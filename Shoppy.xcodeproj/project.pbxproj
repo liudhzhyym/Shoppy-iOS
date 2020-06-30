@@ -3,10 +3,11 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1B7D8FF924AB8AB900CAD138 /* SwiftyShoppy in Frameworks */ = {isa = PBXBuildFile; productRef = 1B7D8FF824AB8AB900CAD138 /* SwiftyShoppy */; };
 		1BB764D024AB76DF00C7F63A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BB764CF24AB76DF00C7F63A /* AppDelegate.swift */; };
 		1BB764D224AB76DF00C7F63A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BB764D124AB76DF00C7F63A /* SceneDelegate.swift */; };
 		1BB764D524AB76DF00C7F63A /* Shoppy.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 1BB764D324AB76DF00C7F63A /* Shoppy.xcdatamodeld */; };
@@ -33,12 +34,39 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1B7D8FF924AB8AB900CAD138 /* SwiftyShoppy in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1B7D901F24ABA0BB00CAD138 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				1BB764D624AB76DF00C7F63A /* ContentView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		1B7D902024ABA0C200CAD138 /* App */ = {
+			isa = PBXGroup;
+			children = (
+				1BB764CF24AB76DF00C7F63A /* AppDelegate.swift */,
+				1BB764D124AB76DF00C7F63A /* SceneDelegate.swift */,
+				1BB764DD24AB76E400C7F63A /* LaunchScreen.storyboard */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		1B7D902124ABA0D500CAD138 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				1BB764D324AB76DF00C7F63A /* Shoppy.xcdatamodeld */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
 		1BB764C324AB76DF00C7F63A = {
 			isa = PBXGroup;
 			children = (
@@ -58,13 +86,11 @@
 		1BB764CE24AB76DF00C7F63A /* Shoppy */ = {
 			isa = PBXGroup;
 			children = (
-				1BB764CF24AB76DF00C7F63A /* AppDelegate.swift */,
-				1BB764D124AB76DF00C7F63A /* SceneDelegate.swift */,
-				1BB764D624AB76DF00C7F63A /* ContentView.swift */,
+				1B7D902124ABA0D500CAD138 /* Models */,
+				1B7D902024ABA0C200CAD138 /* App */,
+				1B7D901F24ABA0BB00CAD138 /* Views */,
 				1BB764D824AB76E400C7F63A /* Assets.xcassets */,
-				1BB764DD24AB76E400C7F63A /* LaunchScreen.storyboard */,
 				1BB764E024AB76E400C7F63A /* Info.plist */,
-				1BB764D324AB76DF00C7F63A /* Shoppy.xcdatamodeld */,
 				1BB764DA24AB76E400C7F63A /* Preview Content */,
 			);
 			path = Shoppy;
@@ -94,6 +120,9 @@
 			dependencies = (
 			);
 			name = Shoppy;
+			packageProductDependencies = (
+				1B7D8FF824AB8AB900CAD138 /* SwiftyShoppy */,
+			);
 			productName = Shoppy;
 			productReference = 1BB764CC24AB76DF00C7F63A /* Shoppy.app */;
 			productType = "com.apple.product-type.application";
@@ -122,6 +151,9 @@
 				Base,
 			);
 			mainGroup = 1BB764C324AB76DF00C7F63A;
+			packageReferences = (
+				1B7D8FF724AB8AB900CAD138 /* XCRemoteSwiftPackageReference "SwiftyShoppy" */,
+			);
 			productRefGroup = 1BB764CD24AB76DF00C7F63A /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -346,6 +378,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		1B7D8FF724AB8AB900CAD138 /* XCRemoteSwiftPackageReference "SwiftyShoppy" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/vlourme/SwiftyShoppy.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.3;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		1B7D8FF824AB8AB900CAD138 /* SwiftyShoppy */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 1B7D8FF724AB8AB900CAD138 /* XCRemoteSwiftPackageReference "SwiftyShoppy" */;
+			productName = SwiftyShoppy;
+		};
+/* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
 		1BB764D324AB76DF00C7F63A /* Shoppy.xcdatamodeld */ = {
