@@ -7,10 +7,61 @@
 //
 
 import SwiftUI
+import KeychainSwift
+import SwiftyShoppy
 
 struct ContentView: View {
+    // Keychain
+    private let keychain = KeychainSwift()
+    
+    ///
+    /// Check for key
+    ///
+    private func startupCheck() {
+        // Check for key
+        if let key = keychain.get("key") {
+            print("[DefaultView] Exiting key detected, checking validity")
+            
+            // Check if key is valid
+            let nm = NetworkManager(token: key)
+            nm.getAnalytics() { _, error in
+                if error != nil {
+                    print("[DefaultView] Exiting key is wrong, asking user")
+                    self.showModal()
+                }
+                
+                print("[DefaultView] Key is valid")
+            }
+        } else {
+            print("[DefaultView] No exiting key, asking user")
+            showModal()
+        }
+        
+    }
+    
+    ///
+    /// Show modal
+    ///
+    private func showModal() {
+        let window = UIApplication.shared.windows.first
+        let vc = UIHostingController(rootView: LoginView())
+        
+        // Disable dismiss gesture
+        vc.isModalInPresentation = true
+        
+        // Display
+        window?.rootViewController?.present(vc, animated: true)
+    }
+    
     var body: some View {
-        Text("Hello, World!")
+        VStack {
+            HeroView()
+            
+            Spacer()
+        }.onAppear() {
+            self.keychain.clear()
+            self.startupCheck()
+        }
     }
 }
 

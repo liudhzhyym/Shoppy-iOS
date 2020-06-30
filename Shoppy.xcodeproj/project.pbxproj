@@ -7,7 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1B6199B624ABADB0003FA43F /* HeroView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B6199B524ABADB0003FA43F /* HeroView.swift */; };
 		1B7D8FF924AB8AB900CAD138 /* SwiftyShoppy in Frameworks */ = {isa = PBXBuildFile; productRef = 1B7D8FF824AB8AB900CAD138 /* SwiftyShoppy */; };
+		1B7D902424ABA1CC00CAD138 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B7D902324ABA1CC00CAD138 /* LoginView.swift */; };
+		1B7D902724ABA70100CAD138 /* KeychainSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 1B7D902624ABA70100CAD138 /* KeychainSwift */; };
 		1BB764D024AB76DF00C7F63A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BB764CF24AB76DF00C7F63A /* AppDelegate.swift */; };
 		1BB764D224AB76DF00C7F63A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BB764D124AB76DF00C7F63A /* SceneDelegate.swift */; };
 		1BB764D524AB76DF00C7F63A /* Shoppy.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 1BB764D324AB76DF00C7F63A /* Shoppy.xcdatamodeld */; };
@@ -18,6 +21,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1B6199B524ABADB0003FA43F /* HeroView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeroView.swift; sourceTree = "<group>"; };
+		1B7D902324ABA1CC00CAD138 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		1BB764CC24AB76DF00C7F63A /* Shoppy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Shoppy.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1BB764CF24AB76DF00C7F63A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1BB764D124AB76DF00C7F63A /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -34,6 +39,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1B7D902724ABA70100CAD138 /* KeychainSwift in Frameworks */,
 				1B7D8FF924AB8AB900CAD138 /* SwiftyShoppy in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -41,9 +47,19 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1B6199B424ABADA6003FA43F /* Dashboard */ = {
+			isa = PBXGroup;
+			children = (
+				1B6199B524ABADB0003FA43F /* HeroView.swift */,
+			);
+			path = Dashboard;
+			sourceTree = "<group>";
+		};
 		1B7D901F24ABA0BB00CAD138 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				1B6199B424ABADA6003FA43F /* Dashboard */,
+				1B7D902224ABA1BB00CAD138 /* Login */,
 				1BB764D624AB76DF00C7F63A /* ContentView.swift */,
 			);
 			path = Views;
@@ -65,6 +81,14 @@
 				1BB764D324AB76DF00C7F63A /* Shoppy.xcdatamodeld */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		1B7D902224ABA1BB00CAD138 /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				1B7D902324ABA1CC00CAD138 /* LoginView.swift */,
+			);
+			path = Login;
 			sourceTree = "<group>";
 		};
 		1BB764C324AB76DF00C7F63A = {
@@ -122,6 +146,7 @@
 			name = Shoppy;
 			packageProductDependencies = (
 				1B7D8FF824AB8AB900CAD138 /* SwiftyShoppy */,
+				1B7D902624ABA70100CAD138 /* KeychainSwift */,
 			);
 			productName = Shoppy;
 			productReference = 1BB764CC24AB76DF00C7F63A /* Shoppy.app */;
@@ -153,6 +178,7 @@
 			mainGroup = 1BB764C324AB76DF00C7F63A;
 			packageReferences = (
 				1B7D8FF724AB8AB900CAD138 /* XCRemoteSwiftPackageReference "SwiftyShoppy" */,
+				1B7D902524ABA70100CAD138 /* XCRemoteSwiftPackageReference "keychain-swift" */,
 			);
 			productRefGroup = 1BB764CD24AB76DF00C7F63A /* Products */;
 			projectDirPath = "";
@@ -183,7 +209,9 @@
 			files = (
 				1BB764D524AB76DF00C7F63A /* Shoppy.xcdatamodeld in Sources */,
 				1BB764D024AB76DF00C7F63A /* AppDelegate.swift in Sources */,
+				1B6199B624ABADB0003FA43F /* HeroView.swift in Sources */,
 				1BB764D724AB76DF00C7F63A /* ContentView.swift in Sources */,
+				1B7D902424ABA1CC00CAD138 /* LoginView.swift in Sources */,
 				1BB764D224AB76DF00C7F63A /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -388,6 +416,14 @@
 				minimumVersion = 1.0.3;
 			};
 		};
+		1B7D902524ABA70100CAD138 /* XCRemoteSwiftPackageReference "keychain-swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/evgenyneu/keychain-swift";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 19.0.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -395,6 +431,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 1B7D8FF724AB8AB900CAD138 /* XCRemoteSwiftPackageReference "SwiftyShoppy" */;
 			productName = SwiftyShoppy;
+		};
+		1B7D902624ABA70100CAD138 /* KeychainSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 1B7D902524ABA70100CAD138 /* XCRemoteSwiftPackageReference "keychain-swift" */;
+			productName = KeychainSwift;
 		};
 /* End XCSwiftPackageProductDependency section */
 
