@@ -50,7 +50,7 @@ struct DashboardView: View {
         NavigationView {
             VStack {
                 LineChartView(data: data,
-                              title: "Revenues",
+                              title: "Revenue",
                               form: ChartForm.extraLarge,
                               rateValue: 0,
                               valueSpecifier: "%0.2f€")
