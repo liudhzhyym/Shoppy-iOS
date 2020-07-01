@@ -35,6 +35,9 @@ struct DashboardView: View {
             // Sort incomes
             let keys = analytics?.income?.keys.sorted(by: <)
             
+            // Clear data
+            self.data.removeAll()
+            
             // Push
             for key in keys! {
                 let i = analytics?.income?[key]
