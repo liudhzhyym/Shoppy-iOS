@@ -53,13 +53,17 @@ struct ContentView: View {
         window?.rootViewController?.present(vc, animated: true)
     }
     
+    @State private var selectedIndex = 0
+    
     var body: some View {
-        VStack {
-            HeroView()
-            
-            Spacer()
-        }.onAppear() {
-            self.keychain.clear()
+        TabView {
+            DashboardView()
+                .tabItem {
+                    Image(systemName: "house")
+                    Text("Dashboard")
+                }
+        }
+        .onAppear() {
             self.startupCheck()
         }
     }

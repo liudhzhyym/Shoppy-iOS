@@ -11,6 +11,15 @@
         }
       },
       {
+        "package": "SwiftUICharts",
+        "repositoryURL": "https://github.com/vlourme/ChartView",
+        "state": {
+          "branch": "master",
+          "revision": "fd04dc9feabc25ebfe0b11031b646438f0be0875",
+          "version": null
+        }
+      },
+      {
         "package": "KeychainSwift",
         "repositoryURL": "https://github.com/evgenyneu/keychain-swift",
         "state": {
@@ -51,8 +60,8 @@
         "repositoryURL": "https://github.com/vlourme/SwiftyShoppy.git",
         "state": {
           "branch": null,
-          "revision": "15fc27adedf5cded13c27f98710a2a93b5f079ec",
-          "version": "1.0.4"
+          "revision": "4f6d8bbc8444089bbdcb84bd8f842798c1b5426d",
+          "version": "1.0.5"
         }
       }
     ]
