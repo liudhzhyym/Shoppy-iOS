@@ -10,7 +10,7 @@ import SwiftUI
 
 struct OrderCard: View {
     @State public var email: String
-    @State public var id: String
+    @State public var description: String
     @State public var price: Double
     @State public var currency: String
     
@@ -18,7 +18,7 @@ struct OrderCard: View {
         HStack {
             VStack(alignment: .leading) {
                 Text(email)
-                Text(id)
+                Text(description)
                     .font(.caption)
                     .foregroundColor(.secondary)
             }.lineLimit(0)
@@ -46,15 +46,15 @@ struct OrderCard_Previews: PreviewProvider {
     static var previews: some View {
         VStack {
             OrderCard(email: "averyveryveryverylongmail@example.com",
-                      id: UUID().uuidString,
+                      description: "Lorem Ipsum",
                       price: 20,
                       currency: "EUR")
             OrderCard(email: "test@example.com",
-                      id: UUID().uuidString,
+                      description: "Lorem Ipsum",
                       price: 9.99,
                       currency: "USD")
             OrderCard(email: "anotherexample@example.com",
-                      id: UUID().uuidString,
+                      description: "Lorem Ipsum",
                       price: 195.43,
                       currency: "GBP")
         }

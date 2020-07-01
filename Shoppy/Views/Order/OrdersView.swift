@@ -17,12 +17,13 @@ struct OrdersView: View {
                 ForEach(orders.orders, id: \.id) { order in
                     NavigationLink(destination: EmptyView()) {
                         OrderCard(email: order.email ?? "",
-                                  id: order.id ?? "",
+                                  description: order.product?.title ?? "",
                                   price: (order.price ?? 0) * Double(order.quantity ?? 0),
                                   currency: order.currency ?? "")
                     }
+                    
                 }
-                .padding(.bottom)
+                .padding([.top, .bottom])
             }
             .navigationBarTitle("Orders")
         }
