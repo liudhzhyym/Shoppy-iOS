@@ -13,14 +13,26 @@ struct OrderCard: View {
     @State public var description: String
     @State public var price: Double
     @State public var currency: String
+    @State public var paid: Int
     
     var body: some View {
         HStack {
             VStack(alignment: .leading) {
                 Text(email)
-                Text(description)
-                    .font(.caption)
-                    .foregroundColor(.secondary)
+                HStack {
+                    if paid == 1 {
+                        Image(systemName: "checkmark")
+                        Text("Paid — ")
+                        + Text(description)
+                    } else {
+                        Image(systemName: "xmark")
+                        Text("Cancelled — ")
+                        + Text(description)
+                    }
+                    
+                }
+                .font(.caption)
+                .foregroundColor(.secondary)
             }.lineLimit(0)
             
             Spacer()
@@ -48,15 +60,18 @@ struct OrderCard_Previews: PreviewProvider {
             OrderCard(email: "averyveryveryverylongmail@example.com",
                       description: "Lorem Ipsum",
                       price: 20,
-                      currency: "EUR")
+                      currency: "EUR",
+                      paid: 1)
             OrderCard(email: "test@example.com",
                       description: "Lorem Ipsum",
                       price: 9.99,
-                      currency: "USD")
+                      currency: "USD",
+                      paid: 0)
             OrderCard(email: "anotherexample@example.com",
                       description: "Lorem Ipsum",
                       price: 195.43,
-                      currency: "GBP")
+                      currency: "GBP",
+                      paid: 0)
         }
     }
 }

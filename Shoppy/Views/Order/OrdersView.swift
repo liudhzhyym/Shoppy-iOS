@@ -19,7 +19,8 @@ struct OrdersView: View {
                         OrderCard(email: order.email ?? "",
                                   description: order.product?.title ?? "",
                                   price: (order.price ?? 0) * Double(order.quantity ?? 0),
-                                  currency: order.currency ?? "")
+                                  currency: order.currency ?? "",
+                                  paid: order.delivered ?? 0)
                     }
                     
                 }
