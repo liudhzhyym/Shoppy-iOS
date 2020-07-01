@@ -50,7 +50,7 @@ struct OrderCard: View {
         .background(Color.white)
         .cornerRadius(15)
         .padding([.leading, .trailing])
-        .shadow(radius: 8)
+        .shadow(radius: 2)
     }
 }
 
