@@ -15,7 +15,7 @@ struct OrdersView: View {
         NavigationView {
             ScrollView {
                 ForEach(orders.orders, id: \.id) { order in
-                    NavigationLink(destination: EmptyView()) {
+                    NavigationLink(destination: OrderDetailView(order: order)) {
                         OrderCard(email: order.email ?? "",
                                   description: order.product?.title ?? "",
                                   price: (order.price ?? 0) * Double(order.quantity ?? 0),
