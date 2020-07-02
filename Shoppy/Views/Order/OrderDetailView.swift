@@ -46,12 +46,10 @@ struct OrderDetailView: View {
 }
 
 ///
-/// TODO: Find a way to make the preview work
-/// Issue: Order need an init, maybe edit the API model to allow a fake init?
+/// Preview
 ///
 struct OrderDetailView_Previews: PreviewProvider {
     static var previews: some View {
-        EmptyView()
-        //OrderDetailView()
+        OrderDetailView(order: Order())
     }
 }
