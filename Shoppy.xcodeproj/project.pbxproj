@@ -28,6 +28,7 @@
 		1BB764D924AB76E400C7F63A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1BB764D824AB76E400C7F63A /* Assets.xcassets */; };
 		1BB764DC24AB76E400C7F63A /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1BB764DB24AB76E400C7F63A /* Preview Assets.xcassets */; };
 		1BB764DF24AB76E400C7F63A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1BB764DD24AB76E400C7F63A /* LaunchScreen.storyboard */; };
+		1BD7D4E124AF84FE00857EEC /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BD7D4E024AF84FE00857EEC /* SettingsView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -51,6 +52,7 @@
 		1BB764DB24AB76E400C7F63A /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		1BB764DE24AB76E400C7F63A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		1BB764E024AB76E400C7F63A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		1BD7D4E024AF84FE00857EEC /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -113,6 +115,7 @@
 		1B7D901F24ABA0BB00CAD138 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				1BD7D4DF24AF84EB00857EEC /* Settings */,
 				1B6199D824ADEF32003FA43F /* Product */,
 				1B6199CA24AC98B7003FA43F /* Order */,
 				1B6199C724AC8C8D003FA43F /* Components */,
@@ -187,6 +190,14 @@
 				1BB764DB24AB76E400C7F63A /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		1BD7D4DF24AF84EB00857EEC /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				1BD7D4E024AF84FE00857EEC /* SettingsView.swift */,
+			);
+			path = Settings;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -279,6 +290,7 @@
 				1B6199CE24AC9A10003FA43F /* OrderCard.swift in Sources */,
 				1B6199BE24ABB45F003FA43F /* DashboardView.swift in Sources */,
 				1BB764D724AB76DF00C7F63A /* ContentView.swift in Sources */,
+				1BD7D4E124AF84FE00857EEC /* SettingsView.swift in Sources */,
 				1B6199D724ACBEE0003FA43F /* Field.swift in Sources */,
 				1B6199CC24AC98C4003FA43F /* OrdersView.swift in Sources */,
 				1B6199D024ACABA9003FA43F /* OrdersObservable.swift in Sources */,

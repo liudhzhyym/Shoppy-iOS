@@ -11,6 +11,7 @@ import SwiftyShoppy
 import KeychainSwift
 
 struct DashboardView: View {
+    @State private var displaySettings = false
     @State private var dailyIncome = 0
     @State private var totalRevenue = 0
     @State private var orders = 0
@@ -36,6 +37,16 @@ struct DashboardView: View {
         }
     }
     
+    var settings: some View {
+        Button(action: {
+            self.displaySettings = true
+        }) {
+            Image(systemName: "gear")
+                .resizable()
+                .frame(width: 26, height: 26)
+        }
+    }
+    
     var body: some View {
         NavigationView {
             VStack {
@@ -51,8 +62,11 @@ struct DashboardView: View {
             }
                 
             .navigationBarTitle("Dashboard")
+            .navigationBarItems(trailing: settings)
         }.onAppear() {
             self.loadStats()
+        }.sheet(isPresented: $displaySettings) {
+            SettingsView()
         }
     }
 }
