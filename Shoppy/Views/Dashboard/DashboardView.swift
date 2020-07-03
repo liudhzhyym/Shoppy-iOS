@@ -39,16 +39,18 @@ struct DashboardView: View {
     var body: some View {
         NavigationView {
             VStack {
-                Card(title: "Total revenue", value: $totalRevenue, ext: "€")
-                
-                Card(title: "Daily income", value: $dailyIncome, ext: "€")
-                
-                Card(title: "Total orders", value: $orders, ext: "")
-                
+                Group {
+                    Card(title: "Total revenue", value: $totalRevenue, ext: "€")
+                    
+                    Card(title: "Daily income", value: $dailyIncome, ext: "€")
+                    
+                    Card(title: "Total orders", value: $orders, ext: "")
+                    
+                }.padding([.top, .bottom], 5)
                 Spacer()
-            }.padding()
+            }
                 
-                .navigationBarTitle("Dashboard")
+            .navigationBarTitle("Dashboard")
         }.onAppear() {
             self.loadStats()
         }
