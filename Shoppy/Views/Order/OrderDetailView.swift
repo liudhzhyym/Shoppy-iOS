@@ -38,6 +38,14 @@ struct OrderDetailView: View {
                         Field(key: "Crypto amount", value: "\(order.crypto_amount ?? "")")
                     }
                 }
+                
+                if order.product != nil {
+                    Section(header: Text("Product")) {
+                        NavigationLink(destination: ProductDetailView(product: order.product!)) {
+                            Text("See the product page")
+                        }
+                    }
+                }
             }
                 
             .navigationBarTitle("Order")

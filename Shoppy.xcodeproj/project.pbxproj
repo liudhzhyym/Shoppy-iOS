@@ -16,6 +16,9 @@
 		1B6199D324ACABDA003FA43F /* Currencies.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B6199D224ACABDA003FA43F /* Currencies.swift */; };
 		1B6199D524ACBBF9003FA43F /* OrderDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B6199D424ACBBF9003FA43F /* OrderDetailView.swift */; };
 		1B6199D724ACBEE0003FA43F /* Field.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B6199D624ACBEE0003FA43F /* Field.swift */; };
+		1B6199DA24ADEF4A003FA43F /* ProductDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B6199D924ADEF49003FA43F /* ProductDetailView.swift */; };
+		1B6199DE24AE0670003FA43F /* ImageLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B6199DD24AE0670003FA43F /* ImageLoader.swift */; };
+		1B6199E124AF1F44003FA43F /* FancyScrollView in Frameworks */ = {isa = PBXBuildFile; productRef = 1B6199E024AF1F44003FA43F /* FancyScrollView */; };
 		1B7D8FF924AB8AB900CAD138 /* SwiftyShoppy in Frameworks */ = {isa = PBXBuildFile; productRef = 1B7D8FF824AB8AB900CAD138 /* SwiftyShoppy */; };
 		1B7D902424ABA1CC00CAD138 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B7D902324ABA1CC00CAD138 /* LoginView.swift */; };
 		1B7D902724ABA70100CAD138 /* KeychainSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 1B7D902624ABA70100CAD138 /* KeychainSwift */; };
@@ -37,6 +40,8 @@
 		1B6199D224ACABDA003FA43F /* Currencies.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Currencies.swift; sourceTree = "<group>"; };
 		1B6199D424ACBBF9003FA43F /* OrderDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderDetailView.swift; sourceTree = "<group>"; };
 		1B6199D624ACBEE0003FA43F /* Field.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Field.swift; sourceTree = "<group>"; };
+		1B6199D924ADEF49003FA43F /* ProductDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductDetailView.swift; sourceTree = "<group>"; };
+		1B6199DD24AE0670003FA43F /* ImageLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageLoader.swift; sourceTree = "<group>"; };
 		1B7D902324ABA1CC00CAD138 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		1BB764CC24AB76DF00C7F63A /* Shoppy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Shoppy.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1BB764CF24AB76DF00C7F63A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -56,6 +61,7 @@
 			files = (
 				1B6199C624ABDED4003FA43F /* SwiftUICharts in Frameworks */,
 				1B7D902724ABA70100CAD138 /* KeychainSwift in Frameworks */,
+				1B6199E124AF1F44003FA43F /* FancyScrollView in Frameworks */,
 				1B7D8FF924AB8AB900CAD138 /* SwiftyShoppy in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -98,9 +104,18 @@
 			path = Helpers;
 			sourceTree = "<group>";
 		};
+		1B6199D824ADEF32003FA43F /* Product */ = {
+			isa = PBXGroup;
+			children = (
+				1B6199D924ADEF49003FA43F /* ProductDetailView.swift */,
+			);
+			path = Product;
+			sourceTree = "<group>";
+		};
 		1B7D901F24ABA0BB00CAD138 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				1B6199D824ADEF32003FA43F /* Product */,
 				1B6199CA24AC98B7003FA43F /* Order */,
 				1B6199C724AC8C8D003FA43F /* Components */,
 				1B6199B424ABADA6003FA43F /* Dashboard */,
@@ -125,6 +140,7 @@
 			children = (
 				1BB764D324AB76DF00C7F63A /* Shoppy.xcdatamodeld */,
 				1B6199CF24ACABA9003FA43F /* OrdersObservable.swift */,
+				1B6199DD24AE0670003FA43F /* ImageLoader.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -195,6 +211,7 @@
 				1B7D8FF824AB8AB900CAD138 /* SwiftyShoppy */,
 				1B7D902624ABA70100CAD138 /* KeychainSwift */,
 				1B6199C524ABDED4003FA43F /* SwiftUICharts */,
+				1B6199E024AF1F44003FA43F /* FancyScrollView */,
 			);
 			productName = Shoppy;
 			productReference = 1BB764CC24AB76DF00C7F63A /* Shoppy.app */;
@@ -228,6 +245,7 @@
 				1B7D8FF724AB8AB900CAD138 /* XCRemoteSwiftPackageReference "SwiftyShoppy" */,
 				1B7D902524ABA70100CAD138 /* XCRemoteSwiftPackageReference "keychain-swift" */,
 				1B6199C424ABDED4003FA43F /* XCRemoteSwiftPackageReference "ChartView" */,
+				1B6199DF24AF1F43003FA43F /* XCRemoteSwiftPackageReference "FancyScrollView" */,
 			);
 			productRefGroup = 1BB764CD24AB76DF00C7F63A /* Products */;
 			projectDirPath = "";
@@ -257,6 +275,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				1BB764D524AB76DF00C7F63A /* Shoppy.xcdatamodeld in Sources */,
+				1B6199DA24ADEF4A003FA43F /* ProductDetailView.swift in Sources */,
+				1B6199DE24AE0670003FA43F /* ImageLoader.swift in Sources */,
 				1BB764D024AB76DF00C7F63A /* AppDelegate.swift in Sources */,
 				1B6199D524ACBBF9003FA43F /* OrderDetailView.swift in Sources */,
 				1B6199C924AC8C96003FA43F /* Card.swift in Sources */,
@@ -472,6 +492,14 @@
 				kind = branch;
 			};
 		};
+		1B6199DF24AF1F43003FA43F /* XCRemoteSwiftPackageReference "FancyScrollView" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/nerdsupremacist/FancyScrollView";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.1.3;
+			};
+		};
 		1B7D8FF724AB8AB900CAD138 /* XCRemoteSwiftPackageReference "SwiftyShoppy" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/vlourme/SwiftyShoppy.git";
@@ -495,6 +523,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 1B6199C424ABDED4003FA43F /* XCRemoteSwiftPackageReference "ChartView" */;
 			productName = SwiftUICharts;
+		};
+		1B6199E024AF1F44003FA43F /* FancyScrollView */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 1B6199DF24AF1F43003FA43F /* XCRemoteSwiftPackageReference "FancyScrollView" */;
+			productName = FancyScrollView;
 		};
 		1B7D8FF824AB8AB900CAD138 /* SwiftyShoppy */ = {
 			isa = XCSwiftPackageProductDependency;
