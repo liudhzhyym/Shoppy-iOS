@@ -7,7 +7,6 @@
 //
 
 import SwiftUI
-import Charts
 import SwiftyShoppy
 import KeychainSwift
 
