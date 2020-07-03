@@ -7,12 +7,13 @@
 //
 
 import SwiftUI
-import SwiftUICharts
+import Charts
 import SwiftyShoppy
 import KeychainSwift
 
 struct DashboardView: View {
-    @State private var data: [Double] = []
+    @State private var dailyIncome = 0
+    @State private var totalRevenue = 0
     @State private var orders = 0
     
     private func loadStats() {
@@ -29,38 +30,26 @@ struct DashboardView: View {
                 return
             }
             
-            // Set orders
+            // Set data
             self.orders = analytics?.totalOrders ?? 0
-            
-            // Sort incomes
-            let keys = analytics?.income?.keys.sorted(by: <)
-            
-            // Clear data
-            self.data.removeAll()
-            
-            // Push
-            for key in keys! {
-                let i = analytics?.income?[key]
-                self.data.append(Double(i ?? 0))
-            }
+            self.dailyIncome = analytics?.todaysRevenue ?? 0
+            self.totalRevenue = analytics?.totalRevenue ?? 0
         }
     }
     
     var body: some View {
         NavigationView {
             VStack {
-                LineChartView(data: data,
-                              title: "Revenue",
-                              form: ChartForm.extraLarge,
-                              rateValue: 0,
-                              valueSpecifier: "%0.2f€")
+                Card(title: "Total revenue", value: $totalRevenue, ext: "€")
                 
-                Card(title: "Total orders", value: $orders, ext: "").padding()
+                Card(title: "Daily income", value: $dailyIncome, ext: "€")
+                
+                Card(title: "Total orders", value: $orders, ext: "")
                 
                 Spacer()
-            }.padding(.top)
+            }.padding()
                 
-            .navigationBarTitle("Dashboard")
+                .navigationBarTitle("Dashboard")
         }.onAppear() {
             self.loadStats()
         }

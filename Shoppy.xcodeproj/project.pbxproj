@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		1B6199BE24ABB45F003FA43F /* DashboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B6199BD24ABB45F003FA43F /* DashboardView.swift */; };
-		1B6199C624ABDED4003FA43F /* SwiftUICharts in Frameworks */ = {isa = PBXBuildFile; productRef = 1B6199C524ABDED4003FA43F /* SwiftUICharts */; };
 		1B6199C924AC8C96003FA43F /* Card.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B6199C824AC8C96003FA43F /* Card.swift */; };
 		1B6199CC24AC98C4003FA43F /* OrdersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B6199CB24AC98C4003FA43F /* OrdersView.swift */; };
 		1B6199CE24AC9A10003FA43F /* OrderCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B6199CD24AC9A10003FA43F /* OrderCard.swift */; };
@@ -59,7 +58,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1B6199C624ABDED4003FA43F /* SwiftUICharts in Frameworks */,
 				1B7D902724ABA70100CAD138 /* KeychainSwift in Frameworks */,
 				1B6199E124AF1F44003FA43F /* FancyScrollView in Frameworks */,
 				1B7D8FF924AB8AB900CAD138 /* SwiftyShoppy in Frameworks */,
@@ -210,7 +208,6 @@
 			packageProductDependencies = (
 				1B7D8FF824AB8AB900CAD138 /* SwiftyShoppy */,
 				1B7D902624ABA70100CAD138 /* KeychainSwift */,
-				1B6199C524ABDED4003FA43F /* SwiftUICharts */,
 				1B6199E024AF1F44003FA43F /* FancyScrollView */,
 			);
 			productName = Shoppy;
@@ -244,7 +241,6 @@
 			packageReferences = (
 				1B7D8FF724AB8AB900CAD138 /* XCRemoteSwiftPackageReference "SwiftyShoppy" */,
 				1B7D902524ABA70100CAD138 /* XCRemoteSwiftPackageReference "keychain-swift" */,
-				1B6199C424ABDED4003FA43F /* XCRemoteSwiftPackageReference "ChartView" */,
 				1B6199DF24AF1F43003FA43F /* XCRemoteSwiftPackageReference "FancyScrollView" */,
 			);
 			productRefGroup = 1BB764CD24AB76DF00C7F63A /* Products */;
@@ -484,14 +480,6 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		1B6199C424ABDED4003FA43F /* XCRemoteSwiftPackageReference "ChartView" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/vlourme/ChartView";
-			requirement = {
-				branch = master;
-				kind = branch;
-			};
-		};
 		1B6199DF24AF1F43003FA43F /* XCRemoteSwiftPackageReference "FancyScrollView" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/nerdsupremacist/FancyScrollView";
@@ -519,11 +507,6 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		1B6199C524ABDED4003FA43F /* SwiftUICharts */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 1B6199C424ABDED4003FA43F /* XCRemoteSwiftPackageReference "ChartView" */;
-			productName = SwiftUICharts;
-		};
 		1B6199E024AF1F44003FA43F /* FancyScrollView */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 1B6199DF24AF1F43003FA43F /* XCRemoteSwiftPackageReference "FancyScrollView" */;
