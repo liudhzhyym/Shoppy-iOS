@@ -9,6 +9,7 @@
 import SwiftUI
 
 struct OrderCard: View {
+    @Environment(\.colorScheme) var colorScheme
     @State public var email: String
     @State public var description: String
     @State public var price: Double
@@ -19,15 +20,16 @@ struct OrderCard: View {
         HStack {
             VStack(alignment: .leading) {
                 Text(email)
+                    .foregroundColor(colorScheme == .dark ? .white : .black)
                 HStack {
                     if paid == 1 {
                         Image(systemName: "checkmark")
                         Text("Paid — ")
-                        + Text(description)
+                            + Text(description)
                     } else {
                         Image(systemName: "xmark")
                         Text("Cancelled — ")
-                        + Text(description)
+                            + Text(description)
                     }
                     
                 }
@@ -37,9 +39,11 @@ struct OrderCard: View {
             
             Spacer()
             
-            Text("\(price, specifier: "%0.2f")")
-                + Text(Currencies.getSymbol(forCurrencyCode: currency) ?? "$")
-                    .font(.caption)
+            Group {
+                Text("\(price, specifier: "%0.2f")")
+                    + Text(Currencies.getSymbol(forCurrencyCode: currency) ?? "$")
+                        .font(.caption)
+            }.foregroundColor(colorScheme == .dark ? .white : .black)
             
             Image(systemName: "chevron.right")
                 .font(.footnote)
@@ -47,10 +51,9 @@ struct OrderCard: View {
         }
         .padding()
         .foregroundColor(.black)
-        .background(Color.white)
+        .background(Color(UIColor.systemGray6))
         .cornerRadius(15)
         .padding([.leading, .trailing])
-        .shadow(radius: 2)
     }
 }
 
