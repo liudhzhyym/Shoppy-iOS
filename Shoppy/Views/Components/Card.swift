@@ -9,6 +9,7 @@
 import SwiftUI
 
 struct Card: View {
+    @Environment(\.colorScheme) var colorScheme
     @State public var title: String
     @Binding public var value: Int
     @State public var ext: String
@@ -21,18 +22,18 @@ struct Card: View {
                 Text("\(value)")
                     .font(.title)
                     .bold()
-                + Text(ext)
-                    .font(.footnote)
+                    + Text(ext)
+                        .font(.footnote)
             }
             
             Spacer()
         }
         .padding()
         .frame(minWidth: 0, maxWidth: .infinity)
-        .background(Color.white)
+        .background(colorScheme == .dark ? Color.black : Color.white)
+        .border(Color(UIColor.systemGray6), width: 1)
         .cornerRadius(20)
         .padding([.leading, .top, .trailing], 10)
-        .shadow(radius: 8)
     }
 }
 
