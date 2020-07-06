@@ -21,7 +21,10 @@ struct SettingsView: View {
             Form {
                 Section(header: Text("API")) {
                     Button(action: changeKey) {
-                        Text("Change API key")
+                        HStack(spacing: 10) {
+                            Image(systemName: "lock.fill")
+                            Text("Change API key")
+                        }
                     }
                 }
             }
