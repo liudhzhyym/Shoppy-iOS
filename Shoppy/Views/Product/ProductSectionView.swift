@@ -13,19 +13,13 @@ struct ProductSectionView: View {
     @State public var product: Product
     @State public var displayTitle: Bool = true
     
-    static let formatter: DateFormatter = {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "dd-MM-yyyy"
-        return dateFormatter
-    }()
-    
     var body: some View {
         VStack(alignment: .leading) {
             Section {
                 if displayTitle {
-                Text(product.title ?? "Unknown product")
-                    .font(.title)
-                    .bold()
+                    Text(product.title ?? "Unknown product")
+                        .font(.title)
+                        .bold()
                 }
                 
                 if !(product.description?.isEmpty ?? true) {
@@ -44,7 +38,7 @@ struct ProductSectionView: View {
                 Field(key: "Stock", value: "\(product.stock?.get() ?? -1)")
                 Field(key: "Payment methods", value: product.gateways?.map { $0.rawValue }.joined(separator: ", ") ?? "")
                 if product.created_at != nil {
-                    Field(key: "Creation date", value: Self.formatter.string(from: product.created_at!))
+                    Field(key: "Creation date", value: product.created_at?.description ?? "Unknown")
                 }
             }.padding()
             
