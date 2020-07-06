@@ -14,55 +14,28 @@ struct ProductDetailView: View {
     @ObservedObject private var imageLoader = ImageLoader()
     @State public var product: Product
     
-    static let formatter: DateFormatter = {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "dd-MM-yyyy"
-        return dateFormatter
-    }()
-    
     var body: some View {
-        FancyScrollView(headerHeight: 350,
-                        scrollUpHeaderBehavior: .parallax,
-                        scrollDownHeaderBehavior: .sticky,
-                        header: {
-                            Image(uiImage: ((imageLoader.image != nil) ?
-                                UIImage(data: imageLoader.image!): UIImage(systemName: "xmark"))!)
-                                .resizable()
-                                .aspectRatio(contentMode: .fill)
-        }) {
-            VStack(alignment: .leading) {
-                Section {
-                    Text(product.title ?? "Unknown product")
-                        .font(.title)
-                        .bold()
-                    
-                    if !(product.description?.isEmpty ?? true) {
-                        Text("Description")
-                            .font(.caption)
-                            .foregroundColor(.secondary)
-                        ScrollView {
-                            Text(product.description!)
-                        }.frame(maxHeight: 180)
-                    }
-                    
-                    Field(key: "ID", value: product.id ?? "Unknown")
-                    Field(key: "Price", value: "\(product.price ?? 0)\(Currencies.getSymbol(forCurrencyCode: product.currency ?? "USD") ?? "USD")")
-                    Field(key: "Currency", value: product.currency ?? "USD")
-                    Field(key: "Delivery Type", value: (product.type?.rawValue.capitalized ?? "Unknown"))
-                    Field(key: "Stock", value: "\(product.stock!)") // TODO: Unwrap + catch error
-                    
-                    // TODO: Field(key: "Payment methods", value: product.gateways)
-                    if product.created_at != nil {
-                        Field(key: "Creation date", value: Self.formatter.string(from: product.created_at!))
-                    }
-                }.padding()
-                
-                Spacer()
+        Group {
+            if product.image != nil {
+                FancyScrollView(headerHeight: 350,
+                                scrollUpHeaderBehavior: .parallax,
+                                scrollDownHeaderBehavior: .sticky,
+                                header: {
+                                    Image(uiImage: ((imageLoader.image != nil) ?
+                                        UIImage(data: imageLoader.image!): UIImage(systemName: "xmark"))!)
+                                        .resizable()
+                                        .aspectRatio(contentMode: .fill)
+                }) {
+                    ProductSectionView(product: product)
+                }
+            } else {
+                ScrollView {
+                    ProductSectionView(product: product)
+                }
             }
         }
         .onAppear() {
             if let url = self.product.image?.url {
-                print(url)
                 self.imageLoader.setImage(imageURL: url)
             }
         }
