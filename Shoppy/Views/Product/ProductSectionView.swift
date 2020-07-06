@@ -11,6 +11,7 @@ import SwiftyShoppy
 
 struct ProductSectionView: View {
     @State public var product: Product
+    @State public var displayTitle: Bool = true
     
     static let formatter: DateFormatter = {
         let dateFormatter = DateFormatter()
@@ -21,9 +22,11 @@ struct ProductSectionView: View {
     var body: some View {
         VStack(alignment: .leading) {
             Section {
+                if displayTitle {
                 Text(product.title ?? "Unknown product")
                     .font(.title)
                     .bold()
+                }
                 
                 if !(product.description?.isEmpty ?? true) {
                     Text("Description")

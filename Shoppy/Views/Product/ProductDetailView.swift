@@ -30,7 +30,8 @@ struct ProductDetailView: View {
                 }
             } else {
                 ScrollView {
-                    ProductSectionView(product: product)
+                    ProductSectionView(product: product, displayTitle: false)
+                        .navigationBarTitle(product.title ?? "Unknown")
                 }
             }
         }
