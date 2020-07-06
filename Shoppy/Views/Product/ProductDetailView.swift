@@ -48,10 +48,10 @@ struct ProductDetailView: View {
                     Field(key: "ID", value: product.id ?? "Unknown")
                     Field(key: "Price", value: "\(product.price ?? 0)\(Currencies.getSymbol(forCurrencyCode: product.currency ?? "USD") ?? "USD")")
                     Field(key: "Currency", value: product.currency ?? "USD")
-                    Field(key: "Delivery Type", value: (product.type?.capitalized ?? "Unknown"))
-                    Field(key: "Stock", value: "\(product.stock ?? 0)")
+                    Field(key: "Delivery Type", value: (product.type?.rawValue.capitalized ?? "Unknown"))
+                    Field(key: "Stock", value: "\(product.stock!)") // TODO: Unwrap + catch error
                     
-                    Field(key: "Payment methods", value: product.gateways?.joined(separator: ", ") ?? "Unknown")
+                    // TODO: Field(key: "Payment methods", value: product.gateways)
                     if product.created_at != nil {
                         Field(key: "Creation date", value: Self.formatter.string(from: product.created_at!))
                     }

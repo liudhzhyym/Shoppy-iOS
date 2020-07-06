@@ -18,19 +18,16 @@ class OrdersObservable: ObservableObject {
         let keychain = KeychainSwift()
         
         // Instance NetworkManager
-        let nm = NetworkManager(token: keychain.get("key") ?? "")
-        
-        // Get orders
-        nm.getOrders() { orders, error in
-            // Check for error
-            if error != nil {
-                return
-            }
-            
-            // Store orders
-            if let orders = orders {
-                self.orders = orders
-            }
+        if let key = keychain.get("key") {
+            NetworkManager
+                .prepare(token: key)
+                .target(.getOrders)
+                .asArray(Order.self,
+                         success: { orders in
+                            self.orders = orders
+                }, error: { error in
+                    // Error
+                })
         }
     }
 }

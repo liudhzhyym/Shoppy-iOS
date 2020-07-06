@@ -24,18 +24,18 @@ struct LoginView: View {
     /// Login method
     ///
     private func login() {
-        // Set key
-        let nm = NetworkManager(token: key)
-        
         // Try to get analytics
-        nm.getAnalytics() { analytics, error in
-            // Check for error
-            if error != nil {
+        NetworkManager
+            .prepare(token: key)
+            .target(.getAnalytics)
+            .asObject(Analytics.self,
+                      success: { analytics in
+                        // Valid
+            }, error: { error in
                 self.isError = true
                 print("[LoginView] Invalid key")
                 return
-            }
-        }
+            })
         
         print("[LoginView] Key is valid")
         

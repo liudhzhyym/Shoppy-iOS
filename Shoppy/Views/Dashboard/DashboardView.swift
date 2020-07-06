@@ -20,20 +20,20 @@ struct DashboardView: View {
         // Load keychain
         let keychain = KeychainSwift()
         
-        // Instance NetworkManager
-        let nm = NetworkManager(token: keychain.get("key") ?? "")
-        
-        // Get analytics
-        nm.getAnalytics() { analytics, error in
-            if error != nil {
-                // Catch
-                return
-            }
-            
-            // Set data
-            self.orders = analytics?.totalOrders ?? 0
-            self.dailyIncome = analytics?.todaysRevenue ?? 0
-            self.totalRevenue = analytics?.totalRevenue ?? 0
+        // Load data
+        if let key = keychain.get("key") {
+            NetworkManager
+                .prepare(token: key)
+                .target(.getAnalytics)
+                .asObject(Analytics.self,
+                          success: { analytics in
+                            self.orders = analytics.totalOrders ?? 0
+                            self.dailyIncome = analytics.todaysRevenue ?? 0
+                            self.totalRevenue = analytics.totalRevenue ?? 0
+                }, error: { error in
+                    // Error
+                    print(error)
+                })
         }
     }
     
