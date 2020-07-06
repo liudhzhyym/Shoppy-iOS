@@ -38,7 +38,7 @@ struct ProductSectionView: View {
                 Field(key: "Price", value: "\(product.price ?? 0)\(Currencies.getSymbol(forCurrencyCode: product.currency ?? "USD") ?? "USD")")
                 Field(key: "Currency", value: product.currency ?? "USD")
                 Field(key: "Delivery Type", value: (product.type?.rawValue.capitalized ?? "Unknown"))
-                Field(key: "Stock", value: "\(product.stock!)") // TODO: Unwrap + catch error
+                Field(key: "Stock", value: "\(product.stock?.get() ?? -1)")
                 Field(key: "Payment methods", value: product.gateways?.map { $0.rawValue }.joined(separator: ", ") ?? "")
                 if product.created_at != nil {
                     Field(key: "Creation date", value: Self.formatter.string(from: product.created_at!))
