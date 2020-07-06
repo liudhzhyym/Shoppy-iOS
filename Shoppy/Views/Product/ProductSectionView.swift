@@ -39,8 +39,7 @@ struct ProductSectionView: View {
                 Field(key: "Currency", value: product.currency ?? "USD")
                 Field(key: "Delivery Type", value: (product.type?.rawValue.capitalized ?? "Unknown"))
                 Field(key: "Stock", value: "\(product.stock!)") // TODO: Unwrap + catch error
-                
-                // TODO: Field(key: "Payment methods", value: product.gateways)
+                Field(key: "Payment methods", value: product.gateways?.map { $0.rawValue }.joined(separator: ", ") ?? "")
                 if product.created_at != nil {
                     Field(key: "Creation date", value: Self.formatter.string(from: product.created_at!))
                 }
