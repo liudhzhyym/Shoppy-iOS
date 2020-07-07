@@ -14,37 +14,46 @@ struct UserView: View {
     @State public var image: ImageLoader
     
     var body: some View {
-        Form {
-            Section {
-                HStack {
-                    Image(uiImage: ((image.image != nil) ?
-                        UIImage(data: image.image!): UIImage(systemName: "person"))!)
-                        .resizable()
-                        .frame(width: 64, height: 64)
-                        .clipShape(RoundedRectangle(cornerRadius: 10))
+        VStack {
+            HStack {
+                Image(uiImage: ((image.image != nil) ?
+                    UIImage(data: image.image!): UIImage(systemName: "person"))!)
+                    .resizable()
+                    .frame(width: 80, height: 80)
+                    .clipShape(RoundedRectangle(cornerRadius: 10))
+                
+                VStack(alignment: .leading) {
+                    Text(settings.user?.username ?? "Username")
+                        .font(.title)
+                        .bold()
                     
-                    VStack(alignment: .leading) {
-                        Text(settings.user?.username ?? "Username")
-                            .font(.title)
-                            .bold()
-                        
-                        Text(settings.user?.email ?? "email@provider.tld")
-                            .font(.callout)
-                            .foregroundColor(.secondary)
-                    }.padding()
-                    
-                    Spacer()
-                }
+                    Text(settings.user?.email ?? "email@provider.tld")
+                        .font(.callout)
+                        .foregroundColor(.secondary)
+                }.padding()
+                
+                Spacer()
+            }.padding([.top, .leading, .trailing])
+            
+            Container {
+                ContainerField(name: "BTC Address",
+                               value: self.settings.settings?.bitcoinAddress ?? "Not linked",
+                               icon: "b.circle.fill", accent: .orange)
+                ContainerField(name: "LTC Address",
+                               value: self.settings.settings?.litecoinAddress ?? "Not linked",
+                               icon: "l.circle.fill", accent: .orange)
+                ContainerField(name: "ETH Address",
+                               value: self.settings.settings?.ethereumAddress ?? "Not linked",
+                               icon: "e.circle.fill", accent: .orange)
+                ContainerField(name: "PayPal",
+                               value: self.settings.settings?.paypalAddress ?? "Not linked",
+                               icon: "p.circle.fill", accent: .orange)
+                ContainerField(name: "Stripe ID",
+                               value: self.settings.settings?.stripeAccountId ?? "Not linked",
+                               icon: "s.circle.fill", accent: .orange)
             }
             
-            Section(header: Text("Gateways"),
-                    footer: Text("You can edit gateways from the website.")) {
-                Field(key: "Bitcoin", value: settings.settings?.bitcoinAddress ?? "Not set")
-                Field(key: "Litecoin", value: settings.settings?.litecoinAddress ?? "Not set")
-                Field(key: "Ethereum", value: settings.settings?.ethereumAddress ?? "Not set")
-                Field(key: "PayPal", value: settings.settings?.paypalAddress ?? "Not set")
-                Field(key: "Stripe ID", value: settings.settings?.stripeAccountId ?? "Not linked")
-            }
+            Spacer()
         }.navigationBarTitle("Profile", displayMode: .inline)
     }
 }
