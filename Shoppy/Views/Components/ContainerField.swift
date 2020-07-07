@@ -19,7 +19,8 @@ struct ContainerField: View {
             Image(systemName: icon)
                 .font(.headline)
                 .foregroundColor(accent)
-                .frame(maxWidth: 40)
+                .frame(maxWidth: 25)
+                .padding([.horizontal], 2)
             
             Text(name)
             
