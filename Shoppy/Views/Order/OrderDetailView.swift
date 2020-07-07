@@ -15,7 +15,7 @@ struct OrderDetailView: View {
     var body: some View {
         ScrollView {
             Container {
-                ContainerField(name: "Status", value: self.order.delivered == 1 ? "Paid" : "Unpaid", icon: "number")
+                ContainerField(name: "Status", value: self.order.delivered == 1 ? "Paid" : "Unpaid", icon: "flag.fill")
                 ContainerField(name: "Created at", value: self.order.created_at?.description ?? "", icon: "clock.fill")
                 
                 if self.order.delivered == 1 {
