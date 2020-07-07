@@ -8,9 +8,11 @@
 
 import SwiftUI
 import SwiftyShoppy
+import KeychainSwift
 
 struct ProductDetailView: View {
     @State public var product: Product
+    @State private var isUnlisted: Bool = false
     
     var body: some View {
         Form {
@@ -62,12 +64,40 @@ struct ProductDetailView: View {
             }
             
             Section(header: Text("Additional information")) {
+                Toggle(isOn: $isUnlisted) {
+                    Text("Unlisted")
+                }.onReceive([self.isUnlisted].publisher.first()) { (value) in
+                    // Update
+                    let keychain = KeychainSwift()
+                    
+                    // Update model
+                    self.product.unlisted = self.isUnlisted
+                    
+                    // Make request
+                    if let key = keychain.get("key") {
+                        NetworkManager
+                            .prepare(token: key)
+                            .target(.updateProduct(self.product))
+                            .asObject(UpdatedProduct.self, success: { update in
+                                // Update
+                                if let res = update.resource {
+                                    self.product = res
+                                }
+                            }, error: { error in
+                                print("ERROR: \(error)")
+                            })
+                    }
+                }
                 Field(key: "Unlisted", value: product.unlisted ?? false ? "Yes" : "No")
                 Field(key: "ID", value: product.id ?? "Unknown")
                 Field(key: "Created at", value: product.created_at?.description ?? "Unknown")
                 Field(key: "Updated at", value: product.updated_at?.description ?? "Unknown")
             }
-        }.navigationBarTitle(product.title ?? "Product")
+        }
+        .navigationBarTitle(product.title ?? "Product")
+        .onAppear {
+            self.isUnlisted = self.product.unlisted ?? false
+        }
     }
 }
 
