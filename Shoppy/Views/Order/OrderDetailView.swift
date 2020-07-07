@@ -35,6 +35,7 @@ struct OrderDetailView: View {
                 ContainerField(name: "Email", value: self.order.email ?? "", icon: "person.fill")
                 ContainerField(name: "IP", value: self.order.agent?.geo?.ip ?? "", icon: "globe")
                 ContainerField(name: "Country", value: self.order.agent?.geo?.country ?? "", icon: "mappin")
+                ContainerField(name: "Platform", value: self.order.agent?.data?.platform ?? "", icon: "aspectratio")
             }
             
             Container {
