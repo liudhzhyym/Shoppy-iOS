@@ -24,6 +24,7 @@
 		1B9BCB8024B4889600255448 /* ProductView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B9BCB7F24B4889600255448 /* ProductView.swift */; };
 		1B9BCB8224B488DC00255448 /* ProductsObservable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B9BCB8124B488DC00255448 /* ProductsObservable.swift */; };
 		1B9BCB8424B4894F00255448 /* ProductCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B9BCB8324B4894F00255448 /* ProductCard.swift */; };
+		1B9BCB8D24B4A52D00255448 /* MDText in Frameworks */ = {isa = PBXBuildFile; productRef = 1B9BCB8C24B4A52D00255448 /* MDText */; };
 		1BB764D024AB76DF00C7F63A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BB764CF24AB76DF00C7F63A /* AppDelegate.swift */; };
 		1BB764D224AB76DF00C7F63A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BB764D124AB76DF00C7F63A /* SceneDelegate.swift */; };
 		1BB764D524AB76DF00C7F63A /* Shoppy.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 1BB764D324AB76DF00C7F63A /* Shoppy.xcdatamodeld */; };
@@ -73,6 +74,7 @@
 			files = (
 				1B7D902724ABA70100CAD138 /* KeychainSwift in Frameworks */,
 				1B7D8FF924AB8AB900CAD138 /* SwiftyShoppy in Frameworks */,
+				1B9BCB8D24B4A52D00255448 /* MDText in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -243,6 +245,7 @@
 			packageProductDependencies = (
 				1B7D8FF824AB8AB900CAD138 /* SwiftyShoppy */,
 				1B7D902624ABA70100CAD138 /* KeychainSwift */,
+				1B9BCB8C24B4A52D00255448 /* MDText */,
 			);
 			productName = Shoppy;
 			productReference = 1BB764CC24AB76DF00C7F63A /* Shoppy.app */;
@@ -275,6 +278,7 @@
 			packageReferences = (
 				1B7D8FF724AB8AB900CAD138 /* XCRemoteSwiftPackageReference "SwiftyShoppy" */,
 				1B7D902524ABA70100CAD138 /* XCRemoteSwiftPackageReference "keychain-swift" */,
+				1B9BCB8B24B4A52D00255448 /* XCRemoteSwiftPackageReference "MDText" */,
 			);
 			productRefGroup = 1BB764CD24AB76DF00C7F63A /* Products */;
 			projectDirPath = "";
@@ -536,6 +540,14 @@
 				minimumVersion = 19.0.0;
 			};
 		};
+		1B9BCB8B24B4A52D00255448 /* XCRemoteSwiftPackageReference "MDText" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Lambdo-Labs/MDText";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.0.9;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -548,6 +560,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 1B7D902524ABA70100CAD138 /* XCRemoteSwiftPackageReference "keychain-swift" */;
 			productName = KeychainSwift;
+		};
+		1B9BCB8C24B4A52D00255448 /* MDText */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 1B9BCB8B24B4A52D00255448 /* XCRemoteSwiftPackageReference "MDText" */;
+			productName = MDText;
 		};
 /* End XCSwiftPackageProductDependency section */
 

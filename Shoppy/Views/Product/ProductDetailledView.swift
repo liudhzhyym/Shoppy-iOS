@@ -7,14 +7,17 @@
 //
 
 import SwiftUI
+import MDText
 
 struct ProductDetailledView: View {
     @State public var name: String
     @State public var value: String
     
+    //@State public var md = MarkdownView()
+    
     var body: some View {
         ScrollView {
-            Text(value)
+            MDText(markdown: value)
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
                 .padding()
         }.navigationBarTitle(name)
