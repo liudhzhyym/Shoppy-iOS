@@ -17,7 +17,6 @@
 		1B6199D724ACBEE0003FA43F /* Field.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B6199D624ACBEE0003FA43F /* Field.swift */; };
 		1B6199DA24ADEF4A003FA43F /* ProductDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B6199D924ADEF49003FA43F /* ProductDetailView.swift */; };
 		1B6199DE24AE0670003FA43F /* ImageLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B6199DD24AE0670003FA43F /* ImageLoader.swift */; };
-		1B6199E124AF1F44003FA43F /* FancyScrollView in Frameworks */ = {isa = PBXBuildFile; productRef = 1B6199E024AF1F44003FA43F /* FancyScrollView */; };
 		1B7D8FF924AB8AB900CAD138 /* SwiftyShoppy in Frameworks */ = {isa = PBXBuildFile; productRef = 1B7D8FF824AB8AB900CAD138 /* SwiftyShoppy */; };
 		1B7D902424ABA1CC00CAD138 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B7D902324ABA1CC00CAD138 /* LoginView.swift */; };
 		1B7D902724ABA70100CAD138 /* KeychainSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 1B7D902624ABA70100CAD138 /* KeychainSwift */; };
@@ -67,7 +66,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				1B7D902724ABA70100CAD138 /* KeychainSwift in Frameworks */,
-				1B6199E124AF1F44003FA43F /* FancyScrollView in Frameworks */,
 				1B7D8FF924AB8AB900CAD138 /* SwiftyShoppy in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -236,7 +234,6 @@
 			packageProductDependencies = (
 				1B7D8FF824AB8AB900CAD138 /* SwiftyShoppy */,
 				1B7D902624ABA70100CAD138 /* KeychainSwift */,
-				1B6199E024AF1F44003FA43F /* FancyScrollView */,
 			);
 			productName = Shoppy;
 			productReference = 1BB764CC24AB76DF00C7F63A /* Shoppy.app */;
@@ -269,7 +266,6 @@
 			packageReferences = (
 				1B7D8FF724AB8AB900CAD138 /* XCRemoteSwiftPackageReference "SwiftyShoppy" */,
 				1B7D902524ABA70100CAD138 /* XCRemoteSwiftPackageReference "keychain-swift" */,
-				1B6199DF24AF1F43003FA43F /* XCRemoteSwiftPackageReference "FancyScrollView" */,
 			);
 			productRefGroup = 1BB764CD24AB76DF00C7F63A /* Products */;
 			projectDirPath = "";
@@ -512,14 +508,6 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		1B6199DF24AF1F43003FA43F /* XCRemoteSwiftPackageReference "FancyScrollView" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/nerdsupremacist/FancyScrollView";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 0.1.3;
-			};
-		};
 		1B7D8FF724AB8AB900CAD138 /* XCRemoteSwiftPackageReference "SwiftyShoppy" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/vlourme/SwiftyShoppy.git";
@@ -539,11 +527,6 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		1B6199E024AF1F44003FA43F /* FancyScrollView */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 1B6199DF24AF1F43003FA43F /* XCRemoteSwiftPackageReference "FancyScrollView" */;
-			productName = FancyScrollView;
-		};
 		1B7D8FF824AB8AB900CAD138 /* SwiftyShoppy */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 1B7D8FF724AB8AB900CAD138 /* XCRemoteSwiftPackageReference "SwiftyShoppy" */;
