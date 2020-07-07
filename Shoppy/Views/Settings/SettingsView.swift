@@ -8,69 +8,51 @@
 
 import SwiftUI
 
+enum Links: String {
+    case github = "https://github.com/vlourme/Shoppy-iOS"
+    case issues = "https://github.com/vlourme/SwiftyShoppy/issues"
+}
+
 struct SettingsView: View {
     @State private var displayLogin = false
-    @State private var credits = [
-        "SwiftyShoppy": "https://github.com/vlourme/SwiftyShoppy",
-        "Moya": "https://github.com/Moya/Moya",
-        "KeychainSwift": "https://github.com/evgenyneu/keychain-swift"
-    ]
     
     // Change key
     private func changeKey() {
         self.displayLogin = true
     }
     
+    // Open link
+    private func openLink(link: Links) {
+        if let url = URL(string: link.rawValue) {
+            UIApplication.shared.open(url)
+        }
+    }
+    
     var body: some View {
         NavigationView {
-            Form {
-                Section(header: Text("API")) {
-                    Button(action: changeKey) {
-                        HStack(spacing: 10) {
-                            Image(systemName: "lock.fill")
-                            Text("Change API key")
-                        }
-                    }
+            VStack {
+                Container {
+                    ContainerButton(title: "Change API key", icon: "lock.open.fill", function: {
+                        self.changeKey()
+                    }, accent: .orange)
                 }
                 
-                Section(header: Text("Source code")) {
-                    Button(action: {
-                        if let url = URL(string: "https://github.com/vlourme/Shoppy-iOS/issues") {
-                            UIApplication.shared.open(url)
-                        }
-                    }) {
-                        HStack(spacing: 10) {
-                            Image(systemName: "exclamationmark.bubble.fill")
-                            Text("Report an issue")
-                        }
-                    }
+                Container {
+                    ContainerButton(title: "See the source code", icon: "doc.text.fill", function: {
+                        self.openLink(link: .github)
+                    }, accent: .orange)
                     
-                    Button(action: {
-                        if let url = URL(string: "https://github.com/vlourme/Shoppy-iOS") {
-                            UIApplication.shared.open(url)
-                        }
-                    }) {
-                        HStack(spacing: 10) {
-                            Image(systemName: "doc.text.fill")
-                            Text("View the source code on GitHub")
-                        }
-                    }
+                    ContainerButton(title: "Report a bug", icon: "exclamationmark.bubble.fill", function: {
+                        self.openLink(link: .issues)
+                    }, accent: .orange)
                 }
                 
-                Section(header: Text("Libraries used")) {
-                    List {
-                        ForEach(credits.sorted(by: >), id: \.key) { name, url in
-                            Button(action: {
-                                if let url = URL(string: url) {
-                                    UIApplication.shared.open(url)
-                                }
-                            }) {
-                                Text(name)
-                            }
-                        }
-                    }
+                Container {
+                    ContainerField(name: "Version", value: "1.0", icon: "i.circle.fill", accent: .orange)
                 }
-            }
+                
+                Spacer()
+            }.padding(.top)
                 
             .navigationBarTitle("Settings", displayMode: .inline)
         }.sheet(isPresented: $displayLogin) {
