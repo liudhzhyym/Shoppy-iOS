@@ -12,7 +12,7 @@ struct ContainerButton: View {
     @State public var title: String
     @State public var icon: String
     @State public var function: () -> ()
-    @State public var accent: Color = Color.blue
+    @State public var accent: Color = Color.orange
     
     var body: some View {
         Button(action: function) {
