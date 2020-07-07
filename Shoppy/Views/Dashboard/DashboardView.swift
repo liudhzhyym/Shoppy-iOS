@@ -79,9 +79,9 @@ struct DashboardView: View {
         NavigationView {
             VStack {
                 Group {
-                    Card(title: "Total revenue", value: $totalRevenue, ext: "€")
-                    Card(title: "Daily income", value: $dailyIncome, ext: "€")
-                    Card(title: "Total orders", value: $orders, ext: "")
+                    Card(title: "Total revenue", value: $totalRevenue, ext: "€", specifier: "%.2f")
+                    Card(title: "Daily income", value: $dailyIncome, ext: "€", specifier: "%.2f")
+                    Card(title: "Total orders", value: $orders, ext: "", specifier: "%.0f")
                 }.padding([.top, .bottom], 5)
                 
                 Spacer()

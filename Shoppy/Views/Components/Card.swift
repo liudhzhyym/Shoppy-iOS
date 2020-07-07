@@ -12,13 +12,14 @@ struct Card: View {
     @State public var title: String
     @Binding public var value: Double
     @State public var ext: String
+    @State public var specifier: String
     
     var body: some View {
         HStack {
             VStack(alignment: .leading) {
                 Text(title)
                     .font(.caption)
-                Text("\(value, specifier: "%.2f")")
+                Text("\(value, specifier: specifier)")
                     .font(.title)
                     .bold()
                     + Text(ext)
@@ -39,6 +40,7 @@ struct Card_Previews: PreviewProvider {
     static var previews: some View {
         Card(title: "Revenue",
              value: .constant(15),
-             ext: "€")
+             ext: "€",
+             specifier: "%.2f")
     }
 }
