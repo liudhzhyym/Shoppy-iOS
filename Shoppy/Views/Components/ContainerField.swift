@@ -27,8 +27,17 @@ struct ContainerField: View {
             
             Text(value)
                 .bold()
+                .lineLimit(0)
         }
         .padding(.vertical, 10)
+        .contextMenu {
+            Button(action: {
+                UIPasteboard.general.string = self.value
+            }) {
+                Image(systemName: "doc.on.doc")
+                Text("Copy")
+            }
+        }
     }
 }
 
