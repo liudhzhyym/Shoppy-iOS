@@ -44,7 +44,7 @@ struct OrderDetailView: View {
                     ContainerNavigationButton(title: "See the product", icon: "cube.box.fill", destination: AnyView(ProductDetailView(product: self.order.product!)))
                 }
                 
-                if self.order.product?.type == .account {
+                if self.order.delivered == 1 && self.order.product?.type == .account {
                     ContainerNavigationButton(title: "See delivered accounts", icon: "line.horizontal.3.decrease", destination: AnyView(OrderAccountView(order: self.order)))
                 }
             }
