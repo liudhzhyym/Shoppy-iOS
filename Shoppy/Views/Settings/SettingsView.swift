@@ -74,7 +74,7 @@ struct SettingsView: View {
                 
             .navigationBarTitle("Settings", displayMode: .inline)
         }.sheet(isPresented: $displayLogin) {
-            LoginView()
+            LoginView(isEdit: true)
         }
     }
 }

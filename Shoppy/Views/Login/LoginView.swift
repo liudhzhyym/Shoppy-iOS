@@ -20,6 +20,9 @@ struct LoginView: View {
     // Error management
     @State private var isError = false
     
+    // Is edit
+    @State public var isEdit: Bool = false
+    
     ///
     /// Login method
     ///
@@ -50,17 +53,28 @@ struct LoginView: View {
         VStack {
             Spacer()
             
-            Image(systemName: "bag.fill")
-                .font(.largeTitle)
-                .foregroundColor(.orange)
-                .padding()
-            
-            Text("WELCOME ON")
-                .font(.subheadline)
-            
-            Text("Shoppy")
-                .font(.largeTitle)
-                .bold()
+            if !isEdit {
+                Image(systemName: "bag.fill")
+                    .font(.largeTitle)
+                    .foregroundColor(.orange)
+                    .padding()
+                
+                Text("WELCOME ON")
+                    .font(.subheadline)
+                
+                Text("Shoppy")
+                    .font(.largeTitle)
+                    .bold()
+            } else {
+                Image(systemName: "lock.fill")
+                    .font(.largeTitle)
+                    .foregroundColor(.orange)
+                    .padding()
+                
+                Text("Change your API key")
+                    .font(.title)
+                    .bold()
+            }
             
             TextField("API Key", text: $key)
                 .padding()
@@ -70,7 +84,7 @@ struct LoginView: View {
             Button(action: login) {
                 HStack {
                     Image(systemName: "paperplane.fill")
-                    Text("Continue")
+                    Text(isEdit ? "Save" : "Continue")
                 }
             }.padding()
                 .foregroundColor(.white)
@@ -96,6 +110,6 @@ struct LoginView: View {
 
 struct LoginView_Previews: PreviewProvider {
     static var previews: some View {
-        LoginView()
+        LoginView(isEdit: false)
     }
 }
