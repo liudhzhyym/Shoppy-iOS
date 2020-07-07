@@ -45,9 +45,7 @@ struct UserView: View {
                 Field(key: "PayPal", value: settings.settings?.paypalAddress ?? "Not set")
                 Field(key: "Stripe ID", value: settings.settings?.stripeAccountId ?? "Not linked")
             }
-                
-            .navigationBarTitle("Profile", displayMode: .inline)
-        }
+        }.navigationBarTitle("Profile", displayMode: .inline)
     }
 }
 

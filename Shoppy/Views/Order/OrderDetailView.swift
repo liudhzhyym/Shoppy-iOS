@@ -64,9 +64,7 @@ struct OrderDetailView: View {
                     }
                 }
             }
-                
-            .navigationBarTitle("Order")
-        }
+        }.navigationBarTitle("Order")
     }
 }
 
