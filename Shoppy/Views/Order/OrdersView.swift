@@ -11,6 +11,16 @@ import SwiftUI
 struct OrdersView: View {
     @ObservedObject private var orders = OrdersObservable()
     
+    var refreshButton: some View {
+        Button(action: {
+            self.orders.update()
+        }) {
+            Image(systemName: "arrow.2.circlepath.circle.fill")
+                .resizable()
+                .frame(width: 26, height: 26)
+        }
+    }
+    
     var body: some View {
         NavigationView {
             ScrollView {
@@ -26,7 +36,9 @@ struct OrdersView: View {
                 }
                 .padding([.top, .bottom])
             }
+                
             .navigationBarTitle("Orders")
+            .navigationBarItems(trailing: refreshButton)
         }
     }
 }

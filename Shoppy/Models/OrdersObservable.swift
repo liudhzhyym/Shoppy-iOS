@@ -14,6 +14,10 @@ class OrdersObservable: ObservableObject {
     @Published public var orders: [Order] = []
     
     init() {
+        update()
+    }
+    
+    public func update() {
         // Load keychain
         let keychain = KeychainSwift()
         
