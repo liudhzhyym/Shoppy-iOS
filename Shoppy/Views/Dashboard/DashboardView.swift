@@ -14,9 +14,9 @@ struct DashboardView: View {
     @State private var settings = Settings()
     @ObservedObject private var image = ImageLoader()
     @State private var displaySettings = false
-    @State private var dailyIncome = 0
-    @State private var totalRevenue = 0
-    @State private var orders = 0
+    @State private var dailyIncome: Double = 0
+    @State private var totalRevenue: Double = 0
+    @State private var orders: Double = 0
     
     private func loadUser() {
         // Load keychain
@@ -46,7 +46,7 @@ struct DashboardView: View {
                 .prepare(token: key)
                 .target(.getAnalytics)
                 .asObject(Analytics.self, success: { analytics in
-                    self.orders = analytics.totalOrders ?? 0
+                    self.orders = Double(analytics.totalOrders ?? 0)
                     self.dailyIncome = analytics.todaysRevenue ?? 0
                     self.totalRevenue = analytics.totalRevenue ?? 0
                 }, error: { error in

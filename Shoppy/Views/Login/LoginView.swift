@@ -28,22 +28,22 @@ struct LoginView: View {
         NetworkManager
             .prepare(token: key)
             .target(.getAnalytics)
-            .asObject(Analytics.self,
-                      success: { analytics in
-                        // Valid
+            .asObject(Analytics.self, success: { analytics in
+                print("[LoginView] Key is valid")
+                
+                // Store key
+                self.keychain.set(self.key, forKey: "key")
+                
+                // Close modal
+                UIApplication.shared.windows.first?.rootViewController?.dismiss(animated: true, completion: nil)
             }, error: { error in
+                print(error)
                 self.isError = true
                 print("[LoginView] Invalid key")
                 return
             })
         
-        print("[LoginView] Key is valid")
         
-        // Store key
-        keychain.set(key, forKey: "key")
-        
-        // Close modal
-        UIApplication.shared.windows.first?.rootViewController?.dismiss(animated: true, completion: nil)
     }
     
     var body: some View {

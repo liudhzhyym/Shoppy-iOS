@@ -37,9 +37,8 @@ struct ContentView: View {
             NetworkManager
                 .prepare(token: key)
                 .target(.getAnalytics)
-                .asObject(Analytics.self,
-                          success: { analytics in
-                            print("[DefaultView] Key is valid")
+                .asObject(Analytics.self, success: { analytics in
+                    print("[DefaultView] Key is valid")
                 }, error: { error in
                     print("[DefaultView] Exiting key is wrong, asking user")
                     self.showModal(AnyView(LoginView()))

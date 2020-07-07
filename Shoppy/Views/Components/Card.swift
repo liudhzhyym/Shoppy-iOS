@@ -10,7 +10,7 @@ import SwiftUI
 
 struct Card: View {
     @State public var title: String
-    @Binding public var value: Int
+    @Binding public var value: Double
     @State public var ext: String
     
     var body: some View {
@@ -18,7 +18,7 @@ struct Card: View {
             VStack(alignment: .leading) {
                 Text(title)
                     .font(.caption)
-                Text("\(value)")
+                Text("\(value, specifier: "%.2f")")
                     .font(.title)
                     .bold()
                     + Text(ext)
