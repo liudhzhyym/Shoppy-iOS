@@ -1,8 +1,8 @@
 //
-//  OrdersObservable.swift
+//  ProductsObservable.swift
 //  Shoppy
 //
-//  Created by Victor Lourme on 01/07/2020.
+//  Created by Victor Lourme on 07/07/2020.
 //  Copyright © 2020 Victor Lourme. All rights reserved.
 //
 
@@ -10,8 +10,8 @@ import Foundation
 import SwiftyShoppy
 import KeychainSwift
 
-class OrdersObservable: ObservableObject {
-    @Published public var orders: [Order] = []
+class ProductsObservable: ObservableObject {
+    @Published public var products: [Product] = []
     
     init() {
         update()
@@ -25,9 +25,9 @@ class OrdersObservable: ObservableObject {
         if let key = keychain.get("key") {
             NetworkManager
                 .prepare(token: key)
-                .target(.getOrders)
-                .asArray(Order.self, success: { orders in
-                    self.orders = orders
+                .target(.getProducts)
+                .asArray(Product.self, success: { products in
+                    self.products = products
                 }, error: { error in
                     // Error
                 })

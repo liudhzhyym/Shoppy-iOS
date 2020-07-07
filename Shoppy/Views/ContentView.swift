@@ -78,6 +78,12 @@ struct ContentView: View {
                     Image(systemName: "list.bullet")
                     Text("Orders")
             }
+            
+            ProductView()
+                .tabItem {
+                    Image(systemName: "cube.box")
+                    Text("Products")
+            }
         }
         .onAppear() {
             self.startupCheck()
