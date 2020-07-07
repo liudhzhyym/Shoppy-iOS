@@ -83,10 +83,7 @@ struct ContentView: View {
             self.startupCheck()
         }
         .alert(isPresented: $showAlert) {
-            Alert(title: Text("Network is unreachable"), message: Text("Your device does not have Internet connection."), dismissButton: .default(Text("Retry"), action: {
-                // Recheck
-                self.startupCheck()
-            }))
+            Alert(title: Text("Network is unreachable"), message: Text("Your device does not have Internet connection, reload the application when you have connection back."), dismissButton: .cancel())
         }
     }
 }
