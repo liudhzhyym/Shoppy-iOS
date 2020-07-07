@@ -21,6 +21,7 @@
 		1B7D8FF924AB8AB900CAD138 /* SwiftyShoppy in Frameworks */ = {isa = PBXBuildFile; productRef = 1B7D8FF824AB8AB900CAD138 /* SwiftyShoppy */; };
 		1B7D902424ABA1CC00CAD138 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B7D902324ABA1CC00CAD138 /* LoginView.swift */; };
 		1B7D902724ABA70100CAD138 /* KeychainSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 1B7D902624ABA70100CAD138 /* KeychainSwift */; };
+		1B9BCB7B24B47BA300255448 /* ProductDetailledView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B9BCB7A24B47BA300255448 /* ProductDetailledView.swift */; };
 		1BB764D024AB76DF00C7F63A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BB764CF24AB76DF00C7F63A /* AppDelegate.swift */; };
 		1BB764D224AB76DF00C7F63A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BB764D124AB76DF00C7F63A /* SceneDelegate.swift */; };
 		1BB764D524AB76DF00C7F63A /* Shoppy.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 1BB764D324AB76DF00C7F63A /* Shoppy.xcdatamodeld */; };
@@ -28,7 +29,6 @@
 		1BB764D924AB76E400C7F63A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1BB764D824AB76E400C7F63A /* Assets.xcassets */; };
 		1BB764DC24AB76E400C7F63A /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1BB764DB24AB76E400C7F63A /* Preview Assets.xcassets */; };
 		1BB764DF24AB76E400C7F63A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1BB764DD24AB76E400C7F63A /* LaunchScreen.storyboard */; };
-		1BC70B2624B320B10068B599 /* ProductSectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BC70B2524B320B10068B599 /* ProductSectionView.swift */; };
 		1BC70B2924B32AE90068B599 /* UserView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BC70B2824B32AE90068B599 /* UserView.swift */; };
 		1BD7D4E124AF84FE00857EEC /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BD7D4E024AF84FE00857EEC /* SettingsView.swift */; };
 		1BD7D4E324B08D7E00857EEC /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BD7D4E224B08D7E00857EEC /* Reachability.swift */; };
@@ -46,6 +46,7 @@
 		1B6199D924ADEF49003FA43F /* ProductDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductDetailView.swift; sourceTree = "<group>"; };
 		1B6199DD24AE0670003FA43F /* ImageLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageLoader.swift; sourceTree = "<group>"; };
 		1B7D902324ABA1CC00CAD138 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
+		1B9BCB7A24B47BA300255448 /* ProductDetailledView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductDetailledView.swift; sourceTree = "<group>"; };
 		1BB764CC24AB76DF00C7F63A /* Shoppy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Shoppy.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1BB764CF24AB76DF00C7F63A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1BB764D124AB76DF00C7F63A /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -55,7 +56,6 @@
 		1BB764DB24AB76E400C7F63A /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		1BB764DE24AB76E400C7F63A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		1BB764E024AB76E400C7F63A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		1BC70B2524B320B10068B599 /* ProductSectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductSectionView.swift; sourceTree = "<group>"; };
 		1BC70B2824B32AE90068B599 /* UserView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserView.swift; sourceTree = "<group>"; };
 		1BD7D4E024AF84FE00857EEC /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		1BD7D4E224B08D7E00857EEC /* Reachability.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
@@ -115,7 +115,7 @@
 			isa = PBXGroup;
 			children = (
 				1B6199D924ADEF49003FA43F /* ProductDetailView.swift */,
-				1BC70B2524B320B10068B599 /* ProductSectionView.swift */,
+				1B9BCB7A24B47BA300255448 /* ProductDetailledView.swift */,
 			);
 			path = Product;
 			sourceTree = "<group>";
@@ -301,6 +301,7 @@
 				1BB764D524AB76DF00C7F63A /* Shoppy.xcdatamodeld in Sources */,
 				1B6199DA24ADEF4A003FA43F /* ProductDetailView.swift in Sources */,
 				1B6199DE24AE0670003FA43F /* ImageLoader.swift in Sources */,
+				1B9BCB7B24B47BA300255448 /* ProductDetailledView.swift in Sources */,
 				1BC70B2924B32AE90068B599 /* UserView.swift in Sources */,
 				1BB764D024AB76DF00C7F63A /* AppDelegate.swift in Sources */,
 				1B6199D524ACBBF9003FA43F /* OrderDetailView.swift in Sources */,
@@ -315,7 +316,6 @@
 				1B6199D024ACABA9003FA43F /* OrdersObservable.swift in Sources */,
 				1B7D902424ABA1CC00CAD138 /* LoginView.swift in Sources */,
 				1B6199D324ACABDA003FA43F /* Currencies.swift in Sources */,
-				1BC70B2624B320B10068B599 /* ProductSectionView.swift in Sources */,
 				1BB764D224AB76DF00C7F63A /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
