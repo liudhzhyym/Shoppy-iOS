@@ -39,10 +39,8 @@ struct OrderDetailView: View {
             
             Container {
                 if self.order.product != nil {
-                    // TODO: Improve
-                    NavigationLink(destination: ProductDetailView(product: self.order.product!)) {
-                        ContainerField(name: "See the product", value: "", icon: "cube.box.fill")
-                    }.buttonStyle(PlainButtonStyle())
+                    // Note: is there a way to bypass AnyView?
+                    ContainerNavigationButton(title: "See the product", icon: "cube.box.fill", destination: AnyView(ProductDetailView(product: self.order.product!)))
                 }
             }
             
