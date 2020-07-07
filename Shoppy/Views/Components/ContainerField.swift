@@ -12,7 +12,7 @@ struct ContainerField: View {
     @State public var name: String
     @State public var value: String
     @State public var icon: String
-    @State public var accent: Color
+    @State public var accent: Color = .orange
     
     var body: some View {
         HStack {
