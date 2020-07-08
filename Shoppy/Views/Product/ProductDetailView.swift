@@ -15,84 +15,33 @@ struct ProductDetailView: View {
     @State private var isUnlisted: Bool = false
     
     var body: some View {
-        Form {
-            Section(header: Text("Product")) {
-                // Description
-                if product.description != nil {
-                    NavigationLink(destination: ProductDetailledView(name: "Description", value: product.description!)) {
-                        Text("See product description")
-                    }
-                }
-                
-                Field(key: "Delivery type", value: product.type?.rawValue.capitalized ?? "Unknown")
-                Field(key: "Price", value: "\(product.price ?? -1)")
-                Field(key: "Currency", value: product.currency ?? "Unknown")
+        ScrollView {
+            Container {
+                ContainerNavigationButton(title: "See the description", icon: "text.alignleft", destination: AnyView(ProductDetailledView(name: "Description", value: self.product.description!)))
+                ContainerField(name: "Delivery type", value: self.product.type?.rawValue.capitalized ?? "", icon: "cube.box")
             }
             
-            Section(header: Text("Stock")) {
-                Field(key: "Stock", value: "\(product.stock?.get() ?? -1)")
-                Field(key: "Minimum quantity", value: "\(product.quantity?.min ?? -1)")
-                Field(key: "Maximum quantity", value: "\(product.quantity?.max ?? -1)")
+            Container {
+                ContainerField(name: "Price", value: "\(self.product.price ?? 0)", icon: "bag.fill")
+                ContainerField(name: "Revenue per order", value: "\((self.product.price ?? 0) * Double(self.product.quantity?.min ?? 0))", icon: "equal.square")
+                ContainerField(name: "Potential total", value: "\((self.product.price ?? 0) * Double(self.product.stock?.get() ?? 0))", icon: "equal.square.fill")
+                ContainerField(name: "Currency", value: self.product.currency ?? "", icon: "dollarsign.circle.fill")
             }
             
-            if product.gateways?.count ?? 0 > 0 {
-                Section(header: Text("Gateways")) {
-                    List {
-                        ForEach(product.gateways!, id: \.self) { gateway in
-                            Text("\(gateway.rawValue)")
-                        }
-                    }
-                }
+            Container {
+                ContainerField(name: "Stock", value: "\(self.product.stock?.get() ?? 0)", icon: "cart.fill")
+                ContainerField(name: "Minimum quantity per order", value: "\(self.product.quantity?.min ?? 0)", icon: "minus.circle.fill")
+                ContainerField(name: "Maximum quantity per order", value: "\(self.product.quantity?.max ?? 0)", icon: "plus.circle.fill")
             }
             
-            if product.email?.enabled ?? false {
-                Section(header: Text("Email")) {
-                    NavigationLink(destination: ProductDetailledView(name: "Email", value: product.email?.value ?? "")) {
-                        Text("See email text")
-                    }
-                }
+            Container {
+                ContainerField(name: "Unlisted", value: self.product.unlisted ?? false ? "Yes" : "No", icon: "eye.slash")
+                ContainerField(name: "Product ID", value: self.product.id ?? "", icon: "number")
+                ContainerField(name: "Creation date", value: self.product.created_at?.description ?? "", icon: "calendar")
+                ContainerField(name: "Last update", value: self.product.updated_at?.description ?? "", icon: "clock.fill")
             }
             
-            if product.webhook_urls?.count ?? 0 > 0 {
-                Section(header: Text("Webhooks")) {
-                    List {
-                        ForEach(product.webhook_urls!, id: \.self) { webhook in
-                            Text(webhook)
-                        }
-                    }
-                }
-            }
-            
-            Section(header: Text("Additional information")) {
-                Toggle(isOn: $isUnlisted) {
-                    Text("Unlisted")
-                }.onReceive([self.isUnlisted].publisher.first()) { (value) in
-                    // Update
-                    let keychain = KeychainSwift()
-                    
-                    // Update model
-                    self.product.unlisted = self.isUnlisted
-                    
-                    // Make request
-                    if let key = keychain.get("key") {
-                        NetworkManager
-                            .prepare(token: key)
-                            .target(.updateProduct(self.product))
-                            .asObject(UpdatedProduct.self, success: { update in
-                                // Update
-                                if let res = update.resource {
-                                    self.product = res
-                                }
-                            }, error: { error in
-                                print("ERROR: \(error)")
-                            })
-                    }
-                }
-                Field(key: "Unlisted", value: product.unlisted ?? false ? "Yes" : "No")
-                Field(key: "ID", value: product.id ?? "Unknown")
-                Field(key: "Created at", value: product.created_at?.description ?? "Unknown")
-                Field(key: "Updated at", value: product.updated_at?.description ?? "Unknown")
-            }
+            Spacer()
         }
         .navigationBarTitle(product.title ?? "Product")
         .onAppear {
