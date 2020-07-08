@@ -27,10 +27,10 @@ struct ProductView: View {
                 ForEach(products.products, id: \.id) { product in
                     NavigationLink(destination: ProductDetailView(product: product)) {
                         ProductCard(title: product.title ?? "Unknown",
-                                    price: product.price ?? -1,
+                                    price: product.price ?? 0,
                                     currency: product.currency ?? "USD",
-                                    stock: product.stock?.get() ?? -1,
-                                    type: product.type?.rawValue.capitalized ?? "Unknown")
+                                    stock: product.stock?.get() ?? 0,
+                                    type: product.type ?? .account)
                     }
                 }
                 .padding([.top, .bottom])

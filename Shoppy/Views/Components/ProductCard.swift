@@ -7,6 +7,7 @@
 //
 
 import SwiftUI
+import SwiftyShoppy
 
 struct ProductCard: View {
     @Environment(\.colorScheme) var colorScheme
@@ -14,7 +15,7 @@ struct ProductCard: View {
     @State public var price: Double
     @State public var currency: String
     @State public var stock: Int
-    @State public var type: String
+    @State public var type: DeliveryType
     
     var body: some View {
         HStack {
@@ -22,12 +23,17 @@ struct ProductCard: View {
                 Text(title)
                     .foregroundColor(colorScheme == .dark ? .white : .black)
                 HStack {
-                    if stock > 0 {
-                        Image(systemName: "checkmark")
-                        Text("\(stock) in stock - \(price, specifier: "%.2f") \(currency) - \(type)")
+                    if type == .account {
+                        if stock > 0 {
+                            Image(systemName: "checkmark")
+                            Text("\(stock) in stock - \(price, specifier: "%.2f") \(currency) - \(type.rawValue.capitalized)")
+                        } else {
+                            Image(systemName: "xmark")
+                            Text("Out of stock - \(price, specifier: "%.2f") \(currency) - \(type.rawValue.capitalized)")
+                        }
                     } else {
-                        Image(systemName: "xmark")
-                        Text("Out of stock - \(price, specifier: "%.2f") \(currency) - \(type)")
+                        Image(systemName: "cube.box")
+                        Text("\(price, specifier: "%.2f") \(currency) - \(type.rawValue.capitalized)")
                     }
                 }
                 .font(.caption)
@@ -56,19 +62,19 @@ struct ProductCard_Previews: PreviewProvider {
                         price: 20,
                         currency: "EUR",
                         stock: 250,
-                        type: "Service")
+                        type: .account)
             
             ProductCard(title: "Another product",
                         price: 50,
                         currency: "EUR",
                         stock: 0,
-                        type: "Dynamic")
+                        type: .file)
             
             ProductCard(title: "A very very very very very long title for a product",
                         price: 50,
                         currency: "EUR",
                         stock: 0,
-                        type: "File")
+                        type: .service)
         }
     }
 }
