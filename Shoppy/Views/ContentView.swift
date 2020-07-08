@@ -13,23 +13,6 @@ struct ContentView: View {
     @State private var showAlert = false
     
     ///
-    /// Check for key
-    ///
-    private func startupCheck() {
-        // Check for network
-        if !Reachability.isConnectedToNetwork() {
-            showAlert = true
-            return
-        }
-        
-        // Check for error
-        if network.isError {
-            print("[DefaultView] No exiting key, asking user")
-            showModal(AnyView(LoginView()))
-        }
-    }
-    
-    ///
     /// Show modal
     ///
     private func showModal(_ destination: AnyView) {
@@ -63,8 +46,14 @@ struct ContentView: View {
                     Text("Products")
             }
         }
-        .onAppear() {
-            self.startupCheck()
+        .onReceive(network.errorSubscriber) {
+            // Check for network
+            if !Reachability.isConnectedToNetwork() {
+                self.showAlert = true
+                return
+            }
+            
+            self.showModal(AnyView(LoginView()))
         }
         .alert(isPresented: $showAlert) {
             Alert(title: Text("Network is unreachable"),

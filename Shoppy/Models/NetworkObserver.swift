@@ -18,6 +18,7 @@ class NetworkObserver: ObservableObject {
     let metricsUpdater = PassthroughSubject<Void, Never>()
     let imageUpdater = PassthroughSubject<Void, Never>()
     let analyticsUpdater = PassthroughSubject<Void, Never>()
+    let errorSubscriber = PassthroughSubject<Void, Never>()
     
     ///
     /// Observables
@@ -35,11 +36,6 @@ class NetworkObserver: ObservableObject {
     @Published public var todayRevenue: Double = 0
     
     ///
-    /// Error notifier
-    ///
-    @Published public var isError: Bool = false
-    
-    ///
     /// API Key
     ///
     private var key: String
@@ -51,12 +47,20 @@ class NetworkObserver: ObservableObject {
         // Save key
         self.key = key
         
+        // Load all
+        loadAll()
+    }
+    
+    ///
+    /// Fetch all data
+    ///
+    public func loadAll() {
         // Load observables
         getAnalytics()
         getMetrics()
         getSettings()
-        getOrders()
-        getProducts()
+        getOrders(page: 1)
+        getProducts(page: 1)
     }
     
     ///
@@ -77,13 +81,10 @@ class NetworkObserver: ObservableObject {
                 // Store
                 self.analytics = analytics
                 
-                // Change error state
-                self.isError = false
-                
                 // Notify views
                 self.analyticsUpdater.send()
             }, error: { error in
-                self.isError = true
+                self.errorSubscriber.send()
             })
     }
     
@@ -101,13 +102,10 @@ class NetworkObserver: ObservableObject {
                     self.totalRevenue = revenue
                 }
                 
-                // Change error state
-                self.isError = false
-                
                 // Notify user
                 self.metricsUpdater.send()
             }, error: { error in
-                self.isError = true
+                self.errorSubscriber.send()
             })
         
         // Get daily revenue
@@ -120,13 +118,10 @@ class NetworkObserver: ObservableObject {
                     self.todayRevenue = revenue
                 }
                 
-                // Change error state
-                self.isError = false
-                
                 // Notify user
                 self.metricsUpdater.send()
             }, error: { error in
-                self.isError = true
+                self.errorSubscriber.send()
             })
     }
     
@@ -146,13 +141,10 @@ class NetworkObserver: ObservableObject {
                     self.getImage(imageURL: url)
                 }
                 
-                // Change error state
-                self.isError = false
-                
                 // Notify views
                 self.settingsUpdater.send()
             }, error: { error in
-                self.isError = true
+                self.errorSubscriber.send()
             })
     }
     
@@ -178,30 +170,30 @@ class NetworkObserver: ObservableObject {
     ///
     /// Get orders
     ///
-    public func getOrders() {
+    public func getOrders(page: Int) {
         NetworkManager
             .prepare(token: self.key)
-            .target(.getOrders())
+            .target(.getOrders(page))
             .asArray(Order.self, success: { orders in
                 self.orders = orders
-                self.isError = false
+                if page == 1 {
             }, error: { error in
-                self.isError = true
+                self.errorSubscriber.send()
             })
     }
     
     ///
     /// Get products
     ///
-    public func getProducts() {
+    public func getProducts(page: Int) {
         NetworkManager
             .prepare(token: self.key)
-            .target(.getProducts())
+            .target(.getProducts(page))
             .asArray(Product.self, success: { products in
                 self.products = products
-                self.isError = false
+                if page == 1 {
             }, error: { error in
-                self.isError = true
+                self.errorSubscriber.send()
             })
     }
 }

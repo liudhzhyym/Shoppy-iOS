@@ -10,7 +10,9 @@ import SwiftUI
 import SwiftyShoppy
 import KeychainSwift
 
-struct LoginView: View {    
+struct LoginView: View {
+    @EnvironmentObject var network: NetworkObserver
+    
     // Keychain
     private let keychain = KeychainSwift()
     
@@ -36,6 +38,10 @@ struct LoginView: View {
                 
                 // Store key
                 self.keychain.set(self.key, forKey: "key")
+                
+                // Reload with key
+                self.network.updateKey(key: self.key)
+                self.network.loadAll()
                 
                 // Close modal
                 UIApplication.shared.windows.first?.rootViewController?.dismiss(animated: true, completion: nil)
