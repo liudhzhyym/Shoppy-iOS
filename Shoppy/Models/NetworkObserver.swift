@@ -130,7 +130,7 @@ class NetworkObserver: ObservableObject {
     public func getOrders() {
         NetworkManager
             .prepare(token: self.key)
-            .target(.getOrders)
+            .target(.getOrders())
             .asArray(Order.self, success: { orders in
                 self.orders = orders
                 self.isError = false
@@ -145,7 +145,7 @@ class NetworkObserver: ObservableObject {
     public func getProducts() {
         NetworkManager
             .prepare(token: self.key)
-            .target(.getProducts)
+            .target(.getProducts())
             .asArray(Product.self, success: { products in
                 self.products = products
                 self.isError = false
