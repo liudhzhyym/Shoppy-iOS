@@ -12,8 +12,11 @@ import KeychainSwift
 
 struct ProductDetailView: View {
     @Environment(\.presentationMode) var presentation
+    @EnvironmentObject var network: NetworkObserver
+    
     @State public var product: Product
     @State private var isPresented = false
+    
     private let keychain = KeychainSwift()
     
     // Delete product
@@ -29,6 +32,9 @@ struct ProductDetailView: View {
                 .prepare(token: key)
                 .target(.deleteProduct(id))
                 .asObject(UpdatedProduct.self, success: { update in
+                    // Reload products
+                    self.network.getProducts()
+                    
                     // Dismiss
                     self.presentation.wrappedValue.dismiss()
                 }, error: { error in
