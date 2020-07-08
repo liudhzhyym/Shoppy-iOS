@@ -34,7 +34,7 @@ struct ProductView: View {
                     }
                 }
                 .padding([.top, .bottom])
-            }
+            }.id(UUID().uuidString)
                 
             .navigationBarTitle("Products")
             .navigationBarItems(trailing: refreshButton)

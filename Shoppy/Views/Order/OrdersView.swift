@@ -35,7 +35,7 @@ struct OrdersView: View {
                     
                 }
                 .padding([.top, .bottom])
-            }
+            }.id(UUID().uuidString)
                 
             .navigationBarTitle("Orders")
             .navigationBarItems(trailing: refreshButton)
