@@ -50,7 +50,7 @@ struct ProductDetailView: View {
         }) {
             Image(systemName: "square.and.pencil")
                 .resizable()
-                .frame(width: 26, height: 26)
+                .frame(width: 20, height: 20)
         }
     }
     
