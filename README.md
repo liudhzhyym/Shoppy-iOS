@@ -9,9 +9,11 @@ _I'll try to launch it on App Store as soon as application reach version 1.2!_ Y
 ## Screenshots
 > Here are a couple of screenshots, the applications contains a lot more to see, use it by yourself to discover everything!
 
-| Home | Profile | Orders | Products |
-|:----:|:-------:|:------:|:--------:|
-| ![Home view](media/Home.png) | ![Profile view](media/Profile.png) | ![Orders view](media/Orders.png) | ![Products view](media/Products.png) |
+| Home | Orders | Products |
+|:----:|:------:|:--------:|
+| ![Home view](media/Home.png) | ![Orders view](media/Orders.png) | ![Products view](media/Products.png) |
+
+Others screenshots are available in **`Media`** folder.
 
 ## Features compared to official application
 | Features | Official | Unofficial Shoppy-iOS |
