@@ -25,8 +25,8 @@ class NetworkObserver: ObservableObject {
     ///
     @Published public var settings: Settings?
     @Published public var analytics: Analytics?
-    @Published public var orders: [Order]?
-    @Published public var products: [Product]?
+    @Published public var orders: [Order] = []
+    @Published public var products: [Product] = []
     @Published public var image: Data?
     
     ///
@@ -175,8 +175,13 @@ class NetworkObserver: ObservableObject {
             .prepare(token: self.key)
             .target(.getOrders(page))
             .asArray(Order.self, success: { orders in
-                self.orders = orders
+                // Reset
                 if page == 1 {
+                    self.orders.removeAll()
+                }
+                
+                // Append new orders
+                self.orders.append(contentsOf: orders)
             }, error: { error in
                 self.errorSubscriber.send()
             })
@@ -190,8 +195,13 @@ class NetworkObserver: ObservableObject {
             .prepare(token: self.key)
             .target(.getProducts(page))
             .asArray(Product.self, success: { products in
-                self.products = products
+                // Reset
                 if page == 1 {
+                    self.products.removeAll()
+                }
+                
+                // Append new produts
+                self.products.append(contentsOf: products)
             }, error: { error in
                 self.errorSubscriber.send()
             })

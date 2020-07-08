@@ -10,10 +10,19 @@ import SwiftUI
 
 struct ProductView: View {
     @EnvironmentObject var network: NetworkObserver
+    @State private var page: Int = 1
+    
+    private func loadMore() {
+        // Increment page
+        self.page += 1
+        
+        // Load more
+        self.network.getProducts(page: self.page)
+    }
     
     var refreshButton: some View {
         Button(action: {
-            self.network.getProducts()
+            self.network.getProducts(page: self.page)
         }) {
             Image(systemName: "arrow.2.circlepath.circle.fill")
                 .resizable()
@@ -24,7 +33,7 @@ struct ProductView: View {
     var body: some View {
         NavigationView {
             ScrollView {
-                ForEach(network.products ?? [], id: \.id) { product in
+                ForEach(network.products, id: \.id) { product in
                     NavigationLink(destination: ProductDetailView(product: product)) {
                         ProductCard(title: product.title ?? "Unknown",
                                     price: product.price ?? 0,
@@ -33,7 +42,18 @@ struct ProductView: View {
                                     type: product.type ?? .account)
                     }
                 }
-                .padding([.top, .bottom])
+                
+                Text("\(network.products.count) products")
+                    .font(.footnote)
+                    .foregroundColor(.secondary)
+                
+                if network.products.count >= (25 * self.page) {
+                    Button(action: loadMore) {
+                        Text("Try to load more")
+                    }.padding()
+                }
+                
+                Spacer()
             }.id(UUID().uuidString)
                 
             .navigationBarTitle("Products")

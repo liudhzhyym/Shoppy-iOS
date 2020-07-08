@@ -33,7 +33,7 @@ struct ProductDetailView: View {
                 .target(.deleteProduct(id))
                 .asObject(ResourceUpdate<Product>.self, success: { update in
                     // Reload products
-                    self.network.getProducts()
+                    self.network.getProducts(page: 1)
                     
                     // Dismiss
                     self.presentation.wrappedValue.dismiss()
