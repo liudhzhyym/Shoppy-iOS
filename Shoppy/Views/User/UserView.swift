@@ -15,13 +15,13 @@ struct UserView: View {
     
     var body: some View {
         VStack {
-            HStack {
-                Image(uiImage: (UIImage(data: image ?? Data()) ?? UIImage(systemName: "person"))!)
-                    .resizable()
-                    .frame(width: 80, height: 80)
-                    .clipShape(RoundedRectangle(cornerRadius: 10))
-                
-                VStack(alignment: .leading) {
+            Group {
+                VStack {
+                    Image(uiImage: (UIImage(data: image ?? Data()) ?? UIImage(systemName: "person"))!)
+                        .resizable()
+                        .frame(width: 100, height: 100)
+                        .clipShape(Circle())
+                    
                     Text(settings.user?.username ?? "Username")
                         .font(.title)
                         .bold()
@@ -29,10 +29,9 @@ struct UserView: View {
                     Text(settings.user?.email ?? "email@provider.tld")
                         .font(.callout)
                         .foregroundColor(.secondary)
-                }.padding()
-                
-                Spacer()
-            }.padding([.top, .leading, .trailing])
+                }
+            }.padding(.vertical)
+            
             
             Container {
                 ContainerField(name: "BTC Address",
@@ -51,6 +50,10 @@ struct UserView: View {
                                value: self.settings.settings?.stripeAccountId ?? "Not linked",
                                icon: "s.circle.fill", accent: .orange)
             }
+            
+            Text("Your profile can be changed on the website.")
+                .font(.footnote)
+                .foregroundColor(.secondary)
             
             Spacer()
         }.navigationBarTitle("Profile", displayMode: .inline)
