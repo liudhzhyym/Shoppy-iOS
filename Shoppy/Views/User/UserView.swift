@@ -11,13 +11,12 @@ import SwiftyShoppy
 
 struct UserView: View {
     @State public var settings: Settings
-    @State public var image: ImageLoader
+    @State public var image: Data?
     
     var body: some View {
         VStack {
             HStack {
-                Image(uiImage: ((image.image != nil) ?
-                    UIImage(data: image.image!): UIImage(systemName: "person"))!)
+                Image(uiImage: (UIImage(data: image ?? Data()) ?? UIImage(systemName: "person"))!)
                     .resizable()
                     .frame(width: 80, height: 80)
                     .clipShape(RoundedRectangle(cornerRadius: 10))
@@ -60,6 +59,6 @@ struct UserView: View {
 
 struct UserView_Previews: PreviewProvider {
     static var previews: some View {
-        UserView(settings: Settings(), image: ImageLoader())
+        UserView(settings: Settings(), image: Data())
     }
 }

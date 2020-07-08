@@ -7,43 +7,23 @@
 //
 
 import SwiftUI
-import KeychainSwift
-import SwiftyShoppy
 
 struct ContentView: View {
-    // Keychain
-    private let keychain = KeychainSwift()
-    
+    @EnvironmentObject var network: NetworkObserver
     @State private var showAlert = false
     
     ///
     /// Check for key
     ///
     private func startupCheck() {
-        // Check for key
-        if let key = keychain.get("key") {
-            print("[DefaultView] Exiting key detected, checking validity")
-            
-            // Check for network
-            if !Reachability.isConnectedToNetwork() {
-                showAlert = true
-                return
-            }
-                
-            // Disable
-            showAlert = false
-            
-            // Check if key is valid
-            NetworkManager
-                .prepare(token: key)
-                .target(.getAnalytics)
-                .asObject(Analytics.self, success: { analytics in
-                    print("[DefaultView] Key is valid")
-                }, error: { error in
-                    print("[DefaultView] Exiting key is wrong, asking user")
-                    self.showModal(AnyView(LoginView()))
-                })
-        } else {
+        // Check for network
+        if !Reachability.isConnectedToNetwork() {
+            showAlert = true
+            return
+        }
+        
+        // Check for error
+        if network.isError {
             print("[DefaultView] No exiting key, asking user")
             showModal(AnyView(LoginView()))
         }
@@ -62,8 +42,6 @@ struct ContentView: View {
         // Display
         window?.rootViewController?.present(vc, animated: true)
     }
-    
-    @State private var selectedIndex = 0
     
     var body: some View {
         TabView {
@@ -89,7 +67,9 @@ struct ContentView: View {
             self.startupCheck()
         }
         .alert(isPresented: $showAlert) {
-            Alert(title: Text("Network is unreachable"), message: Text("Your device does not have Internet connection, reload the application when you have connection back."), dismissButton: .cancel())
+            Alert(title: Text("Network is unreachable"),
+                  message: Text("Your device does not have Internet connection, reload the application when you have connection back."),
+                  dismissButton: .cancel())
         }
     }
 }

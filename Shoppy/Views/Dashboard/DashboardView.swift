@@ -11,54 +11,19 @@ import SwiftyShoppy
 import KeychainSwift
 
 struct DashboardView: View {
-    @State private var settings = Settings()
-    @ObservedObject private var image = ImageLoader()
-    @State private var displaySettings = false
-    @State private var dailyIncome: Double = 0
-    @State private var totalRevenue: Double = 0
-    @State private var orders: Double = 0
+    @EnvironmentObject var network: NetworkObserver
     
-    private func loadUser() {
-        // Load keychain
-        let keychain = KeychainSwift()
-        
-        // Load data
-        if let key = keychain.get("key") {
-            // Load settings
-            NetworkManager
-                .prepare(token: key)
-                .target(.getSettings)
-                .asObject(Settings.self, success: { settings in
-                    // Store settings
-                    self.settings = settings
-                    
-                    // Load image
-                    if let url = settings.settings?.userAvatarURL {
-                        print(url)
-                        self.image.setImage(imageURL: url)
-                    }
-                }, error: { error in
-                    print(error)
-                })
-            
-            // Load stats
-            NetworkManager
-                .prepare(token: key)
-                .target(.getAnalytics)
-                .asObject(Analytics.self, success: { analytics in
-                    self.orders = Double(analytics.totalOrders ?? 0)
-                    self.dailyIncome = analytics.todaysRevenue ?? 0
-                    self.totalRevenue = analytics.totalRevenue ?? 0
-                }, error: { error in
-                    print(error)
-                })
-        }
-    }
+    @State private var image: Data?
+    @State private var settings = Settings()
+    @State private var displaySettings = false
+    
+    @State private var revenues: Double = 0
+    @State private var orders: Double = 0
+    @State private var today: Double = 0
     
     var profileButton: some View {
         NavigationLink(destination: UserView(settings: settings, image: image)) {
-            Image(uiImage: ((image.image != nil) ?
-                UIImage(data: image.image!): UIImage(systemName: "person"))!)
+            Image(uiImage: (UIImage(data: image ?? Data()) ?? UIImage(systemName: "person"))!)
                 .resizable()
                 .frame(width: 26, height: 26)
                 .clipShape(Circle())
@@ -79,19 +44,43 @@ struct DashboardView: View {
         NavigationView {
             VStack {
                 Group {
-                    Card(title: "Total revenue", value: $totalRevenue, ext: "€", specifier: "%.2f")
-                    Card(title: "Daily income", value: $dailyIncome, ext: "€", specifier: "%.2f")
-                    Card(title: "Total orders", value: $orders, ext: "", specifier: "%.0f")
-                }.padding([.top, .bottom], 5)
+                    Card(title: "Total orders",
+                         value: $orders,
+                         ext: "", specifier: "%.0f")
+                    
+                    Card(title: "Total revenue",
+                         value: $revenues,
+                         ext: "€", specifier: "%.2f")
+                    
+                    Card(title: "Daily income",
+                         value: $today,
+                         ext: "€", specifier: "%.2f")
+                }.padding(.vertical, 5)
                 
                 Spacer()
             }
                 
             .navigationBarTitle("Dashboard")
             .navigationBarItems(leading: profileButton, trailing: settingsButton)
-        }.onAppear() {
-            self.loadUser()
-        }.sheet(isPresented: $displaySettings) {
+        }
+        .onReceive(network.analyticsUpdater) {
+            // Set card data
+            self.revenues = self.network.analytics?.totalRevenue ?? -1
+            self.today = self.network.analytics?.todaysRevenue ?? -1
+            self.orders = self.network.analytics?.totalOrders ?? -1
+        }.onReceive(network.settingsUpdater) {
+            // Set settings
+            if let settings = self.network.settings {
+                self.settings = settings
+            }
+        }
+        .onReceive(network.imageUpdater) {
+            // Set image
+            if let image = self.network.image {
+                self.image = image
+            }
+        }
+        .sheet(isPresented: $displaySettings) {
             SettingsView()
         }
     }

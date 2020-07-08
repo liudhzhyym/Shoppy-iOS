@@ -16,18 +16,16 @@
 		1B6199C924AC8C96003FA43F /* Card.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B6199C824AC8C96003FA43F /* Card.swift */; };
 		1B6199CC24AC98C4003FA43F /* OrdersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B6199CB24AC98C4003FA43F /* OrdersView.swift */; };
 		1B6199CE24AC9A10003FA43F /* OrderCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B6199CD24AC9A10003FA43F /* OrderCard.swift */; };
-		1B6199D024ACABA9003FA43F /* OrdersObservable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B6199CF24ACABA9003FA43F /* OrdersObservable.swift */; };
 		1B6199D324ACABDA003FA43F /* Currencies.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B6199D224ACABDA003FA43F /* Currencies.swift */; };
 		1B6199D524ACBBF9003FA43F /* OrderDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B6199D424ACBBF9003FA43F /* OrderDetailView.swift */; };
 		1B6199D724ACBEE0003FA43F /* Field.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B6199D624ACBEE0003FA43F /* Field.swift */; };
 		1B6199DA24ADEF4A003FA43F /* ProductDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B6199D924ADEF49003FA43F /* ProductDetailView.swift */; };
-		1B6199DE24AE0670003FA43F /* ImageLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B6199DD24AE0670003FA43F /* ImageLoader.swift */; };
 		1B7D8FF924AB8AB900CAD138 /* SwiftyShoppy in Frameworks */ = {isa = PBXBuildFile; productRef = 1B7D8FF824AB8AB900CAD138 /* SwiftyShoppy */; };
 		1B7D902424ABA1CC00CAD138 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B7D902324ABA1CC00CAD138 /* LoginView.swift */; };
 		1B7D902724ABA70100CAD138 /* KeychainSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 1B7D902624ABA70100CAD138 /* KeychainSwift */; };
+		1B94D95024B5D1D300CEFFED /* NetworkObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B94D94F24B5D1D300CEFFED /* NetworkObserver.swift */; };
 		1B9BCB7B24B47BA300255448 /* ProductDetailledView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B9BCB7A24B47BA300255448 /* ProductDetailledView.swift */; };
 		1B9BCB8024B4889600255448 /* ProductView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B9BCB7F24B4889600255448 /* ProductView.swift */; };
-		1B9BCB8224B488DC00255448 /* ProductsObservable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B9BCB8124B488DC00255448 /* ProductsObservable.swift */; };
 		1B9BCB8424B4894F00255448 /* ProductCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B9BCB8324B4894F00255448 /* ProductCard.swift */; };
 		1B9BCB8D24B4A52D00255448 /* MDText in Frameworks */ = {isa = PBXBuildFile; productRef = 1B9BCB8C24B4A52D00255448 /* MDText */; };
 		1BB764D024AB76DF00C7F63A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BB764CF24AB76DF00C7F63A /* AppDelegate.swift */; };
@@ -52,16 +50,14 @@
 		1B6199C824AC8C96003FA43F /* Card.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Card.swift; sourceTree = "<group>"; };
 		1B6199CB24AC98C4003FA43F /* OrdersView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrdersView.swift; sourceTree = "<group>"; };
 		1B6199CD24AC9A10003FA43F /* OrderCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderCard.swift; sourceTree = "<group>"; };
-		1B6199CF24ACABA9003FA43F /* OrdersObservable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrdersObservable.swift; sourceTree = "<group>"; };
 		1B6199D224ACABDA003FA43F /* Currencies.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Currencies.swift; sourceTree = "<group>"; };
 		1B6199D424ACBBF9003FA43F /* OrderDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderDetailView.swift; sourceTree = "<group>"; };
 		1B6199D624ACBEE0003FA43F /* Field.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Field.swift; sourceTree = "<group>"; };
 		1B6199D924ADEF49003FA43F /* ProductDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductDetailView.swift; sourceTree = "<group>"; };
-		1B6199DD24AE0670003FA43F /* ImageLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageLoader.swift; sourceTree = "<group>"; };
 		1B7D902324ABA1CC00CAD138 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
+		1B94D94F24B5D1D300CEFFED /* NetworkObserver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkObserver.swift; sourceTree = "<group>"; };
 		1B9BCB7A24B47BA300255448 /* ProductDetailledView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductDetailledView.swift; sourceTree = "<group>"; };
 		1B9BCB7F24B4889600255448 /* ProductView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductView.swift; sourceTree = "<group>"; };
-		1B9BCB8124B488DC00255448 /* ProductsObservable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductsObservable.swift; sourceTree = "<group>"; };
 		1B9BCB8324B4894F00255448 /* ProductCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductCard.swift; sourceTree = "<group>"; };
 		1BB764CC24AB76DF00C7F63A /* Shoppy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Shoppy.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1BB764CF24AB76DF00C7F63A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -172,9 +168,7 @@
 			isa = PBXGroup;
 			children = (
 				1BB764D324AB76DF00C7F63A /* Shoppy.xcdatamodeld */,
-				1B6199CF24ACABA9003FA43F /* OrdersObservable.swift */,
-				1B6199DD24AE0670003FA43F /* ImageLoader.swift */,
-				1B9BCB8124B488DC00255448 /* ProductsObservable.swift */,
+				1B94D94F24B5D1D300CEFFED /* NetworkObserver.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -325,7 +319,6 @@
 				1B9BCB8024B4889600255448 /* ProductView.swift in Sources */,
 				1BB764D524AB76DF00C7F63A /* Shoppy.xcdatamodeld in Sources */,
 				1B6199DA24ADEF4A003FA43F /* ProductDetailView.swift in Sources */,
-				1B6199DE24AE0670003FA43F /* ImageLoader.swift in Sources */,
 				1B9BCB7B24B47BA300255448 /* ProductDetailledView.swift in Sources */,
 				1BC70B2924B32AE90068B599 /* UserView.swift in Sources */,
 				1BB764D024AB76DF00C7F63A /* AppDelegate.swift in Sources */,
@@ -341,9 +334,8 @@
 				1B0EB16E24B4DC39007A06E0 /* ContainerButton.swift in Sources */,
 				1B0EB17024B4DE24007A06E0 /* ContainerField.swift in Sources */,
 				1B6199CC24AC98C4003FA43F /* OrdersView.swift in Sources */,
-				1B9BCB8224B488DC00255448 /* ProductsObservable.swift in Sources */,
-				1B6199D024ACABA9003FA43F /* OrdersObservable.swift in Sources */,
 				1B0EB17424B52520007A06E0 /* OrderAccountView.swift in Sources */,
+				1B94D95024B5D1D300CEFFED /* NetworkObserver.swift in Sources */,
 				1B7D902424ABA1CC00CAD138 /* LoginView.swift in Sources */,
 				1B0EB16C24B4D33D007A06E0 /* Container.swift in Sources */,
 				1B6199D324ACABDA003FA43F /* Currencies.swift in Sources */,

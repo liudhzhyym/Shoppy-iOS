@@ -9,11 +9,11 @@
 import SwiftUI
 
 struct OrdersView: View {
-    @ObservedObject private var orders = OrdersObservable()
+    @EnvironmentObject var network: NetworkObserver
     
     var refreshButton: some View {
         Button(action: {
-            self.orders.update()
+            self.network.getOrders()
         }) {
             Image(systemName: "arrow.2.circlepath.circle.fill")
                 .resizable()
@@ -24,7 +24,7 @@ struct OrdersView: View {
     var body: some View {
         NavigationView {
             ScrollView {
-                ForEach(orders.orders, id: \.id) { order in
+                ForEach(network.orders ?? [], id: \.id) { order in
                     NavigationLink(destination: OrderDetailView(order: order)) {
                         OrderCard(email: order.email ?? "",
                                   description: order.product?.title ?? "",

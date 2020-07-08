@@ -19,11 +19,12 @@ struct Card: View {
             VStack(alignment: .leading) {
                 Text(title)
                     .font(.caption)
+                
                 Text("\(value, specifier: specifier)")
                     .font(.title)
                     .bold()
-                    + Text(ext)
-                        .font(.footnote)
+                + Text(ext)
+                    .font(.footnote)
             }
             
             Spacer()
@@ -39,7 +40,7 @@ struct Card: View {
 struct Card_Previews: PreviewProvider {
     static var previews: some View {
         Card(title: "Revenue",
-             value: .constant(15),
+             value: .constant(Double(10)),
              ext: "€",
              specifier: "%.2f")
     }
