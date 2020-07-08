@@ -31,7 +31,7 @@ struct ProductDetailView: View {
             NetworkManager
                 .prepare(token: key)
                 .target(.deleteProduct(id))
-                .asObject(UpdatedProduct.self, success: { update in
+                .asObject(ResourceUpdate<Product>.self, success: { update in
                     // Reload products
                     self.network.getProducts()
                     
