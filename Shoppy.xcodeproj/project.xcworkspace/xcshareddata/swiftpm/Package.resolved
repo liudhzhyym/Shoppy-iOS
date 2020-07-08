@@ -60,8 +60,8 @@
         "repositoryURL": "https://github.com/vlourme/SwiftyShoppy.git",
         "state": {
           "branch": null,
-          "revision": "45d83831fdc78c753c46668a5fb37461eab9f648",
-          "version": "1.0.12"
+          "revision": "5cbdd32b54965e76f04ba5d8609a2878f64d66c0",
+          "version": "1.0.14"
         }
       }
     ]
