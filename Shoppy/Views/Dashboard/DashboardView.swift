@@ -63,10 +63,13 @@ struct DashboardView: View {
             .navigationBarTitle("Dashboard")
             .navigationBarItems(leading: profileButton, trailing: settingsButton)
         }
+        .onReceive(network.metricsUpdater) {
+            // Set card data
+            self.revenues = self.network.totalRevenue
+            self.today = self.network.todayRevenue
+        }
         .onReceive(network.analyticsUpdater) {
             // Set card data
-            self.revenues = self.network.analytics?.totalRevenue ?? -1
-            self.today = self.network.analytics?.todaysRevenue ?? -1
             self.orders = self.network.analytics?.totalOrders ?? -1
         }.onReceive(network.settingsUpdater) {
             // Set settings

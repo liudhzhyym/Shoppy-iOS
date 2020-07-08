@@ -15,6 +15,7 @@ class NetworkObserver: ObservableObject {
     /// Combines
     ///
     let settingsUpdater = PassthroughSubject<Void, Never>()
+    let metricsUpdater = PassthroughSubject<Void, Never>()
     let imageUpdater = PassthroughSubject<Void, Never>()
     let analyticsUpdater = PassthroughSubject<Void, Never>()
     
@@ -26,6 +27,12 @@ class NetworkObserver: ObservableObject {
     @Published public var orders: [Order]?
     @Published public var products: [Product]?
     @Published public var image: Data?
+    
+    ///
+    /// Single value observables
+    ///
+    @Published public var totalRevenue: Double = 0
+    @Published public var todayRevenue: Double = 0
     
     ///
     /// Error notifier
@@ -46,6 +53,7 @@ class NetworkObserver: ObservableObject {
         
         // Load observables
         getAnalytics()
+        getMetrics()
         getSettings()
         getOrders()
         getProducts()
@@ -74,6 +82,49 @@ class NetworkObserver: ObservableObject {
                 
                 // Notify views
                 self.analyticsUpdater.send()
+            }, error: { error in
+                self.isError = true
+            })
+    }
+    
+    ///
+    /// Get metrics
+    ///
+    public func getMetrics() {
+        // Get total revenue
+        NetworkManager
+            .prepare(token: self.key)
+            .target(.getMetrics(.revenue, range: 1000))
+            .asObject(Metrics.self, success: { metrics in
+                // Store
+                if let revenue = metrics.value?.value {
+                    self.totalRevenue = revenue
+                }
+                
+                // Change error state
+                self.isError = false
+                
+                // Notify user
+                self.metricsUpdater.send()
+            }, error: { error in
+                self.isError = true
+            })
+        
+        // Get daily revenue
+        NetworkManager
+            .prepare(token: self.key)
+            .target(.getMetrics(.revenue, range: 1))
+            .asObject(Metrics.self, success: { metrics in
+                // Store
+                if let revenue = metrics.value?.value {
+                    self.todayRevenue = revenue
+                }
+                
+                // Change error state
+                self.isError = false
+                
+                // Notify user
+                self.metricsUpdater.send()
             }, error: { error in
                 self.isError = true
             })
