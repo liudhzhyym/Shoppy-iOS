@@ -32,6 +32,7 @@ struct ProductEditView: View {
     @State private var maximum = ""
     @State private var email_enabled = false
     @State private var email_value = ""
+    @State private var callback = ""
     
     // Update function
     private func submit() {
@@ -45,6 +46,7 @@ struct ProductEditView: View {
         self.product.quantity?.max = Int(self.maximum)
         self.product.email?.enabled = self.email_enabled
         self.product.email?.value = self.email_value
+        self.product.dynamic_url = self.callback
         
         // Submit
         if self.isEdit {
@@ -98,7 +100,7 @@ struct ProductEditView: View {
                     TextField("Price (10.000 max)", text: $price)
                         .keyboardType(.decimalPad)
                     
-                    Picker(selection: $type, label: Text("Type")) {
+                    Picker(selection: $type.animation(), label: Text("Type")) {
                         ForEach(DeliveryType.allCases, id: \.self) { type in
                             Text(type.rawValue.capitalized)
                         }
@@ -117,25 +119,25 @@ struct ProductEditView: View {
                     Section(header: Text("Stock")) {
                         TextField("Minimum stock", text: $minimum)
                         TextField("Maximum stock", text: $maximum)
+                    }.keyboardType(.numberPad)
+                }
+                
+                if type == .dynamic {
+                    Section(header: Text("Dynamic")) {
+                        TextField("Callback URL", text: $callback)
                     }
                 }
                 
-                /*
-                 SwiftyShoppy edit needed
-                 
-                 if type == .dynamic {
-                 Section(header: Text("Dynamic")) {
-                 TextField("Callback URL", text: $callback)
-                 }
-                 }*/
-                
-                Section(header: Text("Email")) {
-                    Toggle(isOn: $email_enabled) {
-                        Text("Send email on purchase")
+                if type != .dynamic {
+                    Section(header: Text("Email")) {
+                        Toggle(isOn: $email_enabled.animation()) {
+                            Text("Send email on purchase")
+                        }
+                        
+                        if email_enabled {
+                            TextField("Message to send", text: $email_value)
+                        }
                     }
-                    
-                    TextField("Message to send", text: $email_value)
-                        .disabled(!email_enabled)
                 }
             }
             .keyboardObserving()
@@ -159,6 +161,7 @@ struct ProductEditView: View {
                 self.maximum = "\(self.product.quantity?.max ?? 0)"
                 self.email_enabled = self.product.email?.enabled ?? false
                 self.email_value = self.product.email?.value ?? ""
+                self.callback = self.product.dynamic_url ?? ""
             }
         }
     }
