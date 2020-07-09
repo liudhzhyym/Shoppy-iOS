@@ -15,16 +15,18 @@ struct OrderAccountView: View {
     
     var body: some View {
         List {
-            ForEach(order.accounts ?? [], id: \.account) { account in
-                Text(account.account ?? "")
-                    .contextMenu {
-                        Button(action: {
-                            UIPasteboard.general.string = account.account
-                        }) {
-                            Image(systemName: "doc.on.doc")
-                            Text("Copy")
-                        }
+            if order.accounts != nil {
+                ForEach(0 ..< order.accounts!.count) { idx in
+                    Text(self.order.accounts?[idx]?.get() ?? "")
+                        .contextMenu {
+                            Button(action: {
+                                UIPasteboard.general.string = self.order.accounts?[idx]?.get() ?? ""
+                            }) {
+                                Image(systemName: "doc.on.doc")
+                                Text("Copy")
+                            }
                     }
+                }
             }
         }
         .navigationBarTitle("Delivered accounts")
