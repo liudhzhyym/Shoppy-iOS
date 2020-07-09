@@ -97,10 +97,10 @@ struct ProductDetailView: View {
                 ContainerField(name: "Last update", value: self.product.updated_at?.description ?? "", icon: "clock.fill")
             }
             
-            Spacer()
+            .navigationBarTitle(product.title ?? "Product", displayMode: .inline)
+            .navigationBarItems(trailing: showAction)
         }
-        .navigationBarTitle(product.title ?? "Product")
-        .navigationBarItems(trailing: showAction)
+        .padding([.top, .bottom])
         .sheet(isPresented: $editMode) {
             ProductEditView(product: self.product, network: self.network, isEdit: true)
         }

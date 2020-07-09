@@ -70,7 +70,8 @@ struct ProductView: View {
             .id(UUID().uuidString)
             .navigationBarTitle("Products")
             .navigationBarItems(leading: refreshButton, trailing: addButton)
-        }.sheet(isPresented: $isPresented) {
+        }
+        .sheet(isPresented: $isPresented) {
             ProductEditView(product: Product(), network: self.network)
         }
     }
