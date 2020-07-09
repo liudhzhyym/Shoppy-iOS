@@ -18,6 +18,9 @@ struct ProductEditView: View {
     @State public var network: NetworkObserver
     @State public var isEdit: Bool = false
     
+    // Error
+    @State private var showError = false
+    
     // Bindings
     @State private var title = ""
     @State private var price = ""
@@ -44,7 +47,7 @@ struct ProductEditView: View {
                         self.close()
                     }
                 }, error: { error in
-                    print(error)
+                    self.showError = true
                 })
         } else {
             NetworkManager
@@ -55,7 +58,7 @@ struct ProductEditView: View {
                         self.close()
                     }
                 }, error: { error in
-                    print(error)
+                    self.showError = true
                 })
         }
     }
@@ -104,6 +107,11 @@ struct ProductEditView: View {
                 
             .navigationBarTitle(isEdit == true ? "Edit a product" : "Create a product", displayMode: .inline)
             .navigationBarItems(trailing: doneButton)
+        }
+        .alert(isPresented: $showError) {
+            Alert(title: Text("Error"),
+                message: Text("Please check you filled required fields correctly."),
+                dismissButton: .cancel())
         }
         .onAppear {
             // Load existant settings
