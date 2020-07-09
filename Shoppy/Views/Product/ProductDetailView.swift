@@ -63,44 +63,45 @@ struct ProductDetailView: View {
     // Body
     var body: some View {
         ScrollView {
-            Container {
-                if self.product.description != nil {
-                    ContainerNavigationButton(title: "See the description", icon: "text.alignleft", destination: AnyView(ProductDetailledView(name: "Description", value: self.product.description ?? "")))
-                }
-                ContainerField(name: "Delivery type", value: self.product.type?.rawValue.capitalized ?? "", icon: "cube.box")
-            }
-            
-            Container {
-                ContainerField(name: "Price", value: "\(self.product.price ?? 0)", icon: "bag.fill")
-                if self.product.type == .account {
-                    ContainerField(name: "Revenue per order", value: "\((self.product.price ?? 0) * Double(self.product.quantity?.min ?? 0))", icon: "equal.square")
-                    ContainerField(name: "Potential total", value: "\((self.product.price ?? 0) * Double(self.product.stock?.get() ?? 0))", icon: "equal.square.fill")
-                }
-                ContainerField(name: "Currency", value: self.product.currency ?? "", icon: "dollarsign.circle.fill")
-            }
-            
-            if self.product.type == .account || self.product.type == .dynamic {
+            Group {
                 Container {
-                    if self.product.type == .account {
-                        ContainerField(name: "Stock", value: "\(self.product.stock?.get() ?? 0)", icon: "cart.fill")
+                    if self.product.description != nil {
+                        ContainerNavigationButton(title: "See the description", icon: "text.alignleft", destination: AnyView(ProductDetailledView(name: "Description", value: self.product.description ?? "")))
                     }
-                    
-                    ContainerField(name: "Minimum quantity per order", value: "\(self.product.quantity?.min ?? 0)", icon: "minus.circle.fill")
-                    ContainerField(name: "Maximum quantity per order", value: "\(self.product.quantity?.max ?? 0)", icon: "plus.circle.fill")
+                    ContainerField(name: "Delivery type", value: self.product.type?.rawValue.capitalized ?? "", icon: "cube.box")
                 }
-            }
-            
-            Container {
-                ContainerField(name: "Unlisted", value: self.product.unlisted ?? false ? "Yes" : "No", icon: "eye.slash")
-                ContainerField(name: "Product ID", value: self.product.id ?? "", icon: "number")
-                ContainerField(name: "Creation date", value: self.product.created_at?.description ?? "", icon: "calendar")
-                ContainerField(name: "Last update", value: self.product.updated_at?.description ?? "", icon: "clock.fill")
-            }
+                
+                Container {
+                    ContainerField(name: "Price", value: "\(self.product.price ?? 0)", icon: "bag.fill")
+                    if self.product.type == .account {
+                        ContainerField(name: "Revenue per order", value: "\((self.product.price ?? 0) * Double(self.product.quantity?.min ?? 0))", icon: "equal.square")
+                        ContainerField(name: "Potential total", value: "\((self.product.price ?? 0) * Double(self.product.stock?.get() ?? 0))", icon: "equal.square.fill")
+                    }
+                    ContainerField(name: "Currency", value: self.product.currency ?? "", icon: "dollarsign.circle.fill")
+                }
+                
+                if self.product.type == .account || self.product.type == .dynamic {
+                    Container {
+                        if self.product.type == .account {
+                            ContainerField(name: "Stock", value: "\(self.product.stock?.get() ?? 0)", icon: "cart.fill")
+                        }
+                        
+                        ContainerField(name: "Minimum quantity per order", value: "\(self.product.quantity?.min ?? 0)", icon: "minus.circle.fill")
+                        ContainerField(name: "Maximum quantity per order", value: "\(self.product.quantity?.max ?? 0)", icon: "plus.circle.fill")
+                    }
+                }
+                
+                Container {
+                    ContainerField(name: "Unlisted", value: self.product.unlisted ?? false ? "Yes" : "No", icon: "eye.slash")
+                    ContainerField(name: "Product ID", value: self.product.id ?? "", icon: "number")
+                    ContainerField(name: "Creation date", value: self.product.created_at?.description ?? "", icon: "calendar")
+                    ContainerField(name: "Last update", value: self.product.updated_at?.description ?? "", icon: "clock.fill")
+                }
+            }.padding([.top, .bottom])
             
             .navigationBarTitle(product.title ?? "Product", displayMode: .inline)
             .navigationBarItems(trailing: showAction)
         }
-        .padding([.top, .bottom])
         .sheet(isPresented: $editMode) {
             ProductEditView(product: self.product, network: self.network, isEdit: true)
         }
