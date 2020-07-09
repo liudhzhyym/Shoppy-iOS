@@ -38,7 +38,7 @@ class NetworkObserver: ObservableObject {
     ///
     /// API Key
     ///
-    private var key: String
+    public var key: String
     
     ///
     /// Initialize

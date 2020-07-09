@@ -16,8 +16,14 @@ struct ProductDetailView: View {
     
     @State public var product: Product
     @State private var isPresented = false
+    @State private var editMode = false
     
     private let keychain = KeychainSwift()
+    
+    // Edit product
+    private func editProduct() {
+        self.editMode = true
+    }
     
     // Delete product
     private func deleteProduct() {
@@ -95,8 +101,12 @@ struct ProductDetailView: View {
         }
         .navigationBarTitle(product.title ?? "Product")
         .navigationBarItems(trailing: showAction)
+        .sheet(isPresented: $editMode) {
+            ProductEditView(product: self.product, network: self.network, isEdit: true)
+        }
         .actionSheet(isPresented: $isPresented) {
             ActionSheet(title: Text("Select an action"), buttons: [
+                .default(Text("Edit product"), action: self.editProduct),
                 .destructive(Text("Delete product"), action: self.deleteProduct),
                 .cancel()
             ])

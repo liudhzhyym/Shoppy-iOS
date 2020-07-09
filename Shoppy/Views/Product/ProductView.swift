@@ -7,10 +7,12 @@
 //
 
 import SwiftUI
+import SwiftyShoppy
 
 struct ProductView: View {
     @EnvironmentObject var network: NetworkObserver
     @State private var page: Int = 1
+    @State private var isPresented = false
     
     private func loadMore() {
         // Increment page
@@ -27,6 +29,16 @@ struct ProductView: View {
             Image(systemName: "arrow.2.circlepath.circle.fill")
                 .resizable()
                 .frame(width: 26, height: 26)
+        }
+    }
+    
+    var addButton: some View {
+        Button(action: {
+            self.isPresented = true
+        }) {
+            Image(systemName: "plus")
+                .resizable()
+                .frame(width: 20, height: 20)
         }
     }
     
@@ -54,10 +66,12 @@ struct ProductView: View {
                 }
                 
                 Spacer()
-            }.id(UUID().uuidString)
-                
+            }
+            .id(UUID().uuidString)
             .navigationBarTitle("Products")
-            .navigationBarItems(trailing: refreshButton)
+            .navigationBarItems(leading: refreshButton, trailing: addButton)
+        }.sheet(isPresented: $isPresented) {
+            ProductEditView(product: Product(), network: self.network)
         }
     }
 }
