@@ -36,6 +36,7 @@
 		1BB764DC24AB76E400C7F63A /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1BB764DB24AB76E400C7F63A /* Preview Assets.xcassets */; };
 		1BB764DF24AB76E400C7F63A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1BB764DD24AB76E400C7F63A /* LaunchScreen.storyboard */; };
 		1BBAC67C24B702BE00E05261 /* ProductEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BBAC67B24B702BE00E05261 /* ProductEditView.swift */; };
+		1BBAC67F24B7174400E05261 /* KeyboardObserving in Frameworks */ = {isa = PBXBuildFile; productRef = 1BBAC67E24B7174400E05261 /* KeyboardObserving */; };
 		1BC70B2924B32AE90068B599 /* UserView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BC70B2824B32AE90068B599 /* UserView.swift */; };
 		1BD7D4E124AF84FE00857EEC /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BD7D4E024AF84FE00857EEC /* SettingsView.swift */; };
 		1BD7D4E324B08D7E00857EEC /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BD7D4E224B08D7E00857EEC /* Reachability.swift */; };
@@ -81,6 +82,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1B7D902724ABA70100CAD138 /* KeychainSwift in Frameworks */,
+				1BBAC67F24B7174400E05261 /* KeyboardObserving in Frameworks */,
 				1B7D8FF924AB8AB900CAD138 /* SwiftyShoppy in Frameworks */,
 				1B9BCB8D24B4A52D00255448 /* MDText in Frameworks */,
 			);
@@ -258,6 +260,7 @@
 				1B7D8FF824AB8AB900CAD138 /* SwiftyShoppy */,
 				1B7D902624ABA70100CAD138 /* KeychainSwift */,
 				1B9BCB8C24B4A52D00255448 /* MDText */,
+				1BBAC67E24B7174400E05261 /* KeyboardObserving */,
 			);
 			productName = Shoppy;
 			productReference = 1BB764CC24AB76DF00C7F63A /* Shoppy.app */;
@@ -291,6 +294,7 @@
 				1B7D8FF724AB8AB900CAD138 /* XCRemoteSwiftPackageReference "SwiftyShoppy" */,
 				1B7D902524ABA70100CAD138 /* XCRemoteSwiftPackageReference "keychain-swift" */,
 				1B9BCB8B24B4A52D00255448 /* XCRemoteSwiftPackageReference "MDText" */,
+				1BBAC67D24B7174400E05261 /* XCRemoteSwiftPackageReference "KeyboardObserving" */,
 			);
 			productRefGroup = 1BB764CD24AB76DF00C7F63A /* Products */;
 			projectDirPath = "";
@@ -564,6 +568,14 @@
 				minimumVersion = 0.0.9;
 			};
 		};
+		1BBAC67D24B7174400E05261 /* XCRemoteSwiftPackageReference "KeyboardObserving" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/nickffox/KeyboardObserving.git";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -581,6 +593,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 1B9BCB8B24B4A52D00255448 /* XCRemoteSwiftPackageReference "MDText" */;
 			productName = MDText;
+		};
+		1BBAC67E24B7174400E05261 /* KeyboardObserving */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 1BBAC67D24B7174400E05261 /* XCRemoteSwiftPackageReference "KeyboardObserving" */;
+			productName = KeyboardObserving;
 		};
 /* End XCSwiftPackageProductDependency section */
 

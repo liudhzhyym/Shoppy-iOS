@@ -8,6 +8,7 @@
 
 import SwiftUI
 import SwiftyShoppy
+import KeyboardObserving
 
 struct ProductEditView: View {
     // Environment
@@ -105,6 +106,7 @@ struct ProductEditView: View {
                 }
             }
                 
+            .keyboardObserving()
             .navigationBarTitle(isEdit == true ? "Edit a product" : "Create a product", displayMode: .inline)
             .navigationBarItems(trailing: doneButton)
         }

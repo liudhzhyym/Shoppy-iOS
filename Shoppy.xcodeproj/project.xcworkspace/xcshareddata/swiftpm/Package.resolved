@@ -11,6 +11,15 @@
         }
       },
       {
+        "package": "KeyboardObserving",
+        "repositoryURL": "https://github.com/nickffox/KeyboardObserving.git",
+        "state": {
+          "branch": "master",
+          "revision": "df105a7c43a93b06492ee5832037e20c8f472b46",
+          "version": null
+        }
+      },
+      {
         "package": "KeychainSwift",
         "repositoryURL": "https://github.com/evgenyneu/keychain-swift",
         "state": {
