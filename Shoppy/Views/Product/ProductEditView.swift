@@ -99,7 +99,6 @@ struct ProductEditView: View {
                     }
                     
                     TextField("Description (10.000 chars max)", text: $description)
-                        .frame(height: 250)
                 }
             }
                 
