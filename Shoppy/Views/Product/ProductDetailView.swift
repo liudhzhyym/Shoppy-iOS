@@ -92,6 +92,14 @@ struct ProductDetailView: View {
                     }
                 }
                 
+                if self.product.type == .account {
+                    Container {
+                        ContainerNavigationButton(title: "See accounts in stock",
+                                                  icon: "rectangle.stack.person.crop.fill",
+                                                  destination: AnyView(ProductAccountView(accounts: self.product.accounts)))
+                    }
+                }
+                
                 Container {
                     ContainerField(name: "Unlisted", value: self.product.unlisted ?? false ? "Yes" : "No", icon: "eye.slash")
                     ContainerField(name: "Product ID", value: self.product.id ?? "", icon: "number")

@@ -12,6 +12,7 @@
 		1B0EB17024B4DE24007A06E0 /* ContainerField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B0EB16F24B4DE24007A06E0 /* ContainerField.swift */; };
 		1B0EB17224B523A2007A06E0 /* ContainerNavigationButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B0EB17124B523A1007A06E0 /* ContainerNavigationButton.swift */; };
 		1B0EB17424B52520007A06E0 /* OrderAccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B0EB17324B52520007A06E0 /* OrderAccountView.swift */; };
+		1B57F88E24B8DDFE00463450 /* ProductAccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B57F88D24B8DDFE00463450 /* ProductAccountView.swift */; };
 		1B6199BE24ABB45F003FA43F /* DashboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B6199BD24ABB45F003FA43F /* DashboardView.swift */; };
 		1B6199C924AC8C96003FA43F /* Card.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B6199C824AC8C96003FA43F /* Card.swift */; };
 		1B6199CC24AC98C4003FA43F /* OrdersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B6199CB24AC98C4003FA43F /* OrdersView.swift */; };
@@ -48,6 +49,7 @@
 		1B0EB16F24B4DE24007A06E0 /* ContainerField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContainerField.swift; sourceTree = "<group>"; };
 		1B0EB17124B523A1007A06E0 /* ContainerNavigationButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContainerNavigationButton.swift; sourceTree = "<group>"; };
 		1B0EB17324B52520007A06E0 /* OrderAccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderAccountView.swift; sourceTree = "<group>"; };
+		1B57F88D24B8DDFE00463450 /* ProductAccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductAccountView.swift; sourceTree = "<group>"; };
 		1B6199BD24ABB45F003FA43F /* DashboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardView.swift; sourceTree = "<group>"; };
 		1B6199C824AC8C96003FA43F /* Card.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Card.swift; sourceTree = "<group>"; };
 		1B6199CB24AC98C4003FA43F /* OrdersView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrdersView.swift; sourceTree = "<group>"; };
@@ -140,6 +142,7 @@
 				1B9BCB7A24B47BA300255448 /* ProductDetailledView.swift */,
 				1B9BCB7F24B4889600255448 /* ProductView.swift */,
 				1BBAC67B24B702BE00E05261 /* ProductEditView.swift */,
+				1B57F88D24B8DDFE00463450 /* ProductAccountView.swift */,
 			);
 			path = Product;
 			sourceTree = "<group>";
@@ -342,6 +345,7 @@
 				1B0EB17024B4DE24007A06E0 /* ContainerField.swift in Sources */,
 				1B6199CC24AC98C4003FA43F /* OrdersView.swift in Sources */,
 				1BBAC67C24B702BE00E05261 /* ProductEditView.swift in Sources */,
+				1B57F88E24B8DDFE00463450 /* ProductAccountView.swift in Sources */,
 				1B0EB17424B52520007A06E0 /* OrderAccountView.swift in Sources */,
 				1B94D95024B5D1D300CEFFED /* NetworkObserver.swift in Sources */,
 				1B7D902424ABA1CC00CAD138 /* LoginView.swift in Sources */,
