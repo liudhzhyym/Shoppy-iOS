@@ -28,7 +28,7 @@ struct ProductEditView: View {
     @State private var type: DeliveryType = .account
     @State private var description = ""
     @State private var isUnlisted = false
-    @State private var minimum = ""
+    @State private var minimum = "1"
     @State private var maximum = "100000"
     @State private var email_enabled = false
     @State private var email_value = ""
@@ -224,7 +224,7 @@ struct ProductEditView: View {
                 self.type = self.product.type ?? .account
                 self.isUnlisted = self.product.unlisted ?? false
                 self.description = self.product.description ?? ""
-                self.minimum = "\(self.product.quantity?.min ?? 0)"
+                self.minimum = "\(self.product.quantity?.min ?? 1)"
                 self.maximum = "\(self.product.quantity?.max ?? 100000)"
                 self.email_enabled = self.product.email?.enabled ?? false
                 self.email_value = self.product.email?.value ?? ""
