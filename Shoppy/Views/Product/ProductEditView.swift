@@ -29,10 +29,16 @@ struct ProductEditView: View {
     @State private var description = ""
     @State private var isUnlisted = false
     @State private var minimum = ""
-    @State private var maximum = ""
+    @State private var maximum = "100000"
     @State private var email_enabled = false
     @State private var email_value = ""
     @State private var callback = ""
+    @State private var attachment_id = ""
+    @State private var accounts: [Account?] = []
+    @State private var account = ""
+    
+    // Attachments
+    @State private var attachments: [Attachment]?
     
     // Update function
     private func submit() {
@@ -47,26 +53,32 @@ struct ProductEditView: View {
         self.product.email?.enabled = self.email_enabled
         self.product.email?.value = self.email_value
         self.product.dynamic_url = self.callback
+        self.product.attachment_id = self.attachment_id
+        self.product.accounts = self.accounts
         
         // Submit
         if self.isEdit {
             NetworkManager
-                .prepare(token: self.network.key)
+                .prepare(token: self.network.key, debug: true)
                 .target(.updateProduct(self.product))
                 .asObject(ResourceUpdate<Product>.self, success: { success in
                     if success.status == true {
                         self.close()
+                    } else {
+                        self.showError = true
                     }
                 }, error: { error in
                     self.showError = true
                 })
         } else {
             NetworkManager
-                .prepare(token: self.network.key)
+                .prepare(token: self.network.key, debug: true)
                 .target(.createProduct(self.product))
                 .asObject(ResourceUpdate<Product>.self, success: { success in
                     if success.status == true {
                         self.close()
+                    } else {
+                        self.showError = true
                     }
                 }, error: { error in
                     self.showError = true
@@ -128,6 +140,51 @@ struct ProductEditView: View {
                     }
                 }
                 
+                if type == .file {
+                    Section(header: Text("File"), footer: Text("Upload files from the website")) {
+                        if self.attachments != nil {
+                            Picker(selection: $attachment_id, label: Text("Attachment")) {
+                                ForEach(self.attachments!, id: \.id) { (attachment: Attachment) in
+                                    Text(attachment.file_name ?? "")
+                                }
+                            }
+                        } else {
+                            Text("Please upload files from the website.")
+                        }
+                    }
+                }
+                
+                if type == .account {
+                    Section(header: Text("Accounts")) {
+                        HStack {
+                            TextField("Account", text: $account.animation())
+                            
+                            if account.count > 0 {
+                                Button(action: {
+                                    // Push
+                                    self.accounts.append(.account(self.account))
+                                    
+                                    // Reset
+                                    self.account = ""
+                                }) {
+                                    Image(systemName: "plus.circle.fill")
+                                        .foregroundColor(.orange)
+                                        .imageScale(.large)
+                                }
+                            }
+                        }
+                        
+                        List {
+                            ForEach(0 ..< accounts.count, id: \.self) { (idx: Int) in
+                                Text(self.accounts[idx]?.get() ?? "").animation(.interactiveSpring())
+                            }
+                            .onDelete { (idx: IndexSet) in
+                                self.accounts.remove(atOffsets: idx)
+                            }
+                        }
+                    }
+                }
+                
                 if type != .dynamic {
                     Section(header: Text("Email")) {
                         Toggle(isOn: $email_enabled.animation()) {
@@ -150,6 +207,16 @@ struct ProductEditView: View {
                   dismissButton: .cancel())
         }
         .onAppear {
+            // Load attachments
+            NetworkManager
+                .prepare(token: self.network.key)
+                .target(.getAttachments)
+                .asArray(Attachment.self, success: { attachments in
+                    self.attachments = attachments
+                }, error: { error in
+                    print(error)
+                })
+            
             // Load existant settings
             if self.isEdit {
                 self.title = self.product.title ?? ""
@@ -158,10 +225,12 @@ struct ProductEditView: View {
                 self.isUnlisted = self.product.unlisted ?? false
                 self.description = self.product.description ?? ""
                 self.minimum = "\(self.product.quantity?.min ?? 0)"
-                self.maximum = "\(self.product.quantity?.max ?? 0)"
+                self.maximum = "\(self.product.quantity?.max ?? 100000)"
                 self.email_enabled = self.product.email?.enabled ?? false
                 self.email_value = self.product.email?.value ?? ""
                 self.callback = self.product.dynamic_url ?? ""
+                self.attachment_id = self.product.attachment_id ?? ""
+                self.accounts = self.product.accounts ?? []
             }
         }
     }
