@@ -65,6 +65,7 @@ struct ProductDetailView: View {
         ScrollView {
             Group {
                 Container {
+                    ContainerField(name: "Name", value: self.product.title ?? "", icon: "a")
                     if self.product.description != nil {
                         ContainerNavigationButton(title: "See the description", icon: "text.alignleft", destination: AnyView(ProductDetailledView(name: "Description", value: self.product.description ?? "")))
                     }
@@ -99,7 +100,7 @@ struct ProductDetailView: View {
                 }
             }.padding([.top, .bottom])
             
-            .navigationBarTitle(product.title ?? "Product", displayMode: .inline)
+            .navigationBarTitle("Product", displayMode: .inline)
             .navigationBarItems(trailing: showAction)
         }
         .sheet(isPresented: $editMode) {
