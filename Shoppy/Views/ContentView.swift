@@ -53,7 +53,7 @@ struct ContentView: View {
                 return
             }
             
-            self.showModal(AnyView(LoginView()))
+            self.showModal(AnyView(LoginView(network: self.network)))
         }
         .alert(isPresented: $showAlert) {
             Alert(title: Text("Network is unreachable"),

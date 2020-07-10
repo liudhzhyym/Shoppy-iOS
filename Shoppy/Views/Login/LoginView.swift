@@ -11,8 +11,6 @@ import SwiftyShoppy
 import KeychainSwift
 
 struct LoginView: View {
-    @EnvironmentObject var network: NetworkObserver
-    
     // Keychain
     private let keychain = KeychainSwift()
     
@@ -24,6 +22,9 @@ struct LoginView: View {
     
     // Is edit
     @State public var isEdit: Bool = false
+    
+    // EnvironmentObject workaround for sheet modals
+    @State public var network: NetworkObserver
     
     ///
     /// Login method
@@ -116,6 +117,6 @@ struct LoginView: View {
 
 struct LoginView_Previews: PreviewProvider {
     static var previews: some View {
-        LoginView(isEdit: false)
+        LoginView(isEdit: false, network: NetworkObserver(key: ""))
     }
 }

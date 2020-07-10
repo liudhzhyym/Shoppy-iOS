@@ -84,7 +84,7 @@ struct DashboardView: View {
             }
         }
         .sheet(isPresented: $displaySettings) {
-            SettingsView()
+            SettingsView(network: self.network)
         }
     }
 }

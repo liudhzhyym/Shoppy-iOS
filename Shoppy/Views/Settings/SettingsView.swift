@@ -16,6 +16,9 @@ enum Links: String {
 struct SettingsView: View {
     @State private var displayLogin = false
     
+    // EnvironmentObject workaround for sheet modals
+    @State public var network: NetworkObserver
+    
     // Change key
     private func changeKey() {
         self.displayLogin = true
@@ -56,13 +59,13 @@ struct SettingsView: View {
                 
             .navigationBarTitle("Settings", displayMode: .inline)
         }.sheet(isPresented: $displayLogin) {
-            LoginView(isEdit: true)
+            LoginView(isEdit: true, network: self.network)
         }
     }
 }
 
 struct SettingsView_Previews: PreviewProvider {
     static var previews: some View {
-        SettingsView()
+        SettingsView(network: NetworkObserver(key: ""))
     }
 }
