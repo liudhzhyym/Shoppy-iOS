@@ -19,9 +19,21 @@ struct QueryCard: View {
                 Text(query.subject ?? "")
                     .foregroundColor(colorScheme == .dark ? .white : .black)
                 
-                Text(query.email ?? "")
-                    .font(.callout)
-                    .foregroundColor(.secondary)
+                HStack {
+                    if query.status == QueryStatus.Open.rawValue {
+                        Image(systemName: "envelope.badge")
+                    } else if query.status == QueryStatus.Closed.rawValue {
+                        Image(systemName: "xmark")
+                    } else if query.status == QueryStatus.Replied.rawValue {
+                        Image(systemName: "arrowshape.turn.up.right")
+                    } else if query.status == QueryStatus.UserReply.rawValue {
+                        Image(systemName: "arrowshape.turn.up.left")
+                    }
+                    
+                    Text(query.email ?? "")
+                }
+                .font(.callout)
+                .foregroundColor(.secondary)
             }
             
             Spacer()
