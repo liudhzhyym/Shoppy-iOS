@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		1B0A822924BA34780043CF63 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 1B0A822824BA34780043CF63 /* Settings.bundle */; };
+		1B0A822C24BA35E70043CF63 /* QueriesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B0A822B24BA35E70043CF63 /* QueriesView.swift */; };
+		1B0A822E24BA37750043CF63 /* QueryCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B0A822D24BA37750043CF63 /* QueryCard.swift */; };
 		1B0EB16C24B4D33D007A06E0 /* Container.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B0EB16B24B4D33D007A06E0 /* Container.swift */; };
 		1B0EB16E24B4DC39007A06E0 /* ContainerButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B0EB16D24B4DC39007A06E0 /* ContainerButton.swift */; };
 		1B0EB17024B4DE24007A06E0 /* ContainerField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B0EB16F24B4DE24007A06E0 /* ContainerField.swift */; };
@@ -48,6 +50,8 @@
 
 /* Begin PBXFileReference section */
 		1B0A822824BA34780043CF63 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
+		1B0A822B24BA35E70043CF63 /* QueriesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueriesView.swift; sourceTree = "<group>"; };
+		1B0A822D24BA37750043CF63 /* QueryCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueryCard.swift; sourceTree = "<group>"; };
 		1B0EB16B24B4D33D007A06E0 /* Container.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Container.swift; sourceTree = "<group>"; };
 		1B0EB16D24B4DC39007A06E0 /* ContainerButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContainerButton.swift; sourceTree = "<group>"; };
 		1B0EB16F24B4DE24007A06E0 /* ContainerField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContainerField.swift; sourceTree = "<group>"; };
@@ -100,6 +104,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1B0A822A24BA35D00043CF63 /* Query */ = {
+			isa = PBXGroup;
+			children = (
+				1B0A822B24BA35E70043CF63 /* QueriesView.swift */,
+			);
+			path = Query;
+			sourceTree = "<group>";
+		};
 		1B6199B424ABADA6003FA43F /* Dashboard */ = {
 			isa = PBXGroup;
 			children = (
@@ -119,6 +131,7 @@
 				1B0EB16D24B4DC39007A06E0 /* ContainerButton.swift */,
 				1B0EB16F24B4DE24007A06E0 /* ContainerField.swift */,
 				1B0EB17124B523A1007A06E0 /* ContainerNavigationButton.swift */,
+				1B0A822D24BA37750043CF63 /* QueryCard.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -158,6 +171,7 @@
 		1B7D901F24ABA0BB00CAD138 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				1B0A822A24BA35D00043CF63 /* Query */,
 				1BC70B2724B32AD90068B599 /* User */,
 				1BD7D4DF24AF84EB00857EEC /* Settings */,
 				1B6199D824ADEF32003FA43F /* Product */,
@@ -348,6 +362,7 @@
 				1B6199D524ACBBF9003FA43F /* OrderDetailView.swift in Sources */,
 				1B6199C924AC8C96003FA43F /* Card.swift in Sources */,
 				1B0EB17224B523A2007A06E0 /* ContainerNavigationButton.swift in Sources */,
+				1B0A822E24BA37750043CF63 /* QueryCard.swift in Sources */,
 				1BD7D4E324B08D7E00857EEC /* Reachability.swift in Sources */,
 				1B6199CE24AC9A10003FA43F /* OrderCard.swift in Sources */,
 				1B6199BE24ABB45F003FA43F /* DashboardView.swift in Sources */,
@@ -364,6 +379,7 @@
 				1B7D902424ABA1CC00CAD138 /* LoginView.swift in Sources */,
 				1B0EB16C24B4D33D007A06E0 /* Container.swift in Sources */,
 				1B6199D324ACABDA003FA43F /* Currencies.swift in Sources */,
+				1B0A822C24BA35E70043CF63 /* QueriesView.swift in Sources */,
 				1BB764D224AB76DF00C7F63A /* SceneDelegate.swift in Sources */,
 				1B9BCB8424B4894F00255448 /* ProductCard.swift in Sources */,
 			);

@@ -56,6 +56,12 @@ struct DashboardView: View {
                          ext: "€", specifier: "%.2f")
                 }.padding(.vertical, 5)
                 
+                Container {
+                    ContainerNavigationButton(title: "Queries".localized,
+                                              icon: "envelope",
+                                              destination: AnyView(QueriesView()))
+                }
+                
                 Spacer()
             }
                 

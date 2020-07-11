@@ -25,6 +25,8 @@
 "orders" = "orders";
 "Product" = "Product";
 "products" = "products";
+"Query" = "Query";
+"queries" = "queries";
 
 // Common
 "Save" = "Save";

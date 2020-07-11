@@ -27,6 +27,7 @@ class NetworkObserver: ObservableObject {
     @Published public var analytics: Analytics?
     @Published public var orders: [Order] = []
     @Published public var products: [Product] = []
+    @Published public var queries: [Query] = []
     @Published public var image: Data?
     
     ///
@@ -61,6 +62,7 @@ class NetworkObserver: ObservableObject {
         getSettings()
         getOrders(page: 1)
         getProducts(page: 1)
+        getQueries(page: 1)
     }
     
     ///
@@ -202,6 +204,31 @@ class NetworkObserver: ObservableObject {
                 
                 // Append new produts
                 self.products.append(contentsOf: products)
+            }, error: { error in
+                self.errorSubscriber.send()
+            })
+    }
+    
+    ///
+    /// Get queries
+    ///
+    public func getQueries(page: Int) {
+        NetworkManager
+            .prepare(token: self.key)
+            .target(.getQueries(page))
+            .asArray(Query.self, success: { queries in
+                // Reset
+                if page == 1 {
+                    self.queries.removeAll()
+                }
+                
+                // Sort by date
+                let queries_sorted = queries.sorted { (a, b) -> Bool in
+                    a.updated_at?.compare(b.updated_at ?? Date()) == .orderedDescending
+                }
+                
+                // Append new produts
+                self.queries.append(contentsOf: queries_sorted)
             }, error: { error in
                 self.errorSubscriber.send()
             })

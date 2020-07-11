@@ -19,12 +19,15 @@
 "Dashboard" = "Tableau de bord";
 "Orders" = "Commandes";
 "Products" = "Produits";
+"Queries" = "Requêtes";
 
 // Tabs variations
 "Order" = "Commande";
 "orders" = "commandes";
 "Product" = "Produit";
 "products" = "produits";
+"Query" = "Requête";
+"queries" = "requêtes";
 
 // Common
 "Save" = "Sauvegarder";
