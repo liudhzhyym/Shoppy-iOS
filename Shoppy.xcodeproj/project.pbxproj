@@ -10,6 +10,8 @@
 		1B0A822924BA34780043CF63 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 1B0A822824BA34780043CF63 /* Settings.bundle */; };
 		1B0A822C24BA35E70043CF63 /* QueriesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B0A822B24BA35E70043CF63 /* QueriesView.swift */; };
 		1B0A822E24BA37750043CF63 /* QueryCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B0A822D24BA37750043CF63 /* QueryCard.swift */; };
+		1B0A823024BA39DB0043CF63 /* QueryDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B0A822F24BA39DB0043CF63 /* QueryDetailView.swift */; };
+		1B0A823224BA4F050043CF63 /* QueryReplyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B0A823124BA4F050043CF63 /* QueryReplyView.swift */; };
 		1B0EB16C24B4D33D007A06E0 /* Container.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B0EB16B24B4D33D007A06E0 /* Container.swift */; };
 		1B0EB16E24B4DC39007A06E0 /* ContainerButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B0EB16D24B4DC39007A06E0 /* ContainerButton.swift */; };
 		1B0EB17024B4DE24007A06E0 /* ContainerField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B0EB16F24B4DE24007A06E0 /* ContainerField.swift */; };
@@ -46,12 +48,15 @@
 		1BC70B2924B32AE90068B599 /* UserView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BC70B2824B32AE90068B599 /* UserView.swift */; };
 		1BD7D4E124AF84FE00857EEC /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BD7D4E024AF84FE00857EEC /* SettingsView.swift */; };
 		1BD7D4E324B08D7E00857EEC /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BD7D4E224B08D7E00857EEC /* Reachability.swift */; };
+		1BF59C4E24BA5B9C00CC2CEA /* TextFieldLength.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BF59C4D24BA5B9C00CC2CEA /* TextFieldLength.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		1B0A822824BA34780043CF63 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		1B0A822B24BA35E70043CF63 /* QueriesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueriesView.swift; sourceTree = "<group>"; };
 		1B0A822D24BA37750043CF63 /* QueryCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueryCard.swift; sourceTree = "<group>"; };
+		1B0A822F24BA39DB0043CF63 /* QueryDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueryDetailView.swift; sourceTree = "<group>"; };
+		1B0A823124BA4F050043CF63 /* QueryReplyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueryReplyView.swift; sourceTree = "<group>"; };
 		1B0EB16B24B4D33D007A06E0 /* Container.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Container.swift; sourceTree = "<group>"; };
 		1B0EB16D24B4DC39007A06E0 /* ContainerButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContainerButton.swift; sourceTree = "<group>"; };
 		1B0EB16F24B4DE24007A06E0 /* ContainerField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContainerField.swift; sourceTree = "<group>"; };
@@ -87,6 +92,7 @@
 		1BC70B2824B32AE90068B599 /* UserView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserView.swift; sourceTree = "<group>"; };
 		1BD7D4E024AF84FE00857EEC /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		1BD7D4E224B08D7E00857EEC /* Reachability.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
+		1BF59C4D24BA5B9C00CC2CEA /* TextFieldLength.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldLength.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -108,6 +114,8 @@
 			isa = PBXGroup;
 			children = (
 				1B0A822B24BA35E70043CF63 /* QueriesView.swift */,
+				1B0A822F24BA39DB0043CF63 /* QueryDetailView.swift */,
+				1B0A823124BA4F050043CF63 /* QueryReplyView.swift */,
 			);
 			path = Query;
 			sourceTree = "<group>";
@@ -199,6 +207,7 @@
 			children = (
 				1BB764D324AB76DF00C7F63A /* Shoppy.xcdatamodeld */,
 				1B94D94F24B5D1D300CEFFED /* NetworkObserver.swift */,
+				1BF59C4D24BA5B9C00CC2CEA /* TextFieldLength.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -365,6 +374,7 @@
 				1B0A822E24BA37750043CF63 /* QueryCard.swift in Sources */,
 				1BD7D4E324B08D7E00857EEC /* Reachability.swift in Sources */,
 				1B6199CE24AC9A10003FA43F /* OrderCard.swift in Sources */,
+				1B0A823224BA4F050043CF63 /* QueryReplyView.swift in Sources */,
 				1B6199BE24ABB45F003FA43F /* DashboardView.swift in Sources */,
 				1BB764D724AB76DF00C7F63A /* ContentView.swift in Sources */,
 				1BD7D4E124AF84FE00857EEC /* SettingsView.swift in Sources */,
@@ -374,11 +384,13 @@
 				1B6199CC24AC98C4003FA43F /* OrdersView.swift in Sources */,
 				1BBAC67C24B702BE00E05261 /* ProductEditView.swift in Sources */,
 				1B57F88E24B8DDFE00463450 /* ProductAccountView.swift in Sources */,
+				1B0A823024BA39DB0043CF63 /* QueryDetailView.swift in Sources */,
 				1B0EB17424B52520007A06E0 /* OrderAccountView.swift in Sources */,
 				1B94D95024B5D1D300CEFFED /* NetworkObserver.swift in Sources */,
 				1B7D902424ABA1CC00CAD138 /* LoginView.swift in Sources */,
 				1B0EB16C24B4D33D007A06E0 /* Container.swift in Sources */,
 				1B6199D324ACABDA003FA43F /* Currencies.swift in Sources */,
+				1BF59C4E24BA5B9C00CC2CEA /* TextFieldLength.swift in Sources */,
 				1B0A822C24BA35E70043CF63 /* QueriesView.swift in Sources */,
 				1BB764D224AB76DF00C7F63A /* SceneDelegate.swift in Sources */,
 				1B9BCB8424B4894F00255448 /* ProductCard.swift in Sources */,

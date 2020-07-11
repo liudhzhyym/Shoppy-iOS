@@ -34,7 +34,9 @@ struct QueriesView: View {
     var body: some View {
         ScrollView {
             ForEach(network.queries, id: \.id) { (query: Query) in
-                QueryCard(query: query)
+                NavigationLink(destination: QueryDetailView(query: query)) {
+                    QueryCard(query: query)
+                }
             }
             
             Text("\(network.queries.count) \("queries".localized)")
