@@ -36,7 +36,7 @@ struct ContainerField: View {
                 UIPasteboard.general.string = self.value
             }) {
                 Image(systemName: "doc.on.doc")
-                Text("Copy")
+                Text("Copy".localized)
             }
         }
     }

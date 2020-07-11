@@ -1,0 +1,46 @@
+/* 
+  Localizable.strings
+  Shoppy
+
+  Created by Victor Lourme on 11/07/2020.
+  Copyright © 2020 Victor Lourme. All rights reserved.
+*/
+
+// App title
+"Shoppy" = "Shoppy";
+
+// Errors
+"Error" = "Error";
+"Wrong API key" = "Wrong API key";
+"Network is unreachable" = "Network is unreachable";
+"Your device does not have Internet connection, reload the application when you have connection back." = "Your device does not have Internet connection, reload the application when you have connection back.";
+
+// Tabs
+"Dashboard" = "Dashboard";
+"Orders" = "Orders";
+"Products" = "Products";
+
+// Common
+"Save" = "Save";
+"Continue" = "Continue";
+
+// Login
+"Your API key is stored encrypted and never shared." = "Your API key is stored encrypted and never shared.";
+"Change your API key" = "Change your API key";
+"WELCOME ON" = "WELCOME ON";
+
+// Dashboard
+"Total orders" = "Total orders";
+"Total revenue" = "Total revenue";
+"Daily income" = "Daily income";
+
+// User
+"Profile" = "Profile";
+"Username" = "Username";
+"Not linked" = "Not linked";
+"BTC Address" = "BTC Address";
+"LTC Address" = "LTC Address";
+"ETH Address" = "ETH Address";
+"PayPal" = "PayPal";
+"Stripe ID" = "Stripe ID";
+"Your profile can be changed on the website." = "Your profile can be changed on the website.";

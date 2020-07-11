@@ -24,11 +24,11 @@ struct OrderCard: View {
                 HStack {
                     if paid == 1 {
                         Image(systemName: "checkmark")
-                        Text("Paid — ")
+                        Text("\("Paid".localized) — ")
                             + Text(description)
                     } else {
                         Image(systemName: "xmark")
-                        Text("Cancelled — ")
+                        Text("\("Cancelled".localized) — ")
                             + Text(description)
                     }
                     

@@ -65,46 +65,46 @@ struct ProductDetailView: View {
         ScrollView {
             Group {
                 Container {
-                    ContainerField(name: "Name", value: self.product.title ?? "", icon: "a")
+                    ContainerField(name: "Name".localized, value: self.product.title ?? "", icon: "a")
                     if self.product.description != nil {
-                        ContainerNavigationButton(title: "See the description", icon: "text.alignleft", destination: AnyView(ProductDetailledView(name: "Description", value: self.product.description ?? "")))
+                        ContainerNavigationButton(title: "See the description".localized, icon: "text.alignleft", destination: AnyView(ProductDetailledView(name: "Description".localized, value: self.product.description ?? "")))
                     }
-                    ContainerField(name: "Delivery type", value: self.product.type?.rawValue.capitalized ?? "", icon: "cube.box")
+                    ContainerField(name: "Delivery type".localized, value: self.product.type?.rawValue.capitalized ?? "", icon: "cube.box")
                 }
                 
                 Container {
-                    ContainerField(name: "Price", value: "\(self.product.price ?? 0)", icon: "bag.fill")
+                    ContainerField(name: "Price".localized, value: "\(self.product.price ?? 0)", icon: "bag.fill")
                     if self.product.type == .account {
-                        ContainerField(name: "Revenue per order", value: "\((self.product.price ?? 0) * Double(self.product.quantity?.min ?? 1))", icon: "equal.square")
-                        ContainerField(name: "Potential total", value: "\((self.product.price ?? 0) * Double(self.product.stock?.get() ?? 0))", icon: "equal.square.fill")
+                        ContainerField(name: "Revenue per order".localized, value: "\((self.product.price ?? 0) * Double(self.product.quantity?.min ?? 1))", icon: "equal.square")
+                        ContainerField(name: "Potential total".localized, value: "\((self.product.price ?? 0) * Double(self.product.stock?.get() ?? 0))", icon: "equal.square.fill")
                     }
-                    ContainerField(name: "Currency", value: self.product.currency ?? "", icon: "dollarsign.circle.fill")
+                    ContainerField(name: "Currency".localized, value: self.product.currency ?? "", icon: "dollarsign.circle.fill")
                 }
                 
                 if self.product.type == .account || self.product.type == .dynamic {
                     Container {
                         if self.product.type == .account {
-                            ContainerField(name: "Stock", value: "\(self.product.stock?.get() ?? 0)", icon: "cart.fill")
+                            ContainerField(name: "Stock".localized, value: "\(self.product.stock?.get() ?? 0)", icon: "cart.fill")
                         }
                         
-                        ContainerField(name: "Minimum quantity per order", value: "\(self.product.quantity?.min ?? 1)", icon: "minus.circle.fill")
-                        ContainerField(name: "Maximum quantity per order", value: "\(self.product.quantity?.max ?? 100000)", icon: "plus.circle.fill")
+                        ContainerField(name: "Minimum quantity per order".localized, value: "\(self.product.quantity?.min ?? 1)", icon: "minus.circle.fill")
+                        ContainerField(name: "Maximum quantity per order".localized, value: "\(self.product.quantity?.max ?? 100000)", icon: "plus.circle.fill")
                     }
                 }
                 
                 if self.product.type == .account {
                     Container {
-                        ContainerNavigationButton(title: "See accounts in stock",
+                        ContainerNavigationButton(title: "See accounts in stock".localized,
                                                   icon: "rectangle.stack.person.crop.fill",
                                                   destination: AnyView(ProductAccountView(accounts: self.product.accounts)))
                     }
                 }
                 
                 Container {
-                    ContainerField(name: "Unlisted", value: self.product.unlisted ?? false ? "Yes" : "No", icon: "eye.slash")
-                    ContainerField(name: "Product ID", value: self.product.id ?? "", icon: "number")
-                    ContainerField(name: "Creation date", value: self.product.created_at?.description ?? "", icon: "calendar")
-                    ContainerField(name: "Last update", value: self.product.updated_at?.description ?? "", icon: "clock.fill")
+                    ContainerField(name: "Unlisted".localized, value: self.product.unlisted ?? false ? "Yes".localized : "No".localized, icon: "eye.slash")
+                    ContainerField(name: "Product ID".localized, value: self.product.id ?? "", icon: "number")
+                    ContainerField(name: "Creation date".localized, value: self.product.created_at?.description ?? "", icon: "calendar")
+                    ContainerField(name: "Last update".localized, value: self.product.updated_at?.description ?? "", icon: "clock.fill")
                 }
             }.padding([.top, .bottom])
             

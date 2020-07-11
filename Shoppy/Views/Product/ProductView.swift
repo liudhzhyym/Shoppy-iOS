@@ -55,7 +55,7 @@ struct ProductView: View {
                     }
                 }
                 
-                Text("\(network.products.count) products")
+                Text("\(network.products.count) \("products".localized)")
                     .font(.footnote)
                     .foregroundColor(.secondary)
                 

@@ -26,14 +26,14 @@ struct ProductCard: View {
                     if type == .account {
                         if stock > 0 {
                             Image(systemName: "checkmark")
-                            Text("\(stock) in stock - \(price, specifier: "%.2f") \(currency) - \(type.rawValue.capitalized)")
+                            Text("\(stock) \("in stock".localized) - \(price, specifier: "%.2f") \(currency) - \(type.rawValue.capitalized.localized)")
                         } else {
                             Image(systemName: "xmark")
-                            Text("Out of stock - \(price, specifier: "%.2f") \(currency) - \(type.rawValue.capitalized)")
+                            Text("\("Out of stock".localized) - \(price, specifier: "%.2f") \(currency) - \(type.rawValue.capitalized.localized)")
                         }
                     } else {
                         Image(systemName: "cube.box")
-                        Text("\(price, specifier: "%.2f") \(currency) - \(type.rawValue.capitalized)")
+                        Text("\(price, specifier: "%.2f") \(currency) - \(type.rawValue.capitalized.localized)")
                     }
                 }
                 .font(.caption)

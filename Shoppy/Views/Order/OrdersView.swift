@@ -43,7 +43,7 @@ struct OrdersView: View {
                     }
                 }
                 
-                Text("\(network.orders.count) orders")
+                Text("\(network.orders.count) \("orders".localized)")
                     .font(.footnote)
                     .foregroundColor(.secondary)
                 

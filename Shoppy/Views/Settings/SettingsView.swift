@@ -39,23 +39,23 @@ struct SettingsView: View {
         NavigationView {
             VStack {
                 Container {
-                    ContainerButton(title: "Change API key", icon: "lock.open.fill", function: {
+                    ContainerButton(title: "Change API key".localized, icon: "lock.open.fill", function: {
                         self.changeKey()
                     }, accent: .orange)
                 }
                 
                 Container {
-                    ContainerButton(title: "See the source code", icon: "doc.text.fill", function: {
+                    ContainerButton(title: "See the source code".localized, icon: "doc.text.fill", function: {
                         self.openLink(link: .github)
                     }, accent: .orange)
                     
-                    ContainerButton(title: "Report a bug", icon: "exclamationmark.bubble.fill", function: {
+                    ContainerButton(title: "Report a bug".localized, icon: "exclamationmark.bubble.fill", function: {
                         self.openLink(link: .issues)
                     }, accent: .orange)
                 }
                 
                 Container {
-                    ContainerField(name: "Version", value: self.version ?? "", icon: "i.circle.fill", accent: .orange)
+                    ContainerField(name: "Version".localized, value: self.version ?? "", icon: "i.circle.fill", accent: .orange)
                 }
                 
                 Spacer()

@@ -34,20 +34,20 @@ struct UserView: View {
             
             
             Container {
-                ContainerField(name: "BTC Address",
-                               value: self.settings.settings?.bitcoinAddress ?? "Not linked",
+                ContainerField(name: "BTC Address".localized,
+                               value: self.settings.settings?.bitcoinAddress ?? "Not linked".localized,
                                icon: "b.circle.fill", accent: .orange)
-                ContainerField(name: "LTC Address",
-                               value: self.settings.settings?.litecoinAddress ?? "Not linked",
+                ContainerField(name: "LTC Address".localized,
+                               value: self.settings.settings?.litecoinAddress ?? "Not linked".localized,
                                icon: "l.circle.fill", accent: .orange)
-                ContainerField(name: "ETH Address",
-                               value: self.settings.settings?.ethereumAddress ?? "Not linked",
+                ContainerField(name: "ETH Address".localized,
+                               value: self.settings.settings?.ethereumAddress ?? "Not linked".localized,
                                icon: "e.circle.fill", accent: .orange)
-                ContainerField(name: "PayPal",
-                               value: self.settings.settings?.paypalAddress ?? "Not linked",
+                ContainerField(name: "PayPal".localized,
+                               value: self.settings.settings?.paypalAddress ?? "Not linked".localized,
                                icon: "p.circle.fill", accent: .orange)
-                ContainerField(name: "Stripe ID",
-                               value: self.settings.settings?.stripeAccountId ?? "Not linked",
+                ContainerField(name: "Stripe ID".localized,
+                               value: self.settings.settings?.stripeAccountId ?? "Not linked".localized,
                                icon: "s.circle.fill", accent: .orange)
             }
             

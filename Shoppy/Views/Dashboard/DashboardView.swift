@@ -43,15 +43,15 @@ struct DashboardView: View {
         NavigationView {
             VStack {
                 Group {
-                    Card(title: "Total orders",
+                    Card(title: "Total orders".localized,
                          value: $orders,
                          ext: "", specifier: "%.0f")
                     
-                    Card(title: "Total revenue",
+                    Card(title: "Total revenue".localized,
                          value: $revenues,
                          ext: "€", specifier: "%.2f")
                     
-                    Card(title: "Daily income",
+                    Card(title: "Daily income".localized,
                          value: $today,
                          ext: "€", specifier: "%.2f")
                 }.padding(.vertical, 5)
