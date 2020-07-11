@@ -9,12 +9,14 @@
 import SwiftUI
 import SwiftyShoppy
 import KeyboardObserving
+import BottomSheet
 
 struct QueryDetailView: View {
     @EnvironmentObject var network: NetworkObserver
     
     @State public var query: Query
     @State private var showButton = false
+    @State private var showDetail = false
     @State private var message = TextFieldLength(limit: 255)
     
     private func sendMessage() {
@@ -46,6 +48,15 @@ struct QueryDetailView: View {
         message.text = ""
     }
     
+    var detail: some View {
+        Button(action: {
+            self.showDetail = true
+        }) {
+            Image(systemName: "person.crop.circle.fill")
+                .imageScale(.large)
+        }
+    }
+    
     var body: some View {
         VStack {
             ScrollView {
@@ -57,6 +68,7 @@ struct QueryDetailView: View {
             }
             
             .navigationBarTitle(query.subject ?? "Query")
+            .navigationBarItems(trailing: detail)
             
             if query.status != QueryStatus.Closed.rawValue {
                 HStack {
@@ -81,7 +93,11 @@ struct QueryDetailView: View {
                 .padding()
                 .background(Color(UIColor.secondarySystemBackground))
             }
-        }.keyboardObserving()
+        }
+        .keyboardObserving()
+        .bottomSheet(isPresented: $showDetail, height: 480) {
+            QuerySheetView(query: self.$query, token: self.network.key)
+        }
     }
 }
 

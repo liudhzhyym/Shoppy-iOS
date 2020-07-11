@@ -49,6 +49,8 @@
 		1BD7D4E124AF84FE00857EEC /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BD7D4E024AF84FE00857EEC /* SettingsView.swift */; };
 		1BD7D4E324B08D7E00857EEC /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BD7D4E224B08D7E00857EEC /* Reachability.swift */; };
 		1BF59C4E24BA5B9C00CC2CEA /* TextFieldLength.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BF59C4D24BA5B9C00CC2CEA /* TextFieldLength.swift */; };
+		1BF59C5124BA65B900CC2CEA /* BottomSheet in Frameworks */ = {isa = PBXBuildFile; productRef = 1BF59C5024BA65B900CC2CEA /* BottomSheet */; };
+		1BF59C5324BA663D00CC2CEA /* QuerySheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BF59C5224BA663D00CC2CEA /* QuerySheetView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -93,6 +95,7 @@
 		1BD7D4E024AF84FE00857EEC /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		1BD7D4E224B08D7E00857EEC /* Reachability.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
 		1BF59C4D24BA5B9C00CC2CEA /* TextFieldLength.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldLength.swift; sourceTree = "<group>"; };
+		1BF59C5224BA663D00CC2CEA /* QuerySheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuerySheetView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -100,6 +103,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1BF59C5124BA65B900CC2CEA /* BottomSheet in Frameworks */,
 				1B7D902724ABA70100CAD138 /* KeychainSwift in Frameworks */,
 				1BBAC67F24B7174400E05261 /* KeyboardObserving in Frameworks */,
 				1B7D8FF924AB8AB900CAD138 /* SwiftyShoppy in Frameworks */,
@@ -116,6 +120,7 @@
 				1B0A822B24BA35E70043CF63 /* QueriesView.swift */,
 				1B0A822F24BA39DB0043CF63 /* QueryDetailView.swift */,
 				1B0A823124BA4F050043CF63 /* QueryReplyView.swift */,
+				1BF59C5224BA663D00CC2CEA /* QuerySheetView.swift */,
 			);
 			path = Query;
 			sourceTree = "<group>";
@@ -297,6 +302,7 @@
 				1B7D902624ABA70100CAD138 /* KeychainSwift */,
 				1B9BCB8C24B4A52D00255448 /* MDText */,
 				1BBAC67E24B7174400E05261 /* KeyboardObserving */,
+				1BF59C5024BA65B900CC2CEA /* BottomSheet */,
 			);
 			productName = Shoppy;
 			productReference = 1BB764CC24AB76DF00C7F63A /* Shoppy.app */;
@@ -331,6 +337,7 @@
 				1B7D902524ABA70100CAD138 /* XCRemoteSwiftPackageReference "keychain-swift" */,
 				1B9BCB8B24B4A52D00255448 /* XCRemoteSwiftPackageReference "MDText" */,
 				1BBAC67D24B7174400E05261 /* XCRemoteSwiftPackageReference "KeyboardObserving" */,
+				1BF59C4F24BA65B900CC2CEA /* XCRemoteSwiftPackageReference "bottom-sheet" */,
 			);
 			productRefGroup = 1BB764CD24AB76DF00C7F63A /* Products */;
 			projectDirPath = "";
@@ -386,6 +393,7 @@
 				1B57F88E24B8DDFE00463450 /* ProductAccountView.swift in Sources */,
 				1B0A823024BA39DB0043CF63 /* QueryDetailView.swift in Sources */,
 				1B0EB17424B52520007A06E0 /* OrderAccountView.swift in Sources */,
+				1BF59C5324BA663D00CC2CEA /* QuerySheetView.swift in Sources */,
 				1B94D95024B5D1D300CEFFED /* NetworkObserver.swift in Sources */,
 				1B7D902424ABA1CC00CAD138 /* LoginView.swift in Sources */,
 				1B0EB16C24B4D33D007A06E0 /* Container.swift in Sources */,
@@ -636,6 +644,14 @@
 				kind = branch;
 			};
 		};
+		1BF59C4F24BA65B900CC2CEA /* XCRemoteSwiftPackageReference "bottom-sheet" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/weitieda/bottom-sheet";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.5;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -658,6 +674,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 1BBAC67D24B7174400E05261 /* XCRemoteSwiftPackageReference "KeyboardObserving" */;
 			productName = KeyboardObserving;
+		};
+		1BF59C5024BA65B900CC2CEA /* BottomSheet */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 1BF59C4F24BA65B900CC2CEA /* XCRemoteSwiftPackageReference "bottom-sheet" */;
+			productName = BottomSheet;
 		};
 /* End XCSwiftPackageProductDependency section */
 
