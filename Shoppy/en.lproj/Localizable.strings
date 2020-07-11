@@ -1,7 +1,133 @@
-/* 
-  Localizable.strings
-  Shoppy
+/*
+ Localizable.strings
+ Shoppy
+ 
+ Created by Victor Lourme on 11/07/2020.
+ Copyright © 2020 Victor Lourme. All rights reserved.
+ */
 
-  Created by Victor Lourme on 11/07/2020.
-  Copyright © 2020 Victor Lourme. All rights reserved.
-*/
+// App title
+"Shoppy" = "Shoppy";
+
+// Errors
+"Wrong API key" = "Wrong API key";
+"Please check you filled required fields correctly." = "Please check you filled required fields correctly.";
+"Network is unreachable" = "Network is unreachable";
+"Your device does not have Internet connection, reload the application when you have connection back." = "Your device does not have Internet connection, reload the application when you have connection back.";
+
+// Tabs
+"Dashboard" = "Dashboard";
+"Orders" = "Orders";
+"Products" = "Products";
+
+// Tabs variations
+"Order" = "Order";
+"orders" = "orders";
+"Product" = "Product";
+"products" = "products";
+
+// Common
+"Save" = "Save";
+"Continue" = "Continue";
+"Copy" = "Copy";
+"Done" = "Done";
+"No" = "No";
+"Yes" = "Yes";
+"Error" = "Error";
+
+// Login
+"Your API key is stored encrypted and never shared." = "Your API key is stored encrypted and never shared.";
+"Change your API key" = "Change your API key";
+"WELCOME ON" = "WELCOME ON";
+
+// Settings
+"Settings" = "Settings";
+"Change API key" = "Change API key";
+"See the source code" = "See the source code";
+"Report a bug" = "Report a bug";
+"Version" = "Version";
+
+// Dashboard
+"Total orders" = "Total orders";
+"Total revenue" = "Total revenue";
+"Daily income" = "Daily income";
+
+// Orders
+"Try to load more" = "Try to load more";
+"Paid" = "Paid";
+"Unpaid" = "Unpaid";
+"Cancelled" = "Cancelled";
+"Status" = "Status";
+"Created at" = "Created at";
+"Paid using" = "Paid using";
+"Paid at" = "Paid at";
+"Price" = "Price";
+"Quantity" = "Quantity";
+"Total price" = "Total price";
+"Currency" = "Currency";
+"Email" = "Email";
+"IP" = "IP";
+"Country" = "Country";
+"Platform" = "Platform";
+"See the product" = "See the product";
+"See delivered accounts" = "See delivered accounts";
+"Order ID" = "Order ID";
+"Product ID" = "Product ID";
+"Replacement ID" = "Replacement ID";
+"Coupon ID" = "Coupon ID";
+"Hash" = "hash";
+"Delivered accounts" = "Delivered accounts";
+
+// Products
+"Name" = "Name";
+"See the description" = "See the description";
+"Description" = "Description";
+"Delivery type" = "Delivery type";
+"Revenue per order" = "Revenue per order";
+"Potential total" = "Potential total";
+"Stock" = "Stock";
+"Minimum quantity per order" = "Minimum quantity per order";
+"Maximum quantity per order" = "Maximum quantity per order";
+"See accounts in stock" = "See accounts in stock";
+"Unlisted" = "Unlisted";
+"Creation date" = "Creation date";
+"Last update" = "Last update";
+"Select an action" = "Select an action";
+"Edit product" = "Edit product";
+"Delete product" = "Delete product";
+"Required fields" = "Required fields";
+"Name (128 chars max)" = "Name (128 chars max)";
+"Price (10.000 max)" = "Price (10.000 max)";
+"Type" = "Type";
+"Optional fields" = "Optional fields";
+"Description (10.000 chars max)" = "Description (10.000 chars max)";
+"Minimum stock" = "Minimum per order";
+"Maximum stock" = "Maximum per order";
+"Callback URL" = "Callback URL";
+"Upload files from the website" = "Upload files from the website";
+"Attachment" = "Attachments";
+"Please upload files from the website." = "Please upload files from the website.";
+"Accounts" = "Accounts";
+"Send email on purchase" = "Send email on purchase";
+"Message to send" = "Message to send";
+"Edit a product" = "Edit a product";
+"Create a product" = "Create a product";
+"in stock" = "in stock";
+"Out of stock" = "Out of stock";
+
+// Types
+"Account" = "Account";
+"Service" = "Service";
+"File" = "File";
+"Dynamic" = "Dynamic";
+
+// User
+"Profile" = "Profile";
+"Username" = "Username";
+"Not linked" = "Not linked";
+"BTC Address" = "BTC Address";
+"LTC Address" = "LTC Address";
+"ETH Address" = "ETH Address";
+"PayPal" = "PayPal";
+"Stripe ID" = "Stripe ID";
+"Your profile can be changed on the website." = "Your profile can be changed on the website.";

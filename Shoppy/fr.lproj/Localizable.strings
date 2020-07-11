@@ -1,46 +1,133 @@
 /* 
-  Localizable.strings
-  Shoppy
-
-  Created by Victor Lourme on 11/07/2020.
-  Copyright © 2020 Victor Lourme. All rights reserved.
-*/
+ Localizable.strings
+ Shoppy
+ 
+ Created by Victor Lourme on 11/07/2020.
+ Copyright © 2020 Victor Lourme. All rights reserved.
+ */
 
 // App title
 "Shoppy" = "Shoppy";
 
 // Errors
-"Error" = "Error";
-"Wrong API key" = "Wrong API key";
-"Network is unreachable" = "Network is unreachable";
-"Your device does not have Internet connection, reload the application when you have connection back." = "Your device does not have Internet connection, reload the application when you have connection back.";
+"Wrong API key" = "Mauvaise clé API";
+"Please check you filled required fields correctly." = "Vérifiez que les champs requis sont correctement remplis";
+"Network is unreachable" = "Connection impossible";
+"Your device does not have Internet connection, reload the application when you have connection back." = "Impossible d'accéder à Internet, relancez l'application une fois que la connexion marche à nouveau";
 
 // Tabs
-"Dashboard" = "Dashboard";
-"Orders" = "Orders";
-"Products" = "Products";
+"Dashboard" = "Tableau de bord";
+"Orders" = "Commandes";
+"Products" = "Produits";
+
+// Tabs variations
+"Order" = "Commande";
+"orders" = "commandes";
+"Product" = "Produit";
+"products" = "produits";
 
 // Common
-"Save" = "Save";
-"Continue" = "Continue";
+"Save" = "Sauvegarder";
+"Continue" = "Continuer";
+"Copy" = "Copier";
+"Done" = "Confirmer";
+"No" = "Non";
+"Yes" = "Oui";
+"Error" = "Erreur";
 
 // Login
-"Your API key is stored encrypted and never shared." = "Your API key is stored encrypted and never shared.";
-"Change your API key" = "Change your API key";
-"WELCOME ON" = "WELCOME ON";
+"Your API key is stored encrypted and never shared." = "Votre clé API est sauvegardée chiffrée et jamais partagée.";
+"Change your API key" = "Changer votre clé API";
+"WELCOME ON" = "BIENVENUE SUR";
+
+// Settings
+"Settings" = "Paramètres";
+"Change API key" = "Changer la clé API";
+"See the source code" = "Voir le code source";
+"Report a bug" = "Signaler un bug";
+"Version" = "Version";
 
 // Dashboard
-"Total orders" = "Total orders";
-"Total revenue" = "Total revenue";
-"Daily income" = "Daily income";
+"Total orders" = "Total de commande";
+"Total revenue" = "Revenus total";
+"Daily income" = "Revenus du jour";
+
+// Orders
+"Try to load more" = "Essayer de charger plus";
+"Paid" = "Payé";
+"Unpaid" = "Non payé";
+"Cancelled" = "Annulé";
+"Status" = "Etat";
+"Created at" = "Créé à";
+"Paid using" = "Payé via";
+"Paid at" = "Payé à";
+"Price" = "Prix";
+"Quantity" = "Quantité";
+"Total price" = "Prix total";
+"Currency" = "Devise";
+"Email" = "Email";
+"IP" = "IP";
+"Country" = "Pays";
+"Platform" = "Appareil";
+"See the product" = "Voir le produit";
+"See delivered accounts" = "Voir les comptes livrés";
+"Order ID" = "ID";
+"Product ID" = "ID du produit";
+"Replacement ID" = "ID du remplacement";
+"Coupon ID" = "ID du coupon";
+"Hash" = "Signature";
+"Delivered accounts" = "Comptes livrés";
+
+// Products
+"Name" = "Nom";
+"See the description" = "Voir la description";
+"Description" = "Description";
+"Delivery type" = "Type";
+"Revenue per order" = "Revenus par commande";
+"Potential total" = "Total potentiel";
+"Stock" = "Stock";
+"Minimum quantity per order" = "Quantité minimale par commande";
+"Maximum quantity per order" = "Quantité maximale par commande";
+"See accounts in stock" = "Voir les comptes en stock";
+"Unlisted" = "Non listé";
+"Creation date" = "Date de création";
+"Last update" = "Dernière modification";
+"Select an action" = "Selectionnez une action";
+"Edit product" = "Modifier le produit";
+"Delete product" = "Supprimer le produit";
+"Required fields" = "Champs requis";
+"Name (128 chars max)" = "Nom (128 caractères max.)";
+"Price (10.000 max)" = "Prix (10.000 max)";
+"Type" = "Type";
+"Optional fields" = "Champs optionnels";
+"Description (10.000 chars max)" = "Description (10.000 caractères max)";
+"Minimum stock" = "Quantité minimale par achat";
+"Maximum stock" = "Quantité maximale par achat";
+"Callback URL" = "Callback URL";
+"Upload files from the website" = "Téléversez des fichiers depuis le site";
+"Attachment" = "Pièce jointe";
+"Please upload files from the website." = "Merci de téléverser des fichiers depuis le site.";
+"Accounts" = "Comptes";
+"Send email on purchase" = "Envoyer un mail après l'achat";
+"Message to send" = "Message à envoyer";
+"Edit a product" = "Editer un produit";
+"Create a product" = "Créer un produit";
+"in stock" = "en stock";
+"Out of stock" = "Rupture de stock";
+
+// Types
+"Account" = "Compte";
+"Service" = "Service";
+"File" = "Fichier";
+"Dynamic" = "URL Dynamique";
 
 // User
-"Profile" = "Profile";
-"Username" = "Username";
-"Not linked" = "Not linked";
-"BTC Address" = "BTC Address";
-"LTC Address" = "LTC Address";
-"ETH Address" = "ETH Address";
+"Profile" = "Profil";
+"Username" = "Nom d'utilisateur";
+"Not linked" = "Non lié";
+"BTC Address" = "Adresse BTC";
+"LTC Address" = "Adresse LTC";
+"ETH Address" = "Adresse ETH";
 "PayPal" = "PayPal";
 "Stripe ID" = "Stripe ID";
-"Your profile can be changed on the website." = "Your profile can be changed on the website.";
+"Your profile can be changed on the website." = "Votre profil peut être modifié sur le site.";
