@@ -8,7 +8,6 @@
 
 import SwiftUI
 import SwiftyShoppy
-import KeychainSwift
 
 struct DashboardView: View {
     @EnvironmentObject var network: NetworkObserver

@@ -14,10 +14,14 @@ enum Links: String {
 }
 
 struct SettingsView: View {
+    // Sheet login
     @State private var displayLogin = false
     
     // EnvironmentObject workaround for sheet modals
     @State public var network: NetworkObserver
+    
+    // Version name
+    @State private var version = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String
     
     // Change key
     private func changeKey() {
@@ -51,7 +55,7 @@ struct SettingsView: View {
                 }
                 
                 Container {
-                    ContainerField(name: "Version", value: "1.0", icon: "i.circle.fill", accent: .orange)
+                    ContainerField(name: "Version", value: self.version ?? "", icon: "i.circle.fill", accent: .orange)
                 }
                 
                 Spacer()

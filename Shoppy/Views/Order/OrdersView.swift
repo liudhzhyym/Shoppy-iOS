@@ -7,7 +7,6 @@
 //
 
 import SwiftUI
-import SwiftyShoppy
 
 struct OrdersView: View {
     @EnvironmentObject var network: NetworkObserver

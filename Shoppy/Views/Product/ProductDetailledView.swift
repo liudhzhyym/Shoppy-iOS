@@ -13,8 +13,6 @@ struct ProductDetailledView: View {
     @State public var name: String
     @State public var value: String
     
-    //@State public var md = MarkdownView()
-    
     var body: some View {
         ScrollView {
             MDText(markdown: value)
