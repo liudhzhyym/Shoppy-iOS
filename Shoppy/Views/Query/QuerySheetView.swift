@@ -45,18 +45,18 @@ struct QuerySheetView: View {
             ScrollView {
                 Container {
                     if self.query.status == QueryStatus.Open.rawValue {
-                        ContainerField(name: "Status", value: "Open", icon: "envelope.badge")
+                        ContainerField(name: "Status".localized, value: "Open".localized, icon: "envelope.badge")
                     } else if self.query.status == QueryStatus.Closed.rawValue {
-                        ContainerField(name: "Status", value: "Closed", icon: "envelope.badge")
+                        ContainerField(name: "Status".localized, value: "Closed".localized, icon: "envelope.badge")
                     } else if self.query.status == QueryStatus.Replied.rawValue {
-                        ContainerField(name: "Status", value: "Replied", icon: "envelope.badge")
+                        ContainerField(name: "Status".localized, value: "Replied".localized, icon: "envelope.badge")
                     } else if self.query.status == QueryStatus.UserReply.rawValue {
-                        ContainerField(name: "Status", value: "User replied", icon: "envelope.badge")
+                        ContainerField(name: "Status".localized, value: "User replied".localized, icon: "envelope.badge")
                     }
                     
-                    ContainerField(name: "Sender", value: self.query.email ?? "", icon: "person")
-                    ContainerField(name: "Created on", value: self.query.created_at?.description ?? "", icon: "calendar")
-                    ContainerField(name: "Query ID", value: self.query.id ?? "", icon: "number")
+                    ContainerField(name: "Sender".localized, value: self.query.email ?? "", icon: "person")
+                    ContainerField(name: "Created on".localized, value: self.query.created_at?.description ?? "", icon: "calendar")
+                    ContainerField(name: "Query ID".localized, value: self.query.id ?? "", icon: "number")
                 }
                 
                 Button(action: changeState) {

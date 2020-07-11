@@ -123,6 +123,22 @@
 "File" = "File";
 "Dynamic" = "Dynamic";
 
+// Query
+"Tap to reply" = "Tap to reply";
+"Query detail" = "Query detail";
+"Sent date" = "Sent date";
+"Sender" = "Sender";
+"Created on" = "Created on";
+"Query ID" = "Query ID";
+"Re-open this query" = "Re-open this query";
+"Close this query" = "Close this query";
+
+// Query status
+"Open" = "Open";
+"Closed" = "Closed";
+"Replied" = "Replied";
+"User replied" = "User replied";
+
 // User
 "Profile" = "Profile";
 "Username" = "Username";

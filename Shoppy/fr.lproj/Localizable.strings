@@ -124,6 +124,22 @@
 "File" = "Fichier";
 "Dynamic" = "URL Dynamique";
 
+// Query
+"Tap to reply" = "Appuyez pour répondre";
+"Query detail" = "Détails sur la requête";
+"Sent date" = "Date d'envoi";
+"Sender" = "Expéditeur";
+"Created on" = "Date de création";
+"Query ID" = "ID de la requête";
+"Re-open this query" = "Ré-ouvrir la requête";
+"Close this query" = "Fermer la requête";
+
+// Query status
+"Open" = "Ouvert";
+"Closed" = "Fermé";
+"Replied" = "Répondu";
+"User replied" = "Réponse reçue";
+
 // User
 "Profile" = "Profil";
 "Username" = "Nom d'utilisateur";
