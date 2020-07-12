@@ -97,7 +97,7 @@ struct QueryDetailView: View {
             }
         }
         .keyboardObserving()
-        .bottomSheet(isPresented: $showDetail, height: 480) {
+        .bottomSheet(isPresented: $showDetail, height: 440) {
             QuerySheetView(query: self.$query, token: self.network.key)
         }
     }

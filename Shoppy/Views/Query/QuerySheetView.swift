@@ -13,6 +13,19 @@ struct QuerySheetView: View {
     @Binding public var query: Query
     @State public var token: String
     
+    public func getState() -> String {
+        switch query.status {
+        case QueryStatus.Closed.rawValue:
+            return "Closed"
+        case QueryStatus.Replied.rawValue:
+            return "Replied"
+        case QueryStatus.UserReply.rawValue:
+            return "User replied"
+        default:
+            return "Open"
+        }
+    }
+    
     private func changeState() {
         guard let id = query.id else {
             return
@@ -21,11 +34,21 @@ struct QuerySheetView: View {
         NetworkManager
             .prepare(token: token)
             .target(.updateQuery(id, action: query.status == QueryStatus.Closed.rawValue ? .ReOpen : .Close))
-            .asObject(ResourceUpdate<Query>.self, success: { update in
+            .asObject(ResourceUpdate<QueryActionResponse>.self, success: { update in
                 if update.status == true {
-                    if let query = update.resource {
+                    // Get query
+                    NetworkManager
+                        .prepare(token: self.token)
+                    .target(.getQuery(id))
+                    .asObject(Query.self, success: { query in
+                        // Set query
                         self.query = query
-                    }
+                        
+                        // Update status
+                        //self.status = self.getState()
+                    }, error: { error in
+                        print(error)
+                    })
                 }
             }, error: { error in
                 print(error)
@@ -35,25 +58,21 @@ struct QuerySheetView: View {
     var body: some View {
         VStack {
             HStack {
+                VStack(alignment: .leading) {
                 Text("Query detail")
                     .font(.title)
                     .bold()
+                    
+                Text(self.getState().localized)
+                    .font(.callout)
+                    .foregroundColor(.secondary)
+                }
                 
                 Spacer()
             }.padding()
             
             ScrollView {
                 Container {
-                    if self.query.status == QueryStatus.Open.rawValue {
-                        ContainerField(name: "Status".localized, value: "Open".localized, icon: "envelope.badge")
-                    } else if self.query.status == QueryStatus.Closed.rawValue {
-                        ContainerField(name: "Status".localized, value: "Closed".localized, icon: "envelope.badge")
-                    } else if self.query.status == QueryStatus.Replied.rawValue {
-                        ContainerField(name: "Status".localized, value: "Replied".localized, icon: "envelope.badge")
-                    } else if self.query.status == QueryStatus.UserReply.rawValue {
-                        ContainerField(name: "Status".localized, value: "User replied".localized, icon: "envelope.badge")
-                    }
-                    
                     ContainerField(name: "Sender".localized, value: self.query.email ?? "", icon: "person")
                     ContainerField(name: "Created on".localized, value: self.query.created_at?.description ?? "", icon: "calendar")
                     ContainerField(name: "Query ID".localized, value: self.query.id ?? "", icon: "number")
