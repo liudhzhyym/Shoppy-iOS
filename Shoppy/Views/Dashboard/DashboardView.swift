@@ -41,7 +41,12 @@ struct DashboardView: View {
     
     var body: some View {
         NavigationView {
-            VStack {
+            VStack(alignment: .leading) {
+                Text("Statistics")
+                    .font(.title)
+                    .bold()
+                    .padding([.leading, .top])
+                
                 Group {
                     Card(title: "Total orders".localized,
                          value: $orders,
@@ -55,6 +60,11 @@ struct DashboardView: View {
                          value: $today,
                          ext: "€", specifier: "%.2f")
                 }.padding(.vertical, 5)
+                
+                Text("Navigation")
+                    .font(.title)
+                    .bold()
+                    .padding([.leading, .top])
                 
                 Container {
                     ContainerNavigationButton(title: "Queries".localized,

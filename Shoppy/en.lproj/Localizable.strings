@@ -9,6 +9,10 @@
 // App title
 "Shoppy" = "Shoppy";
 
+// Home
+"Statistics" = "Statistics";
+"Navigation" = "Navigation";
+
 // Errors
 "Wrong API key" = "Wrong API key";
 "Please check you filled required fields correctly." = "Please check you filled required fields correctly.";
