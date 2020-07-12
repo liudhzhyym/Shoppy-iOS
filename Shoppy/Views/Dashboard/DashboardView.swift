@@ -68,7 +68,7 @@ struct DashboardView: View {
                 
                 Container {
                     ContainerNavigationButton(title: "Queries".localized,
-                                              icon: "envelope",
+                                              icon: "bubble.left.and.bubble.right.fill",
                                               destination: AnyView(QueriesView()))
                 }
                 
