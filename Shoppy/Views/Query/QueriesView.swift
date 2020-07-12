@@ -33,6 +33,8 @@ struct QueriesView: View {
     
     var body: some View {
         ScrollView {
+            Spacer()
+            
             ForEach(network.queries, id: \.id) { (query: Query) in
                 NavigationLink(destination: QueryDetailView(query: query)) {
                     QueryCard(query: query)
@@ -52,7 +54,7 @@ struct QueriesView: View {
             Spacer()
         }
         .id(UUID().uuidString)
-        .navigationBarTitle("Queries")
+        .navigationBarTitle("Queries", displayMode: .inline)
         .navigationBarItems(trailing: refreshButton)
     }
 }

@@ -60,6 +60,8 @@ struct QueryDetailView: View {
     var body: some View {
         VStack {
             ScrollView {
+                Spacer()
+                
                 QueryReplyView(message: query.message ?? "", date: query.created_at ?? Date(), is_supporter: false)
                 
                 ForEach(query.replies?.reversed() ?? [], id: \.id) { (reply: QueryReply) in
