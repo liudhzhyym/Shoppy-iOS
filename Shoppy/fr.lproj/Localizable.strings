@@ -55,9 +55,8 @@
 "Version" = "Version";
 
 // Dashboard
-"Total orders" = "Total de commande";
-"Total revenue" = "Revenus total";
-"Daily income" = "Revenus du jour";
+"Total income" = "Revenus totaux";
+"Today income" = "Revenus du jour";
 
 // Orders
 "Try to load more" = "Essayer de charger plus";

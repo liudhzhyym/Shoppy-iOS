@@ -23,10 +23,11 @@ struct DashboardView: View {
     var profileButton: some View {
         NavigationLink(destination: UserView(settings: settings, image: image)) {
             Image(uiImage: (UIImage(data: image ?? Data()) ?? UIImage(systemName: "person"))!)
+                .renderingMode(.original)
                 .resizable()
                 .frame(width: 26, height: 26)
                 .clipShape(Circle())
-        }.buttonStyle(PlainButtonStyle())
+        }
     }
     
     var settingsButton: some View {
@@ -34,47 +35,76 @@ struct DashboardView: View {
             self.displaySettings = true
         }) {
             Image(systemName: "gear")
-                .resizable()
-                .frame(width: 26, height: 26)
+                .imageScale(.large)
+                .foregroundColor(.white)
         }
     }
     
     var body: some View {
         NavigationView {
-            VStack(alignment: .leading) {
-                Text("Statistics")
-                    .font(.title)
-                    .bold()
-                    .padding([.leading, .top])
-                
-                Group {
-                    Card(title: "Total orders".localized,
-                         value: $orders,
-                         ext: "", specifier: "%.0f")
+            GeometryReader { proxy in
+                VStack {
+                    VStack {
+                        Text("\(self.revenues, specifier: "%.2f")")
+                            .font(.title)
+                            .bold()
+                            + Text(Currencies.getSymbol(forCurrencyCode: self.network.settings?.settings?.currency ?? "USD") ?? "$")
+                                .font(.callout)
+                        Text("Total income")
+                        
+                        Spacer()
+                        
+                        HStack {
+                            Spacer()
+                            
+                            VStack {
+                                Text("\(self.today, specifier: "%.2f")")
+                                    .font(.system(size: 22))
+                                    .fontWeight(.bold)
+                                    + Text(Currencies.getSymbol(forCurrencyCode: self.network.settings?.settings?.currency ?? "USD") ?? "$")
+                                        .font(.callout)
+                                Text("Today income")
+                                    .font(.footnote)
+                            }
+                            
+                            Spacer()
+                            
+                            VStack {
+                                Text("\(self.orders, specifier: "%.0f")")
+                                    .font(.system(size: 22))
+                                    .fontWeight(.bold)
+                                Text("Orders")
+                                    .font(.footnote)
+                            }
+                            
+                            Spacer()
+                        }
+                        
+                        Spacer()
+                    }
+                    .padding(.top, proxy.safeAreaInsets.top)
+                    .padding()
+                    .frame(height: 320)
+                    .foregroundColor(.white)
+                        .background(LinearGradient(
+                        gradient: Gradient(colors: [.blue, .purple]),
+                        startPoint: .topLeading,
+                        endPoint: .bottomTrailing
+                    ).opacity(0.9))
+                    .cornerRadius(30)
+                    .shadow(radius: 6)
                     
-                    Card(title: "Total revenue".localized,
-                         value: $revenues,
-                         ext: "€", specifier: "%.2f")
+                    Container {
+                        ContainerNavigationButton(title: "Queries".localized,
+                                                  icon: "bubble.left.and.bubble.right.fill",
+                                                  destination: AnyView(QueriesView()))
+                    }
+                    .padding(.vertical, 20)
                     
-                    Card(title: "Daily income".localized,
-                         value: $today,
-                         ext: "€", specifier: "%.2f")
-                }.padding(.vertical, 5)
-                
-                Text("Navigation")
-                    .font(.title)
-                    .bold()
-                    .padding([.leading, .top])
-                
-                Container {
-                    ContainerNavigationButton(title: "Queries".localized,
-                                              icon: "bubble.left.and.bubble.right.fill",
-                                              destination: AnyView(QueriesView()))
+                    Spacer()
                 }
-                
-                Spacer()
             }
-                
+            .edgesIgnoringSafeArea(.top)
             .navigationBarTitle("Dashboard")
             .navigationBarItems(leading: profileButton, trailing: settingsButton)
         }
