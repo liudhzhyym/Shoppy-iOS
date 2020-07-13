@@ -18,7 +18,7 @@ Others screenshots are available in **`Media`** folder.
 ## Features compared to official application
 | Features | Official | Unofficial Shoppy-iOS |
 |:--------:|:--------:|:---------------------:|
-| Home analytics | Partial | ✅ ([Charts planned for 1.2](https://github.com/vlourme/Shoppy-iOS/projects/2)) |
+| Home analytics | Partial | ✅  |
 | Orders list | ✅ | ✅ |
 | Orders detail | ❌ | ✅ |
 | Product list | ❌ | ✅ |
@@ -26,9 +26,10 @@ Others screenshots are available in **`Media`** folder.
 | Profile and Settings | ❌ | ✅ |
 | Manage products | ❌ | ✅ |
 | Feedbacks | ❌ | 🕐 [Planned for 1.2](https://github.com/vlourme/Shoppy-iOS/projects/2) |
-| Queries | ❌ | 🕐 [Planned for 1.2](https://github.com/vlourme/Shoppy-iOS/projects/2) |
-| [Nofifications](https://github.com/vlourme/Shoppy-iOS/issues/4) | ✅ | ❌ |
-| Translations | ❌ | 🕐 [French planned for 1.2](https://github.com/vlourme/Shoppy-iOS/projects/2) |
+| Queries | ❌ | ✅ |
+| [Notifications](https://github.com/vlourme/Shoppy-iOS/issues/4) | ✅ | ❌ |
+| Translations | ❌ | ✅ |
+| Size when installed | ~60MB | < 15MB|
 
 ## Progression
 You can see progression, bug tracking and future features in [Projects](https://github.com/vlourme/Shoppy-iOS/projects)
