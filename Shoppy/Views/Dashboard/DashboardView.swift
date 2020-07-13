@@ -45,14 +45,14 @@ struct DashboardView: View {
             GeometryReader { proxy in
                 VStack {
                     VStack {
+                        Spacer()
+                        
                         Text("\(self.revenues, specifier: "%.2f")")
                             .font(.title)
                             .bold()
                             + Text(Currencies.getSymbol(forCurrencyCode: self.network.settings?.settings?.currency ?? "USD") ?? "$")
                                 .font(.callout)
                         Text("Total income")
-                        
-                        Spacer()
                         
                         HStack {
                             Spacer()
@@ -79,12 +79,12 @@ struct DashboardView: View {
                             
                             Spacer()
                         }
-                        
-                        Spacer()
+                        .padding(.top)
+                        .padding(.vertical)
                     }
-                    .padding(.top, proxy.safeAreaInsets.top)
+                    .padding(.top, proxy.safeAreaInsets.bottom)
                     .padding()
-                    .frame(height: 320)
+                    .frame(height: 300)
                     .foregroundColor(.white)
                         .background(LinearGradient(
                         gradient: Gradient(colors: [.blue, .purple]),
