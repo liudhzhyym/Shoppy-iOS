@@ -91,7 +91,7 @@ struct DashboardView: View {
                         startPoint: .topLeading,
                         endPoint: .bottomTrailing
                     ).opacity(0.9))
-                    .cornerRadius(30)
+                    .cornerRadius(20, corners: [.bottomLeft, .bottomRight])
                     .shadow(radius: 6)
                     
                     Container {
