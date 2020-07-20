@@ -37,6 +37,8 @@
 		1B9BCB8024B4889600255448 /* ProductView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B9BCB7F24B4889600255448 /* ProductView.swift */; };
 		1B9BCB8424B4894F00255448 /* ProductCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B9BCB8324B4894F00255448 /* ProductCard.swift */; };
 		1B9BCB8D24B4A52D00255448 /* MDText in Frameworks */ = {isa = PBXBuildFile; productRef = 1B9BCB8C24B4A52D00255448 /* MDText */; };
+		1BAA5EB724C6253C00115E59 /* DashboardCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BAA5EB624C6253C00115E59 /* DashboardCardView.swift */; };
+		1BAA5EB924C6290800115E59 /* DashboardStatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BAA5EB824C6290800115E59 /* DashboardStatView.swift */; };
 		1BB764D024AB76DF00C7F63A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BB764CF24AB76DF00C7F63A /* AppDelegate.swift */; };
 		1BB764D224AB76DF00C7F63A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BB764D124AB76DF00C7F63A /* SceneDelegate.swift */; };
 		1BB764D524AB76DF00C7F63A /* Shoppy.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 1BB764D324AB76DF00C7F63A /* Shoppy.xcdatamodeld */; };
@@ -84,6 +86,8 @@
 		1B9BCB7A24B47BA300255448 /* ProductDetailledView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductDetailledView.swift; sourceTree = "<group>"; };
 		1B9BCB7F24B4889600255448 /* ProductView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductView.swift; sourceTree = "<group>"; };
 		1B9BCB8324B4894F00255448 /* ProductCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductCard.swift; sourceTree = "<group>"; };
+		1BAA5EB624C6253C00115E59 /* DashboardCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardCardView.swift; sourceTree = "<group>"; };
+		1BAA5EB824C6290800115E59 /* DashboardStatView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardStatView.swift; sourceTree = "<group>"; };
 		1BB764CC24AB76DF00C7F63A /* Shoppy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Shoppy.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1BB764CF24AB76DF00C7F63A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1BB764D124AB76DF00C7F63A /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -131,6 +135,8 @@
 			isa = PBXGroup;
 			children = (
 				1B6199BD24ABB45F003FA43F /* DashboardView.swift */,
+				1BAA5EB624C6253C00115E59 /* DashboardCardView.swift */,
+				1BAA5EB824C6290800115E59 /* DashboardStatView.swift */,
 			);
 			path = Dashboard;
 			sourceTree = "<group>";
@@ -396,6 +402,7 @@
 				1B79252524BDC7200014CF4D /* CornerRadius.swift in Sources */,
 				1B57F88E24B8DDFE00463450 /* ProductAccountView.swift in Sources */,
 				1B0A823024BA39DB0043CF63 /* QueryDetailView.swift in Sources */,
+				1BAA5EB924C6290800115E59 /* DashboardStatView.swift in Sources */,
 				1B0EB17424B52520007A06E0 /* OrderAccountView.swift in Sources */,
 				1BF59C5324BA663D00CC2CEA /* QuerySheetView.swift in Sources */,
 				1B94D95024B5D1D300CEFFED /* NetworkObserver.swift in Sources */,
@@ -406,6 +413,7 @@
 				1B0A822C24BA35E70043CF63 /* QueriesView.swift in Sources */,
 				1BB764D224AB76DF00C7F63A /* SceneDelegate.swift in Sources */,
 				1B9BCB8424B4894F00255448 /* ProductCard.swift in Sources */,
+				1BAA5EB724C6253C00115E59 /* DashboardCardView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

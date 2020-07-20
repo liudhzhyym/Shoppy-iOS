@@ -12,7 +12,7 @@ import KeyboardObserving
 import BottomSheet
 
 struct QueryDetailView: View {
-    @EnvironmentObject var network: NetworkObserver
+    @State var network: NetworkObserver
     
     @State public var query: Query
     @State private var showButton = false
@@ -105,6 +105,6 @@ struct QueryDetailView: View {
 
 struct QueryDetailView_Previews: PreviewProvider {
     static var previews: some View {
-        QueryDetailView(query: Query())
+        QueryDetailView(network: NetworkObserver(key: ""), query: Query())
     }
 }

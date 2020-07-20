@@ -14,14 +14,21 @@ struct DashboardView: View {
     
     @State private var image: Data?
     @State private var settings = Settings()
-    @State private var displaySettings = false
     
-    @State private var revenues: Double = 0
-    @State private var orders: Double = 0
-    @State private var today: Double = 0
+    @State private var modalContent = AnyView(EmptyView())
+    @State private var showModal = false
+    
+    @State private var currency = "$"
+    
+    @State private var revenuesStat: Double = 0
+    @State private var ordersStat: Double = 0
+    @State private var todayStat: Double = 0
     
     var profileButton: some View {
-        NavigationLink(destination: UserView(settings: settings, image: image)) {
+        Button(action: {
+            self.modalContent = AnyView(UserView(settings: self.settings, image: self.image))
+            self.showModal = true
+        }) {
             Image(uiImage: (UIImage(data: image ?? Data()) ?? UIImage(systemName: "person"))!)
                 .renderingMode(.original)
                 .resizable()
@@ -30,9 +37,20 @@ struct DashboardView: View {
         }
     }
     
+    var queriesButton: some View {
+        Button(action: {
+            self.modalContent = AnyView(QueriesView(network: self.network))
+            self.showModal = true
+        }) {
+            Image(systemName: "bubble.left")
+                .imageScale(.large)
+        }
+    }
+    
     var settingsButton: some View {
         Button(action: {
-            self.displaySettings = true
+            self.modalContent = AnyView(SettingsView(network: self.network))
+            self.showModal = true
         }) {
             Image(systemName: "gear")
                 .imageScale(.large)
@@ -41,85 +59,78 @@ struct DashboardView: View {
     }
     
     var body: some View {
-        NavigationView {
-            GeometryReader { proxy in
+        GeometryReader { (proxy: GeometryProxy) in
+            ZStack(alignment: .top) {
+                ScrollView {
+                    Spacer()
+                    
+                    ForEach(self.network.orders, id: \.id) { (order: Order) in
+                        Group {
+                            DashboardCardView(email: order.email ?? "",
+                                              product: order.product?.title ?? "",
+                                              date: order.created_at ?? Date(),
+                                              price: (order.price ?? 0) * Double(order.quantity ?? 0),
+                                              currency: order.currency ?? "USD",
+                                              paid: order.delivered == 1)
+                            Divider()
+                        }
+                    }
+                }
+                .id(UUID().uuidString)
+                .font(.system(.body, design: .rounded))
+                .padding(.top, 300)
+                
                 VStack {
-                    VStack {
+                    HStack {
+                        self.profileButton
+                        
+                        Text(self.network.settings?.user?.username ?? "")
+                            .font(.headline)
+                        
                         Spacer()
                         
-                        Text("\(self.revenues, specifier: "%.2f")")
-                            .font(.title)
-                            .bold()
-                            + Text(Currencies.getSymbol(forCurrencyCode: self.network.settings?.settings?.currency ?? "USD") ?? "$")
-                                .font(.callout)
-                        Text("Total income")
-                        
-                        HStack {
-                            Spacer()
+                        Group {
+                            self.queriesButton
                             
-                            VStack {
-                                Text("\(self.today, specifier: "%.2f")")
-                                    .font(.system(size: 22))
-                                    .fontWeight(.bold)
-                                    + Text(Currencies.getSymbol(forCurrencyCode: self.network.settings?.settings?.currency ?? "USD") ?? "$")
-                                        .font(.callout)
-                                Text("Today income")
-                                    .font(.footnote)
-                            }
-                            
-                            Spacer()
-                            
-                            VStack {
-                                Text("\(self.orders, specifier: "%.0f")")
-                                    .font(.system(size: 22))
-                                    .fontWeight(.bold)
-                                Text("Orders")
-                                    .font(.footnote)
-                            }
-                            
-                            Spacer()
-                        }
-                        .padding(.top)
-                        .padding(.vertical)
+                            self.settingsButton
+                        }.padding(.leading)
                     }
-                    .padding(.top, proxy.safeAreaInsets.bottom)
-                    .padding()
-                    .frame(height: 300)
                     .foregroundColor(.white)
-                        .background(LinearGradient(
-                        gradient: Gradient(colors: [.blue, .purple]),
-                        startPoint: .topLeading,
-                        endPoint: .bottomTrailing
-                    ).opacity(0.9))
-                    .cornerRadius(20, corners: [.bottomLeft, .bottomRight])
-                    .shadow(radius: 6)
                     
-                    Container {
-                        ContainerNavigationButton(title: "Queries".localized,
-                                                  icon: "bubble.left.and.bubble.right.fill",
-                                                  destination: AnyView(QueriesView()))
+                    Spacer()
+                    
+                    ScrollView(.horizontal, showsIndicators: false) {
+                        HStack {
+                            DashboardStatView(title: "Today's earnings", currency: self.$currency, value: self.$todayStat, specifier: "%.2f")
+                            
+                            DashboardStatView(title: "Total earnings", currency: self.$currency, value: self.$revenuesStat, specifier: "%.2f")
+                            
+                            DashboardStatView(title: "Total orders", currency: .constant(""), value: self.$ordersStat, specifier: "%.0f")
+                        }.padding()
                     }
-                    .padding(.vertical, 20)
                     
                     Spacer()
                 }
+                .padding()
+                .padding(.top, proxy.safeAreaInsets.top)
+                .frame(height: 300)
+                .background(Image("Pattern").resizable(resizingMode: .tile))
             }
             .edgesIgnoringSafeArea(.top)
-            .navigationBarTitle("Dashboard")
-            .navigationBarItems(leading: profileButton, trailing: settingsButton)
         }
         .onReceive(network.metricsUpdater) {
             // Set card data
-            self.revenues = self.network.totalRevenue
-            self.today = self.network.todayRevenue
+            self.revenuesStat = self.network.totalRevenue
+            self.todayStat = self.network.todayRevenue
         }
         .onReceive(network.analyticsUpdater) {
             // Set card data
-            self.orders = self.network.analytics?.totalOrders ?? -1
+            self.ordersStat = self.network.analytics?.totalOrders ?? -1
         }.onReceive(network.settingsUpdater) {
             // Set settings
             if let settings = self.network.settings {
                 self.settings = settings
+                self.currency = Currencies.getSymbol(forCurrencyCode: settings.settings?.currency ?? "USD") ?? "$"
             }
         }
         .onReceive(network.imageUpdater) {
@@ -128,8 +139,8 @@ struct DashboardView: View {
                 self.image = image
             }
         }
-        .sheet(isPresented: $displaySettings) {
-            SettingsView(network: self.network)
+        .sheet(isPresented: $showModal) {
+            self.modalContent
         }
     }
 }

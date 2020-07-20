@@ -10,7 +10,7 @@ import SwiftUI
 import SwiftyShoppy
 
 struct QueriesView: View {
-    @EnvironmentObject var network: NetworkObserver
+    @State var network: NetworkObserver
     @State private var page: Int = 1
     
     private func loadMore() {
@@ -32,35 +32,37 @@ struct QueriesView: View {
     }
     
     var body: some View {
-        ScrollView {
-            Spacer()
-            
-            ForEach(network.queries, id: \.id) { (query: Query) in
-                NavigationLink(destination: QueryDetailView(query: query)) {
-                    QueryCard(query: query)
+        NavigationView {
+            ScrollView {
+                Spacer()
+                
+                ForEach(network.queries, id: \.id) { (query: Query) in
+                    NavigationLink(destination: QueryDetailView(network: self.network, query: query)) {
+                        QueryCard(query: query)
+                    }
                 }
+                
+                Text("\(network.queries.count) \("queries".localized)")
+                    .font(.footnote)
+                    .foregroundColor(.secondary)
+                
+                if network.queries.count >= (25 * self.page) {
+                    Button(action: loadMore) {
+                        Text("Try to load more")
+                    }.padding()
+                }
+                
+                Spacer()
             }
-            
-            Text("\(network.queries.count) \("queries".localized)")
-                .font(.footnote)
-                .foregroundColor(.secondary)
-            
-            if network.queries.count >= (25 * self.page) {
-                Button(action: loadMore) {
-                    Text("Try to load more")
-                }.padding()
-            }
-            
-            Spacer()
+            .id(UUID().uuidString)
+            .navigationBarTitle("Queries", displayMode: .inline)
+            .navigationBarItems(trailing: refreshButton)
         }
-        .id(UUID().uuidString)
-        .navigationBarTitle("Queries", displayMode: .inline)
-        .navigationBarItems(trailing: refreshButton)
     }
 }
 
 struct QueriesView_Previews: PreviewProvider {
     static var previews: some View {
-        QueriesView()
+        QueriesView(network: NetworkObserver(key: ""))
     }
 }
