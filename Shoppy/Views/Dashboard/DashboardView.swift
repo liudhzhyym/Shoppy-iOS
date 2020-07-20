@@ -29,11 +29,16 @@ struct DashboardView: View {
             self.modalContent = AnyView(UserView(settings: self.settings, image: self.image))
             self.showModal = true
         }) {
-            Image(uiImage: (UIImage(data: image ?? Data()) ?? UIImage(systemName: "person"))!)
-                .renderingMode(.original)
-                .resizable()
-                .frame(width: 26, height: 26)
-                .clipShape(Circle())
+            HStack {
+                Image(uiImage: (UIImage(data: image ?? Data()) ?? UIImage(systemName: "person"))!)
+                    .renderingMode(.original)
+                    .resizable()
+                    .frame(width: 26, height: 26)
+                    .clipShape(Circle())
+                
+                Text(self.network.settings?.user?.username ?? "")
+                    .font(.headline)
+            }
         }
     }
     
@@ -83,9 +88,6 @@ struct DashboardView: View {
                 VStack {
                     HStack {
                         self.profileButton
-                        
-                        Text(self.network.settings?.user?.username ?? "")
-                            .font(.headline)
                         
                         Spacer()
                         
