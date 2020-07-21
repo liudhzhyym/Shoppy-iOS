@@ -55,8 +55,7 @@ struct ProductDetailView: View {
             self.isPresented = true
         }) {
             Image(systemName: "square.and.pencil")
-                .resizable()
-                .frame(width: 20, height: 20)
+                .imageScale(.large)
         }
     }
     

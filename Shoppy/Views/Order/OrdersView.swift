@@ -36,8 +36,7 @@ struct OrdersView: View {
             self.network.getOrders(page: 1)
         }) {
             Image(systemName: "arrow.2.circlepath.circle.fill")
-                .resizable()
-                .frame(width: 26, height: 26)
+                .imageScale(.large)
         }
     }
     

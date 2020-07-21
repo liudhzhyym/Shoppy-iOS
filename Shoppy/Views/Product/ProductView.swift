@@ -27,8 +27,7 @@ struct ProductView: View {
             self.network.getProducts(page: self.page)
         }) {
             Image(systemName: "arrow.2.circlepath.circle.fill")
-                .resizable()
-                .frame(width: 26, height: 26)
+                .imageScale(.large)
         }
     }
     
@@ -37,8 +36,7 @@ struct ProductView: View {
             self.isPresented = true
         }) {
             Image(systemName: "plus")
-                .resizable()
-                .frame(width: 20, height: 20)
+                .imageScale(.large)
         }
     }
     
