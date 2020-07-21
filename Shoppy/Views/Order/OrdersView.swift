@@ -34,12 +34,17 @@ struct OrdersView: View {
         NavigationView {
             ScrollView {
                 ForEach(network.orders, id: \.id) { order in
-                    NavigationLink(destination: OrderDetailView(order: order)) {
-                        OrderCard(email: order.email ?? "",
-                                  description: order.product?.title ?? "",
-                                  price: (order.price ?? 0) * Double(order.quantity ?? 0),
-                                  currency: order.currency ?? "",
-                                  paid: order.delivered ?? 0)
+                    Group {
+                        NavigationLink(destination: OrderDetailView(order: order)) {
+                            DashboardCardView(email: order.email ?? "",
+                                              product: order.product?.title ?? "",
+                                              date: order.created_at ?? Date(),
+                                              price: (order.price ?? 0) * Double(order.quantity ?? 0),
+                                              currency: order.currency ?? "USD",
+                                              paid: order.delivered == 1)
+                        }.buttonStyle(PlainButtonStyle())
+                        
+                        Divider()
                     }
                 }
                 
