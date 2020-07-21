@@ -6,8 +6,8 @@
         "repositoryURL": "https://github.com/Alamofire/Alamofire.git",
         "state": {
           "branch": null,
-          "revision": "2777659076fda38bd4e487739ee331c7a65b5924",
-          "version": "5.2.1"
+          "revision": "becd9a729a37bdbef5bc39dc3c702b99f9e3d046",
+          "version": "5.2.2"
         }
       },
       {
@@ -78,8 +78,8 @@
         "repositoryURL": "https://github.com/vlourme/SwiftyShoppy.git",
         "state": {
           "branch": null,
-          "revision": "25a49a4100f86d79c8fc02a622caff634f1b5b15",
-          "version": "1.1.3"
+          "revision": "a5ba5baa08516e4bf59cd89239e38be1c018ceac",
+          "version": "1.1.5"
         }
       }
     ]
