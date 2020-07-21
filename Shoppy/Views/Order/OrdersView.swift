@@ -82,6 +82,8 @@ struct OrdersView: View {
             .id(UUID())
             .navigationBarTitle("Orders")
             .navigationBarItems(leading: paidOnlyButton, trailing: refreshButton)
+            
+            Text("No order selected")
         }
     }
 }

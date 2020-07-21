@@ -25,6 +25,10 @@
 "Products" = "Produits";
 "Queries" = "Requêtes";
 
+// iPad column
+"No product selected" = "Aucun produit sélectionné";
+"No order selected" = "Aucune commande sélectionnée";
+
 // Tabs variations
 "Order" = "Commande";
 "orders" = "commandes";

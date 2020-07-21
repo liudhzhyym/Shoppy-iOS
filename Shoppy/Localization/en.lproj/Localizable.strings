@@ -32,6 +32,10 @@
 "Query" = "Query";
 "queries" = "queries";
 
+// iPad column
+"No product selected" = "No product selected";
+"No order selected" = "No order selected";
+
 // Common
 "Save" = "Save";
 "Continue" = "Continue";

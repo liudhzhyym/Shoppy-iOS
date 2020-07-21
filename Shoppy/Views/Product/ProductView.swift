@@ -72,6 +72,8 @@ struct ProductView: View {
             .id(UUID())
             .navigationBarTitle("Products")
             .navigationBarItems(leading: refreshButton, trailing: addButton)
+            
+            Text("No product selected")
         }
         .sheet(isPresented: $isPresented) {
             ProductEditView(product: Product(), network: self.network)
