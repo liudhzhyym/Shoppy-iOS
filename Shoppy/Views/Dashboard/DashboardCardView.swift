@@ -26,32 +26,28 @@ struct DashboardCardView: View {
     }
     
     var body: some View {
-        HStack {
+        HStack(spacing: 15) {
             Image(systemName: paid == true ? "checkmark" : "xmark")
-                .padding([.leading, .trailing], 10)
-                .foregroundColor(paid == true ? .green : .red)
+                .foregroundColor(Color(paid == true ? "PastelGreenSecondary" : "PastelRedSecondary"))
+                .font(.headline)
+                .padding(14)
+                .background(Color(paid == true ? "PastelGreen" : "PastelRed"))
+                .cornerRadius(10)
             
             VStack(alignment: .leading, spacing: 6) {
                 Text(email)
                     .bold()
-                Text(product)
-                    .font(.caption)
-                    .foregroundColor(.secondary)
-                    .bold()
+                
+                Text(getDate(date: date))
+                .font(.caption)
+                .foregroundColor(.secondary)
+                .bold()
             }.lineLimit(0)
             
             Spacer()
             
-            VStack(alignment: .trailing, spacing: 6) {
-                Text(getDate(date: date))
-                    .font(.caption)
-                    .foregroundColor(.secondary)
-                    .bold()
-                
-                Text("\(Currencies.getSymbol(forCurrencyCode: network.settings?.settings?.currency ?? "USD") ?? "$")\(price, specifier: "%.2f")")
-                    .bold()
-                    .foregroundColor(.green)
-            }
+            Text("\(Currencies.getSymbol(forCurrencyCode: network.settings?.settings?.currency ?? "USD") ?? "$")\(price, specifier: "%.2f")")
+                    .font(.system(.headline, design: .rounded))
         }
         .padding()
     }
@@ -61,18 +57,19 @@ struct DashboardCardView_Previews: PreviewProvider {
     static var previews: some View {
         VStack {
             DashboardCardView(email: "example@domain.tld",
-            product: "Translate your website",
-            date: Date(),
-            price: 12.90,
-            currency: "USD",
-            paid: true)
+                              product: "Translate your website",
+                              date: Date(),
+                              price: 12.90,
+                              currency: "USD",
+                              paid: true)
             
             DashboardCardView(email: "example@domain.tld",
-            product: "Translate your website",
-            date: Date(),
-            price: 12.90,
-            currency: "USD",
-            paid: false)
+                              product: "Translate your website",
+                              date: Date(),
+                              price: 12.90,
+                              currency: "USD",
+                              paid: false)
         }
+        .environmentObject(NetworkObserver(key: ""))
     }
 }
