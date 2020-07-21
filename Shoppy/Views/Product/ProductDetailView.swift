@@ -107,7 +107,7 @@ struct ProductDetailView: View {
                 }
             }.padding([.top, .bottom])
             
-            .navigationBarTitle("Product", displayMode: .inline)
+            .navigationBarTitle("Product")
             .navigationBarItems(trailing: showAction)
         }
         .sheet(isPresented: $editMode) {
