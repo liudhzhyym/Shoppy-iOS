@@ -64,9 +64,12 @@ struct OrdersView: View {
                     }
                 }
                 
+                Group {
                 Text("\(network.orders.count) \("orders".localized)")
-                    .font(.footnote)
-                    .foregroundColor(.secondary)
+                + Text(" (\(self.network.orders.filter({ (order: Order) -> Bool in order.delivered == 1 }).count) paid)")
+                }
+                .font(.footnote)
+                .foregroundColor(.secondary)
                 
                 if network.orders.count >= (25 * self.page) {
                     Button(action: loadMore) {
