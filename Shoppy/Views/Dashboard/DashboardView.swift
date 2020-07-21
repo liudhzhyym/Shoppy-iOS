@@ -7,7 +7,8 @@
 //
 
 import SwiftUI
-import SwiftyShoppy
+import struct SwiftyShoppy.Settings
+import struct SwiftyShoppy.Order
 
 struct DashboardView: View {
     @EnvironmentObject var network: NetworkObserver
@@ -115,7 +116,9 @@ struct DashboardView: View {
                     
                     HStack {
                         Image(systemName: "clock")
-                        Text("10 last orders")
+                        Text("10 last orders".localized.uppercased())
+                            .font(.system(.subheadline, design: .rounded))
+                            .bold()
                         
                         Spacer()
                     }

@@ -55,7 +55,7 @@ struct DashboardCardView: View {
 
 struct DashboardCardView_Previews: PreviewProvider {
     static var previews: some View {
-        VStack {
+        VStack(alignment: .leading) {
             DashboardCardView(email: "example@domain.tld",
                               product: "Translate your website",
                               date: Date(),
