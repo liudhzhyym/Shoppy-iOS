@@ -31,6 +31,7 @@ struct DashboardCardView: View {
                 .foregroundColor(Color(paid == true ? "PastelGreenSecondary" : "PastelRedSecondary"))
                 .font(.headline)
                 .padding(14)
+                .frame(width: 40, height: 40)
                 .background(Color(paid == true ? "PastelGreen" : "PastelRed"))
                 .cornerRadius(10)
             
