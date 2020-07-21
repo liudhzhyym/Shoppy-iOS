@@ -7,51 +7,69 @@
 //
 
 import SwiftUI
-import SwiftyShoppy
+import enum SwiftyShoppy.QueryStatus
 
 struct QueryCard: View {
-    @State public var query: Query
-    @Environment(\.colorScheme) var colorScheme
+    @State public var email: String
+    @State public var message: String
+    @State public var date: Date
+    @State public var status: QueryStatus
+    
+    private func getDate(date: Date) -> String {
+        let df = DateFormatter()
+        df.dateFormat = "HH:mm MMM dd"
+        
+        return df.string(from: date)
+    }
+    
+    private func getIconForStatus() -> String {
+        switch status {
+            case .Closed: return "xmark.rectangle"
+            case .Open: return "envelope"
+            case .Replied: return "envelope.open"
+            case .UserReply: return "envelope.badge"
+        }
+    }
     
     var body: some View {
-        HStack {
+        HStack(spacing: 15) {
+            Image(systemName: getIconForStatus())
+                .padding(14)
+                .font(.headline)
+                .background(Color(UIColor.secondarySystemBackground))
+                .cornerRadius(10)
+            
             VStack(alignment: .leading) {
-                Text(query.subject ?? "")
-                    .foregroundColor(colorScheme == .dark ? .white : .black)
+                Text(email)
+                    .bold()
                 
-                HStack {
-                    if query.status == QueryStatus.Open.rawValue {
-                        Image(systemName: "envelope.badge")
-                    } else if query.status == QueryStatus.Closed.rawValue {
-                        Image(systemName: "xmark")
-                    } else if query.status == QueryStatus.Replied.rawValue {
-                        Image(systemName: "arrowshape.turn.up.right")
-                    } else if query.status == QueryStatus.UserReply.rawValue {
-                        Image(systemName: "arrowshape.turn.up.left")
-                    }
-                    
-                    Text(query.email ?? "")
-                }
-                .font(.callout)
-                .foregroundColor(.secondary)
+                Text("\(message) — \(getDate(date: date))")
+                    .font(.callout)
+                    .foregroundColor(.secondary)
             }
             
             Spacer()
-            
-            Image(systemName: "chevron.right")
-                .font(.footnote)
-                .foregroundColor(.secondary)
         }
         .padding()
-        .foregroundColor(.black)
-        .background(Color(UIColor.systemGray6))
-        .cornerRadius(15)
-        .padding([.leading, .trailing])
     }
 }
 
 struct QueryCard_Previews: PreviewProvider {
     static var previews: some View {
-        QueryCard(query: Query())
+        VStack {
+            QueryCard(email: "email@domain.tld", message: "API Testing", date: Date(), status: .Open)
+            
+            Divider()
+            
+            QueryCard(email: "email@domain.tld", message: "API Testing", date: Date(), status: .Closed)
+            
+            Divider()
+            
+            QueryCard(email: "email@domain.tld", message: "API Testing", date: Date(), status: .Replied)
+            
+            Divider()
+            
+            QueryCard(email: "email@domain.tld", message: "API Testing", date: Date(), status: .UserReply)
+        }
     }
 }

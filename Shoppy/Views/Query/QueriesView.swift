@@ -7,7 +7,8 @@
 //
 
 import SwiftUI
-import SwiftyShoppy
+import struct SwiftyShoppy.Query
+import enum SwiftyShoppy.QueryStatus
 
 struct QueriesView: View {
     @State var network: NetworkObserver
@@ -38,8 +39,15 @@ struct QueriesView: View {
                 
                 ForEach(network.queries, id: \.id) { (query: Query) in
                     NavigationLink(destination: QueryDetailView(network: self.network, query: query)) {
-                        QueryCard(query: query)
-                    }
+                        Group {
+                            QueryCard(email: query.email ?? "",
+                                      message: query.subject ?? "",
+                                      date: query.updated_at ?? Date(),
+                                      status: QueryStatus(rawValue: query.status ?? 0) ?? .Open)
+                            
+                            Divider()
+                        }
+                    }.buttonStyle(PlainButtonStyle())
                 }
                 
                 Text("\(network.queries.count) \("queries".localized)")
