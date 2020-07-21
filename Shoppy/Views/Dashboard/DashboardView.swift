@@ -103,11 +103,11 @@ struct DashboardView: View {
                     
                     ScrollView(.horizontal, showsIndicators: false) {
                         HStack {
-                            DashboardStatView(title: "Today's earnings", currency: self.$currency, value: self.$todayStat, specifier: "%.2f")
+                            DashboardStatView(title: "Today's earnings".localized, currency: self.$currency, value: self.$todayStat, specifier: "%.2f")
                             
-                            DashboardStatView(title: "Total earnings", currency: self.$currency, value: self.$revenuesStat, specifier: "%.2f")
+                            DashboardStatView(title: "Total earnings".localized, currency: self.$currency, value: self.$revenuesStat, specifier: "%.2f")
                             
-                            DashboardStatView(title: "Total orders", currency: .constant(""), value: self.$ordersStat, specifier: "%.0f")
+                            DashboardStatView(title: "Total orders".localized, currency: .constant(""), value: self.$ordersStat, specifier: "%.0f")
                         }.padding()
                     }
                     

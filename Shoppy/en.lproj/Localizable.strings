@@ -54,12 +54,15 @@
 "Version" = "Version";
 
 // Dashboard
-"Total income" = "Total income";
-"Today income" = "Today income";
+"Today's earnings" = "Today's earnings";
+"Total earnings" = "Total earnings";
+"Total orders" = "Total orders";
+"10 last orders" = "10 last orders";
 
 // Orders
 "Try to load more" = "Try to load more";
 "Paid" = "Paid";
+"paid" = "paid";
 "Unpaid" = "Unpaid";
 "Cancelled" = "Cancelled";
 "Status" = "Status";
@@ -74,14 +77,24 @@
 "IP" = "IP";
 "Country" = "Country";
 "Platform" = "Platform";
-"See the product" = "See the product";
-"See delivered accounts" = "See delivered accounts";
 "Order ID" = "Order ID";
 "Product ID" = "Product ID";
 "Replacement ID" = "Replacement ID";
 "Coupon ID" = "Coupon ID";
 "Hash" = "hash";
 "Delivered accounts" = "Delivered accounts";
+"See product" = "See product";
+"See delivered products" = "See delivered products";
+"Copy email" = "Copy email";
+"Copy IP" = "Copy IP";
+"Copy product ID" = "Copy product ID";
+"Copy invoice ID" = "Copy invoice ID";
+"Order was not paid" = "Order was not paid";
+"Payment gateway" = "Payment gateway";
+"Invoice" = "Invoice";
+"Total" = "Total";
+"In" = "In";
+"using" = "using";
 
 // Products
 "Name" = "Name";

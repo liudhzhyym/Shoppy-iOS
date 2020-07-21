@@ -66,7 +66,7 @@ struct OrdersView: View {
                 
                 Group {
                 Text("\(network.orders.count) \("orders".localized)")
-                + Text(" (\(self.network.orders.filter({ (order: Order) -> Bool in order.delivered == 1 }).count) paid)")
+                    + Text(" (\(self.network.orders.filter({ (order: Order) -> Bool in order.delivered == 1 }).count) \("paid".localized))")
                 }
                 .font(.footnote)
                 .foregroundColor(.secondary)

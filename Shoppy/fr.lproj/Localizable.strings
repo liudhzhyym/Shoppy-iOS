@@ -55,12 +55,15 @@
 "Version" = "Version";
 
 // Dashboard
-"Total income" = "Revenus totaux";
-"Today income" = "Revenus du jour";
+"Today's earnings" = "Revenus du jour";
+"Total earnings" = "Revenus totaux";
+"Total orders" = "Commandes totales";
+"10 last orders" = "Dernières commandes";
 
 // Orders
 "Try to load more" = "Essayer de charger plus";
 "Paid" = "Payé";
+"paid" = "payés";
 "Unpaid" = "Non payé";
 "Cancelled" = "Annulé";
 "Status" = "Etat";
@@ -75,14 +78,24 @@
 "IP" = "IP";
 "Country" = "Pays";
 "Platform" = "Appareil";
-"See the product" = "Voir le produit";
-"See delivered accounts" = "Voir les comptes livrés";
 "Order ID" = "ID";
 "Product ID" = "ID du produit";
 "Replacement ID" = "ID du remplacement";
 "Coupon ID" = "ID du coupon";
 "Hash" = "Signature";
 "Delivered accounts" = "Comptes livrés";
+"See product" = "Voir le produit";
+"See delivered products" = "Voir les produits livrés";
+"Copy email" = "Copier l'email";
+"Copy IP" = "Copier l'IP";
+"Copy product ID" = "Copier l'ID du produit";
+"Copy invoice ID" = "Copier l'ID de la facture";
+"Order was not paid" = "La commande n'a pas été payée";
+"Payment gateway" = "Moyen de paiement";
+"Invoice" = "Facture";
+"Total" = "Total";
+"In" = "En";
+"using" = "avec";
 
 // Products
 "Name" = "Nom";

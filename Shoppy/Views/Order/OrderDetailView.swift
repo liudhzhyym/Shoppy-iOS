@@ -31,7 +31,7 @@ struct OrderDetailView: View {
                     Group {
                         Spacer()
                         
-                        OrderDetailRow(icon: "person", topText: order.email ?? "Unknown email", bottomText: "In \(order.agent?.geo?.country ?? "country") using \(order.agent?.data?.platform ?? "desktop")")
+                        OrderDetailRow(icon: "person", topText: order.email ?? "Unknown email", bottomText: "\("In".localized) \(order.agent?.geo?.country ?? "country") \("using".localized) \(order.agent?.data?.platform ?? "desktop")")
                             .contextMenu {
                                 Button(action: {
                                     self.copyToPasteBoard(text: self.order.email)
@@ -51,9 +51,9 @@ struct OrderDetailView: View {
                         Divider()
                         
                         if order.delivered == 1 {
-                            OrderDetailRow(icon: "checkmark", topText: "Paid", bottomText: getDate(date: order.paid_at ?? Date()))
+                            OrderDetailRow(icon: "checkmark", topText: "Paid".localized, bottomText: getDate(date: order.paid_at ?? Date()))
                         } else {
-                            OrderDetailRow(icon: "xmark", topText: "Cancelled", bottomText: "Order was not paid")
+                            OrderDetailRow(icon: "xmark", topText: "Cancelled".localized, bottomText: "Order was not paid".localized)
                         }
                         
                         Divider()
@@ -64,7 +64,7 @@ struct OrderDetailView: View {
                     }
                     
                     Group {
-                        OrderDetailRow(icon: "creditcard", topText: order.gateway ?? "Bitcoin", bottomText: "Payment gateway")
+                        OrderDetailRow(icon: "creditcard", topText: order.gateway ?? "Bitcoin", bottomText: "Payment gateway".localized)
                         
                         Divider()
                         
