@@ -7,67 +7,111 @@
 //
 
 import SwiftUI
-import SwiftyShoppy
+import struct SwiftyShoppy.Order
+import enum SwiftyShoppy.DeliveryType
 
 struct OrderDetailView: View {
     @State public var order: Order
     
+    private func getDate(date: Date) -> String {
+        let df = DateFormatter()
+        df.dateFormat = "HH:mm MMM dd YYYY"
+        
+        return df.string(from: date)
+    }
+    
+    private func copyToPasteBoard(text: String?) {
+        let pasteboard = UIPasteboard()
+        pasteboard.string = text
+    }
+    
     var body: some View {
-        ScrollView {
-            Group {
-                Container {
-                    ContainerField(name: "Status".localized, value: self.order.delivered == 1 ? "Paid".localized : "Unpaid".localized, icon: "flag.fill")
-                    ContainerField(name: "Created at".localized, value: self.order.created_at?.description ?? "", icon: "clock.fill")
-                    
-                    if self.order.delivered == 1 {
-                        ContainerField(name: "Paid using".localized, value: self.order.gateway ?? "", icon: "creditcard.fill")
-                        ContainerField(name: "Paid at".localized, value: self.order.paid_at?.description ?? "", icon: "calendar")
-                    }
-                }
-                
-                Container {
-                    ContainerField(name: "Price".localized, value: "\(self.order.price ?? 0)", icon: "bag.fill")
-                    ContainerField(name: "Quantity".localized, value: "\(self.order.quantity ?? 0)", icon: "cart.fill")
-                    ContainerField(name: "Total price".localized, value: "\((self.order.price ?? 0) * Double(self.order.quantity ?? 0))", icon: "equal.square.fill")
-                    ContainerField(name: "Currency".localized, value: self.order.currency ?? "", icon: "dollarsign.circle.fill")
-                }
-                
-                Container {
-                    ContainerField(name: "Email".localized, value: self.order.email ?? "", icon: "person.fill")
-                    ContainerField(name: "IP".localized, value: self.order.agent?.geo?.ip ?? "", icon: "globe")
-                    ContainerField(name: "Country".localized, value: self.order.agent?.geo?.country ?? "", icon: "mappin")
-                    ContainerField(name: "Platform".localized, value: self.order.agent?.data?.platform ?? "", icon: "aspectratio")
-                }
-                
-                Container {
-                    if self.order.product != nil {
-                        // Note: is there a way to bypass AnyView?
-                        ContainerNavigationButton(title: "See the product".localized, icon: "cube.box.fill", destination: AnyView(ProductDetailView(product: self.order.product!)))
-                    }
-                    
-                    if self.order.delivered == 1 && self.order.product?.type == .account {
-                        ContainerNavigationButton(title: "See delivered accounts".localized, icon: "line.horizontal.3.decrease", destination: AnyView(OrderAccountView(order: self.order)))
-                    }
-                }
-                
-                Container {
-                    ContainerField(name: "Order ID".localized, value: self.order.id ?? "", icon: "number")
-                    ContainerField(name: "Product ID".localized, value: self.order.product_id ?? "", icon: "cube.box")
-                    
-                    if self.order.is_replacement ?? false {
-                        ContainerField(name: "Replacement ID".localized, value: self.order.replacement_id ?? "", icon: "arrow.right.arrow.left")
+            ScrollView {
+                VStack {
+                    Group {
+                        Spacer()
+                        
+                        OrderDetailRow(icon: "person", topText: order.email ?? "Unknown email", bottomText: "In \(order.agent?.geo?.country ?? "country") using \(order.agent?.data?.platform ?? "desktop")")
+                            .contextMenu {
+                                Button(action: {
+                                    self.copyToPasteBoard(text: self.order.email)
+                                }) {
+                                    Text("Copy email")
+                                    Image(systemName: "doc.on.doc")
+                                }
+                                
+                                Button(action: {
+                                    self.copyToPasteBoard(text: self.order.agent?.geo?.ip)
+                                }) {
+                                    Text("Copy IP")
+                                    Image(systemName: "doc.on.doc")
+                                }
+                            }
+                        
+                        Divider()
+                        
+                        if order.delivered == 1 {
+                            OrderDetailRow(icon: "checkmark", topText: "Paid", bottomText: getDate(date: order.paid_at ?? Date()))
+                        } else {
+                            OrderDetailRow(icon: "xmark", topText: "Cancelled", bottomText: "Order was not paid")
+                        }
+                        
+                        Divider()
+                        
+                        OrderPricingRow(icon: "bag", currency: order.currency ?? "USD", price: order.price ?? 1, quantity: order.quantity ?? 0)
+                        
+                        Divider()
                     }
                     
-                    if self.order.coupon_id != nil {
-                        ContainerField(name: "Coupon ID".localized, value: self.order.coupon_id ?? "", icon: "tag.fill")
+                    Group {
+                        OrderDetailRow(icon: "creditcard", topText: order.gateway ?? "Bitcoin", bottomText: "Payment gateway")
+                        
+                        Divider()
+                        
+                        OrderDetailRow(icon: "cube", topText: order.product?.title ?? "Product", bottomText: order.product_id ?? "Product ID")
+                            .contextMenu {
+                                NavigationLink(destination: ProductDetailView(product: self.order.product!)) {
+                                    Text("See product")
+                                    Image(systemName: "cube")
+                                }
+                                
+                                if self.order.product?.type == DeliveryType.account {
+                                    NavigationLink(destination: OrderAccountView(order: self.order)) {
+                                        Text("See delivered products")
+                                        Image(systemName: "list.dash")
+                                    }
+                                }
+                                
+                                Button(action: {
+                                    self.copyToPasteBoard(text: self.order.product_id)
+                                }) {
+                                    Text("Copy product ID")
+                                    Image(systemName: "doc.on.doc")
+                                }
+                            }
+                        
+                        Divider()
+                        
+                        OrderDetailRow(icon: "calendar", topText:  getDate(date: order.created_at ?? Date()), bottomText: order.id ?? "Invoice ID")
+                            .contextMenu {
+                                Button(action: {
+                                    self.copyToPasteBoard(text: self.order.id)
+                                }) {
+                                    Text("Copy invoice ID")
+                                    Image(systemName: "doc.on.doc")
+                                }
+                            }
+                        
+                        Spacer()
                     }
-                    
-                    ContainerField(name: "Hash".localized, value: self.order.hash ?? "", icon: "signature")
                 }
-            }.padding([.top, .bottom])
-            
-            .navigationBarTitle("Order", displayMode: .inline)
-        }
+                .font(.system(.body, design: .rounded))
+                .background(Color(UIColor.secondarySystemBackground))
+                .cornerRadius(10)
+                .padding([.leading, .trailing], 25)
+                .padding([.top, .bottom], 20)
+                .navigationBarTitle("Invoice")
+            }
     }
 }
 

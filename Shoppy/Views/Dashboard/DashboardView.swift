@@ -30,15 +30,15 @@ struct DashboardView: View {
             self.showModal = true
         }) {
             HStack {
-                Image(uiImage: (UIImage(data: image ?? Data()) ?? UIImage(systemName: "person"))!)
-                    .renderingMode(.original)
-                    .resizable()
-                    .frame(width: 26, height: 26)
-                    .clipShape(Circle())
+            Image(uiImage: (UIImage(data: image ?? Data()) ?? UIImage(systemName: "person"))!)
+                .renderingMode(.original)
+                .resizable()
+                .frame(width: 26, height: 26)
+                .clipShape(Circle())
                 
                 Text(self.network.settings?.user?.username ?? "")
-                    .font(.headline)
-            }
+                        .font(.headline)
+                }
         }
     }
     
@@ -57,9 +57,9 @@ struct DashboardView: View {
             self.modalContent = AnyView(SettingsView(network: self.network))
             self.showModal = true
         }) {
-            Image(systemName: "gear")
-                .imageScale(.large)
-                .foregroundColor(.white)
+                Image(systemName: "gear")
+                    .imageScale(.large)
+                    .foregroundColor(.white)
         }
     }
     
