@@ -33,17 +33,26 @@ struct ContentView: View {
                     Image(systemName: "house")
                     Text("Dashboard")
             }
+            .onAppear {
+                UIApplication.setStatusBarStyle(.lightContent)
+            }
             
             OrdersView()
                 .tabItem {
                     Image(systemName: "list.bullet")
                     Text("Orders")
             }
+            .onAppear {
+                UIApplication.setStatusBarStyle(.default)
+            }
             
             ProductView()
                 .tabItem {
                     Image(systemName: "cube.box")
                     Text("Products")
+            }
+            .onAppear {
+                UIApplication.setStatusBarStyle(.default)
             }
         }
         .onReceive(network.errorSubscriber) {
