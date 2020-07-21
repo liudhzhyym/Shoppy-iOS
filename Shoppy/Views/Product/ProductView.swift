@@ -45,12 +45,16 @@ struct ProductView: View {
             ScrollView {
                 ForEach(network.products, id: \.id) { product in
                     NavigationLink(destination: ProductDetailView(product: product)) {
-                        ProductCard(title: product.title ?? "Unknown",
+                        Group {
+                            ProductCard(title: product.title ?? "Unknown",
                                     price: product.price ?? 0,
                                     currency: product.currency ?? "USD",
                                     stock: product.stock?.get() ?? 0,
                                     type: product.type ?? .account)
-                    }
+                            
+                            Divider()
+                        }
+                    }.buttonStyle(PlainButtonStyle())
                 }
                 
                 Text("\(network.products.count) \("products".localized)")
