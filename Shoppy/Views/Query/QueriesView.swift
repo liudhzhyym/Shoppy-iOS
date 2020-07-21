@@ -65,7 +65,7 @@ struct QueriesView: View {
             .id(UUID().uuidString)
             .navigationBarTitle("Queries", displayMode: .inline)
             .navigationBarItems(trailing: refreshButton)
-        }
+        }.navigationViewStyle(StackNavigationViewStyle())
     }
 }
 
