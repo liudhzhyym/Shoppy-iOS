@@ -7,7 +7,7 @@
 //
 
 import SwiftUI
-import SwiftyShoppy
+import struct SwiftyShoppy.Product
 
 struct ProductView: View {
     @EnvironmentObject var network: NetworkObserver
@@ -69,7 +69,7 @@ struct ProductView: View {
                 
                 Spacer()
             }
-            .id(UUID().uuidString)
+            .id(UUID())
             .navigationBarTitle("Products")
             .navigationBarItems(leading: refreshButton, trailing: addButton)
         }
