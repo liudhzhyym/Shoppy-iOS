@@ -69,7 +69,7 @@ struct DashboardView: View {
                 ScrollView {
                     Spacer()
                     
-                    ForEach(self.network.orders, id: \.id) { (order: Order) in
+                    ForEach(self.network.orders.prefix(10), id: \.id) { (order: Order) in
                         Group {
                             DashboardCardView(email: order.email ?? "",
                                               product: order.product?.title ?? "",
@@ -112,6 +112,15 @@ struct DashboardView: View {
                     }
                     
                     Spacer()
+                    
+                    HStack {
+                        Image(systemName: "clock")
+                        Text("10 last orders")
+                        
+                        Spacer()
+                    }
+                    .font(.headline)
+                    .foregroundColor(.white)
                 }
                 .padding()
                 .padding(.top, proxy.safeAreaInsets.top)
