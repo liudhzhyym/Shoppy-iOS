@@ -7,10 +7,12 @@
 //
 
 import SwiftUI
+import struct SwiftyShoppy.Order
 
 struct OrdersView: View {
     @EnvironmentObject var network: NetworkObserver
     @State private var page: Int = 1
+    @State private var showPaidOnly = false
     
     private func loadMore() {
         // Increment page
@@ -18,6 +20,15 @@ struct OrdersView: View {
         
         // Load more
         self.network.getOrders(page: self.page)
+    }
+    
+    var paidOnlyButton: some View {
+        Button(action: {
+            self.showPaidOnly.toggle()
+        }) {
+            Image(systemName: self.showPaidOnly == true ? "checkmark.circle.fill" : "checkmark")
+                .imageScale(.large)
+        }
     }
     
     var refreshButton: some View {
@@ -33,7 +44,13 @@ struct OrdersView: View {
     var body: some View {
         NavigationView {
             ScrollView {
-                ForEach(network.orders, id: \.id) { order in
+                ForEach(self.network.orders.filter({ (order: Order) -> Bool in
+                    if self.showPaidOnly {
+                        return order.delivered == 1
+                    } else {
+                        return true
+                    }
+                }), id: \.id) { (order: Order) in
                     Group {
                         NavigationLink(destination: OrderDetailView(order: order)) {
                             DashboardCardView(email: order.email ?? "",
@@ -60,12 +77,13 @@ struct OrdersView: View {
                 
                 Spacer()
             }
-            .id(UUID().uuidString)
+            .id(UUID())
             .navigationBarTitle("Orders")
-            .navigationBarItems(trailing: refreshButton)
+            .navigationBarItems(leading: paidOnlyButton, trailing: refreshButton)
         }
     }
 }
+
 
 struct OrdersView_Previews: PreviewProvider {
     static var previews: some View {
