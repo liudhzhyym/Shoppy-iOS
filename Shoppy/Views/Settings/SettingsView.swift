@@ -36,34 +36,48 @@ struct SettingsView: View {
     }
     
     var body: some View {
-        NavigationView {
-            VStack {
-                Container {
-                    ContainerButton(title: "Change API key".localized, icon: "lock.open.fill", function: {
-                        self.changeKey()
-                    }, accent: .orange)
-                }
+        VStack(alignment: .leading) {
+                Text("Settings")
+                    .font(.largeTitle)
+                    .bold()
+                    .padding()
+            
+            Text("API management")
+                .font(.headline)
+                .padding([.leading, .top])
+            
+            Container {
+                ContainerButton(title: "Change API key".localized, icon: "lock.open.fill", function: {
+                    self.changeKey()
+                }, accent: .orange)
+            }
+            
+            Text("Source code")
+                .font(.headline)
+                .padding([.leading, .top])
+            
+            Container {
+                ContainerButton(title: "See the source code".localized, icon: "doc.text.fill", function: {
+                    self.openLink(link: .github)
+                }, accent: .orange)
                 
-                Container {
-                    ContainerButton(title: "See the source code".localized, icon: "doc.text.fill", function: {
-                        self.openLink(link: .github)
-                    }, accent: .orange)
-                    
-                    ContainerButton(title: "Report a bug".localized, icon: "exclamationmark.bubble.fill", function: {
-                        self.openLink(link: .issues)
-                    }, accent: .orange)
-                }
-                
-                Container {
-                    ContainerField(name: "Version".localized, value: self.version ?? "", icon: "i.circle.fill", accent: .orange)
-                }
-                
-                Spacer()
-            }.padding(.top)
-                
-            .navigationBarTitle("Settings", displayMode: .inline)
-        }.sheet(isPresented: $displayLogin) {
-            LoginView(isEdit: true, network: self.network)
+                ContainerButton(title: "Report a bug".localized, icon: "exclamationmark.bubble.fill", function: {
+                    self.openLink(link: .issues)
+                }, accent: .orange)
+            }
+            
+            Text("Information")
+                .font(.headline)
+                .padding([.leading, .top])
+            
+            Container {
+                ContainerField(name: "Version".localized, value: self.version ?? "", icon: "i.circle.fill", accent: .orange)
+            }
+            
+            Spacer()
+        }.padding(.top)
+            .sheet(isPresented: $displayLogin) {
+                LoginView(isEdit: true, network: self.network)
         }
     }
 }
