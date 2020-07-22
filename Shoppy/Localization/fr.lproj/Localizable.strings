@@ -52,6 +52,9 @@
 "WELCOME ON" = "BIENVENUE SUR";
 
 // Settings
+"API management" = "Gestion de l'API";
+"Source code" = "Code source";
+"Information" = "Informations";
 "Settings" = "Paramètres";
 "Change API key" = "Changer la clé API";
 "See the source code" = "Voir le code source";
