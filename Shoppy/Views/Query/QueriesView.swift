@@ -11,7 +11,7 @@ import struct SwiftyShoppy.Query
 import enum SwiftyShoppy.QueryStatus
 
 struct QueriesView: View {
-    @State var network: NetworkObserver
+    @EnvironmentObject var network: NetworkObserver
     @State private var page: Int = 1
     
     private func loadMore() {
@@ -38,7 +38,7 @@ struct QueriesView: View {
                 Spacer()
                 
                 ForEach(network.queries, id: \.id) { (query: Query) in
-                    NavigationLink(destination: QueryDetailView(network: self.network, query: query)) {
+                    NavigationLink(destination: QueryDetailView(query: query)) {
                         Group {
                             QueryCard(email: query.email ?? "",
                                       message: query.subject ?? "",
@@ -62,8 +62,8 @@ struct QueriesView: View {
                 
                 Spacer()
             }
-            .id(UUID().uuidString)
-            .navigationBarTitle("Queries", displayMode: .inline)
+            .id(UUID())
+            .navigationBarTitle("Queries")
             .navigationBarItems(trailing: refreshButton)
         }.navigationViewStyle(StackNavigationViewStyle())
     }
@@ -71,6 +71,6 @@ struct QueriesView: View {
 
 struct QueriesView_Previews: PreviewProvider {
     static var previews: some View {
-        QueriesView(network: NetworkObserver(key: ""))
+        QueriesView()
     }
 }

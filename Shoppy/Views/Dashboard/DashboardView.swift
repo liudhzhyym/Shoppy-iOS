@@ -43,16 +43,6 @@ struct DashboardView: View {
         }
     }
     
-    var queriesButton: some View {
-        Button(action: {
-            self.modalContent = AnyView(QueriesView(network: self.network))
-            self.showModal = true
-        }) {
-            Image(systemName: "bubble.left")
-                .imageScale(.large)
-        }
-    }
-    
     var settingsButton: some View {
         Button(action: {
             self.modalContent = AnyView(SettingsView(network: self.network))
@@ -92,11 +82,7 @@ struct DashboardView: View {
                         
                         Spacer()
                         
-                        Group {
-                            self.queriesButton
-                            
-                            self.settingsButton
-                        }.padding(.leading)
+                        self.settingsButton
                     }
                     .foregroundColor(.white)
                     

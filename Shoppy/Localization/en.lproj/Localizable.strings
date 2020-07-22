@@ -152,6 +152,8 @@
 "Query ID" = "Query ID";
 "Re-open this query" = "Re-open this query";
 "Close this query" = "Close this query";
+"Support" = "Support";
+"You can still re-open it later." = "You can still re-open it later.";
 
 // Query status
 "Open" = "Open";

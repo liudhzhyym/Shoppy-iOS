@@ -153,6 +153,8 @@
 "Query ID" = "ID de la requête";
 "Re-open this query" = "Ré-ouvrir la requête";
 "Close this query" = "Fermer la requête";
+"Support" = "Support";
+"You can still re-open it later." = "Vous pourrez toujours la re-ouvrir plus tard.";
 
 // Query status
 "Open" = "Ouvert";

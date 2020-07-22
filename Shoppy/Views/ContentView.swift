@@ -54,6 +54,14 @@ struct ContentView: View {
             .onAppear {
                 UIApplication.setStatusBarStyle(.default)
             }
+            
+            QueriesView()
+                .tabItem {
+                    Image(systemName: "person.crop.circle.badge.checkmark")
+                    Text("Support")
+            }.onAppear {
+                UIApplication.setStatusBarStyle(.default)
+            }
         }
         .onReceive(network.errorSubscriber) {
             // Check for network

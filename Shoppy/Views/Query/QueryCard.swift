@@ -31,12 +31,24 @@ struct QueryCard: View {
         }
     }
     
+    private func getColorForStatus(_ secondary: Bool = false) -> String {
+        switch status {
+            case .Closed: return secondary ? "PastelRedSecondary" : "PastelRed"
+            case .Open: return secondary ? "PastelGreenSecondary" : "PastelGreen"
+            case .UserReply,
+                 .Replied:
+                return secondary ? "PastelOrangeSecondary" : "PastelOrange"
+        }
+    }
+    
     var body: some View {
         HStack(spacing: 15) {
             Image(systemName: getIconForStatus())
                 .padding(14)
                 .font(.headline)
-                .background(Color(UIColor.secondarySystemBackground))
+                .foregroundColor(Color(getColorForStatus(true)))
+                .frame(width: 40, height: 40)
+                .background(Color(getColorForStatus()))
                 .cornerRadius(10)
             
             VStack(alignment: .leading) {

@@ -7,12 +7,15 @@
 //
 
 import SwiftUI
-import SwiftyShoppy
+import struct SwiftyShoppy.Query
+import struct SwiftyShoppy.QueryReply
+import struct SwiftyShoppy.ResourceUpdate
+import enum SwiftyShoppy.QueryStatus
+import class SwiftyShoppy.NetworkManager
 import KeyboardObserving
-import BottomSheet
 
 struct QueryDetailView: View {
-    @State var network: NetworkObserver
+    @EnvironmentObject var network: NetworkObserver
     
     @State public var query: Query
     @State private var showButton = false
@@ -34,9 +37,13 @@ struct QueryDetailView: View {
             .target(.replyToQuery(id, message: message.text))
             .asObject(ResourceUpdate<Query>.self, success: { update in
                 if update.status == true {
+                    // Update query
                     if let query = update.resource {
                         self.query = query
                     }
+                    
+                    // Update list
+                    self.network.getQueries(page: 1)
                 } else {
                     print(update.message ?? "")
                 }
@@ -58,7 +65,7 @@ struct QueryDetailView: View {
     }
     
     var body: some View {
-        VStack {
+        ZStack(alignment: .bottom) {
             ScrollView {
                 Spacer()
                 
@@ -67,20 +74,22 @@ struct QueryDetailView: View {
                 ForEach(query.replies?.reversed() ?? [], id: \.id) { (reply: QueryReply) in
                     QueryReplyView(message: reply.message ?? "", date: reply.created_at ?? Date(), is_supporter: reply.is_supporter ?? false)
                 }
+                
+                Spacer(minLength: 100)
             }
-            
-            .navigationBarTitle(query.subject ?? "Query")
-            .navigationBarItems(trailing: detail)
             
             if query.status != QueryStatus.Closed.rawValue {
                 HStack {
-                    TextField("Tap to reply", text: $message.text)
+                    TextField("Tap to reply", text: $message.text.animation())
                     
                     if showButton {
                         Button(action: sendMessage) {
                             Image(systemName: "paperplane.fill")
-                                .accentColor(.orange)
+                                .font(.headline)
+                                .foregroundColor(Color("PastelGreenSecondary"))
                         }
+                        .animation(.default)
+                        .transition(.slide)
                     }
                 }
                 .onReceive(message.subscriber) {
@@ -92,19 +101,23 @@ struct QueryDetailView: View {
                         self.showButton = false
                     }
                 }
-                .padding()
+                .padding(22)
                 .background(Color(UIColor.secondarySystemBackground))
+                .cornerRadius(20)
+                .padding()
             }
         }
+        .navigationBarTitle("\(query.subject ?? "Query")", displayMode: .inline)
+        .navigationBarItems(trailing: detail)
         .keyboardObserving()
-        .bottomSheet(isPresented: $showDetail, height: 440) {
-            QuerySheetView(query: self.$query, token: self.network.key)
+        .sheet(isPresented: $showDetail) {
+            QuerySheetView(network: self.network, query: self.$query, token: self.network.key)
         }
     }
 }
 
 struct QueryDetailView_Previews: PreviewProvider {
     static var previews: some View {
-        QueryDetailView(network: NetworkObserver(key: ""), query: Query())
+        QueryDetailView(query: Query())
     }
 }
