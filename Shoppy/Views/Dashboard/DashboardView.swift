@@ -31,15 +31,15 @@ struct DashboardView: View {
             self.showModal = true
         }) {
             HStack {
-            Image(uiImage: (UIImage(data: image ?? Data()) ?? UIImage(systemName: "person"))!)
-                .renderingMode(.original)
-                .resizable()
-                .frame(width: 26, height: 26)
-                .clipShape(Circle())
+                Image(uiImage: (UIImage(data: image ?? Data()) ?? UIImage(systemName: "person"))!)
+                    .renderingMode(.original)
+                    .resizable()
+                    .frame(width: 26, height: 26)
+                    .clipShape(Circle())
                 
                 Text(self.network.settings?.user?.username ?? "")
-                        .font(.headline)
-                }
+                    .font(.headline)
+            }
         }
     }
     
@@ -48,31 +48,26 @@ struct DashboardView: View {
             self.modalContent = AnyView(SettingsView(network: self.network))
             self.showModal = true
         }) {
-                Image(systemName: "gear")
-                    .imageScale(.large)
-                    .foregroundColor(.white)
+            Image(systemName: "gear")
+                .imageScale(.large)
+                .foregroundColor(.white)
         }
     }
     
     var body: some View {
         GeometryReader { (proxy: GeometryProxy) in
             ZStack(alignment: .top) {
-                ScrollView {
-                    Spacer()
-                    
+                List {
                     ForEach(self.network.orders.prefix(10), id: \.id) { (order: Order) in
-                        Group {
-                            DashboardCardView(email: order.email ?? "",
-                                              product: order.product?.title ?? "",
-                                              date: order.created_at ?? Date(),
-                                              price: (order.price ?? 0) * Double(order.quantity ?? 0),
-                                              currency: order.currency ?? "USD",
-                                              paid: order.delivered == 1)
-                            Divider()
-                        }
+                        DashboardCardView(email: order.email ?? "",
+                                          product: order.product?.title ?? "",
+                                          date: order.created_at ?? Date(),
+                                          price: (order.price ?? 0) * Double(order.quantity ?? 0),
+                                          currency: order.currency ?? "USD",
+                                          paid: order.delivered == 1)
+                            .listRowInsets(EdgeInsets())
                     }
                 }
-                .id(UUID().uuidString)
                 .font(.system(.body, design: .rounded))
                 .padding(.top, 300)
                 

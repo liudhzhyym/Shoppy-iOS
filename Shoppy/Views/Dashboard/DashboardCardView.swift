@@ -56,13 +56,14 @@ struct DashboardCardView: View {
 
 struct DashboardCardView_Previews: PreviewProvider {
     static var previews: some View {
-        VStack(alignment: .leading) {
+        List {
             DashboardCardView(email: "example@domain.tld",
                               product: "Translate your website",
                               date: Date(),
                               price: 12.90,
                               currency: "USD",
                               paid: true)
+                .listRowInsets(EdgeInsets())
             
             DashboardCardView(email: "example@domain.tld",
                               product: "Translate your website",
@@ -70,6 +71,7 @@ struct DashboardCardView_Previews: PreviewProvider {
                               price: 12.90,
                               currency: "USD",
                               paid: false)
+                .listRowInsets(EdgeInsets())
         }
         .environmentObject(NetworkObserver(key: ""))
     }
