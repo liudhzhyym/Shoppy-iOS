@@ -63,7 +63,7 @@ struct QueriesView: View {
                 Spacer()
             }
             .id(UUID())
-            .navigationBarTitle("Queries")
+            .navigationBarTitle("Support center")
             .navigationBarItems(trailing: refreshButton)
         }.navigationViewStyle(StackNavigationViewStyle())
     }
