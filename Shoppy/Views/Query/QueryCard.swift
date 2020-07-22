@@ -58,9 +58,7 @@ struct QueryCard: View {
                 Text("\(message) — \(getDate(date: date))")
                     .font(.callout)
                     .foregroundColor(.secondary)
-            }
-            
-            Spacer()
+            }.lineLimit(0)
         }
         .padding()
     }
@@ -68,20 +66,24 @@ struct QueryCard: View {
 
 struct QueryCard_Previews: PreviewProvider {
     static var previews: some View {
-        VStack {
-            QueryCard(email: "email@domain.tld", message: "API Testing", date: Date(), status: .Open)
-            
-            Divider()
-            
-            QueryCard(email: "email@domain.tld", message: "API Testing", date: Date(), status: .Closed)
-            
-            Divider()
-            
-            QueryCard(email: "email@domain.tld", message: "API Testing", date: Date(), status: .Replied)
-            
-            Divider()
-            
-            QueryCard(email: "email@domain.tld", message: "API Testing", date: Date(), status: .UserReply)
+        NavigationView{
+            List {
+                NavigationLink(destination: EmptyView()) {
+                    QueryCard(email: "email@domain.tld", message: "API Testing", date: Date(), status: .Open)
+                }.listRowInsets(EdgeInsets())
+                
+                NavigationLink(destination: EmptyView()) {
+                    QueryCard(email: "email@domain.tld", message: "API Testing", date: Date(), status: .Closed)
+                }.listRowInsets(EdgeInsets())
+                
+                NavigationLink(destination: EmptyView()) {
+                    QueryCard(email: "email@domain.tld", message: "API Testing", date: Date(), status: .Replied)
+                }.listRowInsets(EdgeInsets())
+                
+                NavigationLink(destination: EmptyView()) {
+                    QueryCard(email: "email@domain.tld", message: "API Testing", date: Date(), status: .UserReply)
+                }.listRowInsets(EdgeInsets())
+            }
         }
     }
 }

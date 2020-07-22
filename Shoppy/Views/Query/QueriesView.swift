@@ -34,35 +34,27 @@ struct QueriesView: View {
     
     var body: some View {
         NavigationView {
-            ScrollView {
-                Spacer()
-                
-                ForEach(network.queries, id: \.id) { (query: Query) in
-                    NavigationLink(destination: QueryDetailView(query: query)) {
-                        Group {
+            List {
+                Section(
+                    header: Text("\(network.queries.count) \("queries".localized)".uppercased()),
+                    footer: Button(action: loadMore) {
+                        if network.queries.count >= (25 * self.page) {
+                            Text("Try to load more")
+                        }
+                    }) {
+                    ForEach(network.queries, id: \.id) { (query: Query) in
+                        NavigationLink(destination: QueryDetailView(query: query)) {
                             QueryCard(email: query.email ?? "",
                                       message: query.subject ?? "",
                                       date: query.updated_at ?? Date(),
                                       status: QueryStatus(rawValue: query.status ?? 0) ?? .Open)
-                            
-                            Divider()
                         }
-                    }.buttonStyle(PlainButtonStyle())
+                        .listRowInsets(EdgeInsets())
+                        .padding(.trailing)
+                    }
                 }
-                
-                Text("\(network.queries.count) \("queries".localized)")
-                    .font(.footnote)
-                    .foregroundColor(.secondary)
-                
-                if network.queries.count >= (25 * self.page) {
-                    Button(action: loadMore) {
-                        Text("Try to load more")
-                    }.padding()
-                }
-                
-                Spacer()
             }
-            .id(UUID())
+            .listStyle(GroupedListStyle())
             .navigationBarTitle("Support center")
             .navigationBarItems(trailing: refreshButton)
         }.navigationViewStyle(StackNavigationViewStyle())
