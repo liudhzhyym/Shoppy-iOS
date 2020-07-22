@@ -57,7 +57,7 @@ struct QueriesView: View {
             .listStyle(GroupedListStyle())
             .navigationBarTitle("Support center")
             .navigationBarItems(trailing: refreshButton)
-        }.navigationViewStyle(StackNavigationViewStyle())
+        }
     }
 }
 
