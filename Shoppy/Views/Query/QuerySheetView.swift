@@ -106,7 +106,7 @@ struct QuerySheetView: View {
             }
             
             .navigationBarTitle("Query detail", displayMode: .inline)
-        }
+        }.navigationViewStyle(StackNavigationViewStyle())
     }
 }
 
