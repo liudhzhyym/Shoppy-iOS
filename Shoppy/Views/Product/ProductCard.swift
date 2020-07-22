@@ -71,24 +71,27 @@ struct ProductCard: View {
 
 struct ProductCard_Previews: PreviewProvider {
     static var previews: some View {
-        VStack {
+        List {
             ProductCard(title: "Example.org accounts",
                         price: 20,
                         currency: "USD",
                         stock: 250,
                         type: .account)
+                .listRowInsets(EdgeInsets())
             
             ProductCard(title: "How to get rich PDF",
                         price: 50,
                         currency: "EUR",
                         stock: 0,
                         type: .file)
+                .listRowInsets(EdgeInsets())
             
             ProductCard(title: "I translate your iOS application",
                         price: 50,
                         currency: "USD",
                         stock: 0,
                         type: .service)
+                .listRowInsets(EdgeInsets())
         }
     }
 }

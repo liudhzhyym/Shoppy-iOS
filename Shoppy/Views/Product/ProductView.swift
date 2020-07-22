@@ -42,34 +42,27 @@ struct ProductView: View {
     
     var body: some View {
         NavigationView {
-            ScrollView {
-                ForEach(network.products, id: \.id) { product in
-                    NavigationLink(destination: ProductDetailView(product: product)) {
-                        Group {
+            List {
+                Section(header: Text("\(network.products.count) \("products".localized)".uppercased()),
+                        footer: Button(action: loadMore) {
+                            if network.products.count >= (25 * self.page) {
+                                Text("Try to load more")
+                            }
+                }) {
+                    ForEach(network.products, id: \.id) { product in
+                        NavigationLink(destination: ProductDetailView(product: product)) {
                             ProductCard(title: product.title ?? "Unknown",
-                                    price: product.price ?? 0,
-                                    currency: product.currency ?? "USD",
-                                    stock: product.stock?.get() ?? 0,
-                                    type: product.type ?? .account)
-                            
-                            Divider()
+                                        price: product.price ?? 0,
+                                        currency: product.currency ?? "USD",
+                                        stock: product.stock?.get() ?? 0,
+                                        type: product.type ?? .account)
                         }
-                    }.buttonStyle(PlainButtonStyle())
+                        .listRowInsets(EdgeInsets())
+                        .padding(.trailing)
+                    }
                 }
-                
-                Text("\(network.products.count) \("products".localized)")
-                    .font(.footnote)
-                    .foregroundColor(.secondary)
-                
-                if network.products.count >= (25 * self.page) {
-                    Button(action: loadMore) {
-                        Text("Try to load more")
-                    }.padding()
-                }
-                
-                Spacer()
             }
-            .id(UUID())
+            .listStyle(GroupedListStyle())
             .navigationBarTitle("Products")
             .navigationBarItems(leading: refreshButton, trailing: addButton)
             
