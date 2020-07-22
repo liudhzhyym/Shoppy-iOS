@@ -42,15 +42,20 @@ struct OrdersView: View {
     
     var body: some View {
         NavigationView {
-            ScrollView {
-                ForEach(self.network.orders.filter({ (order: Order) -> Bool in
-                    if self.showPaidOnly {
-                        return order.delivered == 1
-                    } else {
-                        return true
-                    }
-                }), id: \.id) { (order: Order) in
-                    Group {
+            List {
+                Section(header: Text("\(network.orders.count) \("orders".localized)".uppercased()),
+                        footer: Button(action: loadMore) {
+                            if network.orders.count >= (25 * self.page) {
+                                Text("Try to load more")
+                            }
+                }) {
+                    ForEach(self.network.orders.filter({ (order: Order) -> Bool in
+                        if self.showPaidOnly {
+                            return order.delivered == 1
+                        } else {
+                            return true
+                        }
+                    }), id: \.id) { (order: Order) in
                         NavigationLink(destination: OrderDetailView(order: order)) {
                             DashboardCardView(email: order.email ?? "",
                                               product: order.product?.title ?? "",
@@ -58,28 +63,13 @@ struct OrdersView: View {
                                               price: (order.price ?? 0) * Double(order.quantity ?? 0),
                                               currency: order.currency ?? "USD",
                                               paid: order.delivered == 1)
-                        }.buttonStyle(PlainButtonStyle())
-                        
-                        Divider()
+                        }
+                        .listRowInsets(EdgeInsets())
+                        .padding(.trailing)
                     }
                 }
-                
-                Group {
-                Text("\(network.orders.count) \("orders".localized)")
-                    + Text(" (\(self.network.orders.filter({ (order: Order) -> Bool in order.delivered == 1 }).count) \("paid".localized))")
-                }
-                .font(.footnote)
-                .foregroundColor(.secondary)
-                
-                if network.orders.count >= (25 * self.page) {
-                    Button(action: loadMore) {
-                        Text("Try to load more")
-                    }.padding()
-                }
-                
-                Spacer()
             }
-            .id(UUID())
+            .listStyle(GroupedListStyle())
             .navigationBarTitle("Orders")
             .navigationBarItems(leading: paidOnlyButton, trailing: refreshButton)
             
