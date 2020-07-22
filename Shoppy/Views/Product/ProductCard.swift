@@ -27,16 +27,14 @@ struct ProductCard: View {
     }
     
     var body: some View {
-        HStack {
+        HStack(spacing: 15) {
             Image(systemName: getIconForType())
-                .imageScale(.large)
-                .font(.headline)
                 .foregroundColor(Color("PastelGreenSecondary"))
-                .padding()
-                .frame(width: 50, height: 50)
+                .font(.headline)
+                .padding(14)
+                .frame(width: 40, height: 40)
                 .background(Color("PastelGreen"))
                 .cornerRadius(10)
-                .padding(.trailing)
             
             VStack(alignment: .leading) {
                 Text(title)
