@@ -7,7 +7,9 @@
 //
 
 import SwiftUI
-import SwiftyShoppy
+import struct SwiftyShoppy.Product
+import struct SwiftyShoppy.ResourceUpdate
+import class SwiftyShoppy.NetworkManager
 import KeychainSwift
 
 struct ProductDetailView: View {
@@ -19,6 +21,13 @@ struct ProductDetailView: View {
     @State private var editMode = false
     
     private let keychain = KeychainSwift()
+    
+    private func getDate(date: Date) -> String {
+        let df = DateFormatter()
+        df.dateFormat = "dd/MM"
+        
+        return df.string(from: date)
+    }
     
     // Edit product
     private func editProduct() {
@@ -54,62 +63,56 @@ struct ProductDetailView: View {
         Button(action: {
             self.isPresented = true
         }) {
-            Image(systemName: "square.and.pencil")
+            Image(systemName: "slider.horizontal.3")
                 .imageScale(.large)
         }
     }
     
     // Body
     var body: some View {
-        ScrollView {
-            Group {
-                Container {
-                    ContainerField(name: "Name".localized, value: self.product.title ?? "", icon: "a")
-                    if self.product.description != nil {
-                        ContainerNavigationButton(title: "See the description".localized, icon: "text.alignleft", destination: AnyView(ProductDetailledView(name: "Description".localized, value: self.product.description ?? "")))
-                    }
-                    ContainerField(name: "Delivery type".localized, value: self.product.type?.rawValue.capitalized ?? "", icon: "cube.box")
-                }
+        VStack {
+            ScrollView(.horizontal, showsIndicators: false) {
+                HStack {
+                    HighlightCardView(name: "Price".localized,
+                                      value: "\(Currencies.getSymbol(forCurrencyCode: product.currency ?? "USD") ?? "$") \(String(format: "%.2f", product.price ?? -1))",
+                                      icon: "dollarsign.circle.fill",
+                                      foreground: Color("PastelRedSecondary"),
+                                      background: Color("PastelRed"))
+                    
+                    HighlightCardView(name: "Stock".localized,
+                                      value: "\(product.stock?.get() ?? 0)",
+                                      icon: "bag.fill",
+                                      foreground: Color("PastelGreenSecondary"),
+                                      background: Color("PastelGreen"))
+                    
+                    HighlightCardView(name: "Creation date".localized,
+                                      value: getDate(date: product.created_at ?? Date()),
+                                      icon: "calendar",
+                                      foreground: Color("PastelBlueSecondary"),
+                                      background: Color("PastelBlue"))
+                }.padding()
+            }
+            
+            Container {
+                ContainerField(name: "Title".localized, value: self.product.title ?? "Product Name", icon: "cube")
                 
-                Container {
-                    ContainerField(name: "Price".localized, value: "\(self.product.price ?? 0)", icon: "bag.fill")
-                    if self.product.type == .account {
-                        ContainerField(name: "Revenue per order".localized, value: "\((self.product.price ?? 0) * Double(self.product.quantity?.min ?? 1))", icon: "equal.square")
-                        ContainerField(name: "Potential total".localized, value: "\((self.product.price ?? 0) * Double(self.product.stock?.get() ?? 0))", icon: "equal.square.fill")
-                    }
-                    ContainerField(name: "Currency".localized, value: self.product.currency ?? "", icon: "dollarsign.circle.fill")
-                }
+                ContainerField(name: "Type".localized, value: self.product.type?.rawValue.capitalized.localized ?? "Service", icon: "aspectratio")
                 
-                if self.product.type == .account || self.product.type == .dynamic {
-                    Container {
-                        if self.product.type == .account {
-                            ContainerField(name: "Stock".localized, value: "\(self.product.stock?.get() ?? 0)", icon: "cart.fill")
-                        }
-                        
-                        ContainerField(name: "Minimum quantity per order".localized, value: "\(self.product.quantity?.min ?? 1)", icon: "minus.circle.fill")
-                        ContainerField(name: "Maximum quantity per order".localized, value: "\(self.product.quantity?.max ?? 100000)", icon: "plus.circle.fill")
-                    }
-                }
+                ContainerNavigationButton(title: "See the description".localized, icon: "text.alignleft", destination: AnyView(ProductDetailledView(name: "Description", value: self.product.description ?? "Empty description.")))
                 
                 if self.product.type == .account {
-                    Container {
-                        ContainerNavigationButton(title: "See accounts in stock".localized,
-                                                  icon: "rectangle.stack.person.crop.fill",
-                                                  destination: AnyView(ProductAccountView(accounts: self.product.accounts)))
-                    }
+                    ContainerNavigationButton(title: "See the accounts".localized, icon: "list.dash", destination: AnyView(ProductAccountView(accounts: self.product.accounts)))
                 }
                 
-                Container {
-                    ContainerField(name: "Unlisted".localized, value: self.product.unlisted ?? false ? "Yes".localized : "No".localized, icon: "eye.slash")
-                    ContainerField(name: "Product ID".localized, value: self.product.id ?? "", icon: "number")
-                    ContainerField(name: "Creation date".localized, value: self.product.created_at?.description ?? "", icon: "calendar")
-                    ContainerField(name: "Last update".localized, value: self.product.updated_at?.description ?? "", icon: "clock.fill")
-                }
-            }.padding([.top, .bottom])
-            
-            .navigationBarTitle("Product")
-            .navigationBarItems(trailing: showAction)
+                ContainerField(name: "Unlisted".localized, value: self.product.unlisted == true ? "Yes".localized : "No".localized, icon: "eye.slash")
+                
+                ContainerField(name: "ID", value: self.product.id ?? "Unknown", icon: "number")
+            }
+                
+            Spacer()
         }
+        .navigationBarTitle("Product")
+        .navigationBarItems(trailing: showAction)
         .sheet(isPresented: $editMode) {
             ProductEditView(product: self.product, network: self.network, isEdit: true)
         }
@@ -125,6 +128,8 @@ struct ProductDetailView: View {
 
 struct ProductDetailView_Previews: PreviewProvider {
     static var previews: some View {
-        ProductDetailView(product: Product())
+        NavigationView {
+            ProductDetailView(product: Product())
+        }
     }
 }

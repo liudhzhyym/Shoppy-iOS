@@ -7,7 +7,7 @@
 //
 
 import SwiftUI
-import SwiftyShoppy
+import enum SwiftyShoppy.Account
 
 struct ProductAccountView: View {
     @State public var accounts: [Account?]?
@@ -15,25 +15,34 @@ struct ProductAccountView: View {
     var body: some View {
         List {
             if accounts != nil {
-                ForEach(0 ..< accounts!.count) { idx in
-                    Text(self.accounts?[idx]?.get() ?? "")
-                        .contextMenu {
-                            Button(action: {
-                                UIPasteboard.general.string = self.accounts?[idx]?.get() ?? ""
-                            }) {
-                                Image(systemName: "doc.on.doc")
-                                Text("Copy")
-                            }
+                Section(header: Text("\(accounts!.count) \("accounts".localized)".uppercased())) {
+                    ForEach(0 ..< accounts!.count) { idx in
+                        Text(self.accounts?[idx]?.get() ?? "")
+                            .contextMenu {
+                                Button(action: {
+                                    UIPasteboard.general.string = self.accounts?[idx]?.get() ?? ""
+                                }) {
+                                    Image(systemName: "doc.on.doc")
+                                    Text("Copy")
+                                }
+                        }
                     }
                 }
             }
         }
-        .navigationBarTitle("Accounts", displayMode: .inline)
+        .listStyle(GroupedListStyle())
+        .navigationBarTitle("Accounts")
     }
 }
 
 struct ProductAccountView_Previews: PreviewProvider {
     static var previews: some View {
-        ProductAccountView(accounts: [.account("test")])
+        NavigationView {
+            ProductAccountView(accounts: [
+                .account("email@domain.tld"),
+                .account("email2@domain.tld"),
+                .account("email3@domain.tld")
+            ])
+        }
     }
 }

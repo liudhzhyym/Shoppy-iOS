@@ -32,19 +32,19 @@ struct OrderDetailView: View {
         VStack(alignment: .leading) {
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack {
-                    OrderHighlightView(name: "Total".localized,
+                    HighlightCardView(name: "Total".localized,
                                        value: "\(Currencies.getSymbol(forCurrencyCode: order.currency ?? "USD") ?? "$") \((order.price ?? 0) * Double(order.quantity ?? 0))",
                         icon: "creditcard.fill",
                         foreground: Color("PastelGreenSecondary"),
                         background: Color("PastelGreen"))
                     
-                    OrderHighlightView(name: "Quantity".localized,
+                    HighlightCardView(name: "Quantity".localized,
                                        value: "\(order.quantity ?? -1)",
                         icon: "bag.fill",
                         foreground: Color("PastelBlueSecondary"),
                         background: Color("PastelBlue"))
                     
-                    OrderHighlightView(name: "Payment gateway".localized,
+                    HighlightCardView(name: "Payment gateway".localized,
                                        value: "\(order.gateway ?? "BTC")",
                         icon: "bag.fill",
                         foreground: Color("PastelOrangeSecondary"),

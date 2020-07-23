@@ -1,5 +1,5 @@
 //
-//  OrderHighlightView.swift
+//  HighlightCardView.swift
 //  Shoppy
 //
 //  Created by Victor Lourme on 22/07/2020.
@@ -8,7 +8,7 @@
 
 import SwiftUI
 
-struct OrderHighlightView: View {
+struct HighlightCardView: View {
     @State public var name: String
     @State public var value: String
     @State public var icon: String
@@ -37,9 +37,9 @@ struct OrderHighlightView: View {
     }
 }
 
-struct OrderHighlightView_Previews: PreviewProvider {
+struct HighlightCardView_Previews: PreviewProvider {
     static var previews: some View {
-        OrderHighlightView(name: "Earnings",
+        HighlightCardView(name: "Earnings",
                            value: "$ 300",
                            icon: "creditcard.fill",
                            foreground: Color("PastelGreenSecondary"),
