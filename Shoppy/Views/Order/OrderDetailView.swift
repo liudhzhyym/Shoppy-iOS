@@ -11,6 +11,7 @@ import struct SwiftyShoppy.Order
 import enum SwiftyShoppy.DeliveryType
 
 struct OrderDetailView: View {
+    @Environment(\.presentationMode) var presentationMode
     @State public var order: Order
     
     private func getDate(date: Date) -> String {
@@ -20,98 +21,62 @@ struct OrderDetailView: View {
         return df.string(from: date)
     }
     
-    private func copyToPasteBoard(text: String?) {
-        let pasteboard = UIPasteboard()
-        pasteboard.string = text
+    var product: some View {
+        NavigationLink(destination: ProductDetailView(product: self.order.product!)) {
+                Image(systemName: "cube.box")
+                    .imageScale(.large)
+        }
     }
     
     var body: some View {
-            ScrollView {
-                VStack {
-                    Group {
-                        Spacer()
-                        
-                        OrderDetailRow(icon: "person", topText: order.email ?? "Unknown email", bottomText: "\("In".localized) \(order.agent?.geo?.country ?? "country") \("using".localized) \(order.agent?.data?.platform ?? "desktop")")
-                            .contextMenu {
-                                Button(action: {
-                                    self.copyToPasteBoard(text: self.order.email)
-                                }) {
-                                    Text("Copy email")
-                                    Image(systemName: "doc.on.doc")
-                                }
-                                
-                                Button(action: {
-                                    self.copyToPasteBoard(text: self.order.agent?.geo?.ip)
-                                }) {
-                                    Text("Copy IP")
-                                    Image(systemName: "doc.on.doc")
-                                }
-                            }
-                        
-                        Divider()
-                        
-                        if order.delivered == 1 {
-                            OrderDetailRow(icon: "checkmark", topText: "Paid".localized, bottomText: getDate(date: order.paid_at ?? Date()))
-                        } else {
-                            OrderDetailRow(icon: "xmark", topText: "Cancelled".localized, bottomText: "Order was not paid".localized)
-                        }
-                        
-                        Divider()
-                        
-                        OrderPricingRow(icon: "bag", currency: order.currency ?? "USD", price: order.price ?? 1, quantity: order.quantity ?? 0)
-                        
-                        Divider()
-                    }
+        VStack(alignment: .leading) {
+            ScrollView(.horizontal, showsIndicators: false) {
+                HStack {
+                    OrderHighlightView(name: "Total".localized,
+                                       value: "\(Currencies.getSymbol(forCurrencyCode: order.currency ?? "USD") ?? "$") \((order.price ?? 0) * Double(order.quantity ?? 0))",
+                        icon: "creditcard.fill",
+                        foreground: Color("PastelGreenSecondary"),
+                        background: Color("PastelGreen"))
                     
-                    Group {
-                        OrderDetailRow(icon: "creditcard", topText: order.gateway ?? "Bitcoin", bottomText: "Payment gateway".localized)
-                        
-                        Divider()
-                        
-                        OrderDetailRow(icon: "cube", topText: order.product?.title ?? "Product", bottomText: order.product_id ?? "Product ID")
-                            .contextMenu {
-                                NavigationLink(destination: ProductDetailView(product: self.order.product!)) {
-                                    Text("See product")
-                                    Image(systemName: "cube")
-                                }
-                                
-                                if self.order.product?.type == DeliveryType.account {
-                                    NavigationLink(destination: OrderAccountView(order: self.order)) {
-                                        Text("See delivered products")
-                                        Image(systemName: "list.dash")
-                                    }
-                                }
-                                
-                                Button(action: {
-                                    self.copyToPasteBoard(text: self.order.product_id)
-                                }) {
-                                    Text("Copy product ID")
-                                    Image(systemName: "doc.on.doc")
-                                }
-                            }
-                        
-                        Divider()
-                        
-                        OrderDetailRow(icon: "calendar", topText:  getDate(date: order.created_at ?? Date()), bottomText: order.id ?? "Invoice ID")
-                            .contextMenu {
-                                Button(action: {
-                                    self.copyToPasteBoard(text: self.order.id)
-                                }) {
-                                    Text("Copy invoice ID")
-                                    Image(systemName: "doc.on.doc")
-                                }
-                            }
-                        
-                        Spacer()
-                    }
-                }
-                .font(.system(.body, design: .rounded))
-                .background(Color(UIColor.secondarySystemBackground))
-                .cornerRadius(10)
-                .padding([.leading, .trailing], 25)
-                .padding([.top, .bottom], 20)
-                .navigationBarTitle("Invoice")
+                    OrderHighlightView(name: "Quantity".localized,
+                                       value: "\(order.quantity ?? -1)",
+                        icon: "bag.fill",
+                        foreground: Color("PastelBlueSecondary"),
+                        background: Color("PastelBlue"))
+                    
+                    OrderHighlightView(name: "Payment gateway".localized,
+                                       value: "\(order.gateway ?? "BTC")",
+                        icon: "bag.fill",
+                        foreground: Color("PastelOrangeSecondary"),
+                        background: Color("PastelOrange"))
+                }.padding(.horizontal)
             }
+            
+            Text("Information")
+                .font(.system(size: 20))
+                .bold()
+                .padding()
+            
+            Container {
+                ContainerField(name: "Status".localized, value: self.order.delivered == 1 ? "Paid".localized : "Cancelled".localized, icon: "waveform.path.ecg")
+                
+                ContainerField(name: "Email".localized, value: self.order.email ?? "email@domain.tld", icon: "envelope")
+                
+                ContainerField(name: "Date", value: self.getDate(date: self.order.created_at ?? Date()), icon: "clock")
+                
+                ContainerField(name: "Country".localized, value: "\(self.order.agent?.geo?.state_name ?? "State"), \(self.order.agent?.geo?.country ?? "Country")", icon: "map")
+                
+                ContainerField(name: "IP".localized, value: self.order.agent?.geo?.ip ?? "Unknown", icon: "globe")
+                
+                if self.order.product?.type == .account {
+                    ContainerNavigationButton(title: "See delivered products".localized, icon: "list.dash", destination: AnyView(OrderAccountView(order: self.order)))
+                }
+            }
+            
+            Spacer()
+        }
+        .navigationBarItems(trailing: self.order.product != nil ? product : nil)
+        .navigationBarTitle("Invoice")
     }
 }
 
@@ -120,6 +85,8 @@ struct OrderDetailView: View {
 ///
 struct OrderDetailView_Previews: PreviewProvider {
     static var previews: some View {
-        OrderDetailView(order: Order())
+        NavigationView {
+            OrderDetailView(order: Order())
+        }
     }
 }

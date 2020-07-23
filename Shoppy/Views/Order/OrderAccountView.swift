@@ -29,6 +29,7 @@ struct OrderAccountView: View {
                 }
             }
         }
+        .listStyle(GroupedListStyle())
         .navigationBarTitle("Delivered accounts")
         .onAppear {
             // Load keychain
