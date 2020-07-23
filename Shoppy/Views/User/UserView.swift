@@ -26,19 +26,19 @@ struct UserView: View {
                 VStack(alignment: .leading) {
                     Text(settings.user?.email ?? "email@domain.tld")
                         .font(.headline)
-                        .foregroundColor(.secondary)
                     
                     Text(settings.user?.username ?? "Username")
                         .font(.largeTitle)
                         .bold()
                 }
+                .foregroundColor(Color("PastelBlueSecondary"))
                 
                 Spacer()
                 
                 profileImage
             }
             .padding()
-            .background(Color("Secondary"))
+            .background(Color("PastelBlue"))
             .cornerRadius(7)
             
             Container {
