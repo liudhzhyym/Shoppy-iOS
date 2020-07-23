@@ -104,6 +104,7 @@ struct QueryDetailView: View {
                 .padding(22)
                 .background(Color(UIColor.secondarySystemBackground))
                 .cornerRadius(20)
+                .shadow(radius: 4)
                 .padding()
             }
         }
