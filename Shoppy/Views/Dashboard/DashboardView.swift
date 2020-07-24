@@ -57,6 +57,8 @@ struct DashboardView: View {
     var body: some View {
         GeometryReader { (proxy: GeometryProxy) in
             ZStack(alignment: .top) {
+                Image("Pattern").resizable(resizingMode: .tile)
+                
                 List {
                     ForEach(self.network.orders.prefix(10), id: \.id) { (order: Order) in
                         DashboardCardView(email: order.email ?? "",
@@ -69,6 +71,8 @@ struct DashboardView: View {
                     }
                 }
                 .font(.system(.body, design: .rounded))
+                .background(Color.primary)
+                .cornerRadius(20, corners: [.topLeft, .topRight])
                 .padding(.top, 300)
                 
                 VStack {
@@ -109,7 +113,6 @@ struct DashboardView: View {
                 .padding()
                 .padding(.top, proxy.safeAreaInsets.top)
                 .frame(height: 300)
-                .background(Image("Pattern").resizable(resizingMode: .tile))
             }
             .edgesIgnoringSafeArea(.top)
         }
