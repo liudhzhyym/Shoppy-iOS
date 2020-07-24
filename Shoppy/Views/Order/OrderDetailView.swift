@@ -68,7 +68,7 @@ struct OrderDetailView: View {
                 
                 ContainerField(name: "IP".localized, value: self.order.agent?.geo?.ip ?? "Unknown", icon: "globe")
                 
-                if self.order.product?.type == .account {
+                if self.order.product?.type ?? .service == .account {
                     ContainerNavigationButton(title: "See delivered products".localized, icon: "list.dash", destination: AnyView(OrderAccountView(order: self.order)))
                 }
             }

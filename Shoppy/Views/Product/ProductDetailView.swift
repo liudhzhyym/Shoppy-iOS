@@ -100,7 +100,7 @@ struct ProductDetailView: View {
                 
                 ContainerNavigationButton(title: "See the description".localized, icon: "text.alignleft", destination: AnyView(ProductDetailledView(name: "Description", value: self.product.description ?? "Empty description.")))
                 
-                if self.product.type == .account {
+                if self.product.type ?? .service == .account {
                     ContainerNavigationButton(title: "See accounts in stock".localized, icon: "list.dash", destination: AnyView(ProductAccountView(accounts: self.product.accounts)))
                 }
                 
