@@ -51,7 +51,6 @@
 		1BD7D4E124AF84FE00857EEC /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BD7D4E024AF84FE00857EEC /* SettingsView.swift */; };
 		1BD7D4E324B08D7E00857EEC /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BD7D4E224B08D7E00857EEC /* Reachability.swift */; };
 		1BF59C4E24BA5B9C00CC2CEA /* TextFieldLength.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BF59C4D24BA5B9C00CC2CEA /* TextFieldLength.swift */; };
-		1BF59C5124BA65B900CC2CEA /* BottomSheet in Frameworks */ = {isa = PBXBuildFile; productRef = 1BF59C5024BA65B900CC2CEA /* BottomSheet */; };
 		1BF59C5324BA663D00CC2CEA /* QuerySheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BF59C5224BA663D00CC2CEA /* QuerySheetView.swift */; };
 /* End PBXBuildFile section */
 
@@ -108,7 +107,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1BF59C5124BA65B900CC2CEA /* BottomSheet in Frameworks */,
 				1B7D902724ABA70100CAD138 /* KeychainSwift in Frameworks */,
 				1BBAC67F24B7174400E05261 /* KeyboardObserving in Frameworks */,
 				1B7D8FF924AB8AB900CAD138 /* SwiftyShoppy in Frameworks */,
@@ -318,7 +316,6 @@
 				1B7D902624ABA70100CAD138 /* KeychainSwift */,
 				1B9BCB8C24B4A52D00255448 /* MDText */,
 				1BBAC67E24B7174400E05261 /* KeyboardObserving */,
-				1BF59C5024BA65B900CC2CEA /* BottomSheet */,
 			);
 			productName = Shoppy;
 			productReference = 1BB764CC24AB76DF00C7F63A /* Shoppy.app */;
@@ -696,11 +693,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 1BBAC67D24B7174400E05261 /* XCRemoteSwiftPackageReference "KeyboardObserving" */;
 			productName = KeyboardObserving;
-		};
-		1BF59C5024BA65B900CC2CEA /* BottomSheet */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 1BF59C4F24BA65B900CC2CEA /* XCRemoteSwiftPackageReference "bottom-sheet" */;
-			productName = BottomSheet;
 		};
 /* End XCSwiftPackageProductDependency section */
 
