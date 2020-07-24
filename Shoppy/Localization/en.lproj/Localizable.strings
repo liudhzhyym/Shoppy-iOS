@@ -48,7 +48,10 @@
 // Login
 "Your API key is stored encrypted and never shared." = "Your API key is stored encrypted and never shared.";
 "Change your API key" = "Change your API key";
-"WELCOME ON" = "WELCOME ON";
+"Welcome on Shoppy" = "Welcome on Shoppy";
+"Manage your commerce like never before, welcome on a easy way to manage your orders, products, customers' queries and more." = "Manage your commerce like never before, welcome on a easy way to manage your orders, products, customers' queries and more.";
+"You can find your API key in Settings on your Shoppy account." = "You can find your API key in Settings on your Shoppy account.";
+"API key" = "API key";
 
 // Settings
 "API management" = "API management";

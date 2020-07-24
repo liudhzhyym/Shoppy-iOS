@@ -7,7 +7,8 @@
 //
 
 import SwiftUI
-import SwiftyShoppy
+import struct SwiftyShoppy.Analytics
+import class SwiftyShoppy.NetworkManager
 import KeychainSwift
 
 struct LoginView: View {
@@ -61,21 +62,23 @@ struct LoginView: View {
             Spacer()
             
             if !isEdit {
-                Image(systemName: "bag.fill")
-                    .font(.largeTitle)
-                    .foregroundColor(.orange)
+                Image(systemName: "cart.fill")
+                    .font(.system(size: 50))
+                    .foregroundColor(.red)
                     .padding()
                 
-                Text("WELCOME ON")
-                    .font(.subheadline)
-                
-                Text("Shoppy")
-                    .font(.largeTitle)
+                Text("Welcome on Shoppy")
+                    .font(.system(.largeTitle, design: .rounded))
                     .bold()
+                
+                Text("Manage your commerce like never before, welcome on a easy way to manage your orders, products, customers' queries and more.")
+                    .padding()
+                    .font(.system(.body, design: .rounded))
+                    .multilineTextAlignment(.center)
             } else {
                 Image(systemName: "lock.fill")
-                    .font(.largeTitle)
-                    .foregroundColor(.orange)
+                    .font(.system(size: 50))
+                    .foregroundColor(.red)
                     .padding()
                 
                 Text("Change your API key")
@@ -83,20 +86,27 @@ struct LoginView: View {
                     .bold()
             }
             
-            TextField("API Key", text: $key)
+            TextField("API key", text: $key)
                 .padding()
                 .disableAutocorrection(true)
                 .autocapitalization(.none)
+                .padding(.top)
+            
+            Text("You can find your API key in Settings on your Shoppy account.")
+                .font(.footnote)
+                .foregroundColor(.secondary)
             
             Button(action: login) {
                 HStack {
                     Image(systemName: "paperplane.fill")
                     Text(isEdit ? "Save" : "Continue")
                 }
-            }.padding()
-                .foregroundColor(.white)
-                .background(Color.orange)
-                .cornerRadius(15)
+            }
+            .padding()
+            .foregroundColor(.white)
+            .background(Color.red)
+            .cornerRadius(15)
+            .padding(.top)
             
             Spacer()
             
@@ -117,6 +127,10 @@ struct LoginView: View {
 
 struct LoginView_Previews: PreviewProvider {
     static var previews: some View {
-        LoginView(isEdit: false, network: NetworkObserver(key: ""))
+        Group {
+            LoginView(isEdit: false, network: NetworkObserver(key: ""))
+            
+            LoginView(isEdit: true, network: NetworkObserver(key: ""))
+        }
     }
 }
