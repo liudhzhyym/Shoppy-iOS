@@ -83,6 +83,7 @@ struct DashboardView: View {
                         
                         self.settingsButton
                     }
+                    .padding()
                     .foregroundColor(.white)
                     
                     Spacer()
@@ -94,7 +95,9 @@ struct DashboardView: View {
                             DashboardStatView(title: "Total earnings".localized, currency: self.$currency, value: self.$revenuesStat, specifier: "%.2f")
                             
                             DashboardStatView(title: "Total orders".localized, currency: .constant(""), value: self.$ordersStat, specifier: "%.0f")
-                        }.padding()
+                        }
+                        .padding(.horizontal, 5)
+                        .padding()
                     }
                     
                     Spacer()
@@ -107,10 +110,10 @@ struct DashboardView: View {
                         
                         Spacer()
                     }
+                    .padding()
                     .font(.headline)
                     .foregroundColor(.white)
                 }
-                .padding()
                 .padding(.top, proxy.safeAreaInsets.top)
                 .frame(height: 300)
             }
