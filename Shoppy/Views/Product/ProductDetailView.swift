@@ -82,7 +82,7 @@ struct ProductDetailView: View {
                                       background: Color("PastelRed"))
                     
                     HighlightCardView(name: "Stock".localized,
-                                      value: "\(product.stock?.get() ?? 0)",
+                                      value: "\(product.type == .account ? String(product.stock?.get() ?? 0) : "∞")",
                                       icon: "bag.fill",
                                       foreground: Color("PastelGreenSecondary"),
                                       background: Color("PastelGreen"))
