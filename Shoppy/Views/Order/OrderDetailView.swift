@@ -34,7 +34,7 @@ struct OrderDetailView: View {
                 HStack {
                     HighlightCardView(name: "Total".localized,
                                        value: "\(Currencies.getSymbol(forCurrencyCode: order.currency ?? "USD") ?? "$") \((order.price ?? 0) * Double(order.quantity ?? 0))",
-                        icon: "creditcard.fill",
+                        icon: "cart.fill",
                         foreground: Color("PastelGreenSecondary"),
                         background: Color("PastelGreen"))
                     
@@ -46,7 +46,7 @@ struct OrderDetailView: View {
                     
                     HighlightCardView(name: "Payment gateway".localized,
                                        value: "\(order.gateway ?? "BTC")",
-                        icon: "bag.fill",
+                        icon: "creditcard.fill",
                         foreground: Color("PastelOrangeSecondary"),
                         background: Color("PastelOrange"))
                 }.padding(.horizontal)
