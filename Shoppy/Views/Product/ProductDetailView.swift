@@ -133,7 +133,7 @@ struct ProductDetailView: View {
             
             // Check if product still exists
             NetworkManager
-                .prepare(token: network.key)
+                .prepare(token: self.network.key)
                 .target(.getProduct(id))
                 .asObject(Product.self, success: { _ in
                     print("Product exists")
