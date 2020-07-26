@@ -43,12 +43,7 @@ struct ProductView: View {
     var body: some View {
         NavigationView {
             List {
-                Section(header: Text("\(network.products.count) \("products".localized)".uppercased()),
-                        footer: Button(action: loadMore) {
-                            if network.products.count >= (25 * self.page) {
-                                Text("Try to load more")
-                            }
-                }) {
+                Section(header: Text("\(network.products.count) \("products".localized)".uppercased())) {
                     ForEach(network.products, id: \.id) { product in
                         NavigationLink(destination: ProductDetailView(product: product)) {
                             ProductCard(title: product.title ?? "Unknown",
@@ -56,6 +51,13 @@ struct ProductView: View {
                                         currency: product.currency ?? "USD",
                                         stock: product.stock?.get() ?? 0,
                                         type: product.type ?? .account)
+                                .onAppear {
+                                    if self.network.products.last == product {
+                                        if self.network.products.count >= (self.page * 25) {
+                                            self.loadMore()
+                                        }
+                                    }
+                            }
                         }
                         .listRowInsets(EdgeInsets())
                         .padding(.trailing)
