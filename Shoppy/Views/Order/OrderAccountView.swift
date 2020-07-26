@@ -7,20 +7,23 @@
 //
 
 import SwiftUI
-import SwiftyShoppy
-import KeychainSwift
+import class SwiftyShoppy.NetworkManager
+import struct SwiftyShoppy.Order
+import enum SwiftyShoppy.Account
 
 struct OrderAccountView: View {
-    @State public var order: Order
+    @EnvironmentObject var network: NetworkObserver
+    @State public var id: String
+    @State public var accounts: [Account?] = []
     
     var body: some View {
         List {
-            if order.accounts != nil {
-                ForEach(0 ..< order.accounts!.count) { idx in
-                    Text(self.order.accounts?[idx]?.get() ?? "")
+            Section(header: Text("\(accounts.count) \("accounts".localized)".uppercased())) {
+                ForEach(accounts, id: \.self) { (account: Account?) in
+                    Text(account?.get() ?? "Unknown")
                         .contextMenu {
                             Button(action: {
-                                UIPasteboard.general.string = self.order.accounts?[idx]?.get() ?? ""
+                                UIPasteboard.general.string = account?.get() ?? ""
                             }) {
                                 Image(systemName: "doc.on.doc")
                                 Text("Copy")
@@ -32,31 +35,21 @@ struct OrderAccountView: View {
         .listStyle(GroupedListStyle())
         .navigationBarTitle("Delivered accounts")
         .onAppear {
-            // Load keychain
-            let keychain = KeychainSwift()
-            
-            // Guard
-            guard let id = self.order.id else {
-                return
-            }
-            
             // Load data
-            if let key = keychain.get("key") {
-                NetworkManager
-                    .prepare(token: key)
-                    .target(.getOrder(id))
-                    .asObject(Order.self, success: { order in
-                        self.order = order
-                    }, error: { error in
-                        return
-                    })
-            }
+            NetworkManager
+                .prepare(token: self.network.key)
+                .target(.getOrder(self.id))
+                .asObject(Order.self, success: { order in
+                    self.accounts = order.accounts ?? []
+                }, error: { error in
+                    print(error)
+                })
         }
     }
 }
 
 struct OrderAccountView_Previews: PreviewProvider {
     static var previews: some View {
-        OrderAccountView(order: Order())
+        OrderAccountView(id: "")
     }
 }
