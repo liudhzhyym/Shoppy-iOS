@@ -36,18 +36,20 @@ struct QueriesView: View {
         NavigationView {
             List {
                 Section(
-                    header: Text("\(network.queries.count) \("queries".localized)".uppercased()),
-                    footer: Button(action: loadMore) {
-                        if network.queries.count >= (25 * self.page) {
-                            Text("Try to load more")
-                        }
-                    }) {
+                    header: Text("\(network.queries.count) \("queries".localized)".uppercased())) {
                     ForEach(network.queries, id: \.id) { (query: Query) in
                         NavigationLink(destination: QueryDetailView(query: query)) {
                             QueryCard(email: query.email ?? "",
                                       message: query.subject ?? "",
                                       date: query.updated_at ?? Date(),
                                       status: QueryStatus(rawValue: query.status ?? 0) ?? .Open)
+                                .onAppear {
+                                    if self.network.queries.last == query {
+                                        if self.network.queries.count >= (25 * self.page) {
+                                            self.loadMore()
+                                        }
+                                    }
+                            }
                         }
                         .listRowInsets(EdgeInsets())
                         .padding(.trailing)
