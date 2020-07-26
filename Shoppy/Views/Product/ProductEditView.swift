@@ -155,7 +155,8 @@ struct ProductEditView: View {
                 }
                 
                 if type == .account {
-                    Section(header: Text("Accounts")) {
+                    Section(header: Text("Accounts"),
+                            footer: Text("\(accounts.count) \("Accounts".localized)")) {
                         HStack {
                             TextField("Account", text: $account.animation())
                             
