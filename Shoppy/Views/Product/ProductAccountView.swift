@@ -14,18 +14,16 @@ struct ProductAccountView: View {
     
     var body: some View {
         List {
-            if accounts != nil {
-                Section(header: Text("\(accounts!.count) \("accounts".localized)".uppercased())) {
-                    ForEach(0 ..< accounts!.count) { idx in
-                        Text(self.accounts?[idx]?.get() ?? "")
-                            .contextMenu {
-                                Button(action: {
-                                    UIPasteboard.general.string = self.accounts?[idx]?.get() ?? ""
-                                }) {
-                                    Image(systemName: "doc.on.doc")
-                                    Text("Copy")
-                                }
-                        }
+            Section(header: Text("\(accounts?.count ?? 0) \("accounts".localized)".uppercased())) {
+                ForEach(accounts ?? [], id: \.self) { (account: Account?) in
+                    Text(account?.get() ?? "")
+                        .contextMenu {
+                            Button(action: {
+                                UIPasteboard.general.string = account?.get() ?? ""
+                            }) {
+                                Image(systemName: "doc.on.doc")
+                                Text("Copy")
+                            }
                     }
                 }
             }
