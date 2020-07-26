@@ -10,13 +10,18 @@ import SwiftUI
 import struct SwiftyShoppy.Settings
 import struct SwiftyShoppy.Order
 
+enum SheetDisplay {
+    case user
+    case settings
+}
+
 struct DashboardView: View {
     @EnvironmentObject var network: NetworkObserver
     
     @State private var image: Data?
     @State private var settings = Settings()
     
-    @State private var modalContent = AnyView(EmptyView())
+    @State private var modalContent: SheetDisplay = .user
     @State private var showModal = false
     
     @State private var currency = "$"
@@ -27,7 +32,7 @@ struct DashboardView: View {
     
     var profileButton: some View {
         Button(action: {
-            self.modalContent = AnyView(UserView(settings: self.settings, image: self.image))
+            self.modalContent = .user
             self.showModal = true
         }) {
             HStack {
@@ -45,7 +50,7 @@ struct DashboardView: View {
     
     var settingsButton: some View {
         Button(action: {
-            self.modalContent = AnyView(SettingsView(network: self.network))
+            self.modalContent = .settings
             self.showModal = true
         }) {
             Image(systemName: "gear")
@@ -141,7 +146,11 @@ struct DashboardView: View {
             }
         }
         .sheet(isPresented: $showModal) {
-            self.modalContent
+            if self.modalContent == .user {
+                UserView(settings: self.settings, image: self.image)
+            } else {
+                SettingsView(network: self.network)
+            }
         }
     }
 }
