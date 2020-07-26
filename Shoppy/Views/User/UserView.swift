@@ -16,58 +16,62 @@ struct UserView: View {
     var profileImage: some View {
         Image(uiImage: (UIImage(data: image ?? Data()) ?? UIImage(systemName: "rectangle.fill"))!)
             .resizable()
-            .frame(width: 48, height: 48)
+            .frame(width: 60, height: 60)
             .clipShape(Circle())
     }
     
     var body: some View {
-        VStack {
-            HStack {
-                VStack(alignment: .leading) {
-                    Text(settings.user?.email ?? "email@domain.tld")
-                        .font(.headline)
+        NavigationView {
+            VStack {
+                HStack {
+                    profileImage
+                        .padding(.horizontal)
                     
-                    Text(settings.user?.username ?? "Username")
-                        .font(.largeTitle)
-                        .bold()
+                    VStack(alignment: .leading) {
+                        Text(settings.user?.username ?? "Username")
+                            .font(.largeTitle)
+                            .bold()
+                        
+                        Text(settings.user?.email ?? "email@domain.tld")
+                            .font(.headline)
+                    }
+                    .lineLimit(0)
+                    
+                    Spacer()
                 }
-                .foregroundColor(Color("PastelBlueSecondary"))
+                .padding()
+                .padding(.top)
+                
+                Container {
+                    ContainerField(name: "Currency".localized, value: self.settings.settings?.currency ?? "USD", icon: "dollarsign.circle.fill")
+                }
+                
+                Container {
+                    ContainerField(name: "BTC Address".localized,
+                                   value: self.settings.settings?.bitcoinAddress ?? "Not linked".localized,
+                                   icon: "b.circle.fill", accent: .orange)
+                    ContainerField(name: "LTC Address".localized,
+                                   value: self.settings.settings?.litecoinAddress ?? "Not linked".localized,
+                                   icon: "l.circle.fill", accent: .orange)
+                    ContainerField(name: "ETH Address".localized,
+                                   value: self.settings.settings?.ethereumAddress ?? "Not linked".localized,
+                                   icon: "e.circle.fill", accent: .orange)
+                    ContainerField(name: "PayPal".localized,
+                                   value: self.settings.settings?.paypalAddress ?? "Not linked".localized,
+                                   icon: "p.circle.fill", accent: .orange)
+                    ContainerField(name: "Stripe ID".localized,
+                                   value: self.settings.settings?.stripeAccountId ?? "Not linked".localized,
+                                   icon: "s.circle.fill", accent: .orange)
+                }
+                
+                Text("Your profile can be changed on the website.")
+                    .font(.footnote)
+                    .foregroundColor(.secondary)
                 
                 Spacer()
+            }
                 
-                profileImage
-            }
-            .padding()
-            .background(Color("PastelBlue"))
-            .cornerRadius(7)
-            
-            Container {
-                ContainerField(name: "Currency".localized, value: self.settings.settings?.currency ?? "USD", icon: "dollarsign.circle.fill")
-            }
-            
-            Container {
-                ContainerField(name: "BTC Address".localized,
-                               value: self.settings.settings?.bitcoinAddress ?? "Not linked".localized,
-                               icon: "b.circle.fill", accent: .orange)
-                ContainerField(name: "LTC Address".localized,
-                               value: self.settings.settings?.litecoinAddress ?? "Not linked".localized,
-                               icon: "l.circle.fill", accent: .orange)
-                ContainerField(name: "ETH Address".localized,
-                               value: self.settings.settings?.ethereumAddress ?? "Not linked".localized,
-                               icon: "e.circle.fill", accent: .orange)
-                ContainerField(name: "PayPal".localized,
-                               value: self.settings.settings?.paypalAddress ?? "Not linked".localized,
-                               icon: "p.circle.fill", accent: .orange)
-                ContainerField(name: "Stripe ID".localized,
-                               value: self.settings.settings?.stripeAccountId ?? "Not linked".localized,
-                               icon: "s.circle.fill", accent: .orange)
-            }
-            
-            Text("Your profile can be changed on the website.")
-                .font(.footnote)
-                .foregroundColor(.secondary)
-            
-            Spacer()
+            .navigationBarTitle("Profile", displayMode: .inline)
         }
     }
 }
