@@ -19,6 +19,7 @@ struct ProductDetailView: View {
     @State public var product: Product
     @State private var isPresented = false
     @State private var editMode = false
+    @State private var allowEditing = true
     
     private let keychain = KeychainSwift()
     
@@ -66,6 +67,7 @@ struct ProductDetailView: View {
             Image(systemName: "slider.horizontal.3")
                 .imageScale(.large)
         }
+        .disabled(!self.allowEditing)
     }
     
     // Body
@@ -122,6 +124,23 @@ struct ProductDetailView: View {
                 .destructive(Text("Delete product"), action: self.deleteProduct),
                 .cancel()
             ])
+        }
+        .onAppear {
+            // Get ID
+            guard let id = self.product.id else {
+                return
+            }
+            
+            // Check if product still exists
+            NetworkManager
+                .prepare(token: network.key)
+                .target(.getProduct(id))
+                .asObject(Product.self, success: { _ in
+                    print("Product exists")
+                }, error: { error in
+                    print("Product does not exists")
+                    self.allowEditing = false
+                })
         }
     }
 }
