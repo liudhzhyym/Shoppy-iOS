@@ -19,27 +19,63 @@ class NetworkObserver: ObservableObject {
     let imageUpdater = PassthroughSubject<Void, Never>()
     let analyticsUpdater = PassthroughSubject<Void, Never>()
     let ordersUpdater = PassthroughSubject<Void, Never>()
+    let productsUpdater = PassthroughSubject<Void, Never>()
+    let queriesUpdater = PassthroughSubject<Void, Never>()
     let errorSubscriber = PassthroughSubject<Void, Never>()
     
     ///
     /// Observables
     ///
-    @Published public var settings: Settings?
-    @Published public var analytics: Analytics?
+    @Published public var settings: Settings? {
+        didSet {
+            settingsUpdater.send()
+        }
+    }
+    
+    @Published public var analytics: Analytics? {
+        didSet {
+            analyticsUpdater.send()
+        }
+    }
+    
     @Published public var orders: [Order] = [] {
         didSet {
             ordersUpdater.send()
         }
     }
-    @Published public var products: [Product] = []
-    @Published public var queries: [Query] = []
-    @Published public var image: Data?
+    
+    @Published public var products: [Product] = [] {
+        didSet {
+            productsUpdater.send()
+        }
+    }
+    
+    @Published public var queries: [Query] = [] {
+        didSet {
+            queriesUpdater.send()
+        }
+    }
+    
+    @Published public var image: Data? {
+        didSet {
+            imageUpdater.send()
+        }
+    }
     
     ///
     /// Single value observables
     ///
-    @Published public var totalRevenue: Double = 0
-    @Published public var todayRevenue: Double = 0
+    @Published public var totalRevenue: Double = 0 {
+        didSet {
+            metricsUpdater.send()
+        }
+    }
+    
+    @Published public var todayRevenue: Double = 0 {
+        didSet {
+            metricsUpdater.send()
+        }
+    }
     
     ///
     /// API Key
@@ -87,9 +123,6 @@ class NetworkObserver: ObservableObject {
             .asObject(Analytics.self, success: { analytics in
                 // Store
                 self.analytics = analytics
-                
-                // Notify views
-                self.analyticsUpdater.send()
             }, error: { error in
                 self.errorSubscriber.send()
             })
@@ -108,9 +141,6 @@ class NetworkObserver: ObservableObject {
                 if let revenue = metrics.value?.value {
                     self.totalRevenue = revenue
                 }
-                
-                // Notify user
-                self.metricsUpdater.send()
             }, error: { error in
                 self.errorSubscriber.send()
             })
@@ -124,9 +154,6 @@ class NetworkObserver: ObservableObject {
                 if let revenue = metrics.value?.value {
                     self.todayRevenue = revenue
                 }
-                
-                // Notify user
-                self.metricsUpdater.send()
             }, error: { error in
                 self.errorSubscriber.send()
             })
@@ -147,9 +174,6 @@ class NetworkObserver: ObservableObject {
                 if let url = settings.settings?.userAvatarURL {
                     self.getImage(imageURL: url)
                 }
-                
-                // Notify views
-                self.settingsUpdater.send()
             }, error: { error in
                 self.errorSubscriber.send()
             })
@@ -160,15 +184,13 @@ class NetworkObserver: ObservableObject {
     ///
     private func getImage(imageURL: String) {
         guard let url = URL(string: imageURL) else { return }
+        
         URLSession.shared.dataTask(with: url) { (data, response, error) in
             guard let data = data else { return }
             
             DispatchQueue.main.async {
                 // Store image
                 self.image = data
-                
-                // Notify
-                self.imageUpdater.send()
             }
             
         }.resume()
