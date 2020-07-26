@@ -10,6 +10,7 @@ import SwiftUI
 import struct SwiftyShoppy.Analytics
 import class SwiftyShoppy.NetworkManager
 import KeychainSwift
+import KeyboardObserving
 
 struct LoginView: View {
     // Keychain
@@ -53,8 +54,6 @@ struct LoginView: View {
                 print("[LoginView] Invalid key")
                 return
             })
-        
-        
     }
     
     var body: some View {
@@ -116,6 +115,7 @@ struct LoginView: View {
             
         }
         .padding()
+        .keyboardObserving()
         .alert(isPresented: $isError) {
             Alert(
                 title: Text("Error"),
