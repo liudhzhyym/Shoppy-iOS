@@ -18,6 +18,7 @@ class NetworkObserver: ObservableObject {
     let metricsUpdater = PassthroughSubject<Void, Never>()
     let imageUpdater = PassthroughSubject<Void, Never>()
     let analyticsUpdater = PassthroughSubject<Void, Never>()
+    let ordersUpdater = PassthroughSubject<Void, Never>()
     let errorSubscriber = PassthroughSubject<Void, Never>()
     
     ///
@@ -25,7 +26,11 @@ class NetworkObserver: ObservableObject {
     ///
     @Published public var settings: Settings?
     @Published public var analytics: Analytics?
-    @Published public var orders: [Order] = []
+    @Published public var orders: [Order] = [] {
+        didSet {
+            ordersUpdater.send()
+        }
+    }
     @Published public var products: [Product] = []
     @Published public var queries: [Query] = []
     @Published public var image: Data?
