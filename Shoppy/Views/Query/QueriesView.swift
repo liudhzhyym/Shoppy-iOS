@@ -24,7 +24,8 @@ struct QueriesView: View {
     
     var refreshButton: some View {
         Button(action: {
-            self.network.getQueries(page: 1)
+            self.page = 1
+            self.network.getQueries(page: self.page)
         }) {
             Image(systemName: "arrow.2.circlepath.circle.fill")
                 .resizable()

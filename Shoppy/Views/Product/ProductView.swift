@@ -24,6 +24,7 @@ struct ProductView: View {
     
     var refreshButton: some View {
         Button(action: {
+            self.page = 1
             self.network.getProducts(page: self.page)
         }) {
             Image(systemName: "arrow.2.circlepath.circle.fill")

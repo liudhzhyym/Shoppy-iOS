@@ -60,7 +60,8 @@ struct OrdersView: View {
     ///
     var refreshButton: some View {
         Button(action: {
-            self.network.getOrders(page: 1)
+            self.page = 1
+            self.network.getOrders(page: self.page)
         }) {
             Image(systemName: "arrow.2.circlepath.circle.fill")
                 .imageScale(.large)
