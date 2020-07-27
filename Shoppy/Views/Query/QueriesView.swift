@@ -67,5 +67,6 @@ struct QueriesView: View {
 struct QueriesView_Previews: PreviewProvider {
     static var previews: some View {
         QueriesView()
+            .environmentObject(NetworkObserver(key: ""))
     }
 }
