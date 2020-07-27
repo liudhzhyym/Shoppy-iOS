@@ -10,19 +10,14 @@ import SwiftUI
 import struct SwiftyShoppy.Settings
 import struct SwiftyShoppy.Order
 
-enum SheetDisplay {
-    case user
-    case settings
-}
-
 struct DashboardView: View {
     @EnvironmentObject var network: NetworkObserver
     
     @State private var image: Data?
     @State private var settings = Settings()
     
-    @State private var modalContent: SheetDisplay = .user
-    @State private var showModal = false
+    @State private var showUser = false
+    @State private var showSettings = false
     
     @State private var currency = "$"
     
@@ -32,8 +27,7 @@ struct DashboardView: View {
     
     var profileButton: some View {
         Button(action: {
-            self.modalContent = .user
-            self.showModal = true
+            self.showUser.toggle()
         }) {
             HStack {
                 Image(uiImage: (UIImage(data: image ?? Data()) ?? UIImage(systemName: "person"))!)
@@ -50,8 +44,7 @@ struct DashboardView: View {
     
     var settingsButton: some View {
         Button(action: {
-            self.modalContent = .settings
-            self.showModal = true
+            self.showSettings.toggle()
         }) {
             Image(systemName: "gear")
                 .imageScale(.large)
@@ -83,10 +76,16 @@ struct DashboardView: View {
                 VStack {
                     HStack {
                         self.profileButton
+                            .sheet(isPresented: self.$showUser) {
+                                UserView(settings: self.settings, image: self.image)
+                            }
                         
                         Spacer()
                         
                         self.settingsButton
+                            .sheet(isPresented: self.$showSettings) {
+                                SettingsView(network: self.network)
+                            }
                     }
                     .padding()
                     .foregroundColor(.white)
@@ -143,13 +142,6 @@ struct DashboardView: View {
             // Set image
             if let image = self.network.image {
                 self.image = image
-            }
-        }
-        .sheet(isPresented: $showModal) {
-            if self.modalContent == .user {
-                UserView(settings: self.settings, image: self.image)
-            } else {
-                SettingsView(network: self.network)
             }
         }
     }
