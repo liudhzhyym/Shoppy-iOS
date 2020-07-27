@@ -28,12 +28,9 @@ struct SettingsView: View {
         self.displayLogin = true
     }
     
-    // Open link
-    private func openLink(link: Links) {
-        if let url = URL(string: link.rawValue) {
-            UIApplication.shared.open(url)
-        }
-    }
+    // Safari WebView
+    @State private var url: Links = .github
+    @State private var showSafari = false
     
     var body: some View {
         VStack(alignment: .leading) {
@@ -51,6 +48,9 @@ struct SettingsView: View {
                     self.changeKey()
                 }, accent: .orange)
             }
+            .sheet(isPresented: $displayLogin) {
+                LoginView(isEdit: true, network: self.network)
+            }
             
             Text("Source code")
                 .font(.headline)
@@ -58,12 +58,17 @@ struct SettingsView: View {
             
             Container {
                 ContainerButton(title: "See the source code".localized, icon: "doc.text.fill", function: {
-                    self.openLink(link: .github)
+                    self.url = .github
+                    self.showSafari.toggle()
                 }, accent: .orange)
                 
                 ContainerButton(title: "Report a bug".localized, icon: "exclamationmark.bubble.fill", function: {
-                    self.openLink(link: .issues)
+                    self.url = .issues
+                    self.showSafari.toggle()
                 }, accent: .orange)
+            }
+            .sheet(isPresented: $showSafari) {
+                SafariView(url: URL(string: self.url.rawValue)!)
             }
             
             Text("Information")
@@ -75,10 +80,8 @@ struct SettingsView: View {
             }
             
             Spacer()
-        }.padding(.top)
-            .sheet(isPresented: $displayLogin) {
-                LoginView(isEdit: true, network: self.network)
         }
+        .padding(.top)
     }
 }
 
