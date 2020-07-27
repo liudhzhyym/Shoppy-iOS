@@ -146,6 +146,7 @@
 
 // Types
 "Account" = "Compte";
+"Accounts" = "Comptes";
 "Service" = "Service";
 "File" = "Fichier";
 "Dynamic" = "URL Dynamique";

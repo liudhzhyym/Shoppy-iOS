@@ -14,7 +14,7 @@ struct ProductAccountView: View {
     
     var body: some View {
         List {
-            Section(header: Text("\(accounts?.count ?? 0) \("accounts".localized)".uppercased())) {
+            Section(header: Text("\(accounts?.count ?? 0) \("Accounts".localized)".uppercased())) {
                 ForEach(accounts ?? [], id: \.self) { (account: Account?) in
                     Text(account?.get() ?? "")
                         .contextMenu {

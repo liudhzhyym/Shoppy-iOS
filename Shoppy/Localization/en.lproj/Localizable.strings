@@ -145,6 +145,7 @@
 
 // Types
 "Account" = "Account";
+"Accounts" = "Accounts";
 "Service" = "Service";
 "File" = "File";
 "Dynamic" = "Dynamic";

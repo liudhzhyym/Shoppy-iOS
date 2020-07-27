@@ -18,7 +18,7 @@ struct OrderAccountView: View {
     
     var body: some View {
         List {
-            Section(header: Text("\(accounts.count) \("accounts".localized)".uppercased())) {
+            Section(header: Text("\(accounts.count) \("Accounts".localized)".uppercased())) {
                 ForEach(accounts, id: \.self) { (account: Account?) in
                     Text(account?.get() ?? "Unknown")
                         .contextMenu {
