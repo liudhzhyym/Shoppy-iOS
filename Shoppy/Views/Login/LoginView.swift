@@ -28,6 +28,9 @@ struct LoginView: View {
     // EnvironmentObject workaround for sheet modals
     @State public var network: NetworkObserver
     
+    // SafariVC
+    @State private var showSafari = false
+    
     ///
     /// Login method
     ///
@@ -95,17 +98,34 @@ struct LoginView: View {
                 .font(.footnote)
                 .foregroundColor(.secondary)
             
-            Button(action: login) {
-                HStack {
-                    Image(systemName: "paperplane.fill")
-                    Text(isEdit ? "Save" : "Continue")
+            HStack {
+                Group {
+                    Button(action: {
+                        self.showSafari.toggle()
+                    }) {
+                        HStack {
+                            Image(systemName: "checkmark.shield.fill")
+                            Text("Get API key")
+                        }
+                    }
+                    .padding()
+                    .foregroundColor(.white)
+                    .background(Color.green)
+                    
+                    Button(action: login) {
+                        HStack {
+                            Image(systemName: "paperplane.fill")
+                            Text(isEdit ? "Save" : "Continue")
+                        }
+                    }
+                    .padding()
+                    .foregroundColor(.white)
+                    .background(Color.red)
                 }
+                .cornerRadius(15)
+                .padding(.top)
             }
-            .padding()
-            .foregroundColor(.white)
-            .background(Color.red)
-            .cornerRadius(15)
-            .padding(.top)
+            
             
             Spacer()
             
@@ -117,10 +137,12 @@ struct LoginView: View {
         .padding()
         .keyboardObserving()
         .alert(isPresented: $isError) {
-            Alert(
-                title: Text("Error"),
-                message: Text("Wrong API key"),
-                dismissButton: .cancel())
+            Alert(title: Text("Error"),
+                  message: Text("Wrong API key"),
+                  dismissButton: .cancel())
+        }
+        .sheet(isPresented: $showSafari) {
+            SafariView(url: URL(string: "https://shoppy.gg/auth/login")!)
         }
     }
 }
