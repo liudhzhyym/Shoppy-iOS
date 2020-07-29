@@ -27,13 +27,12 @@ struct DashboardCardView: View {
     
     var body: some View {
         HStack(spacing: 15) {
-            Image(systemName: paid == true ? "checkmark" : "xmark")
+            Image(systemName: paid == true ? "arrow.down" : "xmark")
                 .foregroundColor(Color(paid == true ? "PastelGreenSecondary" : "PastelRedSecondary"))
                 .font(.headline)
                 .padding(14)
                 .frame(width: 40, height: 40)
-                .background(Color(paid == true ? "PastelGreen" : "PastelRed"))
-                .cornerRadius(10)
+                .background(Circle().foregroundColor(Color(paid == true ? "PastelGreen" : "PastelRed")))
             
             VStack(alignment: .leading, spacing: 6) {
                 Text(email)
