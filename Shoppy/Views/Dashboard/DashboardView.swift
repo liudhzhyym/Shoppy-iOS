@@ -40,115 +40,116 @@ struct DashboardView: View {
         }) {
             Image(uiImage: (UIImage(data: image ?? Data()) ?? UIImage(systemName: "rectangle.fill"))!)
                 .resizable()
-                .frame(width: 64, height: 64)
-                .cornerRadius(10)
+                .frame(width: 56, height: 56)
+                .clipShape(Circle())
         }.buttonStyle(PlainButtonStyle())
     }
     
     var body: some View {
-        VStack(alignment: .leading, spacing: 10) {
-            HStack {
-                VStack(alignment: .leading) {
-                    Text(getDate())
-                        .font(.callout)
-                        .foregroundColor(.secondary)
-                    Text("Hi, \(self.settings.user?.username ?? "Username")")
-                        .font(.largeTitle)
-                        .bold()
-                }.lineLimit(0)
-                
-                Spacer()
-                
-                profileButton
-            }
-            .padding([.leading, .top, .trailing])
-            
-            Text("Analytics")
-                .font(.system(size: 22))
-                .fontWeight(.semibold)
-                .padding([.leading])
-            
-            ScrollView(.horizontal, showsIndicators: false) {
-                HStack {
-                    ZStack(alignment: .topLeading) {
-                        Text("Incomes")
-                            .font(.title)
-                            .bold()
-                            .padding()
+        GeometryReader { (geo: GeometryProxy) in
+            VStack(alignment: .leading, spacing: 0) {
+                VStack {
+                    HStack {
+                        VStack(alignment: .leading) {
+                            Text(self.getDate())
+                                .font(.callout)
+                                .foregroundColor(.secondary)
+                            Text("Hi, \(self.settings.user?.username ?? "Username")")
+                                .font(.largeTitle)
+                                .bold()
+                        }.lineLimit(0)
                         
-                        LineChart()
-                            .data(incomes)
-                            .chartStyle(.init(backgroundColor: .clear, foregroundColor: [ColorGradient(.blue, .purple)]))
+                        Spacer()
+                        
+                        self.profileButton
                     }
-                    .frame(width: 350, height: 200)
-                    .background(Color(UIColor.secondarySystemBackground))
-                    .cornerRadius(20)
+                    .padding([.leading, .trailing])
                     
-                    VStack {
+                    LineChart()
+                        .data(self.incomes)
+                        .chartStyle(.init(backgroundColor: .clear, foregroundColor: [ColorGradient(.blue, .purple)]))
+                        .frame(height: 150)
+                }
+                .padding(.top, geo.safeAreaInsets.top)
+                .background(Color(UIColor.secondarySystemBackground))
+                
+                ScrollView {
+                    VStack(alignment: .leading) {
                         Text("Gateways")
-                            .font(.title)
-                            .bold()
-                            .padding(.top)
+                            .font(.system(size: 22))
+                            .fontWeight(.light)
+                            .padding([.leading, .top])
                         
-                        List {
-                            ForEach(gateways.sorted(by: >), id: \.key) { key, value in
-                                HStack {
-                                    Text(key)
-                                    
-                                    Spacer()
-                                    
-                                    Text("\(value, specifier: "%.0f")")
-                                }
+                        ScrollView(.horizontal, showsIndicators: false) {
+                            HStack {
+                                ForEach(self.gateways.sorted(by: >), id: \.key) { key, value in
+                                    HStack {
+                                        VStack(alignment: .leading) {
+                                            Text(key.uppercased())
+                                                .font(.footnote)
+                                                .foregroundColor(.secondary)
+                                            
+                                            Text("\(value, specifier: "%.0f")")
+                                                .font(.system(size: 20))
+                                                .bold()
+                                        }
+                                        .lineLimit(0)
+                                        
+                                        Spacer()
+                                    }
+                                    .padding()
+                                    .frame(width: 175)
+                                    .background(Color(UIColor.secondarySystemBackground))
+                                    .cornerRadius(20)
+                                    .padding(.leading)
+                                }.id(UUID())
                             }
                         }
+                        
+                        Text("Analytics")
+                            .font(.system(size: 22))
+                            .fontWeight(.light)
+                            .padding([.leading, .bottom])
+                        
+                        HStack(alignment: .top) {
+                            VStack {
+                                DashboardStatView(title: "Total revenues".localized,
+                                                  currency: self.$currency,
+                                                  value: self.$revenuesStat,
+                                                  specifier: "%.2f",
+                                                  icon: "chevron.down.circle.fill",
+                                                  foreground: Color("PastelGreenSecondary"),
+                                                  background: Color("PastelGreen"))
+                                
+                                DashboardStatView(title: "Today's revenues".localized,
+                                                  currency: self.$currency,
+                                                  value: self.$todayStat,
+                                                  specifier: "%.2f",
+                                                  icon: "clock.fill",
+                                                  foreground: Color("PastelOrangeSecondary"),
+                                                  background: Color("PastelOrange"))
+                            }
+                            
+                            Spacer()
+                            
+                            VStack {
+                                DashboardStatView(title: "Total orders".localized,
+                                                  currency: .constant(""),
+                                                  value: self.$ordersStat,
+                                                  specifier: "%.0f",
+                                                  icon: "cart.fill",
+                                                  foreground: Color("PastelBlueSecondary"),
+                                                  background: Color("PastelBlue"))
+                            }
+                        }
+                        .padding([.leading, .trailing])
+                        
+                        Spacer()
                     }
-                    .frame(width: 350, height: 200)
-                    .background(Color(UIColor.secondarySystemBackground))
-                    .cornerRadius(20)
-                }.padding()
-            }
-            
-            ScrollView(.horizontal, showsIndicators: false) {
-                HStack {
-                    DashboardStatView(title: "Total revenues".localized,
-                                      currency: $currency,
-                                      value: $revenuesStat,
-                                      specifier: "%.2f")
-                    
-                    Spacer()
-                    
-                    DashboardStatView(title: "Total orders".localized,
-                                      currency: .constant(""),
-                                      value: $ordersStat,
-                                      specifier: "%.0f")
-                    
-                    Spacer()
-                    
-                    DashboardStatView(title: "Today revenue".localized,
-                                      currency: $currency,
-                                      value: $todayStat,
-                                      specifier: "%.2f")
-                }.padding([.leading, .trailing])
-            }
-            
-            Text("Last orders")
-                .font(.system(size: 22))
-                .fontWeight(.semibold)
-                .padding([.leading, .top])
-            
-            List {
-                ForEach(self.network.orders.prefix(5), id: \.id) { (order: Order) in
-                    DashboardCardView(
-                        email: order.email ?? "",
-                        product: order.product?.title ?? "",
-                        date: order.paid_at ?? Date(),
-                        price: (order.price ?? 0) * Double(order.quantity ?? 0),
-                        currency: order.currency ?? "USD",
-                        paid: order.delivered == 1)
-                        .listRowInsets(EdgeInsets())
                 }
             }
         }
+        .edgesIgnoringSafeArea(.top)
         .onReceive(network.metricsUpdater) {
             // Set card data
             self.revenuesStat = self.network.totalRevenue
