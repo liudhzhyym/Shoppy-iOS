@@ -26,6 +26,7 @@ struct DashboardView: View {
     @State private var todayStat: Double = 0
     
     @State private var incomes: [Double] = []
+    @State private var gateways: [String: Double] = [:]
     
     func getDate() -> String {
         let df = DateFormatter()
@@ -67,20 +68,45 @@ struct DashboardView: View {
                 .fontWeight(.semibold)
                 .padding([.leading])
             
-            ZStack(alignment: .topLeading) {
-                Text("Incomes")
-                    .font(.title)
-                    .bold()
-                    .padding()
-                
-                LineChart()
-                    .data(incomes)
-                    .chartStyle(.init(backgroundColor: .clear, foregroundColor: [ColorGradient(.blue, .purple)]))
+            ScrollView(.horizontal, showsIndicators: false) {
+                HStack {
+                    ZStack(alignment: .topLeading) {
+                        Text("Incomes")
+                            .font(.title)
+                            .bold()
+                            .padding()
+                        
+                        LineChart()
+                            .data(incomes)
+                            .chartStyle(.init(backgroundColor: .clear, foregroundColor: [ColorGradient(.blue, .purple)]))
+                    }
+                    .frame(width: 350, height: 200)
+                    .background(Color(UIColor.secondarySystemBackground))
+                    .cornerRadius(20)
+                    
+                    VStack {
+                        Text("Gateways")
+                            .font(.title)
+                            .bold()
+                            .padding(.top)
+                        
+                        List {
+                            ForEach(gateways.sorted(by: >), id: \.key) { key, value in
+                                HStack {
+                                    Text(key)
+                                    
+                                    Spacer()
+                                    
+                                    Text("\(value, specifier: "%.0f")")
+                                }
+                            }
+                        }
+                    }
+                    .frame(width: 350, height: 200)
+                    .background(Color(UIColor.secondarySystemBackground))
+                    .cornerRadius(20)
+                }.padding()
             }
-            .frame(height: 200)
-            .background(Color(UIColor.secondarySystemBackground))
-            .cornerRadius(20)
-            .padding()
             
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack {
@@ -145,6 +171,14 @@ struct DashboardView: View {
                     let value = income[key]
                     self.incomes.append(value ?? 0)
                 }
+            }
+            
+            // Clear gateways
+            self.gateways.removeAll()
+            
+            // Set gateways
+            if let gateways = self.network.analytics?.gateways {
+                self.gateways = gateways
             }
         }.onReceive(network.settingsUpdater) {
             // Set settings

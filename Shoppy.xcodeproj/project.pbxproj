@@ -359,7 +359,6 @@
 				1B7D902524ABA70100CAD138 /* XCRemoteSwiftPackageReference "keychain-swift" */,
 				1B9BCB8B24B4A52D00255448 /* XCRemoteSwiftPackageReference "MDText" */,
 				1BBAC67D24B7174400E05261 /* XCRemoteSwiftPackageReference "KeyboardObserving" */,
-				1BF59C4F24BA65B900CC2CEA /* XCRemoteSwiftPackageReference "bottom-sheet" */,
 				1BE8F11424D0953500F2E051 /* XCRemoteSwiftPackageReference "SwiftyStoreKit" */,
 				1B1E98FA24D16BC90077BFF9 /* XCRemoteSwiftPackageReference "ChartView" */,
 			);
@@ -660,7 +659,7 @@
 			repositoryURL = "https://github.com/vlourme/SwiftyShoppy.git";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 1.0.3;
+				minimumVersion = 1.1.9;
 			};
 		};
 		1B7D902524ABA70100CAD138 /* XCRemoteSwiftPackageReference "keychain-swift" */ = {
@@ -693,14 +692,6 @@
 			requirement = {
 				kind = upToNextMajorVersion;
 				minimumVersion = 0.16.1;
-			};
-		};
-		1BF59C4F24BA65B900CC2CEA /* XCRemoteSwiftPackageReference "bottom-sheet" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/weitieda/bottom-sheet";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 1.0.5;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
