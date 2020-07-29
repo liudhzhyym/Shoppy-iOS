@@ -20,6 +20,15 @@
         }
       },
       {
+        "package": "SwiftUICharts",
+        "repositoryURL": "https://github.com/AppPear/ChartView.git",
+        "state": {
+          "branch": null,
+          "revision": "3265d3e16b6480158b748095a227ea04c48f80ad",
+          "version": "2.0.0-beta.1"
+        }
+      },
+      {
         "package": "KeyboardObserving",
         "repositoryURL": "https://github.com/nickffox/KeyboardObserving.git",
         "state": {
@@ -80,6 +89,15 @@
           "branch": null,
           "revision": "c0256a22c742944926b8e989eaae1e84f6b1da71",
           "version": "1.1.7"
+        }
+      },
+      {
+        "package": "SwiftyStoreKit",
+        "repositoryURL": "https://github.com/bizz84/SwiftyStoreKit.git",
+        "state": {
+          "branch": null,
+          "revision": "9974acf07b31b6f5bf363d5118dc1bd4fcac6122",
+          "version": "0.16.1"
         }
       }
     ]

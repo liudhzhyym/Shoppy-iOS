@@ -10,8 +10,10 @@ import SwiftUI
 import struct SwiftyShoppy.Settings
 
 struct UserView: View {
+    @State public var network: NetworkObserver
     @State public var settings: Settings
     @State public var image: Data?
+    @State private var showSettings = false
     
     var profileImage: some View {
         Image(uiImage: (UIImage(data: image ?? Data()) ?? UIImage(systemName: "rectangle.fill"))!)
@@ -72,12 +74,20 @@ struct UserView: View {
             }
                 
             .navigationBarTitle("Profile", displayMode: .inline)
+            .navigationBarItems(trailing: Button(action: {
+                self.showSettings = true
+            }) {
+                Image(systemName: "gear")
+                    .imageScale(.large)
+            })
+        }.sheet(isPresented: $showSettings) {
+            SettingsView(network: self.network)
         }
     }
 }
 
 struct UserView_Previews: PreviewProvider {
     static var previews: some View {
-        UserView(settings: Settings(), image: Data())
+        UserView(network: NetworkObserver(key: ""), settings: Settings(), image: Data())
     }
 }

@@ -7,6 +7,7 @@
 //
 
 import SwiftUI
+import SwiftyStoreKit
 
 enum Links: String {
     case github = "https://github.com/vlourme/Shoppy-iOS"
@@ -31,6 +32,10 @@ struct SettingsView: View {
     // Safari WebView
     @State private var url: Links = .github
     @State private var showSafari = false
+    
+    // Donation
+    @State private var showDonation = false
+    @State private var showError = false
     
     var body: some View {
         VStack(alignment: .leading) {
@@ -71,6 +76,23 @@ struct SettingsView: View {
                 SafariView(url: URL(string: self.url.rawValue)!)
             }
             
+            Text("Donation")
+                .font(.headline)
+                .padding([.leading, .top])
+            
+            Container {
+                ContainerButton(title: "Donate $1", icon: "1.circle.fill", function: {
+                    SwiftyStoreKit.purchaseProduct("SM_TIP", quantity: 1, atomically: true) { result in
+                        switch result {
+                            case .success:
+                                self.showDonation.toggle()
+                            case .error:
+                                self.showError.toggle()
+                        }
+                    }
+                })
+            }
+            
             Text("Information")
                 .font(.headline)
                 .padding([.leading, .top])
@@ -82,6 +104,16 @@ struct SettingsView: View {
             Spacer()
         }
         .padding(.top)
+        .alert(isPresented: $showDonation) {
+            Alert(title: Text("Thank you!"),
+                  message: Text("Thank you so much for donating, it's so nice 🥰"),
+                  dismissButton: .default(Text("Close")))
+        }
+        .alert(isPresented: $showError) {
+            Alert(title: Text("Error"),
+                  message: Text("Hm, there was an error..."),
+                  dismissButton: .cancel())
+        }
     }
 }
 

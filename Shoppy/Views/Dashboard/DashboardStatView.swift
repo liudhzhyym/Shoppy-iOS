@@ -16,25 +16,29 @@ struct DashboardStatView: View {
     
     var body: some View {
         HStack {
-            VStack(alignment: .leading, spacing: 5) {
+            VStack(alignment: .leading) {
                 Text(title.uppercased())
-                    .foregroundColor(Color.white.opacity(0.6))
-                    .font(.headline)
+                    .font(.footnote)
+                    .foregroundColor(.gray)
                 
-                HStack(alignment: .firstTextBaseline) {
-                    Text("\(currency) \(value, specifier: specifier)")
-                }
-                .font(.system(size: 42, weight: .bold, design: .default))
+                Text("\(currency) \(value, specifier: specifier)")
+                    .font(.system(size: 22))
+                    .bold()
             }
-            .foregroundColor(.white)
             
             Spacer()
-        }.frame(width: 200)
+        }
+        .padding()
+        .frame(width: 180)
+        .background(Color(UIColor.secondarySystemBackground))
+        .cornerRadius(20)
     }
 }
 
 struct DashboardStatView_Previews: PreviewProvider {
     static var previews: some View {
-        DashboardStatView(title: "Total orders", currency: .constant("$"), value: .constant(40), specifier: "%.2f")
+        VStack {
+            DashboardStatView(title: "Total orders", currency: .constant("$"), value: .constant(40), specifier: "%.2f")
+        }
     }
 }

@@ -9,6 +9,7 @@
 import SwiftUI
 import struct SwiftyShoppy.Settings
 import struct SwiftyShoppy.Order
+import SwiftUICharts
 
 struct DashboardView: View {
     @EnvironmentObject var network: NetworkObserver
@@ -17,7 +18,6 @@ struct DashboardView: View {
     @State private var settings = Settings()
     
     @State private var showUser = false
-    @State private var showSettings = false
     
     @State private var currency = "$"
     
@@ -25,103 +25,103 @@ struct DashboardView: View {
     @State private var ordersStat: Double = 0
     @State private var todayStat: Double = 0
     
-    var profileButton: some View {
-        Button(action: {
-            self.showUser.toggle()
-        }) {
-            HStack {
-                Image(uiImage: (UIImage(data: image ?? Data()) ?? UIImage(systemName: "person"))!)
-                    .renderingMode(.original)
-                    .resizable()
-                    .frame(width: 26, height: 26)
-                    .clipShape(Circle())
-                
-                Text(self.network.settings?.user?.username ?? "")
-                    .font(.headline)
-            }
-        }
+    @State private var incomes: [Double] = []
+    
+    func getDate() -> String {
+        let df = DateFormatter()
+        df.dateFormat = "dd MMM YYYY"
+        return df.string(from: Date())
     }
     
-    var settingsButton: some View {
+    var profileButton: some View {
         Button(action: {
-            self.showSettings.toggle()
+            self.showUser = true
         }) {
-            Image(systemName: "gear")
-                .imageScale(.large)
-                .foregroundColor(.white)
-        }
+            Image(uiImage: (UIImage(data: image ?? Data()) ?? UIImage(systemName: "rectangle.fill"))!)
+                .resizable()
+                .frame(width: 64, height: 64)
+                .cornerRadius(10)
+        }.buttonStyle(PlainButtonStyle())
     }
     
     var body: some View {
-        GeometryReader { (proxy: GeometryProxy) in
-            ZStack(alignment: .top) {
-                Image("Pattern").resizable(resizingMode: .tile)
+        VStack(alignment: .leading, spacing: 10) {
+            HStack {
+                VStack(alignment: .leading) {
+                    Text(getDate())
+                        .font(.callout)
+                        .foregroundColor(.secondary)
+                    Text("Hi, \(self.settings.user?.username ?? "Username")")
+                        .font(.largeTitle)
+                        .bold()
+                }.lineLimit(0)
                 
-                List {
-                    ForEach(self.network.orders.prefix(10), id: \.id) { (order: Order) in
-                        DashboardCardView(email: order.email ?? "",
-                                          product: order.product?.title ?? "",
-                                          date: order.created_at ?? Date(),
-                                          price: (order.price ?? 0) * Double(order.quantity ?? 0),
-                                          currency: order.currency ?? "USD",
-                                          paid: order.delivered == 1)
-                            .listRowInsets(EdgeInsets())
-                    }
-                }
-                .font(.system(.body, design: .rounded))
-                .background(Color.primary)
-                .cornerRadius(20, corners: [.topLeft, .topRight])
-                .padding(.top, 300)
+                Spacer()
                 
-                VStack {
-                    HStack {
-                        self.profileButton
-                            .sheet(isPresented: self.$showUser) {
-                                UserView(settings: self.settings, image: self.image)
-                            }
-                        
-                        Spacer()
-                        
-                        self.settingsButton
-                            .sheet(isPresented: self.$showSettings) {
-                                SettingsView(network: self.network)
-                            }
-                    }
-                    .padding()
-                    .foregroundColor(.white)
-                    
-                    Spacer()
-                    
-                    ScrollView(.horizontal, showsIndicators: false) {
-                        HStack {
-                            DashboardStatView(title: "Today's earnings".localized, currency: self.$currency, value: self.$todayStat, specifier: "%.2f")
-                            
-                            DashboardStatView(title: "Total earnings".localized, currency: self.$currency, value: self.$revenuesStat, specifier: "%.2f")
-                            
-                            DashboardStatView(title: "Total orders".localized, currency: .constant(""), value: self.$ordersStat, specifier: "%.0f")
-                        }
-                        .padding(.horizontal, 5)
-                        .padding()
-                    }
-                    
-                    Spacer()
-                    
-                    HStack {
-                        Image(systemName: "clock")
-                        Text("10 last orders".localized.uppercased())
-                            .font(.system(.subheadline, design: .rounded))
-                            .bold()
-                        
-                        Spacer()
-                    }
-                    .padding()
-                    .font(.headline)
-                    .foregroundColor(.white)
-                }
-                .padding(.top, proxy.safeAreaInsets.top)
-                .frame(height: 300)
+                profileButton
             }
-            .edgesIgnoringSafeArea(.top)
+            .padding([.leading, .top, .trailing])
+            
+            Text("Analytics")
+                .font(.system(size: 22))
+                .fontWeight(.semibold)
+                .padding([.leading])
+            
+            ZStack(alignment: .topLeading) {
+                Text("Incomes")
+                    .font(.title)
+                    .bold()
+                    .padding()
+                
+                LineChart()
+                    .data(incomes)
+                    .chartStyle(.init(backgroundColor: .clear, foregroundColor: [ColorGradient(.blue, .purple)]))
+            }
+            .frame(height: 200)
+            .background(Color(UIColor.secondarySystemBackground))
+            .cornerRadius(20)
+            .padding()
+            
+            ScrollView(.horizontal, showsIndicators: false) {
+                HStack {
+                    DashboardStatView(title: "Total revenues".localized,
+                                      currency: $currency,
+                                      value: $revenuesStat,
+                                      specifier: "%.2f")
+                    
+                    Spacer()
+                    
+                    DashboardStatView(title: "Total orders".localized,
+                                      currency: .constant(""),
+                                      value: $ordersStat,
+                                      specifier: "%.0f")
+                    
+                    Spacer()
+                    
+                    DashboardStatView(title: "Today revenue".localized,
+                                      currency: $currency,
+                                      value: $todayStat,
+                                      specifier: "%.2f")
+                }.padding([.leading, .trailing])
+            }
+            
+            Text("Last orders")
+                .font(.system(size: 22))
+                .fontWeight(.semibold)
+                .padding([.leading, .top])
+            
+            List {
+                ForEach(self.network.orders.prefix(5), id: \.id) { (order: Order) in
+                    DashboardCardView(
+                        email: order.email ?? "",
+                        product: order.product?.title ?? "",
+                        date: order.paid_at ?? Date(),
+                        price: (order.price ?? 0) * Double(order.quantity ?? 0),
+                        currency: order.currency ?? "USD",
+                        paid: order.delivered == 1)
+                        .listRowInsets(EdgeInsets())
+                }
+            }
         }
         .onReceive(network.metricsUpdater) {
             // Set card data
@@ -131,6 +131,21 @@ struct DashboardView: View {
         .onReceive(network.analyticsUpdater) {
             // Set card data
             self.ordersStat = self.network.analytics?.totalOrders ?? -1
+            
+            // Set incomes
+            if let income = self.network.analytics?.income {
+                // Get keys
+                let keys = income.keys.sorted(by: <)
+                
+                // Clear data
+                self.incomes.removeAll()
+                
+                // Push data
+                for key in keys {
+                    let value = income[key]
+                    self.incomes.append(value ?? 0)
+                }
+            }
         }.onReceive(network.settingsUpdater) {
             // Set settings
             if let settings = self.network.settings {
@@ -143,6 +158,9 @@ struct DashboardView: View {
             if let image = self.network.image {
                 self.image = image
             }
+        }
+        .sheet(isPresented: $showUser) {
+            UserView(network: self.network, settings: self.settings, image: self.image)
         }
     }
 }
