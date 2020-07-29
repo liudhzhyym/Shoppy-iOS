@@ -66,6 +66,12 @@ struct UserView: View {
                                    icon: "s.circle.fill", accent: .orange)
                 }
                 
+                Container {
+                    ContainerNavigationButton(title: "See feedbacks",
+                                              icon: "hand.thumbsup.fill",
+                                              destination: AnyView(FeedbackView(network: self.network)))
+                }
+                
                 Text("Your profile can be changed on the website.")
                     .font(.footnote)
                     .foregroundColor(.secondary)
@@ -80,7 +86,8 @@ struct UserView: View {
                 Image(systemName: "gear")
                     .imageScale(.large)
             })
-        }.sheet(isPresented: $showSettings) {
+        }
+        .sheet(isPresented: $showSettings) {
             SettingsView(network: self.network)
         }
     }

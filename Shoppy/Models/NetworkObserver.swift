@@ -15,6 +15,7 @@ class NetworkObserver: ObservableObject {
     /// Combines
     ///
     let settingsUpdater = PassthroughSubject<Void, Never>()
+    let feedbackUpdater = PassthroughSubject<Void, Never>()
     let metricsUpdater = PassthroughSubject<Void, Never>()
     let imageUpdater = PassthroughSubject<Void, Never>()
     let analyticsUpdater = PassthroughSubject<Void, Never>()
@@ -53,6 +54,12 @@ class NetworkObserver: ObservableObject {
     @Published public var queries: [Query] = [] {
         didSet {
             queriesUpdater.send()
+        }
+    }
+    
+    @Published public var feedbacks: [Feedback] = [] {
+        didSet {
+            feedbackUpdater.send()
         }
     }
     
@@ -103,6 +110,7 @@ class NetworkObserver: ObservableObject {
         getSettings()
         getOrders(page: 1)
         getProducts(page: 1)
+        getFeedbacks(page: 1)
         getQueries(page: 1)
     }
     
@@ -231,6 +239,26 @@ class NetworkObserver: ObservableObject {
                 
                 // Append new produts
                 self.products.append(contentsOf: products)
+            }, error: { error in
+                self.errorSubscriber.send()
+            })
+    }
+    
+    ///
+    /// Get feedbacks
+    ///
+    public func getFeedbacks(page: Int) {
+        NetworkManager
+            .prepare(token: self.key)
+            .target(.getFeedbacks(page))
+            .asArray(Feedback.self, success: { feedbacks in
+                // Reset
+                if page == 1 {
+                    self.feedbacks.removeAll()
+                }
+                
+                // Append new produts
+                self.feedbacks.append(contentsOf: feedbacks)
             }, error: { error in
                 self.errorSubscriber.send()
             })

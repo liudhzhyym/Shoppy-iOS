@@ -36,6 +36,7 @@
 		1B9BCB8424B4894F00255448 /* ProductCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B9BCB8324B4894F00255448 /* ProductCard.swift */; };
 		1B9BCB8D24B4A52D00255448 /* MDText in Frameworks */ = {isa = PBXBuildFile; productRef = 1B9BCB8C24B4A52D00255448 /* MDText */; };
 		1B9C237824C8D118007545BA /* HighlightCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B9C237724C8D118007545BA /* HighlightCardView.swift */; };
+		1B9F19B624D1BB9F001D37C7 /* FeedbackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B9F19B524D1BB9F001D37C7 /* FeedbackView.swift */; };
 		1BAA5EB724C6253C00115E59 /* DashboardCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BAA5EB624C6253C00115E59 /* DashboardCardView.swift */; };
 		1BAA5EB924C6290800115E59 /* DashboardStatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BAA5EB824C6290800115E59 /* DashboardStatView.swift */; };
 		1BB764D024AB76DF00C7F63A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BB764CF24AB76DF00C7F63A /* AppDelegate.swift */; };
@@ -47,6 +48,7 @@
 		1BB764DF24AB76E400C7F63A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1BB764DD24AB76E400C7F63A /* LaunchScreen.storyboard */; };
 		1BBAC67C24B702BE00E05261 /* ProductEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BBAC67B24B702BE00E05261 /* ProductEditView.swift */; };
 		1BBAC67F24B7174400E05261 /* KeyboardObserving in Frameworks */ = {isa = PBXBuildFile; productRef = 1BBAC67E24B7174400E05261 /* KeyboardObserving */; };
+		1BBF751F24D1BDE3005D3FA2 /* FeedbackCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BBF751E24D1BDE3005D3FA2 /* FeedbackCardView.swift */; };
 		1BC63B1324CEC0D600BD5B9B /* SafariView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BC63B1224CEC0D600BD5B9B /* SafariView.swift */; };
 		1BC70B2924B32AE90068B599 /* UserView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BC70B2824B32AE90068B599 /* UserView.swift */; };
 		1BD7D4E124AF84FE00857EEC /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BD7D4E024AF84FE00857EEC /* SettingsView.swift */; };
@@ -85,6 +87,7 @@
 		1B9BCB7F24B4889600255448 /* ProductView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductView.swift; sourceTree = "<group>"; };
 		1B9BCB8324B4894F00255448 /* ProductCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductCard.swift; sourceTree = "<group>"; };
 		1B9C237724C8D118007545BA /* HighlightCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HighlightCardView.swift; sourceTree = "<group>"; };
+		1B9F19B524D1BB9F001D37C7 /* FeedbackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedbackView.swift; sourceTree = "<group>"; };
 		1BAA5EB624C6253C00115E59 /* DashboardCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardCardView.swift; sourceTree = "<group>"; };
 		1BAA5EB824C6290800115E59 /* DashboardStatView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardStatView.swift; sourceTree = "<group>"; };
 		1BB764CC24AB76DF00C7F63A /* Shoppy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Shoppy.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -96,6 +99,7 @@
 		1BB764DB24AB76E400C7F63A /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		1BB764E024AB76E400C7F63A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1BBAC67B24B702BE00E05261 /* ProductEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductEditView.swift; sourceTree = "<group>"; };
+		1BBF751E24D1BDE3005D3FA2 /* FeedbackCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedbackCardView.swift; sourceTree = "<group>"; };
 		1BC63B1224CEC0D600BD5B9B /* SafariView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafariView.swift; sourceTree = "<group>"; };
 		1BC70B2824B32AE90068B599 /* UserView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserView.swift; sourceTree = "<group>"; };
 		1BD7D4E024AF84FE00857EEC /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
@@ -201,6 +205,7 @@
 		1B7D901F24ABA0BB00CAD138 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				1B9F19B424D1BB81001D37C7 /* Feedback */,
 				1B0A822A24BA35D00043CF63 /* Query */,
 				1BC70B2724B32AD90068B599 /* User */,
 				1BD7D4DF24AF84EB00857EEC /* Settings */,
@@ -240,6 +245,15 @@
 				1B7D902324ABA1CC00CAD138 /* LoginView.swift */,
 			);
 			path = Login;
+			sourceTree = "<group>";
+		};
+		1B9F19B424D1BB81001D37C7 /* Feedback */ = {
+			isa = PBXGroup;
+			children = (
+				1B9F19B524D1BB9F001D37C7 /* FeedbackView.swift */,
+				1BBF751E24D1BDE3005D3FA2 /* FeedbackCardView.swift */,
+			);
+			path = Feedback;
 			sourceTree = "<group>";
 		};
 		1BB764C324AB76DF00C7F63A = {
@@ -403,6 +417,7 @@
 				1B6199BE24ABB45F003FA43F /* DashboardView.swift in Sources */,
 				1BB764D724AB76DF00C7F63A /* ContentView.swift in Sources */,
 				1BD7D4E124AF84FE00857EEC /* SettingsView.swift in Sources */,
+				1BBF751F24D1BDE3005D3FA2 /* FeedbackCardView.swift in Sources */,
 				1B0EB16E24B4DC39007A06E0 /* ContainerButton.swift in Sources */,
 				1B0EB17024B4DE24007A06E0 /* ContainerField.swift in Sources */,
 				1B6199CC24AC98C4003FA43F /* OrdersView.swift in Sources */,
@@ -417,6 +432,7 @@
 				1B9C237824C8D118007545BA /* HighlightCardView.swift in Sources */,
 				1B0EB16C24B4D33D007A06E0 /* Container.swift in Sources */,
 				1B6199D324ACABDA003FA43F /* Currencies.swift in Sources */,
+				1B9F19B624D1BB9F001D37C7 /* FeedbackView.swift in Sources */,
 				1BF59C4E24BA5B9C00CC2CEA /* TextFieldLength.swift in Sources */,
 				1B0A822C24BA35E70043CF63 /* QueriesView.swift in Sources */,
 				1BC63B1324CEC0D600BD5B9B /* SafariView.swift in Sources */,
