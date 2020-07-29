@@ -66,7 +66,7 @@ struct LoginView: View {
             if !isEdit {
                 Image(systemName: "cart.fill")
                     .font(.system(size: 50))
-                    .foregroundColor(.red)
+                    .foregroundColor(.blue)
                     .padding()
                 
                 Text("Welcome on Shoppy")
@@ -80,7 +80,7 @@ struct LoginView: View {
             } else {
                 Image(systemName: "lock.fill")
                     .font(.system(size: 50))
-                    .foregroundColor(.red)
+                    .foregroundColor(.blue)
                     .padding()
                 
                 Text("Change your API key")
@@ -94,37 +94,39 @@ struct LoginView: View {
                 .autocapitalization(.none)
                 .padding(.top)
             
+            HStack {
+                Button(action: {
+                    self.showSafari.toggle()
+                }) {
+                    HStack {
+                        Image(systemName: "checkmark.shield.fill")
+                        Text("Get API key")
+                    }
+                }
+                .padding()
+                .foregroundColor(.orange)
+                .overlay(
+                    RoundedRectangle(cornerRadius: 15)
+                        .stroke(Color.orange, lineWidth: 2)
+                )
+                
+                Button(action: login) {
+                    HStack {
+                        Image(systemName: "paperplane.fill")
+                        Text(isEdit ? "Save" : "Continue")
+                    }
+                }
+                .padding()
+                .foregroundColor(.white)
+                .background(Color.green)
+                .cornerRadius(15)
+            }.padding()
+            
             Text("You can find your API key in Settings on your Shoppy account.")
                 .font(.footnote)
                 .foregroundColor(.secondary)
-            
-            HStack {
-                Group {
-                    Button(action: {
-                        self.showSafari.toggle()
-                    }) {
-                        HStack {
-                            Image(systemName: "checkmark.shield.fill")
-                            Text("Get API key")
-                        }
-                    }
-                    .padding()
-                    .foregroundColor(.white)
-                    .background(Color.green)
-                    
-                    Button(action: login) {
-                        HStack {
-                            Image(systemName: "paperplane.fill")
-                            Text(isEdit ? "Save" : "Continue")
-                        }
-                    }
-                    .padding()
-                    .foregroundColor(.white)
-                    .background(Color.red)
-                }
-                .cornerRadius(15)
-                .padding(.top)
-            }
+                .multilineTextAlignment(.center)
+                .padding()
             
             
             Spacer()
