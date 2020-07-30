@@ -77,7 +77,7 @@ struct DashboardView: View {
                     VStack(alignment: .leading) {
                         Text("Gateways")
                             .font(.system(size: 22))
-                            .fontWeight(.light)
+                            .fontWeight(.semibold)
                             .padding([.leading, .top])
                         
                         ScrollView(.horizontal, showsIndicators: false) {
@@ -101,14 +101,15 @@ struct DashboardView: View {
                                     .frame(width: 175)
                                     .background(Color(UIColor.secondarySystemBackground))
                                     .cornerRadius(20)
-                                    .padding(.leading)
-                                }.id(UUID())
-                            }
+                                }
+                                .id(UUID())
+                                .padding(.trailing, 10)
+                            }.padding([.leading, .trailing])
                         }
                         
                         Text("Analytics")
                             .font(.system(size: 22))
-                            .fontWeight(.light)
+                            .fontWeight(.semibold)
                             .padding([.leading, .bottom])
                         
                         HStack(alignment: .top) {
@@ -143,9 +144,7 @@ struct DashboardView: View {
                             }
                         }
                         .padding([.leading, .trailing])
-                        
-                        Spacer()
-                    }
+                    }.padding(.bottom)
                 }
             }
         }
