@@ -11,7 +11,7 @@ import SwiftyStoreKit
 
 enum Links: String {
     case github = "https://github.com/vlourme/Shoppy-iOS"
-    case issues = "https://github.com/vlourme/SwiftyShoppy/issues"
+    case issues = "https://github.com/vlourme/Shoppy-iOS/issues"
 }
 
 struct SettingsView: View {
