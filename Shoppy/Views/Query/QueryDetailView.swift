@@ -112,7 +112,7 @@ struct QueryDetailView: View {
         .navigationBarItems(trailing: detail)
         .keyboardObserving()
         .sheet(isPresented: $showDetail) {
-            QuerySheetView(network: self.network, query: self.$query, token: self.network.key)
+            QuerySheetView(network: self.network, query: self.$query)
         }
     }
 }
