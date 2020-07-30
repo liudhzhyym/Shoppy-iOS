@@ -74,6 +74,7 @@ struct SettingsView: View {
             }
             .sheet(isPresented: $showSafari) {
                 SafariView(url: URL(string: self.url.rawValue)!)
+                    .edgesIgnoringSafeArea(.bottom)
             }
             
             Text("Donation")
@@ -83,6 +84,17 @@ struct SettingsView: View {
             Container {
                 ContainerButton(title: "Donate $1", icon: "1.circle.fill", function: {
                     SwiftyStoreKit.purchaseProduct("SM_TIP", quantity: 1, atomically: true) { result in
+                        switch result {
+                            case .success:
+                                self.showDonation.toggle()
+                            case .error:
+                                self.showError.toggle()
+                        }
+                    }
+                })
+                
+                ContainerButton(title: "Donate $3", icon: "3.circle.fill", function: {
+                    SwiftyStoreKit.purchaseProduct("MD_TIP", quantity: 1, atomically: true) { result in
                         switch result {
                             case .success:
                                 self.showDonation.toggle()

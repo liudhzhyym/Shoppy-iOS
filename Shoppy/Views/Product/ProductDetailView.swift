@@ -117,6 +117,7 @@ struct ProductDetailView: View {
         }
         .sheet(isPresented: $showSafari) {
             SafariView(url: URL(string: "https://shoppy.gg/product/\(self.product.id ?? "")")!)
+                .edgesIgnoringSafeArea(.bottom)
         }
         .onAppear {
             // Get ID
