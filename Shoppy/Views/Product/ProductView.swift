@@ -32,15 +32,6 @@ struct ProductView: View {
         }
     }
     
-    var addButton: some View {
-        Button(action: {
-            self.isPresented = true
-        }) {
-            Image(systemName: "plus")
-                .imageScale(.large)
-        }
-    }
-    
     var body: some View {
         NavigationView {
             List {
@@ -67,12 +58,9 @@ struct ProductView: View {
             }
             .listStyle(GroupedListStyle())
             .navigationBarTitle("Products")
-            .navigationBarItems(leading: refreshButton, trailing: addButton)
+            .navigationBarItems(trailing: refreshButton)
             
             Text("No product selected")
-        }
-        .sheet(isPresented: $isPresented) {
-            ProductEditView(product: Product(), network: self.network)
         }
     }
 }

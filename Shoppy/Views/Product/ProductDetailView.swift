@@ -17,22 +17,15 @@ struct ProductDetailView: View {
     @EnvironmentObject var network: NetworkObserver
     
     @State public var product: Product
+    @State private var showSafari = false
     @State private var isPresented = false
-    @State private var editMode = false
     @State private var allowEditing = true
-    
-    private let keychain = KeychainSwift()
     
     private func getDate(date: Date) -> String {
         let df = DateFormatter()
         df.dateFormat = "dd/MM"
         
         return df.string(from: date)
-    }
-    
-    // Edit product
-    private func editProduct() {
-        self.editMode = true
     }
     
     // Delete product
@@ -42,21 +35,19 @@ struct ProductDetailView: View {
             return
         }
         
-        // Get token
-        if let key = keychain.get("key") {
-            NetworkManager
-                .prepare(token: key)
-                .target(.deleteProduct(id))
-                .asObject(ResourceUpdate<Product>.self, success: { update in
-                    // Reload products
-                    self.network.getProducts(page: 1)
-                    
-                    // Dismiss
-                    self.presentation.wrappedValue.dismiss()
-                }, error: { error in
-                    print(error)
-                })
-        }
+        // Delete item
+        NetworkManager
+            .prepare(token: network.key)
+            .target(.deleteProduct(id))
+            .asObject(ResourceUpdate<Product>.self, success: { update in
+                // Reload products
+                self.network.getProducts(page: 1)
+                
+                // Dismiss
+                self.presentation.wrappedValue.dismiss()
+            }, error: { error in
+                print(error)
+            })
     }
     
     // Open action sheet
@@ -64,7 +55,7 @@ struct ProductDetailView: View {
         Button(action: {
             self.isPresented = true
         }) {
-            Image(systemName: "slider.horizontal.3")
+            Image(systemName: "ellipsis")
                 .imageScale(.large)
         }
         .disabled(!self.allowEditing)
@@ -72,58 +63,60 @@ struct ProductDetailView: View {
     
     // Body
     var body: some View {
-        VStack {
-            ScrollView(.horizontal, showsIndicators: false) {
-                HStack {
-                    HighlightCardView(name: "Price".localized,
-                                      value: "\(Currencies.getSymbol(forCurrencyCode: product.currency ?? "USD") ?? "$") \(String(format: "%.2f", product.price ?? -1))",
-                                      icon: "dollarsign.circle.fill",
-                                      foreground: Color("PastelRedSecondary"),
-                                      background: Color("PastelRed"))
-                    
-                    HighlightCardView(name: "Stock".localized,
-                                      value: "\(product.type == .account ? String(product.stock?.get() ?? 0) : "∞")",
-                                      icon: "bag.fill",
-                                      foreground: Color("PastelGreenSecondary"),
-                                      background: Color("PastelGreen"))
-                    
-                    HighlightCardView(name: "Creation date".localized,
-                                      value: getDate(date: product.created_at ?? Date()),
-                                      icon: "calendar",
-                                      foreground: Color("PastelBlueSecondary"),
-                                      background: Color("PastelBlue"))
-                }.padding()
-            }
-            
-            Container {
-                ContainerField(name: "Title".localized, value: self.product.title ?? "Product Name", icon: "cube")
-                
-                ContainerField(name: "Type".localized, value: self.product.type?.rawValue.capitalized.localized ?? "Service", icon: "aspectratio")
-                
-                ContainerNavigationButton(title: "See the description".localized, icon: "text.alignleft", destination: AnyView(ProductDetailledView(name: "Description", value: self.product.description ?? "Empty description.")))
-                
-                if self.product.type ?? .service == .account {
-                    ContainerNavigationButton(title: "See accounts in stock".localized, icon: "list.dash", destination: AnyView(ProductAccountView(accounts: self.product.accounts)))
+        ScrollView {
+            VStack {
+                ScrollView(.horizontal, showsIndicators: false) {
+                    HStack {
+                        HighlightCardView(name: "Price".localized,
+                                          value: "\(Currencies.getSymbol(forCurrencyCode: product.currency ?? "USD") ?? "$") \(String(format: "%.2f", product.price ?? -1))",
+                            icon: "dollarsign.circle.fill",
+                            foreground: Color("PastelRedSecondary"),
+                            background: Color("PastelRed"))
+                        
+                        HighlightCardView(name: "Stock".localized,
+                                          value: "\(product.type == .account ? String(product.stock?.get() ?? 0) : "∞")",
+                            icon: "bag.fill",
+                            foreground: Color("PastelGreenSecondary"),
+                            background: Color("PastelGreen"))
+                        
+                        HighlightCardView(name: "Creation date".localized,
+                                          value: getDate(date: product.created_at ?? Date()),
+                                          icon: "calendar",
+                                          foreground: Color("PastelBlueSecondary"),
+                                          background: Color("PastelBlue"))
+                    }.padding()
                 }
                 
-                ContainerField(name: "Unlisted".localized, value: self.product.unlisted == true ? "Yes".localized : "No".localized, icon: "eye.slash")
+                Container {
+                    ContainerField(name: "Title".localized, value: self.product.title ?? "Product Name", icon: "cube")
+                    
+                    ContainerField(name: "Type".localized, value: self.product.type?.rawValue.capitalized.localized ?? "Service", icon: "aspectratio")
+                    
+                    ContainerNavigationButton(title: "See the description".localized, icon: "text.alignleft", destination: AnyView(ProductDetailledView(name: "Description", value: self.product.description ?? "Empty description.")))
+                    
+                    if self.product.type ?? .service == .account {
+                        ContainerNavigationButton(title: "See accounts in stock".localized, icon: "list.dash", destination: AnyView(ProductAccountView(accounts: self.product.accounts)))
+                    }
+                    
+                    ContainerField(name: "Unlisted".localized, value: self.product.unlisted == true ? "Yes".localized : "No".localized, icon: "eye.slash")
+                    
+                    ContainerField(name: "ID", value: self.product.id ?? "Unknown", icon: "number")
+                }
                 
-                ContainerField(name: "ID", value: self.product.id ?? "Unknown", icon: "number")
+                Spacer()
             }
-                
-            Spacer()
         }
         .navigationBarTitle("Product")
         .navigationBarItems(trailing: showAction)
-        .sheet(isPresented: $editMode) {
-            ProductEditView(product: self.product, network: self.network, isEdit: true)
-        }
         .actionSheet(isPresented: $isPresented) {
             ActionSheet(title: Text("Select an action"), buttons: [
-                .default(Text("Edit product"), action: self.editProduct),
+                .default(Text("Open in Safari"), action: { self.showSafari.toggle() }),
                 .destructive(Text("Delete product"), action: self.deleteProduct),
                 .cancel()
             ])
+        }
+        .sheet(isPresented: $showSafari) {
+            SafariView(url: URL(string: "https://shoppy.gg/product/\(self.product.id ?? "")")!)
         }
         .onAppear {
             // Get ID
