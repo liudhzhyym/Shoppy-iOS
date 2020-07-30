@@ -41,7 +41,7 @@ struct ProductCard: View {
                     .font(.headline)
                 
                 Group {
-                    if type == .account || type == .dynamic {
+                    if type == .account {
                         if stock > 0 {
                             Text("\(stock) \("in stock".localized)")
                         } else {
@@ -49,6 +49,8 @@ struct ProductCard: View {
                         }
                     } else if type == .file {
                         Text("File")
+                    } else if type == .dynamic {
+                        Text("Dynamic")
                     } else {
                         Text("Service")
                     }
