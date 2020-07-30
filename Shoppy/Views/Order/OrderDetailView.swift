@@ -8,12 +8,19 @@
 
 import SwiftUI
 import struct SwiftyShoppy.Order
-import enum SwiftyShoppy.DeliveryType
+import enum SwiftyShoppy.Gateways
 
 struct OrderDetailView: View {
-    @Environment(\.presentationMode) var presentationMode
+    // Order
     @State public var order: Order
     
+    ///
+    /// Get a formatted date from Date object
+    /// - parameters:
+    ///     - date as Date
+    /// - returns:
+    ///     - Formatted string as "HH:mm MMM dd YYYY"
+    ///
     private func getDate(date: Date) -> String {
         let df = DateFormatter()
         df.dateFormat = "HH:mm MMM dd YYYY"
@@ -21,61 +28,99 @@ struct OrderDetailView: View {
         return df.string(from: date)
     }
     
-    var product: some View {
-        NavigationLink(destination: ProductDetailView(product: self.order.product!)) {
-                Image(systemName: "cube.box")
-                    .imageScale(.large)
-        }
-    }
-    
+    ///
+    /// Body
+    ///
     var body: some View {
-        VStack(alignment: .leading) {
-            ScrollView(.horizontal, showsIndicators: false) {
-                HStack {
-                    HighlightCardView(name: "Total".localized,
-                                       value: "\(Currencies.getSymbol(forCurrencyCode: order.currency ?? "USD") ?? "$") \((order.price ?? 0) * Double(order.quantity ?? 0))",
-                        icon: "cart.fill",
-                        foreground: Color("PastelGreenSecondary"),
-                        background: Color("PastelGreen"))
-                    
-                    HighlightCardView(name: "Quantity".localized,
-                                       value: "\(order.quantity ?? -1)",
-                        icon: "bag.fill",
-                        foreground: Color("PastelBlueSecondary"),
-                        background: Color("PastelBlue"))
-                    
-                    HighlightCardView(name: "Payment gateway".localized,
-                                       value: "\(order.gateway ?? "BTC")",
-                        icon: "creditcard.fill",
-                        foreground: Color("PastelOrangeSecondary"),
-                        background: Color("PastelOrange"))
-                }.padding(.horizontal)
+        List {
+            Section(header: Text("Information")) {
+                ScrollView(.horizontal, showsIndicators: false) {
+                    HStack {
+                        HighlightCardView(name: "Total".localized,
+                                          value: "\(Currencies.getSymbol(forCurrencyCode: order.currency ?? "USD") ?? "$") \((order.price ?? 0) * Double(order.quantity ?? 0))",
+                            icon: "cart.fill",
+                            foreground: Color("PastelGreenSecondary"),
+                            background: Color("PastelGreen"))
+                        
+                        HighlightCardView(name: "Quantity".localized,
+                                          value: "\(order.quantity ?? -1)",
+                            icon: "bag.fill",
+                            foreground: Color("PastelBlueSecondary"),
+                            background: Color("PastelBlue"))
+                        
+                        HighlightCardView(name: "Payment gateway".localized,
+                                          value: "\(order.gateway ?? "BTC")",
+                            icon: "creditcard.fill",
+                            foreground: Color("PastelOrangeSecondary"),
+                            background: Color("PastelOrange"))
+                    }.padding(.horizontal)
+                }
+                .listRowInsets(EdgeInsets())
+                .padding([.top, .bottom])
+                
+                Label(label: "Status",
+                      value: order.delivered == 1 ? "Paid" : "Cancelled",
+                      icon: "cube.box.fill")
+                
+                Label(label: "Date",
+                      value: getDate(date: order.created_at ?? Date()),
+                      icon: "clock.fill")
             }
             
-            Text("Information")
-                .font(.system(size: 20))
-                .bold()
-                .padding()
+            Section(header: Text("Buyer")) {
+                Label(label: "Email",
+                      value: order.email ?? "Unknown",
+                      icon: "envelope.fill",
+                      color: .green)
+                
+                Label(label: "Location",
+                      value: "\(order.agent?.geo?.state_name ?? "State"), \(order.agent?.geo?.country ?? "Country")",
+                    icon: "map.fill",
+                    color: .green)
+                
+                Label(label: "IP",
+                      value: order.agent?.geo?.ip ?? "Unknown",
+                      icon: "globe",
+                      color: .green)
+            }
             
-            Container {
-                ContainerField(name: "Status".localized, value: self.order.delivered == 1 ? "Paid".localized : "Cancelled".localized, icon: "waveform.path.ecg")
-                
-                ContainerField(name: "Email".localized, value: self.order.email ?? "email@domain.tld", icon: "envelope")
-                
-                ContainerField(name: "Date", value: self.getDate(date: self.order.created_at ?? Date()), icon: "clock")
-                
-                ContainerField(name: "Country".localized, value: "\(self.order.agent?.geo?.state_name ?? "State"), \(self.order.agent?.geo?.country ?? "Country")", icon: "map")
-                
-                ContainerField(name: "IP".localized, value: self.order.agent?.geo?.ip ?? "Unknown", icon: "globe")
-                
-                if self.order.product?.type ?? .service == .account && self.order.delivered == 1 {
-                    ContainerNavigationButton(title: "See delivered products".localized, icon: "list.dash", destination: AnyView(OrderAccountView(id: self.order.id ?? "")))
+            if order.gateway != Gateways.paypal.rawValue && order.gateway != Gateways.stripe.rawValue {
+                Section(header: Text("Crypto")) {
+                    Label(label: "Amount",
+                          value: order.crypto_amount ?? "0",
+                          icon: "bitcoinsign.circle.fill",
+                          color: .red)
+                    
+                    Label(label: "Address",
+                          value: order.crypto_address ?? "Unknown",
+                          icon: "arrow.branch",
+                          color: .red)
                 }
             }
             
-            Spacer()
+            Section(header: Text("Product")) {
+                Label(label: "Product",
+                      value: order.product?.title ?? "Unknown",
+                      icon: "doc.plaintext")
+                
+                // MARKS: This could cause a crash.
+                if order.product != nil {
+                    NavigationLink(destination: ProductDetailView(product: order.product!)) {
+                        Label(label: "See the product",
+                              icon: "cube.box",
+                              color: .orange)
+                    }
+                }
+            }
+            
+            Section(header: Text("Additional information")) {
+                Label(label: "ID",
+                      value: order.id ?? "Unknown",
+                      icon: "number",
+                      color: .purple)
+            }
         }
-        .navigationBarItems(trailing: self.order.product != nil ? product : nil)
+        .listStyle(GroupedListStyle())
         .navigationBarTitle("Invoice")
     }
 }

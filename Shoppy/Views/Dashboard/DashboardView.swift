@@ -28,12 +28,6 @@ struct DashboardView: View {
     @State private var incomes: [Double] = []
     @State private var gateways: [String: Double] = [:]
     
-    func getDate() -> String {
-        let df = DateFormatter()
-        df.dateFormat = "dd MMM YYYY"
-        return df.string(from: Date())
-    }
-    
     var profileButton: some View {
         Button(action: {
             self.showUser = true
@@ -51,13 +45,14 @@ struct DashboardView: View {
                 VStack {
                     HStack {
                         VStack(alignment: .leading) {
-                            Text(self.getDate())
+                            Text("Welcome back")
                                 .font(.callout)
                                 .foregroundColor(.secondary)
-                            Text("Hi, \(self.settings.user?.username ?? "Username")")
+                            Text("\(self.settings.user?.username ?? "Username")")
                                 .font(.largeTitle)
                                 .bold()
-                        }.lineLimit(0)
+                        }
+                        .lineLimit(0)
                         
                         Spacer()
                         
@@ -70,7 +65,7 @@ struct DashboardView: View {
                         .chartStyle(.init(backgroundColor: .clear, foregroundColor: [ColorGradient(.blue, .purple)]))
                         .frame(height: 150)
                 }
-                .padding(.top, geo.safeAreaInsets.top)
+                .padding(.top, geo.safeAreaInsets.bottom - 30)
                 .background(Color(UIColor.secondarySystemBackground))
                 
                 ScrollView {

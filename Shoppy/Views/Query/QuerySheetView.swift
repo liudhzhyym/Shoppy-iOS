@@ -69,44 +69,47 @@ struct QuerySheetView: View {
     
     var body: some View {
         NavigationView {
-            ScrollView {
-                Spacer()
-                
-                Container {
-                    ContainerField(name: "Status".localized, value: self.getState().localized, icon: "envelope")
-                    ContainerField(name: "Sender".localized, value: self.query.email ?? "", icon: "person")
-                    ContainerField(name: "Created on".localized, value: self.getDate(date: self.query.created_at ?? Date()), icon: "calendar")
-                    ContainerField(name: "Query ID".localized, value: self.query.id ?? "", icon: "number")
-                }.padding(.top)
-                
-                Button(action: changeState) {
-                    if query.status == QueryStatus.Closed.rawValue {
-                        Image(systemName: "lock.open")
-                            .padding(.horizontal, 5)
-                        
-                        Text("Re-open this query")
-                    } else {
-                        Image(systemName: "lock")
-                            .padding(.horizontal, 5)
-                        
-                        Text("Close this query")
-                    }
+            List {
+                Section(header: Text("Information")) {
+                    Label(label: "Status",
+                          value: getState(),
+                          icon: "envelope")
+                    
+                    Label(label: "Sender",
+                          value: query.email ?? "Unknown",
+                          icon: "person.fill")
+                    
+                    Label(label: "Creation date",
+                          value: getDate(date: query.created_at ?? Date()),
+                          icon: "calendar")
+                    
+                    Label(label: "ID",
+                          value: query.id ?? "Unknown",
+                          icon: "number")
                 }
-                .padding()
-                .font(.headline)
-                .foregroundColor(Color(query.status == QueryStatus.Closed.rawValue ? "PastelGreenSecondary" : "PastelRedSecondary"))
-                .background(Color(query.status == QueryStatus.Closed.rawValue ? "PastelGreen" : "PastelRed"))
-                .cornerRadius(20)
                 
-                if query.status != QueryStatus.Closed.rawValue {
-                    Text("You can still re-open it later.")
-                        .font(.footnote)
-                        .foregroundColor(.secondary)
+                Section(header: Text("Actions"),
+                        footer: Text("You can still re-open the query later")) {
+                    Button(action: changeState) {
+                        if query.status == QueryStatus.Closed.rawValue {
+                            Label(label: "Re-open this query",
+                                  showChevron: true,
+                                  icon: "lock.open.fill",
+                                  color: .green)
+                        } else {
+                            Label(label: "Close this query",
+                                  showChevron: true,
+                                  icon: "lock.fill",
+                                  color: .red)
+                        }
+                    }.buttonStyle(PlainButtonStyle())
                 }
             }
+            .listStyle(GroupedListStyle())
             
             .navigationBarTitle("Query detail", displayMode: .inline)
-        }.navigationViewStyle(StackNavigationViewStyle())
+        }
+        .navigationViewStyle(StackNavigationViewStyle())
     }
 }
 

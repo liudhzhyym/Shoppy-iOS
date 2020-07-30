@@ -24,24 +24,30 @@ struct DashboardStatView: View {
                     .font(.footnote)
                     .fontWeight(.light)
                 
-                Text("\(currency) \(value, specifier: specifier)")
-                    .font(.system(size: 22, weight: .bold, design: .default))
+                HStack {
+                    if !currency.isEmpty {
+                        Text(currency)
+                    }
+                    
+                    Text("\(value, specifier: specifier)")
+                }
+                .font(.system(size: 24, weight: .bold, design: .default))
                 
                 Spacer()
                 
                 Image(systemName: icon)
                     .font(.system(size: 28))
-                    .padding(.bottom)
-            }
-            
-            Spacer()
         }
-        .padding()
-        .foregroundColor(foreground)
-        .frame(height: 150)
-        .background(background)
-        .cornerRadius(20)
+        
+        Spacer()
     }
+    .padding()
+    .foregroundColor(foreground)
+    .frame(height: 150)
+    .background(background)
+    .cornerRadius(20)
+    .padding(.bottom, 10)
+}
 }
 
 struct DashboardStatView_Previews: PreviewProvider {

@@ -94,39 +94,29 @@ struct LoginView: View {
                 .autocapitalization(.none)
                 .padding(.top)
             
-            HStack {
-                Button(action: {
-                    self.showSafari.toggle()
-                }) {
-                    HStack {
-                        Image(systemName: "checkmark.shield.fill")
-                        Text("Get API key")
-                    }
+            Button(action: login) {
+                HStack {
+                    Image(systemName: "paperplane.fill")
+                    Text(isEdit ? "Save" : "Continue")
                 }
-                .padding()
-                .foregroundColor(.orange)
-                .overlay(
-                    RoundedRectangle(cornerRadius: 15)
-                        .stroke(Color.orange, lineWidth: 2)
-                )
-                
-                Button(action: login) {
-                    HStack {
-                        Image(systemName: "paperplane.fill")
-                        Text(isEdit ? "Save" : "Continue")
-                    }
-                }
-                .padding()
-                .foregroundColor(.white)
-                .background(Color.green)
-                .cornerRadius(15)
-            }.padding()
+            }
+            .padding()
+            .foregroundColor(.white)
+            .background(Color.green)
+            .cornerRadius(15)
             
-            Text("You can find your API key in Settings on your Shoppy account.")
-                .font(.footnote)
-                .foregroundColor(.secondary)
-                .multilineTextAlignment(.center)
-                .padding()
+            Button(action: {
+                self.showSafari.toggle()
+            }) {
+                Text("You can find your API key in Settings on your Shoppy account. ")
+                    + Text("Get my API key.")
+                        .foregroundColor(.orange)
+                        .bold()
+            }
+            .font(.footnote)
+            .foregroundColor(.secondary)
+            .multilineTextAlignment(.center)
+            .padding()
             
             
             Spacer()
@@ -134,7 +124,7 @@ struct LoginView: View {
             Text("Your API key is stored encrypted and never shared.")
                 .font(.footnote)
                 .foregroundColor(.secondary)
-            
+                .multilineTextAlignment(.center)
         }
         .padding()
         .keyboardObserving()
@@ -145,6 +135,7 @@ struct LoginView: View {
         }
         .sheet(isPresented: $showSafari) {
             SafariView(url: URL(string: "https://shoppy.gg/auth/login")!)
+                .edgesIgnoringSafeArea(.bottom)
         }
     }
 }

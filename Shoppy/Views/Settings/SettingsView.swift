@@ -38,84 +38,63 @@ struct SettingsView: View {
     @State private var showError = false
     
     var body: some View {
-        VStack(alignment: .leading) {
-                Text("Settings")
-                    .font(.largeTitle)
-                    .bold()
-                    .padding()
-            
-            Text("API management")
-                .font(.headline)
-                .padding([.leading, .top])
-            
-            Container {
-                ContainerButton(title: "Change API key".localized, icon: "lock.open.fill", function: {
-                    self.changeKey()
-                }, accent: .orange)
-            }
-            .sheet(isPresented: $displayLogin) {
-                LoginView(isEdit: true, network: self.network)
-            }
-            
-            Text("Source code")
-                .font(.headline)
-                .padding([.leading, .top])
-            
-            Container {
-                ContainerButton(title: "See the source code".localized, icon: "doc.text.fill", function: {
-                    self.url = .github
-                    self.showSafari.toggle()
-                }, accent: .orange)
-                
-                ContainerButton(title: "Report a bug".localized, icon: "exclamationmark.bubble.fill", function: {
-                    self.url = .issues
-                    self.showSafari.toggle()
-                }, accent: .orange)
-            }
-            .sheet(isPresented: $showSafari) {
-                SafariView(url: URL(string: self.url.rawValue)!)
-                    .edgesIgnoringSafeArea(.bottom)
-            }
-            
-            Text("Donation")
-                .font(.headline)
-                .padding([.leading, .top])
-            
-            Container {
-                ContainerButton(title: "Donate $1", icon: "1.circle.fill", function: {
-                    SwiftyStoreKit.purchaseProduct("SM_TIP", quantity: 1, atomically: true) { result in
-                        switch result {
-                            case .success:
-                                self.showDonation.toggle()
-                            case .error:
-                                self.showError.toggle()
-                        }
+            List {
+                Section(header: Text("API management")) {
+                    NavigationLink(destination: LoginView(isEdit: true, network: self.network)) {
+                        Label(label: "Change API key", icon: "lock.open.fill", color: .red)
                     }
-                })
+                }
                 
-                ContainerButton(title: "Donate $3", icon: "3.circle.fill", function: {
-                    SwiftyStoreKit.purchaseProduct("MD_TIP", quantity: 1, atomically: true) { result in
-                        switch result {
-                            case .success:
-                                self.showDonation.toggle()
-                            case .error:
-                                self.showError.toggle()
-                        }
+                Section(header: Text("Source code")) {
+                    Button(action: {
+                        self.url = .github
+                        self.showSafari.toggle()
+                    }) {
+                        Label(label: "See the source code", showChevron: true, icon: "doc.text.fill")
                     }
-                })
+                    
+                    Button(action: {
+                        self.url = .issues
+                        self.showSafari.toggle()
+                    }) {
+                        Label(label: "Report a bug", showChevron: true, icon: "exclamationmark.bubble.fill")
+                    }
+                }.buttonStyle(PlainButtonStyle())
+                
+                Section(header: Text("Donations")) {
+                    Button(action: {
+                        SwiftyStoreKit.purchaseProduct("SM_TIP", quantity: 1, atomically: true) { result in
+                            switch result {
+                                case .success:
+                                    self.showDonation.toggle()
+                                case .error:
+                                    self.showError.toggle()
+                            }
+                        }
+                    }) {
+                        Label(label: "Donate $1", showChevron: true, icon: "1.circle.fill", color: .green)
+                    }
+                    
+                    Button(action: {
+                        SwiftyStoreKit.purchaseProduct("MD_TIP", quantity: 1, atomically: true) { result in
+                            switch result {
+                                case .success:
+                                    self.showDonation.toggle()
+                                case .error:
+                                    self.showError.toggle()
+                            }
+                        }
+                    }) {
+                        Label(label: "Donate $3", showChevron: true, icon: "3.circle.fill", color: .green)
+                    }
+                }.buttonStyle(PlainButtonStyle())
+                
+                Section(header: Text("Information")) {
+                    Label(label: "Version", value: self.version ?? "", icon: "i.circle.fill", color: .orange)
+                }
             }
-            
-            Text("Information")
-                .font(.headline)
-                .padding([.leading, .top])
-            
-            Container {
-                ContainerField(name: "Version".localized, value: self.version ?? "", icon: "i.circle.fill", accent: .orange)
-            }
-            
-            Spacer()
-        }
-        .padding(.top)
+            .listStyle(GroupedListStyle())
+            .navigationBarTitle("Settings", displayMode: .inline)
         .alert(isPresented: $showDonation) {
             Alert(title: Text("Thank you!"),
                   message: Text("Thank you so much for donating, it's so nice 🥰"),
@@ -125,6 +104,10 @@ struct SettingsView: View {
             Alert(title: Text("Error"),
                   message: Text("Hm, there was an error..."),
                   dismissButton: .cancel())
+        }
+        .sheet(isPresented: $showSafari) {
+            SafariView(url: URL(string: self.url.rawValue)!)
+                .edgesIgnoringSafeArea(.bottom)
         }
     }
 }

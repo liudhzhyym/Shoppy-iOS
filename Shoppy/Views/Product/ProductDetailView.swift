@@ -13,14 +13,27 @@ import class SwiftyShoppy.NetworkManager
 import KeychainSwift
 
 struct ProductDetailView: View {
-    @Environment(\.presentationMode) var presentation
+    // Network
     @EnvironmentObject var network: NetworkObserver
     
+    // Presentation Mode
+    @Environment(\.presentationMode) var presentation
+    
+    // Product
     @State public var product: Product
+    
+    // Events
     @State private var showSafari = false
     @State private var isPresented = false
     @State private var allowEditing = true
     
+    ///
+    /// Get formatted string from Date object
+    /// - parameters:
+    ///     - date as Date()
+    /// - returns:
+    ///     - Formatted string as "dd/MM"
+    ///
     private func getDate(date: Date) -> String {
         let df = DateFormatter()
         df.dateFormat = "dd/MM"
@@ -28,7 +41,9 @@ struct ProductDetailView: View {
         return df.string(from: date)
     }
     
-    // Delete product
+    ///
+    /// Delete a product
+    ///
     private func deleteProduct() {
         // Get product ID
         guard let id = product.id else {
@@ -50,7 +65,9 @@ struct ProductDetailView: View {
             })
     }
     
-    // Open action sheet
+    ///
+    /// Show action
+    ///
     var showAction: some View {
         Button(action: {
             self.isPresented = true
@@ -61,10 +78,12 @@ struct ProductDetailView: View {
         .disabled(!self.allowEditing)
     }
     
-    // Body
+    ///
+    /// Body
+    ///
     var body: some View {
-        ScrollView {
-            VStack {
+        List {
+            Section(header: Text("Information")) {
                 ScrollView(.horizontal, showsIndicators: false) {
                     HStack {
                         HighlightCardView(name: "Price".localized,
@@ -84,28 +103,70 @@ struct ProductDetailView: View {
                                           icon: "calendar",
                                           foreground: Color("PastelBlueSecondary"),
                                           background: Color("PastelBlue"))
-                    }.padding()
+                    }.padding(.horizontal)
                 }
+                .listRowInsets(EdgeInsets())
+                .padding([.top, .bottom])
                 
-                Container {
-                    ContainerField(name: "Title".localized, value: self.product.title ?? "Product Name", icon: "cube")
-                    
-                    ContainerField(name: "Type".localized, value: self.product.type?.rawValue.capitalized.localized ?? "Service", icon: "aspectratio")
-                    
-                    ContainerNavigationButton(title: "See the description".localized, icon: "text.alignleft", destination: AnyView(ProductDetailledView(name: "Description", value: self.product.description ?? "Empty description.")))
-                    
-                    if self.product.type ?? .service == .account {
-                        ContainerNavigationButton(title: "See accounts in stock".localized, icon: "list.dash", destination: AnyView(ProductAccountView(accounts: self.product.accounts)))
+                Label(label: "Title",
+                      value: product.title ?? "Unknown",
+                      icon: "cube.box.fill")
+                
+                Label(label: "Type",
+                      value: product.type?.rawValue.capitalized ?? "Service",
+                      icon: "aspectratio.fill")
+                
+                NavigationLink(destination: ProductDetailledView(name: "Description", value: self.product.description ?? "Empty description.")) {
+                    Label(label: "See the description",
+                          icon: "a")
+                }
+            }
+            
+            if product.type == .account || product.type == .dynamic {
+                Section(header: Text(product.type == .account ? "Account" : "Dynamic")) {
+                    if product.type == .account {
+                        NavigationLink(destination: ProductAccountView(accounts: product.accounts)) {
+                            Label(label: "See the list of account",
+                                  icon: "rectangle.stack.person.crop.fill",
+                                  color: .red)
+                        }
+                    } else {
+                        Label(label: "URL",
+                              value: product.dynamic_url ?? "Unknown",
+                              icon: "link.fill",
+                              color: .red)
                     }
                     
-                    ContainerField(name: "Unlisted".localized, value: self.product.unlisted == true ? "Yes".localized : "No".localized, icon: "eye.slash")
+                    Label(label: "Minimum per order",
+                          value: "\(product.quantity?.min ?? 0)",
+                        icon: "minus.circle.fill",
+                        color: .red)
                     
-                    ContainerField(name: "ID", value: self.product.id ?? "Unknown", icon: "number")
+                    Label(label: "Maximum per order",
+                          value: "\(product.quantity?.max ?? 0)",
+                        icon: "plus.circle.fill",
+                        color: .red)
                 }
+            }
+            
+            Section(header: Text("Additional information")) {
+                Label(label: "Unlisted",
+                      value: product.unlisted == true ? "Yes" : "No",
+                      icon: "eye.slash.fill",
+                      color: .green)
                 
-                Spacer()
+                Label(label: "Currency",
+                      value: product.currency ?? "USD",
+                      icon: "dollarsign.circle.fill",
+                      color: .green)
+                
+                Label(label: "ID",
+                      value: product.id ?? "Unknown",
+                      icon: "number",
+                      color: .green)
             }
         }
+        .listStyle(GroupedListStyle())
         .navigationBarTitle("Product")
         .navigationBarItems(trailing: showAction)
         .actionSheet(isPresented: $isPresented) {

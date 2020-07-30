@@ -44,33 +44,47 @@ struct UserView: View {
                 .padding()
                 .padding(.top)
                 
-                Container {
-                    ContainerField(name: "Currency".localized, value: self.settings.settings?.currency ?? "USD", icon: "dollarsign.circle.fill")
+                List {
+                    Section(header: Text("Account")) {
+                        Label(label: "Currency",
+                              value: self.settings.settings?.currency ?? "USD",
+                              icon: "dollarsign.circle.fill")
+                    }
+                    
+                    Section(header: Text("Payments")) {
+                        Label(label: "BTC Address",
+                              value: self.settings.settings?.bitcoinAddress ?? "N/A",
+                              icon: "b.circle.fill",
+                              color: .orange)
+                        
+                        Label(label: "LTC Address",
+                              value: self.settings.settings?.litecoinAddress ?? "N/A",
+                              icon: "l.circle.fill",
+                              color: .orange)
+                        
+                        Label(label: "ETH Address",
+                              value: self.settings.settings?.ethereumAddress ?? "N/A",
+                              icon: "e.circle.fill",
+                              color: .orange)
+                        
+                        Label(label: "PayPal",
+                              value: self.settings.settings?.paypalAddress ?? "N/A",
+                              icon: "p.circle.fill",
+                              color: .orange)
+                        
+                        Label(label: "Stripe ID",
+                              value: self.settings.settings?.stripeAccountId ?? "N/A",
+                              icon: "s.circle.fill",
+                              color: .orange)
+                    }
+                    
+                    Section(header: Text("Customers")) {
+                        NavigationLink(destination: FeedbackView(network: self.network)) {
+                            Label(label: "See feedbacks", icon: "hand.thumbsup.fill", color: .green)
+                        }
+                    }
                 }
-                
-                Container {
-                    ContainerField(name: "BTC Address".localized,
-                                   value: self.settings.settings?.bitcoinAddress ?? "Not linked".localized,
-                                   icon: "b.circle.fill", accent: .orange)
-                    ContainerField(name: "LTC Address".localized,
-                                   value: self.settings.settings?.litecoinAddress ?? "Not linked".localized,
-                                   icon: "l.circle.fill", accent: .orange)
-                    ContainerField(name: "ETH Address".localized,
-                                   value: self.settings.settings?.ethereumAddress ?? "Not linked".localized,
-                                   icon: "e.circle.fill", accent: .orange)
-                    ContainerField(name: "PayPal".localized,
-                                   value: self.settings.settings?.paypalAddress ?? "Not linked".localized,
-                                   icon: "p.circle.fill", accent: .orange)
-                    ContainerField(name: "Stripe ID".localized,
-                                   value: self.settings.settings?.stripeAccountId ?? "Not linked".localized,
-                                   icon: "s.circle.fill", accent: .orange)
-                }
-                
-                Container {
-                    ContainerNavigationButton(title: "See feedbacks",
-                                              icon: "hand.thumbsup.fill",
-                                              destination: AnyView(FeedbackView(network: self.network)))
-                }
+                .listStyle(GroupedListStyle())
                 
                 Text("Your profile can be changed on the website.")
                     .font(.footnote)
@@ -80,15 +94,10 @@ struct UserView: View {
             }
                 
             .navigationBarTitle("Profile", displayMode: .inline)
-            .navigationBarItems(trailing: Button(action: {
-                self.showSettings = true
-            }) {
+            .navigationBarItems(trailing: NavigationLink(destination: SettingsView(network: self.network)) {
                 Image(systemName: "gear")
                     .imageScale(.large)
             })
-        }
-        .sheet(isPresented: $showSettings) {
-            SettingsView(network: self.network)
         }
     }
 }
