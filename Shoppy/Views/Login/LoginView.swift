@@ -136,7 +136,7 @@ struct LoginView: View {
                   dismissButton: .cancel())
         }
         .sheet(isPresented: $showSafari) {
-            SafariView(url: URL(string: "https://shoppy.gg/auth/login")!)
+            SafariView(url: URL(string: "https://shoppy.gg/")!)
                 .edgesIgnoringSafeArea(.bottom)
         }
     }
