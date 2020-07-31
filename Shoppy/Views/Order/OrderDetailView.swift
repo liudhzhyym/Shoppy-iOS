@@ -84,6 +84,16 @@ struct OrderDetailView: View {
                       color: .green)
             }
             
+            if order.product?.type == .account {
+                Section(header: Text("accounts".localized.capitalized)) {
+                    NavigationLink(destination: OrderAccountView(id: order.id ?? "")) {
+                        Label(label: "See the account list",
+                              icon: "list.dash",
+                              color: .pink)
+                    }
+                }
+            }
+            
             if order.gateway != Gateways.paypal.rawValue && order.gateway != Gateways.stripe.rawValue {
                 Section(header: Text("Crypto")) {
                     Label(label: "Amount",
@@ -101,7 +111,8 @@ struct OrderDetailView: View {
             Section(header: Text("Product")) {
                 Label(label: "Product",
                       value: order.product?.title ?? "Unknown",
-                      icon: "doc.plaintext")
+                      icon: "doc.plaintext",
+                      color: .orange)
                 
                 // MARKS: This could cause a crash.
                 if order.product != nil {

@@ -22,7 +22,7 @@ struct HighlightCardView: View {
             
             Spacer()
             
-            Text(name.uppercased())
+            Text(name.localized.uppercased())
                 .font(.footnote)
             
             Text(value)

@@ -154,6 +154,7 @@
 "Crypto" = "Crypto";
 "Amount" = "Montant";
 "Address" = "Adresse";
+"See the account list" = "Voir les comptes";
 
 // Status
 "Paid" = "Payé";
@@ -189,11 +190,11 @@
 "Delete product" = "Supprimer le produit";
 
 // Types
-"service" = "service";
+"Service" = "Service";
 "account" = "compte";
 "accounts" = "comptes";
-"file" = "fichier";
-"dynamic" = "dynamique";
+"File" = "Fichier";
+"Dynamic" = "Dynamique";
 
 // Description
 "Description" = "Description";
