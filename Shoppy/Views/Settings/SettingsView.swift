@@ -7,7 +7,6 @@
 //
 
 import SwiftUI
-import SwiftyStoreKit
 
 enum Links: String {
     case github = "https://github.com/vlourme/Shoppy-iOS"
@@ -24,87 +23,56 @@ struct SettingsView: View {
     // Version name
     @State private var version = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String
     
-    // Change key
-    private func changeKey() {
-        self.displayLogin = true
-    }
-    
     // Safari WebView
     @State private var url: Links = .github
     @State private var showSafari = false
     
-    // Donation
-    @State private var showDonation = false
-    @State private var showError = false
+    ///
+    /// Change key
+    ///
+    private func changeKey() {
+        self.displayLogin = true
+    }
     
+    ///
+    /// Body
+    ///
     var body: some View {
-            List {
-                Section(header: Text("API management")) {
-                    NavigationLink(destination: LoginView(isEdit: true, network: self.network)) {
-                        Label(label: "Change API key", icon: "lock.open.fill", color: .red)
-                    }
-                }
-                
-                Section(header: Text("Source code")) {
-                    Button(action: {
-                        self.url = .github
-                        self.showSafari.toggle()
-                    }) {
-                        Label(label: "See the source code", showChevron: true, icon: "doc.text.fill")
-                    }
-                    
-                    Button(action: {
-                        self.url = .issues
-                        self.showSafari.toggle()
-                    }) {
-                        Label(label: "Report a bug", showChevron: true, icon: "exclamationmark.bubble.fill")
-                    }
-                }.buttonStyle(PlainButtonStyle())
-                
-                Section(header: Text("Donations")) {
-                    Button(action: {
-                        SwiftyStoreKit.purchaseProduct("SM_TIP", quantity: 1, atomically: true) { result in
-                            switch result {
-                                case .success:
-                                    self.showDonation.toggle()
-                                case .error:
-                                    self.showError.toggle()
-                            }
-                        }
-                    }) {
-                        Label(label: "Donate $1", showChevron: true, icon: "1.circle.fill", color: .green)
-                    }
-                    
-                    Button(action: {
-                        SwiftyStoreKit.purchaseProduct("MD_TIP", quantity: 1, atomically: true) { result in
-                            switch result {
-                                case .success:
-                                    self.showDonation.toggle()
-                                case .error:
-                                    self.showError.toggle()
-                            }
-                        }
-                    }) {
-                        Label(label: "Donate $3", showChevron: true, icon: "3.circle.fill", color: .green)
-                    }
-                }.buttonStyle(PlainButtonStyle())
-                
-                Section(header: Text("Information")) {
-                    Label(label: "Version", value: self.version ?? "", icon: "i.circle.fill", color: .orange)
+        List {
+            Section(header: Text("API management")) {
+                NavigationLink(destination: LoginView(isEdit: true, network: self.network)) {
+                    Label(label: "Change API key", icon: "lock.open.fill", color: .red)
                 }
             }
-            .listStyle(GroupedListStyle())
-            .navigationBarTitle("Settings", displayMode: .inline)
-        .alert(isPresented: $showDonation) {
-            Alert(title: Text("Thank you!"),
-                  message: Text("Thank you so much for donating, it's so nice 🥰"),
-                  dismissButton: .default(Text("Close")))
+            
+            Section(header: Text("Source code")) {
+                Button(action: {
+                    self.url = .github
+                    self.showSafari.toggle()
+                }) {
+                    Label(label: "See the source code", showChevron: true, icon: "doc.text.fill")
+                }
+                
+                Button(action: {
+                    self.url = .issues
+                    self.showSafari.toggle()
+                }) {
+                    Label(label: "Report a bug", showChevron: true, icon: "exclamationmark.bubble.fill")
+                }
+            }.buttonStyle(PlainButtonStyle())
+            
+            Section(header: Text("Donations")) {
+                NavigationLink(destination: DonationView()) {
+                    Label(label: "Make a donation", icon: "app.gift.fill", color: .green)
+                }
+            }
+            
+            Section(header: Text("Information")) {
+                Label(label: "Version", value: self.version ?? "", icon: "i.circle.fill", color: .orange)
+            }
         }
-        .alert(isPresented: $showError) {
-            Alert(title: Text("Error"),
-                  message: Text("Hm, there was an error..."),
-                  dismissButton: .cancel())
-        }
+        .listStyle(GroupedListStyle())
+        .navigationBarTitle("Settings", displayMode: .inline)
         .sheet(isPresented: $showSafari) {
             SafariView(url: URL(string: self.url.rawValue)!)
                 .edgesIgnoringSafeArea(.bottom)

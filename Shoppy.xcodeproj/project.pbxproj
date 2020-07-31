@@ -35,6 +35,7 @@
 		1B9C237824C8D118007545BA /* HighlightCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B9C237724C8D118007545BA /* HighlightCardView.swift */; };
 		1B9F19B624D1BB9F001D37C7 /* FeedbackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B9F19B524D1BB9F001D37C7 /* FeedbackView.swift */; };
 		1B9F5BC524D43EA60029C88D /* DashboardFeedbackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B9F5BC424D43EA60029C88D /* DashboardFeedbackView.swift */; };
+		1B9F5BC724D444190029C88D /* DonationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B9F5BC624D444190029C88D /* DonationView.swift */; };
 		1BA7FCBB24D429BE00CE67B6 /* PassKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1BA7FCBA24D429BE00CE67B6 /* PassKit.framework */; };
 		1BAA5EB724C6253C00115E59 /* OrderCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BAA5EB624C6253C00115E59 /* OrderCardView.swift */; };
 		1BAA5EB924C6290800115E59 /* DashboardStatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BAA5EB824C6290800115E59 /* DashboardStatView.swift */; };
@@ -84,6 +85,7 @@
 		1B9C237724C8D118007545BA /* HighlightCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HighlightCardView.swift; sourceTree = "<group>"; };
 		1B9F19B524D1BB9F001D37C7 /* FeedbackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedbackView.swift; sourceTree = "<group>"; };
 		1B9F5BC424D43EA60029C88D /* DashboardFeedbackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardFeedbackView.swift; sourceTree = "<group>"; };
+		1B9F5BC624D444190029C88D /* DonationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DonationView.swift; sourceTree = "<group>"; };
 		1BA7FCBA24D429BE00CE67B6 /* PassKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PassKit.framework; path = System/Library/Frameworks/PassKit.framework; sourceTree = SDKROOT; };
 		1BAA5EB624C6253C00115E59 /* OrderCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderCardView.swift; sourceTree = "<group>"; };
 		1BAA5EB824C6290800115E59 /* DashboardStatView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardStatView.swift; sourceTree = "<group>"; };
@@ -312,6 +314,7 @@
 			isa = PBXGroup;
 			children = (
 				1BD7D4E024AF84FE00857EEC /* SettingsView.swift */,
+				1B9F5BC624D444190029C88D /* DonationView.swift */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
@@ -405,6 +408,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1B9F5BC724D444190029C88D /* DonationView.swift in Sources */,
 				1B9BCB8024B4889600255448 /* ProductView.swift in Sources */,
 				1BB764D524AB76DF00C7F63A /* Shoppy.xcdatamodeld in Sources */,
 				1B61051F24BA22C6003857A9 /* Localization.swift in Sources */,
