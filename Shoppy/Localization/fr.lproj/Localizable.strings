@@ -6,177 +6,221 @@
  Copyright © 2020 Victor Lourme. All rights reserved.
  */
 
-// App title
-"Shoppy" = "Shoppy";
+///
+/// Common
+///
+"Yes" = "Oui";
+"No" = "Non";
 
-// Home
-"Statistics" = "Statistiques";
-"Navigation" = "Navigation";
-
-// Errors
-"Wrong API key" = "Mauvaise clé API";
-"Please check you filled required fields correctly." = "Vérifiez que les champs requis sont correctement remplis";
-"Network is unreachable" = "Connection impossible";
-"Your device does not have Internet connection, reload the application when you have connection back." = "Impossible d'accéder à Internet, relancez l'application une fois que la connexion marche à nouveau";
-
-// Tabs
+///
+/// Tabs
+///
 "Dashboard" = "Tableau de bord";
 "Orders" = "Commandes";
 "Products" = "Produits";
-"Queries" = "Requêtes";
-
-// iPad column
-"No product selected" = "Aucun produit sélectionné";
-"No order selected" = "Aucune commande sélectionnée";
-
-// Tabs variations
-"Order" = "Commande";
-"orders" = "commandes";
-"Product" = "Produit";
-"products" = "produits";
-"Query" = "Requête";
-"queries" = "requêtes";
-
-// Common
-"Save" = "Sauvegarder";
-"Continue" = "Continuer";
-"Copy" = "Copier";
-"Done" = "Confirmer";
-"No" = "Non";
-"Yes" = "Oui";
-"Error" = "Erreur";
-
-// Login
-"Your API key is stored encrypted and never shared." = "Votre clé API est sauvegardée chiffrée et jamais partagée.";
-"Change your API key" = "Changer votre clé API";
-"Welcome on Shoppy" = "Bienvenue sur Shoppy";
-"Manage your commerce like never before, welcome on a easy way to manage your orders, products, customers' queries and more." = "Gérez votre commerce en ligne facilement, Shoppy vous permet de gérer simplement vos commandes, produits et les requêtes de vos clients.";
-"You can find your API key in Settings on your Shoppy account." = "Votre clé API est trouvable dans les paramètres de votre compte.";
-"API key" = "Clé API";
-
-// Settings
-"API management" = "Gestion de l'API";
-"Source code" = "Code source";
-"Information" = "Informations";
-"Settings" = "Paramètres";
-"Change API key" = "Changer la clé API";
-"See the source code" = "Voir le code source";
-"Report a bug" = "Signaler un bug";
-"Version" = "Version";
-
-// Dashboard
-"Today's earnings" = "Revenus du jour";
-"Total earnings" = "Revenus totaux";
-"Total orders" = "Commandes totales";
-"10 last orders" = "Dernières commandes";
-
-// Orders
-"Try to load more" = "Essayer de charger plus";
-"Paid" = "Payé";
-"paid" = "payés";
-"Unpaid" = "Non payé";
-"Cancelled" = "Annulé";
-"Status" = "Etat";
-"Created at" = "Créé à";
-"Paid using" = "Payé via";
-"Paid at" = "Payé à";
-"Price" = "Prix";
-"Quantity" = "Quantité";
-"Total price" = "Prix total";
-"Currency" = "Devise";
-"Email" = "Email";
-"IP" = "IP";
-"Country" = "Pays";
-"Platform" = "Appareil";
-"Order ID" = "ID";
-"Product ID" = "ID du produit";
-"Replacement ID" = "ID du remplacement";
-"Coupon ID" = "ID du coupon";
-"Hash" = "Signature";
-"Delivered accounts" = "Comptes livrés";
-"See product" = "Voir le produit";
-"See delivered products" = "Voir les produits livrés";
-"Copy email" = "Copier l'email";
-"Copy IP" = "Copier l'IP";
-"Copy product ID" = "Copier l'ID du produit";
-"Copy invoice ID" = "Copier l'ID de la facture";
-"Order was not paid" = "La commande n'a pas été payée";
-"Payment gateway" = "Moyen de paiement";
-"Invoice" = "Facture";
-"Total" = "Total";
-"In" = "En";
-"using" = "avec";
-
-// Products
-"Name" = "Nom";
-"See the description" = "Voir la description";
-"Description" = "Description";
-"Delivery type" = "Type";
-"Revenue per order" = "Revenus par commande";
-"Potential total" = "Total potentiel";
-"Stock" = "Stock";
-"Minimum quantity per order" = "Quantité minimale par commande";
-"Maximum quantity per order" = "Quantité maximale par commande";
-"See accounts in stock" = "Voir les comptes en stock";
-"Unlisted" = "Non listé";
-"Creation date" = "Date de création";
-"Last update" = "Dernière modification";
-"Select an action" = "Selectionnez une action";
-"Edit product" = "Modifier le produit";
-"Delete product" = "Supprimer le produit";
-"Required fields" = "Champs requis";
-"Name (128 chars max)" = "Nom (128 caractères max.)";
-"Price (10.000 max)" = "Prix (10.000 max)";
-"Type" = "Type";
-"Optional fields" = "Champs optionnels";
-"Description (10.000 chars max)" = "Description (10.000 caractères max)";
-"Minimum stock" = "Quantité minimale par achat";
-"Maximum stock" = "Quantité maximale par achat";
-"Callback URL" = "Callback URL";
-"Upload files from the website" = "Téléversez des fichiers depuis le site";
-"Attachment" = "Pièce jointe";
-"Please upload files from the website." = "Merci de téléverser des fichiers depuis le site.";
-"Accounts" = "Comptes";
-"Send email on purchase" = "Envoyer un mail après l'achat";
-"Message to send" = "Message à envoyer";
-"Edit a product" = "Editer un produit";
-"Create a product" = "Créer un produit";
-"in stock" = "en stock";
-"Out of stock" = "Rupture de stock";
-
-// Types
-"Account" = "Compte";
-"Accounts" = "Comptes";
-"Service" = "Service";
-"File" = "Fichier";
-"Dynamic" = "URL Dynamique";
-
-// Query
-"Tap to reply" = "Appuyez pour répondre";
-"Query detail" = "Détails sur la requête";
-"Sent date" = "Date d'envoi";
-"Sender" = "Expéditeur";
-"Created on" = "Date de création";
-"Query ID" = "ID de la requête";
-"Re-open this query" = "Ré-ouvrir la requête";
-"Close this query" = "Fermer la requête";
 "Support" = "Support";
-"Support center" = "Centre de support";
-"You can still re-open it later." = "Vous pourrez toujours la re-ouvrir plus tard.";
 
-// Query status
-"Open" = "Ouvert";
-"Closed" = "Fermé";
-"Replied" = "Répondu";
-"User replied" = "Réponse reçue";
+///
+/// Dashboard
+///
 
-// User
+// Sections
+"Welcome back" = "Bienvenue";
+"Analytics" = "Statistiques";
+"Feedbacks" = "Avis";
+
+// Cards
+"Total revenues" = "Revenus totaux";
+"Total orders" = "Commandes";
+"Today's revenues" = "Revenus du jour";
+
+// Feedbacks
+"Positive" = "Positifs";
+"Neutral" = "Neutres";
+"Negative" = "Negatifs";
+
+///
+/// Profile
+///
+
+// Sections
 "Profile" = "Profil";
-"Username" = "Nom d'utilisateur";
-"Not linked" = "Non lié";
+"Account" = "Compte";
+"Payments" = "Paiements";
+"Customers" = "Clients";
+
+// Labels
+"Currency" = "Devise";
 "BTC Address" = "Adresse BTC";
 "LTC Address" = "Adresse LTC";
 "ETH Address" = "Adresse ETH";
-"PayPal" = "PayPal";
-"Stripe ID" = "Stripe ID";
-"Your profile can be changed on the website." = "Votre profil peut être modifié sur le site.";
+"Paypal" = "Paypal";
+"Stripe ID" = "ID Stripe";
+"See feedbacks" = "Voir les avis";
+
+// Footer
+"Your profile can be changed on the website." = "Votre profil peut être mis à jour sur le site.";
+
+///
+/// Feedbacks
+///
+"feedbacks" = "avis";
+
+///
+/// Settings
+///
+
+// Title
+"Settings" = "Paramètres";
+
+// Sections
+"API management" = "Gestion de l'API";
+"Source code" = "Code source";
+"Donations" = "Dons";
+"Information" = "Informations";
+
+// Labels
+"Change API key" = "Changer la clé API";
+"See the source code" = "Voir le code source";
+"Report a bug" = "Signaler un bug";
+"Make a donation" = "Faire un don";
+"Version" = "Version";
+
+///
+/// API
+///
+
+// First-time mode
+"Welcome on Shoppy" = "Bienvenue sur Shoppy";
+"Manage your digital e-commerce like never before. This alternative client brings you the easiest way to manage your orders, products, and customers' queries." = "Gérez votre commerce digital de la meilleure manière. Ce client alternatif vous offre la gestion la plus facile de vos commandes, produits et de vos clients.";
+
+// Edition mode
+"Change your API key" = "Changer la clé API";
+
+// Texts
+"You can find your API key in settings on your Shoppy account. " = "Vous pouvez trouver votre clé API dans les paramètres de votre compte Shoppy. ";
+"Get my API key." = "Obtenir ma clé API.";
+"Your key is stored encrypted and never shared. " = "Votre clé API est sauvegardée chiffrée et jamais partagée. ";
+"Read our privacy policy." = "Lire la politique de confidentialité.";
+
+// Fields
+"API key" = "Clé API";
+
+// Buttons
+"Save" = "Sauvegarder";
+
+///
+/// Donations
+///
+
+// Texts
+"This application is developed and distributed for free. Please consider doing a small donation to help the future of the app." = "Cette application est développée et distribuée gratuitement. Un petit don serait vraiment bienvenue afin améliorer l'application.";
+"You can also contribute to the app on GitHub by reporting issues and proposing new features." = "Vous pouvez aussi contribuer gratuitement à l'application en signalant les bugs ou en proposant des nouvelles fonctionnalités.";
+
+// Labels
+"Donate $1" = "Donner 1€";
+"Donate $3" = "Donner 3€";
+
+///
+/// Orders and products
+///
+
+// Buttons
+"See the product" = "Voir le produit";
+
+// Labels
+"Product" = "Produit";
+"Additional information" = "Informations additionnelles";
+"ID" = "ID";
+
+///
+/// Orders
+///
+
+// Texts
+"Invoice" = "Facture";
+
+// Cards
+"Total" = "Total";
+"Quantity" = "Quantité";
+"Payment gateway" = "Mode de paiement";
+
+// Labels
+"Status" = "Etat";
+"Date" = "Date";
+"Email" = "Email";
+"Location" = "Lieu";
+"IP" = "IP";
+"Crypto" = "Crypto";
+"Amount" = "Montant";
+"Address" = "Adresse";
+
+// Status
+"Paid" = "Payé";
+"Cancelled" = "Non payé";
+
+// Account
+"Delivered accounts" = "Comptes livrés";
+
+///
+/// Products
+///
+
+// Preview
+"in stock" = "en stock";
+
+// Cards
+"Price" = "Prix";
+"Stock" = "Stock";
+"Creation date" = "Date de création";
+
+// Labels
+"Title" = "Titre";
+"Type" = "Type";
+"See the description" = "Voir la description";
+"See the list of account" = "Voir la liste des comptes";
+"Minimum per order" = "Minimum par commande";
+"Maximum per order" = "Maximum par commande";
+"Unlisted" = "Non visible";
+
+// Sheet
+"Select an action" = "Sélectionnez une action";
+"Open in Safari" = "Ouvrir dans Safari";
+"Delete product" = "Supprimer le produit";
+
+// Types
+"service" = "service";
+"account" = "compte";
+"accounts" = "comptes";
+"file" = "fichier";
+"dynamic" = "dynamique";
+
+// Description
+"Description" = "Description";
+"Empty description." = "Description vide.";
+
+///
+/// Support center
+///
+
+// Title
+"Support center" = "Centre de support";
+
+// Labels
+"Queries" = "Requêtes";
+"Sender" = "Expéditeur";
+"You can still re-open the query later" = "Vous pouvez toujours ré-ouvrir la requête plus tard.";
+
+// Status
+"Open" = "Ouverte";
+"Closed" = "Fermée";
+"User replied" = "Réponse reçue";
+"Replied" = "Répondu";
+
+// Sheet
+"Query detail" = "Détails sur la requête";
+
+// Button
+"Tap to reply" = "Appuyez pour répondre";
+"Close this query" = "Fermer la requête";
+"Re-open this query" = "Ré-ouvrir la requête";

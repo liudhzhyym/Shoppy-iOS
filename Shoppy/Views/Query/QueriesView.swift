@@ -37,7 +37,7 @@ struct QueriesView: View {
         NavigationView {
             List {
                 Section(
-                    header: Text("\(network.queries.count) \("queries".localized)".uppercased())) {
+                    header: Text("\(network.queries.count) \("Queries".localized)".uppercased())) {
                     ForEach(network.queries, id: \.id) { (query: Query) in
                         NavigationLink(destination: QueryDetailView(query: query)) {
                             QueryCard(email: query.email ?? "",

@@ -36,19 +36,19 @@ struct OrderDetailView: View {
             Section(header: Text("Information")) {
                 ScrollView(.horizontal, showsIndicators: false) {
                     HStack {
-                        HighlightCardView(name: "Total".localized,
+                        HighlightCardView(name: "Total",
                                           value: "\(Currencies.getSymbol(forCurrencyCode: order.currency ?? "USD") ?? "$") \((order.price ?? 0) * Double(order.quantity ?? 0))",
                             icon: "cart.fill",
                             foreground: Color("PastelGreenSecondary"),
                             background: Color("PastelGreen"))
                         
-                        HighlightCardView(name: "Quantity".localized,
+                        HighlightCardView(name: "Quantity",
                                           value: "\(order.quantity ?? -1)",
                             icon: "bag.fill",
                             foreground: Color("PastelBlueSecondary"),
                             background: Color("PastelBlue"))
                         
-                        HighlightCardView(name: "Payment gateway".localized,
+                        HighlightCardView(name: "Payment gateway",
                                           value: "\(order.gateway ?? "BTC")",
                             icon: "creditcard.fill",
                             foreground: Color("PastelOrangeSecondary"),
@@ -59,7 +59,7 @@ struct OrderDetailView: View {
                 .padding([.top, .bottom])
                 
                 Label(label: "Status",
-                      value: order.delivered == 1 ? "Paid" : "Cancelled",
+                      value: order.delivered == 1 ? "Paid".localized : "Cancelled".localized,
                       icon: "cube.box.fill")
                 
                 Label(label: "Date",

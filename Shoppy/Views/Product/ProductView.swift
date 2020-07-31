@@ -35,7 +35,7 @@ struct ProductView: View {
     var body: some View {
         NavigationView {
             List {
-                Section(header: Text("\(network.products.count) \("products".localized)".uppercased())) {
+                Section(header: Text("\(network.products.count) \("Products".localized)".uppercased())) {
                     ForEach(network.products, id: \.id) { product in
                         NavigationLink(destination: ProductDetailView(product: product)) {
                             ProductCard(title: product.title ?? "Unknown",

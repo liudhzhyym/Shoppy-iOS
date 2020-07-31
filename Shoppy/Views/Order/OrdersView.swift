@@ -71,7 +71,7 @@ struct OrdersView: View {
     var body: some View {
         NavigationView {
             List {
-                Section(header: Text("\(orders.count) \("orders".localized)".uppercased())) {
+                Section(header: Text("\(orders.count) \("Orders".localized)".uppercased())) {
                     ForEach(orders, id: \.id) { (order: Order) in
                         NavigationLink(destination: OrderDetailView(order: order)) {
                             OrderCardView(email: order.email ?? "",

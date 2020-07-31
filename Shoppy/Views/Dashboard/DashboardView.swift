@@ -80,7 +80,7 @@ struct DashboardView: View {
                         
                         HStack(alignment: .top) {
                             VStack {
-                                DashboardStatView(title: "Total revenues".localized,
+                                DashboardStatView(title: "Total revenues",
                                                   currency: self.$currency,
                                                   value: self.$revenuesStat,
                                                   specifier: "%.2f",
@@ -88,7 +88,7 @@ struct DashboardView: View {
                                                   foreground: Color("PastelGreenSecondary"),
                                                   background: Color("PastelGreen"))
                                 
-                                DashboardStatView(title: "Today's revenues".localized,
+                                DashboardStatView(title: "Today's revenues",
                                                   currency: self.$currency,
                                                   value: self.$todayStat,
                                                   specifier: "%.2f",
@@ -100,7 +100,7 @@ struct DashboardView: View {
                             Spacer()
                             
                             VStack {
-                                DashboardStatView(title: "Total orders".localized,
+                                DashboardStatView(title: "Total orders",
                                                   currency: .constant(""),
                                                   value: self.$ordersStat,
                                                   specifier: "%.0f",

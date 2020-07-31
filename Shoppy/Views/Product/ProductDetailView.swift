@@ -86,19 +86,19 @@ struct ProductDetailView: View {
             Section(header: Text("Information")) {
                 ScrollView(.horizontal, showsIndicators: false) {
                     HStack {
-                        HighlightCardView(name: "Price".localized,
+                        HighlightCardView(name: "Price",
                                           value: "\(Currencies.getSymbol(forCurrencyCode: product.currency ?? "USD") ?? "$") \(String(format: "%.2f", product.price ?? -1))",
                             icon: "dollarsign.circle.fill",
                             foreground: Color("PastelRedSecondary"),
                             background: Color("PastelRed"))
                         
-                        HighlightCardView(name: "Stock".localized,
+                        HighlightCardView(name: "Stock",
                                           value: "\(product.type == .account ? String(product.stock?.get() ?? 0) : "∞")",
                             icon: "bag.fill",
                             foreground: Color("PastelGreenSecondary"),
                             background: Color("PastelGreen"))
                         
-                        HighlightCardView(name: "Creation date".localized,
+                        HighlightCardView(name: "Creation date",
                                           value: getDate(date: product.created_at ?? Date()),
                                           icon: "calendar",
                                           foreground: Color("PastelBlueSecondary"),
@@ -116,7 +116,7 @@ struct ProductDetailView: View {
                       value: product.type?.rawValue.capitalized ?? "Service",
                       icon: "aspectratio.fill")
                 
-                NavigationLink(destination: ProductDetailledView(name: "Description", value: self.product.description ?? "Empty description.")) {
+                NavigationLink(destination: ProductDetailledView(name: "Description".localized, value: self.product.description ?? "Empty description.".localized)) {
                     Label(label: "See the description",
                           icon: "a")
                 }
@@ -151,7 +151,7 @@ struct ProductDetailView: View {
             
             Section(header: Text("Additional information")) {
                 Label(label: "Unlisted",
-                      value: product.unlisted == true ? "Yes" : "No",
+                      value: product.unlisted == true ? "Yes".localized : "No".localized,
                       icon: "eye.slash.fill",
                       color: .green)
                 

@@ -51,7 +51,7 @@ struct DonationView: View {
             
             Text("You can also contribute to the app on GitHub by reporting issues and proposing new features.")
         }
-        .navigationBarTitle("Donation")
+        .navigationBarTitle("Make a donation")
         .alert(isPresented: $success) {
             Alert(title: Text("Thank you!"),
                   message: Text("Thank you for donation, it's so lovely!"),

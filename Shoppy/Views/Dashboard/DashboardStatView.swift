@@ -20,7 +20,7 @@ struct DashboardStatView: View {
     var body: some View {
         HStack {
             VStack(alignment: .leading, spacing: 5) {
-                Text(title.uppercased())
+                Text(title.localized.uppercased())
                     .font(.footnote)
                     .fontWeight(.light)
                 

@@ -34,7 +34,7 @@ struct FeedbackView: View {
     
     var body: some View {
         List {
-            Section(header: Text("\(self.network.feedbacks.count) feedbacks".uppercased())) {
+            Section(header: Text("\(self.network.feedbacks.count) \("feedbacks".localized)".uppercased())) {
                 ForEach(self.network.feedbacks, id: \.id) { (feedback: Feedback) in
                     FeedbackCardView(feedback: feedback)
                         .onAppear {

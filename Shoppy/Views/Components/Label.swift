@@ -24,7 +24,7 @@ struct Label: View {
                 .background(color)
                 .cornerRadius(5)
             
-            Text(label)
+            Text(label.localized)
             
             Spacer()
             

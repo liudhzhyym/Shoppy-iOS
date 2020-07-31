@@ -98,7 +98,7 @@ struct QuerySheetView: View {
             List {
                 Section(header: Text("Information")) {
                     Label(label: "Status",
-                          value: getState(),
+                          value: getState().localized,
                           icon: "envelope")
                     
                     Label(label: "Sender",

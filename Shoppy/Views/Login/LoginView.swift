@@ -111,7 +111,7 @@ struct LoginView: View {
             Button(action: {
                 self.showShoppy.toggle()
             }) {
-                Text("You can find your API key in Settings on your Shoppy account. ")
+                Text("You can find your API key in settings on your Shoppy account. ")
                     + Text("Get my API key.")
                         .foregroundColor(.orange)
                         .bold()

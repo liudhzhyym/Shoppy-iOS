@@ -22,7 +22,7 @@ struct DashboardFeedbackView: View {
                 .padding(.leading, 5)
             
             VStack(alignment: .leading) {
-                Text(label.uppercased())
+                Text(label.localized.uppercased())
                     .font(.footnote)
                     .foregroundColor(.secondary)
                 
