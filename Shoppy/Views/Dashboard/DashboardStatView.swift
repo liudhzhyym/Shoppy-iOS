@@ -37,17 +37,16 @@ struct DashboardStatView: View {
                 
                 Image(systemName: icon)
                     .font(.system(size: 28))
+            }
+            
+            Spacer()
         }
-        
-        Spacer()
+        .padding()
+        .foregroundColor(foreground)
+        .frame(height: 150)
+        .background(background)
+        .cornerRadius(20)
     }
-    .padding()
-    .foregroundColor(foreground)
-    .frame(height: 150)
-    .background(background)
-    .cornerRadius(20)
-    .padding(.bottom, 10)
-}
 }
 
 struct DashboardStatView_Previews: PreviewProvider {

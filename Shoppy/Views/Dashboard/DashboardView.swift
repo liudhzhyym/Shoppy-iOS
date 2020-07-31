@@ -26,7 +26,10 @@ struct DashboardView: View {
     @State private var todayStat: Double = 0
     
     @State private var incomes: [Double] = []
-    @State private var gateways: [String: Double] = [:]
+    
+    @State private var positive: Int = 0
+    @State private var neutral: Int = 0
+    @State private var negative: Int = 0
     
     var profileButton: some View {
         Button(action: {
@@ -70,42 +73,10 @@ struct DashboardView: View {
                 
                 ScrollView {
                     VStack(alignment: .leading) {
-                        Text("Gateways")
-                            .font(.system(size: 22))
-                            .fontWeight(.semibold)
-                            .padding([.leading, .top])
-                        
-                        ScrollView(.horizontal, showsIndicators: false) {
-                            HStack {
-                                ForEach(self.gateways.sorted(by: >), id: \.key) { key, value in
-                                    HStack {
-                                        VStack(alignment: .leading) {
-                                            Text(key.uppercased())
-                                                .font(.footnote)
-                                                .foregroundColor(.secondary)
-                                            
-                                            Text("\(value, specifier: "%.0f")")
-                                                .font(.system(size: 20))
-                                                .bold()
-                                        }
-                                        .lineLimit(0)
-                                        
-                                        Spacer()
-                                    }
-                                    .padding()
-                                    .frame(width: 175)
-                                    .background(Color(UIColor.secondarySystemBackground))
-                                    .cornerRadius(20)
-                                }
-                                .id(UUID())
-                                .padding(.trailing, 10)
-                            }.padding([.leading, .trailing])
-                        }
-                        
                         Text("Analytics")
                             .font(.system(size: 22))
                             .fontWeight(.semibold)
-                            .padding([.leading, .bottom])
+                            .padding([.leading, .bottom, .top])
                         
                         HStack(alignment: .top) {
                             VStack {
@@ -139,6 +110,31 @@ struct DashboardView: View {
                             }
                         }
                         .padding([.leading, .trailing])
+                        
+                        Text("Feedbacks")
+                            .font(.system(size: 22))
+                            .fontWeight(.semibold)
+                            .padding([.leading, .top])
+                        
+                        ScrollView(.horizontal, showsIndicators: false) {
+                            HStack {
+                                DashboardFeedbackView(label: "Positive",
+                                                      value: self.$positive,
+                                                      icon: "hand.thumbsup.fill",
+                                                      color: .green)
+                                
+                                DashboardFeedbackView(label: "Neutral",
+                                                      value: self.$neutral,
+                                                      icon: "hand.raised.fill",
+                                                      color: .orange)
+                                
+                                DashboardFeedbackView(label: "Negative",
+                                                      value: self.$negative,
+                                                      icon: "hand.thumbsdown.fill",
+                                                      color: .red)
+                            }
+                            .padding([.leading, .trailing])
+                        }
                     }.padding(.bottom)
                 }
             }
@@ -167,14 +163,6 @@ struct DashboardView: View {
                     self.incomes.append(value ?? 0)
                 }
             }
-            
-            // Clear gateways
-            self.gateways.removeAll()
-            
-            // Set gateways
-            if let gateways = self.network.analytics?.gateways {
-                self.gateways = gateways
-            }
         }.onReceive(network.settingsUpdater) {
             // Set settings
             if let settings = self.network.settings {
@@ -186,6 +174,14 @@ struct DashboardView: View {
             // Set image
             if let image = self.network.image {
                 self.image = image
+            }
+        }
+        .onReceive(network.profileUpdater) {
+            // Get reputation
+            if let reputation = self.network.profile?.rep {
+                self.positive = reputation.positive ?? 0
+                self.neutral = reputation.neutral ?? 0
+                self.negative = reputation.negative ?? 0
             }
         }
         .sheet(isPresented: $showUser) {

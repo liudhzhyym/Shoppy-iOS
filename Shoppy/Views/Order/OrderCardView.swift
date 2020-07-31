@@ -8,7 +8,7 @@
 
 import SwiftUI
 
-struct DashboardCardView: View {
+struct OrderCardView: View {
     @EnvironmentObject var network: NetworkObserver
     
     @State public var email: String
@@ -53,10 +53,10 @@ struct DashboardCardView: View {
     }
 }
 
-struct DashboardCardView_Previews: PreviewProvider {
+struct OrderCardView_Previews: PreviewProvider {
     static var previews: some View {
         List {
-            DashboardCardView(email: "example@domain.tld",
+            OrderCardView(email: "example@domain.tld",
                               product: "Translate your website",
                               date: Date(),
                               price: 12.90,
@@ -64,7 +64,7 @@ struct DashboardCardView_Previews: PreviewProvider {
                               paid: true)
                 .listRowInsets(EdgeInsets())
             
-            DashboardCardView(email: "example@domain.tld",
+            OrderCardView(email: "example@domain.tld",
                               product: "Translate your website",
                               date: Date(),
                               price: 12.90,

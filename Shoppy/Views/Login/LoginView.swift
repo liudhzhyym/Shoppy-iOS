@@ -72,6 +72,7 @@ struct LoginView: View {
                 Text("Welcome on Shoppy")
                     .font(.system(.largeTitle, design: .rounded))
                     .bold()
+                    .multilineTextAlignment(.center)
                 
                 Text("Manage your commerce like never before, welcome on a easy way to manage your orders, products, customers' queries and more.")
                     .padding()
@@ -86,6 +87,7 @@ struct LoginView: View {
                 Text("Change your API key")
                     .font(.title)
                     .bold()
+                    .multilineTextAlignment(.center)
             }
             
             TextField("API key", text: $key)

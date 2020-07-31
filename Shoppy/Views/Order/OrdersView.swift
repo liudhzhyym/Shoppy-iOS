@@ -74,7 +74,7 @@ struct OrdersView: View {
                 Section(header: Text("\(orders.count) \("orders".localized)".uppercased())) {
                     ForEach(orders, id: \.id) { (order: Order) in
                         NavigationLink(destination: OrderDetailView(order: order)) {
-                            DashboardCardView(email: order.email ?? "",
+                            OrderCardView(email: order.email ?? "",
                                               product: order.product?.title ?? "",
                                               date: order.created_at ?? Date(),
                                               price: (order.price ?? 0) * Double(order.quantity ?? 0),

@@ -18,6 +18,7 @@ class NetworkObserver: ObservableObject {
     let feedbackUpdater = PassthroughSubject<Void, Never>()
     let metricsUpdater = PassthroughSubject<Void, Never>()
     let imageUpdater = PassthroughSubject<Void, Never>()
+    let profileUpdater = PassthroughSubject<Void, Never>()
     let analyticsUpdater = PassthroughSubject<Void, Never>()
     let ordersUpdater = PassthroughSubject<Void, Never>()
     let productsUpdater = PassthroughSubject<Void, Never>()
@@ -36,6 +37,12 @@ class NetworkObserver: ObservableObject {
     @Published public var analytics: Analytics? {
         didSet {
             analyticsUpdater.send()
+        }
+    }
+    
+    @Published public var profile: Profile? {
+        didSet {
+            profileUpdater.send()
         }
     }
     
@@ -168,6 +175,24 @@ class NetworkObserver: ObservableObject {
     }
     
     ///
+    /// Get public profile
+    ///
+    public func getProfile(username: String) {
+        // Get profile
+        NetworkManager
+            .prepare(token: self.key)
+            .target(.getProfile(username))
+            .asObject(ProfileResponse.self, success: { response in
+                // Check
+                if let user = response.user {
+                    self.profile = user
+                }
+            }, error: { error in
+                self.errorSubscriber.send()
+            })
+    }
+    
+    ///
     /// Get settings
     ///
     public func getSettings() {
@@ -181,6 +206,11 @@ class NetworkObserver: ObservableObject {
                 // Load image
                 if let url = settings.settings?.userAvatarURL {
                     self.getImage(imageURL: url)
+                }
+                
+                // Get public profile
+                if let username = settings.user?.username {
+                    self.getProfile(username: username)
                 }
             }, error: { error in
                 self.errorSubscriber.send()
