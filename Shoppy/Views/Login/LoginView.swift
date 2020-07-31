@@ -29,7 +29,8 @@ struct LoginView: View {
     @State public var network: NetworkObserver
     
     // SafariVC
-    @State private var showSafari = false
+    @State private var showShoppy = false
+    @State private var showPolicy = false
     
     ///
     /// Login method
@@ -74,7 +75,7 @@ struct LoginView: View {
                     .bold()
                     .multilineTextAlignment(.center)
                 
-                Text("Manage your commerce like never before, welcome on a easy way to manage your orders, products, customers' queries and more.")
+                Text("Manage your digital e-commerce like never before. This alternative client brings you the easiest way to manage your orders, products, and customers' queries.")
                     .padding()
                     .font(.system(.body, design: .rounded))
                     .multilineTextAlignment(.center)
@@ -108,7 +109,7 @@ struct LoginView: View {
             .cornerRadius(15)
             
             Button(action: {
-                self.showSafari.toggle()
+                self.showShoppy.toggle()
             }) {
                 Text("You can find your API key in Settings on your Shoppy account. ")
                     + Text("Get my API key.")
@@ -123,7 +124,14 @@ struct LoginView: View {
             
             Spacer()
             
-            Text("Your API key is stored encrypted and never shared.")
+            Button(action: {
+                self.showPolicy.toggle()
+            }) {
+                Text("Your API key is stored encrypted and never shared. ")
+                + Text("Read our privacy policy.")
+                    .foregroundColor(.purple)
+                    .bold()
+            }
                 .font(.footnote)
                 .foregroundColor(.secondary)
                 .multilineTextAlignment(.center)
@@ -135,8 +143,12 @@ struct LoginView: View {
                   message: Text("Wrong API key"),
                   dismissButton: .cancel())
         }
-        .sheet(isPresented: $showSafari) {
+        .sheet(isPresented: $showShoppy) {
             SafariView(url: URL(string: "https://shoppy.gg/")!)
+                .edgesIgnoringSafeArea(.bottom)
+        }
+        .sheet(isPresented: $showPolicy) {
+            SafariView(url: URL(string: "https://github.com/vlourme/Shoppy-iOS/blob/master/PRIVACY_POLICY.md")!)
                 .edgesIgnoringSafeArea(.bottom)
         }
     }
