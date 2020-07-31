@@ -48,8 +48,7 @@ struct QueryCard: View {
                 .font(.headline)
                 .foregroundColor(Color(getColorForStatus(true)))
                 .frame(width: 40, height: 40)
-                .background(Color(getColorForStatus()))
-                .cornerRadius(10)
+                .background(Circle().foregroundColor(Color(getColorForStatus())))
             
             VStack(alignment: .leading) {
                 Text(email)

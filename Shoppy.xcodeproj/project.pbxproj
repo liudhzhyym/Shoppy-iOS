@@ -166,8 +166,8 @@
 		1B6199CA24AC98B7003FA43F /* Order */ = {
 			isa = PBXGroup;
 			children = (
-				1BAA5EB624C6253C00115E59 /* OrderCardView.swift */,
 				1B6199CB24AC98C4003FA43F /* OrdersView.swift */,
+				1BAA5EB624C6253C00115E59 /* OrderCardView.swift */,
 				1B6199D424ACBBF9003FA43F /* OrderDetailView.swift */,
 				1B0EB17324B52520007A06E0 /* OrderAccountView.swift */,
 			);

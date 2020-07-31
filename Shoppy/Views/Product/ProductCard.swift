@@ -33,8 +33,7 @@ struct ProductCard: View {
                 .font(.headline)
                 .padding(14)
                 .frame(width: 40, height: 40)
-                .background(Color("PastelGreen"))
-                .cornerRadius(10)
+                .background(Circle().foregroundColor(Color("PastelGreen")))
             
             VStack(alignment: .leading) {
                 Text(title)
