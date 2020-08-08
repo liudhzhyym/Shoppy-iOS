@@ -58,7 +58,7 @@ struct DashboardView: View {
                             Text("Welcome back")
                                 .font(.callout)
                                 .foregroundColor(.secondary)
-                            Text("\(self.settings.user?.username ?? "Username")")
+                            Text("\(self.settings.user?.username ?? "")")
                                 .font(.largeTitle)
                                 .bold()
                         }
