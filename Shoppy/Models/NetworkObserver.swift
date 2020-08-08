@@ -17,7 +17,6 @@ class NetworkObserver: ObservableObject {
     let settingsUpdater = PassthroughSubject<Void, Never>()
     let feedbackUpdater = PassthroughSubject<Void, Never>()
     let metricsUpdater = PassthroughSubject<Void, Never>()
-    let imageUpdater = PassthroughSubject<Void, Never>()
     let profileUpdater = PassthroughSubject<Void, Never>()
     let analyticsUpdater = PassthroughSubject<Void, Never>()
     let ordersUpdater = PassthroughSubject<Void, Never>()
@@ -67,12 +66,6 @@ class NetworkObserver: ObservableObject {
     @Published public var feedbacks: [Feedback] = [] {
         didSet {
             feedbackUpdater.send()
-        }
-    }
-    
-    @Published public var image: Data? {
-        didSet {
-            imageUpdater.send()
         }
     }
     
@@ -203,11 +196,6 @@ class NetworkObserver: ObservableObject {
                 // Store
                 self.settings = settings
                 
-                // Load image
-                if let url = settings.settings?.userAvatarURL {
-                    self.getImage(imageURL: url)
-                }
-                
                 // Get public profile
                 if let username = settings.user?.username {
                     self.getProfile(username: username)
@@ -215,23 +203,6 @@ class NetworkObserver: ObservableObject {
             }, error: { error in
                 self.errorSubscriber.send()
             })
-    }
-    
-    ///
-    /// Load image
-    ///
-    private func getImage(imageURL: String) {
-        guard let url = URL(string: imageURL) else { return }
-        
-        URLSession.shared.dataTask(with: url) { (data, response, error) in
-            guard let data = data else { return }
-            
-            DispatchQueue.main.async {
-                // Store image
-                self.image = data
-            }
-            
-        }.resume()
     }
     
     ///

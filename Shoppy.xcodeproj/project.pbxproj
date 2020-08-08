@@ -50,6 +50,7 @@
 		1BBF751F24D1BDE3005D3FA2 /* FeedbackCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BBF751E24D1BDE3005D3FA2 /* FeedbackCardView.swift */; };
 		1BC63B1324CEC0D600BD5B9B /* SafariView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BC63B1224CEC0D600BD5B9B /* SafariView.swift */; };
 		1BC70B2924B32AE90068B599 /* UserView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BC70B2824B32AE90068B599 /* UserView.swift */; };
+		1BCBE09724DF37C900E16EF3 /* KingfisherSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 1BCBE09624DF37C900E16EF3 /* KingfisherSwiftUI */; };
 		1BD7D4E124AF84FE00857EEC /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BD7D4E024AF84FE00857EEC /* SettingsView.swift */; };
 		1BD7D4E324B08D7E00857EEC /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BD7D4E224B08D7E00857EEC /* Reachability.swift */; };
 		1BE8F11624D0953500F2E051 /* SwiftyStoreKit in Frameworks */ = {isa = PBXBuildFile; productRef = 1BE8F11524D0953500F2E051 /* SwiftyStoreKit */; };
@@ -117,6 +118,7 @@
 				1B1E98FC24D16BC90077BFF9 /* SwiftUICharts in Frameworks */,
 				1BE8F11624D0953500F2E051 /* SwiftyStoreKit in Frameworks */,
 				1B9BCB8D24B4A52D00255448 /* MDText in Frameworks */,
+				1BCBE09724DF37C900E16EF3 /* KingfisherSwiftUI in Frameworks */,
 				1BA7FCBB24D429BE00CE67B6 /* PassKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -342,6 +344,7 @@
 				1BBAC67E24B7174400E05261 /* KeyboardObserving */,
 				1BE8F11524D0953500F2E051 /* SwiftyStoreKit */,
 				1B1E98FB24D16BC90077BFF9 /* SwiftUICharts */,
+				1BCBE09624DF37C900E16EF3 /* KingfisherSwiftUI */,
 			);
 			productName = Shoppy;
 			productReference = 1BB764CC24AB76DF00C7F63A /* Shoppy.app */;
@@ -378,6 +381,7 @@
 				1BBAC67D24B7174400E05261 /* XCRemoteSwiftPackageReference "KeyboardObserving" */,
 				1BE8F11424D0953500F2E051 /* XCRemoteSwiftPackageReference "SwiftyStoreKit" */,
 				1B1E98FA24D16BC90077BFF9 /* XCRemoteSwiftPackageReference "ChartView" */,
+				1BCBE09524DF37C900E16EF3 /* XCRemoteSwiftPackageReference "Kingfisher" */,
 			);
 			productRefGroup = 1BB764CD24AB76DF00C7F63A /* Products */;
 			projectDirPath = "";
@@ -708,6 +712,14 @@
 				kind = branch;
 			};
 		};
+		1BCBE09524DF37C900E16EF3 /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/onevcat/Kingfisher";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.14.1;
+			};
+		};
 		1BE8F11424D0953500F2E051 /* XCRemoteSwiftPackageReference "SwiftyStoreKit" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/bizz84/SwiftyStoreKit.git";
@@ -743,6 +755,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 1BBAC67D24B7174400E05261 /* XCRemoteSwiftPackageReference "KeyboardObserving" */;
 			productName = KeyboardObserving;
+		};
+		1BCBE09624DF37C900E16EF3 /* KingfisherSwiftUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 1BCBE09524DF37C900E16EF3 /* XCRemoteSwiftPackageReference "Kingfisher" */;
+			productName = KingfisherSwiftUI;
 		};
 		1BE8F11524D0953500F2E051 /* SwiftyStoreKit */ = {
 			isa = XCSwiftPackageProductDependency;

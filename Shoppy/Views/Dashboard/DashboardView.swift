@@ -10,11 +10,11 @@ import SwiftUI
 import struct SwiftyShoppy.Settings
 import struct SwiftyShoppy.Order
 import SwiftUICharts
+import KingfisherSwiftUI
 
 struct DashboardView: View {
     @EnvironmentObject var network: NetworkObserver
     
-    @State private var image: Data?
     @State private var settings = Settings()
     
     @State private var showUser = false
@@ -35,10 +35,17 @@ struct DashboardView: View {
         Button(action: {
             self.showUser = true
         }) {
-            Image(uiImage: (UIImage(data: image ?? Data()) ?? UIImage(systemName: "rectangle.fill"))!)
-                .resizable()
-                .frame(width: 56, height: 56)
-                .clipShape(Circle())
+            Group {
+                if network.settings?.settings?.userAvatarURL != nil {
+                    KFImage(URL(string: (network.settings?.settings?.userAvatarURL)!)!)
+                        .resizable()
+                } else {
+                    Image(systemName: "person.crop.circle.fill")
+                        .resizable()
+                }
+            }
+            .frame(width: 56, height: 56)
+            .clipShape(Circle())
         }.buttonStyle(PlainButtonStyle())
     }
     
@@ -170,12 +177,6 @@ struct DashboardView: View {
                 self.currency = Currencies.getSymbol(forCurrencyCode: settings.settings?.currency ?? "USD") ?? "$"
             }
         }
-        .onReceive(network.imageUpdater) {
-            // Set image
-            if let image = self.network.image {
-                self.image = image
-            }
-        }
         .onReceive(network.profileUpdater) {
             // Get reputation
             if let reputation = self.network.profile?.rep {
@@ -185,7 +186,7 @@ struct DashboardView: View {
             }
         }
         .sheet(isPresented: $showUser) {
-            UserView(network: self.network, settings: self.settings, image: self.image)
+            UserView(network: self.network, settings: self.settings)
         }
     }
 }

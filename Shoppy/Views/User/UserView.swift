@@ -8,18 +8,25 @@
 
 import SwiftUI
 import struct SwiftyShoppy.Settings
+import KingfisherSwiftUI
 
 struct UserView: View {
     @State public var network: NetworkObserver
     @State public var settings: Settings
-    @State public var image: Data?
     @State private var showSettings = false
     
     var profileImage: some View {
-        Image(uiImage: (UIImage(data: image ?? Data()) ?? UIImage(systemName: "rectangle.fill"))!)
-            .resizable()
-            .frame(width: 60, height: 60)
-            .clipShape(Circle())
+        Group {
+            if network.settings?.settings?.userAvatarURL != nil {
+                KFImage(URL(string: (network.settings?.settings?.userAvatarURL)!)!)
+                    .resizable()
+            } else {
+                Image(systemName: "person.crop.circle.fill")
+                    .resizable()
+            }
+        }
+        .frame(width: 60, height: 60)
+        .clipShape(Circle())
     }
     
     var body: some View {
@@ -104,6 +111,6 @@ struct UserView: View {
 
 struct UserView_Previews: PreviewProvider {
     static var previews: some View {
-        UserView(network: NetworkObserver(key: ""), settings: Settings(), image: Data())
+        UserView(network: NetworkObserver(key: ""), settings: Settings())
     }
 }
