@@ -40,11 +40,13 @@ struct Label: View {
         }
         .lineLimit(0)
         .contextMenu {
-            Button(action: {
-                UIPasteboard.general.string = self.value
-            }) {
-                Image(systemName: "doc.on.doc")
-                Text("Copy".localized)
+            if !(value?.isEmpty ?? true) {
+                Button(action: {
+                    UIPasteboard.general.string = self.value
+                }) {
+                    Image(systemName: "doc.on.doc")
+                    Text("Copy".localized)
+                }
             }
         }
     }
