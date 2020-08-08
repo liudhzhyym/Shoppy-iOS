@@ -12,7 +12,6 @@ import KingfisherSwiftUI
 
 struct UserView: View {
     @State public var network: NetworkObserver
-    @State public var settings: Settings
     @State private var showSettings = false
     
     var profileImage: some View {
@@ -37,11 +36,11 @@ struct UserView: View {
                         .padding(.horizontal)
                     
                     VStack(alignment: .leading) {
-                        Text(settings.user?.username ?? "Username")
+                        Text(network.settings?.user?.username ?? "Username")
                             .font(.largeTitle)
                             .bold()
                         
-                        Text(settings.user?.email ?? "email@domain.tld")
+                        Text(network.settings?.user?.email ?? "email@domain.tld")
                             .font(.headline)
                     }
                     .lineLimit(0)
@@ -54,33 +53,33 @@ struct UserView: View {
                 List {
                     Section(header: Text("Account")) {
                         Label(label: "Currency",
-                              value: self.settings.settings?.currency ?? "USD",
+                              value: self.network.settings?.settings?.currency ?? "USD",
                               icon: "dollarsign.circle.fill")
                     }
                     
                     Section(header: Text("Payments")) {
                         Label(label: "BTC Address",
-                              value: self.settings.settings?.bitcoinAddress ?? "N/A",
+                              value: self.network.settings?.settings?.bitcoinAddress ?? "N/A",
                               icon: "b.circle.fill",
                               color: .orange)
                         
                         Label(label: "LTC Address",
-                              value: self.settings.settings?.litecoinAddress ?? "N/A",
+                              value: self.network.settings?.settings?.litecoinAddress ?? "N/A",
                               icon: "l.circle.fill",
                               color: .orange)
                         
                         Label(label: "ETH Address",
-                              value: self.settings.settings?.ethereumAddress ?? "N/A",
+                              value: self.network.settings?.settings?.ethereumAddress ?? "N/A",
                               icon: "e.circle.fill",
                               color: .orange)
                         
                         Label(label: "PayPal",
-                              value: self.settings.settings?.paypalAddress ?? "N/A",
+                              value: self.network.settings?.settings?.paypalAddress ?? "N/A",
                               icon: "p.circle.fill",
                               color: .orange)
                         
                         Label(label: "Stripe ID",
-                              value: self.settings.settings?.stripeAccountId ?? "N/A",
+                              value: self.network.settings?.settings?.stripeAccountId ?? "N/A",
                               icon: "s.circle.fill",
                               color: .orange)
                     }
@@ -111,6 +110,6 @@ struct UserView: View {
 
 struct UserView_Previews: PreviewProvider {
     static var previews: some View {
-        UserView(network: NetworkObserver(key: ""), settings: Settings())
+        UserView(network: NetworkObserver(key: ""))
     }
 }

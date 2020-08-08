@@ -186,7 +186,7 @@ struct DashboardView: View {
             }
         }
         .sheet(isPresented: $showUser) {
-            UserView(network: self.network, settings: self.settings)
+            UserView(network: self.network)
         }
     }
 }
