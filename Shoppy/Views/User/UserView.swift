@@ -12,7 +12,6 @@ import KingfisherSwiftUI
 
 struct UserView: View {
     @State public var network: NetworkObserver
-    @State private var showSettings = false
     
     var profileImage: some View {
         Group {
