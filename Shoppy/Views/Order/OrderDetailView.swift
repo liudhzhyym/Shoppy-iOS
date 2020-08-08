@@ -84,7 +84,7 @@ struct OrderDetailView: View {
                       color: .green)
             }
             
-            if order.product?.type == .account {
+            if order.product?.type == .account && order.delivered == 1 {
                 Section(header: Text("accounts".localized.capitalized)) {
                     NavigationLink(destination: OrderAccountView(id: order.id ?? "")) {
                         Label(label: "See the account list",
