@@ -9,10 +9,14 @@
 import SwiftUI
 import SwiftyStoreKit
 
+enum DonationStatus {
+    case success, fail
+}
+
 struct DonationView: View {
     // Alerts
-    @State private var success = false
-    @State private var error = false
+    @State private var alert = false
+    @State private var status: DonationStatus = .fail
     
     ///
     /// Donation method
@@ -21,10 +25,12 @@ struct DonationView: View {
         SwiftyStoreKit.purchaseProduct(product, quantity: 1, atomically: true) { result in
             switch result {
                 case .success:
-                    self.success.toggle()
+                    self.status = .success
                 case .error:
-                    self.error.toggle()
+                    self.status = .fail
             }
+            
+            self.alert.toggle()
         }
     }
     
@@ -52,15 +58,16 @@ struct DonationView: View {
             Text("You can also contribute to the app on GitHub by reporting issues and proposing new features.")
         }
         .navigationBarTitle("Make a donation")
-        .alert(isPresented: $success) {
-            Alert(title: Text("Thank you!"),
-                  message: Text("Thank you for donation, it's so lovely!"),
-                  dismissButton: .default(Text("Close")))
-        }
-        .alert(isPresented: $error) {
-            Alert(title: Text("Error"),
-                  message: Text("It seems there was an error."),
-                  dismissButton: .cancel())
+        .alert(isPresented: $alert) {
+            if self.status == .success {
+                return Alert(title: Text("Thank you!"),
+                             message: Text("Thank you for donation, it's so lovely!"),
+                             dismissButton: .default(Text("Close")))
+            } else {
+                return Alert(title: Text("Error"),
+                             message: Text("It seems there was an error."),
+                             dismissButton: .cancel())
+            }
         }
     }
 }
