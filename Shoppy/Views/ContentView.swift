@@ -11,6 +11,7 @@ import SwiftUI
 struct ContentView: View {
     @EnvironmentObject var network: NetworkObserver
     @State private var showAlert = false
+    @State private var showOnboard = true
 
     ///
     /// Show modal
@@ -52,6 +53,11 @@ struct ContentView: View {
                     Text("Support")
             }
         }
+        .onReceive(network.analyticsUpdater) {
+            DispatchQueue.global().asyncAfter(deadline: .now() + 2) {
+                self.showOnboard = false
+            }
+        }
         .onReceive(network.errorSubscriber) {
             // Check for network
             if !Reachability.isConnectedToNetwork() {
@@ -61,6 +67,7 @@ struct ContentView: View {
 
             self.showModal(AnyView(LoginView(network: self.network)))
         }
+        .onboard(isPresented: $showOnboard)
         .networkAlert(isPresented: $showAlert, network: self.network)
     }
 }

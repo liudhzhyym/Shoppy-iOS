@@ -21,8 +21,13 @@
 "Support" = "Support";
 
 ///
-/// Errors
+/// Onboard
 ///
+
+// Text
+"Manage your products, invoices and reply to your customers needs." = "Gerez vos produits, factures et répondez aux besoins de vos clients.";
+
+// Errors
 "Network issue" = "Problème de connexion";
 "You don't have network connection. Tap this card to retry." = "Vous n'avez pas de connexion à Internet, appuyez pour re-essayer.";
 

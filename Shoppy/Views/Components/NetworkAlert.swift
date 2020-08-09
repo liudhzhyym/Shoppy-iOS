@@ -31,10 +31,9 @@ struct NetworkAlert: View {
         }
         .padding()
         .foregroundColor(.white)
-        .background(Color("Gray").opacity(0.98))
+        .background(Color("Gray"))
         .cornerRadius(10)
         .padding()
-        .padding(.bottom, 45)
         .modifier(Shake(animatableData: CGFloat(attemps)))
         .offset(y: isPresented ? 0 : 250)
         .animation(.easeInOut(duration: 1))
