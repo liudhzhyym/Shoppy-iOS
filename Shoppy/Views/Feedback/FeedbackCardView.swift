@@ -44,16 +44,15 @@ struct FeedbackCardView: View {
                     .background(Circle().foregroundColor(Color("PastelGreen")))
             }
 
-            VStack(alignment: .leading, spacing: 6) {
-                Text(feedback.comment ?? "Comment")
+            VStack(alignment: .leading, spacing: 10) {
+                Text(feedback.comment ?? "Unknown comment")
 
                 Text(getDate(date: feedback.created_at ?? Date()))
-                .font(.caption)
-                .foregroundColor(.secondary)
-                .bold()
+                    .font(.caption)
+                    .foregroundColor(.secondary)
+                    .bold()
             }
-
-            Spacer()
+            .fixedSize(horizontal: false, vertical: true)
         }
         .padding()
     }
