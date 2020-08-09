@@ -1,6 +1,9 @@
 ![Banner](media/hero.png)
 
 # Shoppy iOS Client
+
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/188e2cd891d04bb48adbef863e8f3928)](https://app.codacy.com/manual/victor.lourme/Shoppy-iOS?utm_source=github.com&utm_medium=referral&utm_content=vlourme/Shoppy-iOS&utm_campaign=Badge_Grade_Dashboard)
+
 > Shoppy is an unofficial alternative client for [shoppy.gg iOS application](https://apps.apple.com/fr/app/shoppy-ecommerce/id1486173778?l=en) present on the iOS App Store. I decided to make this alternative because the official application was slow, bugged and not using the full power of the proposed API.
 
 ## Install
