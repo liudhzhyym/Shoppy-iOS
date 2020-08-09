@@ -61,11 +61,7 @@ struct ContentView: View {
 
             self.showModal(AnyView(LoginView(network: self.network)))
         }
-        .alert(isPresented: $showAlert) {
-            Alert(title: Text("Network is unreachable"),
-                  message: Text("Your device does not have Internet connection, reload the application when you have connection back."),
-                  dismissButton: .cancel())
-        }
+        .networkAlert(isPresented: $showAlert, network: self.network)
     }
 }
 
