@@ -109,6 +109,10 @@
 // Buttons
 "Save" = "Sauvegarder";
 
+// Errors
+"Error" = "Erreur";
+"Wrong API key" = "La clé API est incorrecte";
+
 ///
 /// Donations
 ///
@@ -120,6 +124,11 @@
 // Labels
 "Donate $1" = "Donner 1€";
 "Donate $3" = "Donner 3€";
+
+// Alerts
+"Thank you!" = "Merci !";
+"Thank you for donation, it's so lovely!" = "Merci pour votre don, c'est super sympa !";
+"It seems there was an error." = "Il semble y avoir une erreur.";
 
 ///
 /// Orders and products
