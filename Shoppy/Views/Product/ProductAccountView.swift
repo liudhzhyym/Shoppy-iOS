@@ -13,23 +13,8 @@ struct ProductAccountView: View {
     @State public var accounts: [Account?]?
 
     var body: some View {
-        List {
-            Section(header: Text("\(accounts?.count ?? 0) \("accounts".localized)".uppercased())) {
-                ForEach(accounts ?? [], id: \.self) { (account: Account?) in
-                    Text(account?.get() ?? "")
-                        .contextMenu {
-                            Button(action: {
-                                UIPasteboard.general.string = account?.get() ?? ""
-                            }) {
-                                Image(systemName: "doc.on.doc")
-                                Text("Copy")
-                            }
-                    }
-                }
-            }
-        }
-        .listStyle(GroupedListStyle())
-        .navigationBarTitle("accounts".localized.capitalized)
+        AccountListView(accounts: $accounts)
+            .navigationBarTitle("accounts".localized.capitalized)
     }
 }
 

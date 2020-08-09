@@ -14,25 +14,10 @@ import enum SwiftyShoppy.Account
 struct OrderAccountView: View {
     @EnvironmentObject var network: NetworkObserver
     @State public var id: String
-    @State public var accounts: [Account?] = []
+    @State public var accounts: [Account?]?
 
     var body: some View {
-        List {
-            Section(header: Text("\(accounts.count) \("accounts".localized)".uppercased())) {
-                ForEach(accounts, id: \.self) { (account: Account?) in
-                    Text(account?.get() ?? "Unknown")
-                        .contextMenu {
-                            Button(action: {
-                                UIPasteboard.general.string = account?.get() ?? ""
-                            }) {
-                                Image(systemName: "doc.on.doc")
-                                Text("Copy")
-                            }
-                    }
-                }
-            }
-        }
-        .listStyle(GroupedListStyle())
+        AccountListView(accounts: $accounts)
         .navigationBarTitle("Delivered accounts")
         .onAppear {
             // Load data
@@ -40,7 +25,7 @@ struct OrderAccountView: View {
                 .prepare(token: self.network.key)
                 .target(.getOrder(self.id))
                 .asObject(Order.self, success: { order in
-                    self.accounts = order.accounts ?? []
+                    self.accounts = order.accounts
                 }, error: { error in
                     print(error)
                 })
