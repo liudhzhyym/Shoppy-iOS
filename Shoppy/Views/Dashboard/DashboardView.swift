@@ -14,23 +14,23 @@ import KingfisherSwiftUI
 
 struct DashboardView: View {
     @EnvironmentObject var network: NetworkObserver
-    
+
     @State private var settings = Settings()
-    
+
     @State private var showUser = false
-    
+
     @State private var currency = "$"
-    
+
     @State private var revenuesStat: Double = 0
     @State private var ordersStat: Double = 0
     @State private var todayStat: Double = 0
-    
+
     @State private var incomes: [Double] = []
-    
+
     @State private var positive: Int = 0
     @State private var neutral: Int = 0
     @State private var negative: Int = 0
-    
+
     var profileButton: some View {
         Button(action: {
             self.showUser = true
@@ -48,7 +48,7 @@ struct DashboardView: View {
             .clipShape(Circle())
         }.buttonStyle(PlainButtonStyle())
     }
-    
+
     var body: some View {
         GeometryReader { (geo: GeometryProxy) in
             VStack(alignment: .leading, spacing: 0) {
@@ -63,13 +63,13 @@ struct DashboardView: View {
                                 .bold()
                         }
                         .lineLimit(0)
-                        
+
                         Spacer()
-                        
+
                         self.profileButton
                     }
                     .padding([.leading, .trailing])
-                    
+
                     LineChart()
                         .data(self.incomes)
                         .chartStyle(.init(backgroundColor: .clear, foregroundColor: [ColorGradient(.blue, .purple)]))
@@ -77,14 +77,14 @@ struct DashboardView: View {
                 }
                 .padding(.top, geo.safeAreaInsets.bottom - 30)
                 .background(Color(UIColor.secondarySystemBackground))
-                
+
                 ScrollView {
                     VStack(alignment: .leading) {
                         Text("Analytics")
                             .font(.system(size: 22))
                             .fontWeight(.semibold)
                             .padding([.leading, .bottom, .top])
-                        
+
                         HStack(alignment: .top) {
                             VStack {
                                 DashboardStatView(title: "Total revenues",
@@ -94,7 +94,7 @@ struct DashboardView: View {
                                                   icon: "chevron.down.circle.fill",
                                                   foreground: Color("PastelGreenSecondary"),
                                                   background: Color("PastelGreen"))
-                                
+
                                 DashboardStatView(title: "Today's revenues",
                                                   currency: self.$currency,
                                                   value: self.$todayStat,
@@ -103,9 +103,9 @@ struct DashboardView: View {
                                                   foreground: Color("PastelOrangeSecondary"),
                                                   background: Color("PastelOrange"))
                             }
-                            
+
                             Spacer()
-                            
+
                             VStack {
                                 DashboardStatView(title: "Total orders",
                                                   currency: .constant(""),
@@ -117,24 +117,24 @@ struct DashboardView: View {
                             }
                         }
                         .padding([.leading, .trailing])
-                        
+
                         Text("Feedbacks")
                             .font(.system(size: 22))
                             .fontWeight(.semibold)
                             .padding([.leading, .top])
-                        
+
                         ScrollView(.horizontal, showsIndicators: false) {
                             HStack {
                                 DashboardFeedbackView(label: "Positive",
                                                       value: self.$positive,
                                                       icon: "hand.thumbsup.fill",
                                                       color: .green)
-                                
+
                                 DashboardFeedbackView(label: "Neutral",
                                                       value: self.$neutral,
                                                       icon: "hand.raised.fill",
                                                       color: .orange)
-                                
+
                                 DashboardFeedbackView(label: "Negative",
                                                       value: self.$negative,
                                                       icon: "hand.thumbsdown.fill",
@@ -155,15 +155,15 @@ struct DashboardView: View {
         .onReceive(network.analyticsUpdater) {
             // Set card data
             self.ordersStat = self.network.analytics?.totalOrders ?? -1
-            
+
             // Set incomes
             if let income = self.network.analytics?.income {
                 // Get keys
                 let keys = income.keys.sorted(by: <)
-                
+
                 // Clear data
                 self.incomes.removeAll()
-                
+
                 // Push data
                 for key in keys {
                     let value = income[key]

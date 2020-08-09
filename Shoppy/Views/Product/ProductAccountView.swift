@@ -11,7 +11,7 @@ import enum SwiftyShoppy.Account
 
 struct ProductAccountView: View {
     @State public var accounts: [Account?]?
-    
+
     var body: some View {
         List {
             Section(header: Text("\(accounts?.count ?? 0) \("accounts".localized)".uppercased())) {

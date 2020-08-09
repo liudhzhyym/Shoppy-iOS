@@ -51,6 +51,7 @@
 		1BC63B1324CEC0D600BD5B9B /* SafariView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BC63B1224CEC0D600BD5B9B /* SafariView.swift */; };
 		1BC70B2924B32AE90068B599 /* UserView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BC70B2824B32AE90068B599 /* UserView.swift */; };
 		1BCBE09724DF37C900E16EF3 /* KingfisherSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 1BCBE09624DF37C900E16EF3 /* KingfisherSwiftUI */; };
+		1BCBE09C24DFDF7B00E16EF3 /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = 1BCBE09B24DFDF7B00E16EF3 /* .swiftlint.yml */; };
 		1BD7D4E124AF84FE00857EEC /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BD7D4E024AF84FE00857EEC /* SettingsView.swift */; };
 		1BD7D4E324B08D7E00857EEC /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BD7D4E224B08D7E00857EEC /* Reachability.swift */; };
 		1BE8F11624D0953500F2E051 /* SwiftyStoreKit in Frameworks */ = {isa = PBXBuildFile; productRef = 1BE8F11524D0953500F2E051 /* SwiftyStoreKit */; };
@@ -101,6 +102,7 @@
 		1BBF751E24D1BDE3005D3FA2 /* FeedbackCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedbackCardView.swift; sourceTree = "<group>"; };
 		1BC63B1224CEC0D600BD5B9B /* SafariView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafariView.swift; sourceTree = "<group>"; };
 		1BC70B2824B32AE90068B599 /* UserView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserView.swift; sourceTree = "<group>"; };
+		1BCBE09B24DFDF7B00E16EF3 /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
 		1BD7D4E024AF84FE00857EEC /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		1BD7D4E224B08D7E00857EEC /* Reachability.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
 		1BF59C4D24BA5B9C00CC2CEA /* TextFieldLength.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldLength.swift; sourceTree = "<group>"; };
@@ -265,6 +267,7 @@
 		1BB764C324AB76DF00C7F63A = {
 			isa = PBXGroup;
 			children = (
+				1BCBE09B24DFDF7B00E16EF3 /* .swiftlint.yml */,
 				1BB764CE24AB76DF00C7F63A /* Shoppy */,
 				1BB764CD24AB76DF00C7F63A /* Products */,
 				1BA7FCB924D429BE00CE67B6 /* Frameworks */,
@@ -331,6 +334,7 @@
 				1BB764C824AB76DF00C7F63A /* Sources */,
 				1BB764C924AB76DF00C7F63A /* Frameworks */,
 				1BB764CA24AB76DF00C7F63A /* Resources */,
+				1BCBE09824DFDC8400E16EF3 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -397,6 +401,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1BCBE09C24DFDF7B00E16EF3 /* .swiftlint.yml in Resources */,
 				1BB764DF24AB76E400C7F63A /* LaunchScreen.storyboard in Resources */,
 				1B61051A24B9C475003857A9 /* Localizable.strings in Resources */,
 				1B0A822924BA34780043CF63 /* Settings.bundle in Resources */,
@@ -406,6 +411,26 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		1BCBE09824DFDC8400E16EF3 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if which swiftlint >/dev/null; then\n  swiftlint\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		1BB764C824AB76DF00C7F63A /* Sources */ = {

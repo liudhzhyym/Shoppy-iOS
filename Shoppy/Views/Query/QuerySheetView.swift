@@ -16,13 +16,13 @@ import enum SwiftyShoppy.QueryStatus
 struct QuerySheetView: View {
     // Network
     @State public var network: NetworkObserver
-    
+
     // Query
     @Binding public var query: Query
-    
+
     // Presentation mode
     @Environment(\.presentationMode) var presentation
-    
+
     ///
     /// Get formatted date from Date object
     /// - parameters:
@@ -33,10 +33,10 @@ struct QuerySheetView: View {
     private func getDate(date: Date) -> String {
         let df = DateFormatter()
         df.dateFormat = "HH:mm MMM dd"
-        
+
         return df.string(from: date)
     }
-    
+
     ///
     /// Get state
     /// - returns:
@@ -54,7 +54,7 @@ struct QuerySheetView: View {
                 return "Open"
         }
     }
-    
+
     ///
     /// Change the state
     ///
@@ -62,7 +62,7 @@ struct QuerySheetView: View {
         guard let id = query.id else {
             return
         }
-        
+
         NetworkManager
             .prepare(token: network.key, debug: true)
             .target(.updateQuery(id, action: query.status == QueryStatus.Closed.rawValue ? .ReOpen : .Close))
@@ -75,10 +75,10 @@ struct QuerySheetView: View {
                         .asObject(Query.self, success: { query in
                             // Set query
                             self.query = query
-                            
+
                             // Update queries
                             self.network.getQueries(page: 1)
-                            
+
                             // Return
                             self.presentation.wrappedValue.dismiss()
                         }, error: { error in
@@ -89,7 +89,7 @@ struct QuerySheetView: View {
                 print(error)
             })
     }
-    
+
     ///
     /// Body
     ///
@@ -100,20 +100,20 @@ struct QuerySheetView: View {
                     Label(label: "Status",
                           value: getState().localized,
                           icon: "envelope")
-                    
+
                     Label(label: "Sender",
                           value: query.email ?? "Unknown",
                           icon: "person.fill")
-                    
+
                     Label(label: "Creation date",
                           value: getDate(date: query.created_at ?? Date()),
                           icon: "calendar")
-                    
+
                     Label(label: "ID",
                           value: query.id ?? "Unknown",
                           icon: "number")
                 }
-                
+
                 Section(header: Text("Actions"),
                         footer: Text("You can still re-open the query later")) {
                             Button(action: changeState) {
@@ -132,7 +132,7 @@ struct QuerySheetView: View {
                 }
             }
             .listStyle(GroupedListStyle())
-                
+
             .navigationBarTitle("Query detail", displayMode: .inline)
         }
         .navigationViewStyle(StackNavigationViewStyle())

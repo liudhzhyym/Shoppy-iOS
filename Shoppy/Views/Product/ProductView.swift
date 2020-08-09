@@ -13,15 +13,15 @@ struct ProductView: View {
     @EnvironmentObject var network: NetworkObserver
     @State private var page: Int = 1
     @State private var isPresented = false
-    
+
     private func loadMore() {
         // Increment page
         self.page += 1
-        
+
         // Load more
         self.network.getProducts(page: self.page)
     }
-    
+
     var refreshButton: some View {
         Button(action: {
             self.page = 1
@@ -31,7 +31,7 @@ struct ProductView: View {
                 .imageScale(.large)
         }
     }
-    
+
     var body: some View {
         NavigationView {
             List {
@@ -59,7 +59,7 @@ struct ProductView: View {
             .listStyle(GroupedListStyle())
             .navigationBarTitle("Products")
             .navigationBarItems(trailing: refreshButton)
-            
+
             Text("No product selected")
         }
     }

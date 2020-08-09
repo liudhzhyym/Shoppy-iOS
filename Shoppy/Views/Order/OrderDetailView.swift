@@ -13,7 +13,7 @@ import enum SwiftyShoppy.Gateways
 struct OrderDetailView: View {
     // Order
     @State public var order: Order
-    
+
     ///
     /// Get a formatted date from Date object
     /// - parameters:
@@ -24,10 +24,10 @@ struct OrderDetailView: View {
     private func getDate(date: Date) -> String {
         let df = DateFormatter()
         df.dateFormat = "HH:mm MMM dd YYYY"
-        
+
         return df.string(from: date)
     }
-    
+
     ///
     /// Body
     ///
@@ -41,13 +41,13 @@ struct OrderDetailView: View {
                             icon: "cart.fill",
                             foreground: Color("PastelGreenSecondary"),
                             background: Color("PastelGreen"))
-                        
+
                         HighlightCardView(name: "Quantity",
                                           value: "\(order.quantity ?? -1)",
                             icon: "bag.fill",
                             foreground: Color("PastelBlueSecondary"),
                             background: Color("PastelBlue"))
-                        
+
                         HighlightCardView(name: "Payment gateway",
                                           value: "\(order.gateway ?? "BTC")",
                             icon: "creditcard.fill",
@@ -57,33 +57,33 @@ struct OrderDetailView: View {
                 }
                 .listRowInsets(EdgeInsets())
                 .padding([.top, .bottom])
-                
+
                 Label(label: "Status",
                       value: order.delivered == 1 ? "Paid".localized : "Cancelled".localized,
                       icon: "cube.box.fill")
-                
+
                 Label(label: "Date",
                       value: getDate(date: order.created_at ?? Date()),
                       icon: "clock.fill")
             }
-            
+
             Section(header: Text("Buyer")) {
                 Label(label: "Email",
                       value: order.email ?? "Unknown",
                       icon: "envelope.fill",
                       color: .green)
-                
+
                 Label(label: "Location",
                       value: "\(order.agent?.geo?.state_name ?? "State"), \(order.agent?.geo?.country ?? "Country")",
                     icon: "map.fill",
                     color: .green)
-                
+
                 Label(label: "IP",
                       value: order.agent?.geo?.ip ?? "Unknown",
                       icon: "globe",
                       color: .green)
             }
-            
+
             if order.product?.type == .account && order.delivered == 1 {
                 Section(header: Text("accounts".localized.capitalized)) {
                     NavigationLink(destination: OrderAccountView(id: order.id ?? "")) {
@@ -93,28 +93,28 @@ struct OrderDetailView: View {
                     }
                 }
             }
-            
+
             if order.gateway != Gateways.paypal.rawValue && order.gateway != Gateways.stripe.rawValue {
                 Section(header: Text("Crypto")) {
                     Label(label: "Amount",
                           value: order.crypto_amount ?? "0",
                           icon: "bitcoinsign.circle.fill",
                           color: .red)
-                    
+
                     Label(label: "Address",
                           value: order.crypto_address ?? "Unknown",
                           icon: "arrow.branch",
                           color: .red)
                 }
             }
-            
+
             Section(header: Text("Product")) {
                 Label(label: "Product",
                       value: order.product?.title ?? "Unknown",
                       icon: "doc.plaintext",
                       color: .orange)
-                
-                // MARKS: This could cause a crash.
+
+                // MARK: This could cause a crash.
                 if order.product != nil {
                     NavigationLink(destination: ProductDetailView(product: order.product!)) {
                         Label(label: "See the product",
@@ -123,7 +123,7 @@ struct OrderDetailView: View {
                     }
                 }
             }
-            
+
             Section(header: Text("Additional information")) {
                 Label(label: "ID",
                       value: order.id ?? "Unknown",

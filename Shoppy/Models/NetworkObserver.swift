@@ -23,7 +23,7 @@ class NetworkObserver: ObservableObject {
     let productsUpdater = PassthroughSubject<Void, Never>()
     let queriesUpdater = PassthroughSubject<Void, Never>()
     let errorSubscriber = PassthroughSubject<Void, Never>()
-    
+
     ///
     /// Observables
     ///
@@ -32,43 +32,43 @@ class NetworkObserver: ObservableObject {
             settingsUpdater.send()
         }
     }
-    
+
     @Published public var analytics: Analytics? {
         didSet {
             analyticsUpdater.send()
         }
     }
-    
+
     @Published public var profile: Profile? {
         didSet {
             profileUpdater.send()
         }
     }
-    
+
     @Published public var orders: [Order] = [] {
         didSet {
             ordersUpdater.send()
         }
     }
-    
+
     @Published public var products: [Product] = [] {
         didSet {
             productsUpdater.send()
         }
     }
-    
+
     @Published public var queries: [Query] = [] {
         didSet {
             queriesUpdater.send()
         }
     }
-    
+
     @Published public var feedbacks: [Feedback] = [] {
         didSet {
             feedbackUpdater.send()
         }
     }
-    
+
     ///
     /// Single value observables
     ///
@@ -77,29 +77,29 @@ class NetworkObserver: ObservableObject {
             metricsUpdater.send()
         }
     }
-    
+
     @Published public var todayRevenue: Double = 0 {
         didSet {
             metricsUpdater.send()
         }
     }
-    
+
     ///
     /// API Key
     ///
     public var key: String
-    
+
     ///
     /// Initialize
     ///
     public init(key: String) {
         // Save key
         self.key = key
-        
+
         // Load all
         loadAll()
     }
-    
+
     ///
     /// Fetch all data
     ///
@@ -113,14 +113,14 @@ class NetworkObserver: ObservableObject {
         getFeedbacks(page: 1)
         getQueries(page: 1)
     }
-    
+
     ///
     /// Update key
     ///
     public func updateKey(key: String) {
         self.key = key
     }
-    
+
     ///
     /// Get analytics
     ///
@@ -131,11 +131,11 @@ class NetworkObserver: ObservableObject {
             .asObject(Analytics.self, success: { analytics in
                 // Store
                 self.analytics = analytics
-            }, error: { error in
+            }, error: { _ in
                 self.errorSubscriber.send()
             })
     }
-    
+
     ///
     /// Get metrics
     ///
@@ -149,10 +149,10 @@ class NetworkObserver: ObservableObject {
                 if let revenue = metrics.value?.value {
                     self.totalRevenue = revenue
                 }
-            }, error: { error in
+            }, error: { _ in
                 self.errorSubscriber.send()
             })
-        
+
         // Get daily revenue
         NetworkManager
             .prepare(token: self.key)
@@ -162,11 +162,11 @@ class NetworkObserver: ObservableObject {
                 if let revenue = metrics.value?.value {
                     self.todayRevenue = revenue
                 }
-            }, error: { error in
+            }, error: { _ in
                 self.errorSubscriber.send()
             })
     }
-    
+
     ///
     /// Get public profile
     ///
@@ -180,11 +180,11 @@ class NetworkObserver: ObservableObject {
                 if let user = response.user {
                     self.profile = user
                 }
-            }, error: { error in
+            }, error: { _ in
                 self.errorSubscriber.send()
             })
     }
-    
+
     ///
     /// Get settings
     ///
@@ -195,16 +195,16 @@ class NetworkObserver: ObservableObject {
             .asObject(Settings.self, success: { settings in
                 // Store
                 self.settings = settings
-                
+
                 // Get public profile
                 if let username = settings.user?.username {
                     self.getProfile(username: username)
                 }
-            }, error: { error in
+            }, error: { _ in
                 self.errorSubscriber.send()
             })
     }
-    
+
     ///
     /// Get orders
     ///
@@ -217,14 +217,14 @@ class NetworkObserver: ObservableObject {
                 if page == 1 {
                     self.orders.removeAll()
                 }
-                
+
                 // Append new orders
                 self.orders.append(contentsOf: orders)
-            }, error: { error in
+            }, error: { _ in
                 self.errorSubscriber.send()
             })
     }
-    
+
     ///
     /// Get products
     ///
@@ -237,14 +237,14 @@ class NetworkObserver: ObservableObject {
                 if page == 1 {
                     self.products.removeAll()
                 }
-                
+
                 // Append new produts
                 self.products.append(contentsOf: products)
-            }, error: { error in
+            }, error: { _ in
                 self.errorSubscriber.send()
             })
     }
-    
+
     ///
     /// Get feedbacks
     ///
@@ -257,14 +257,14 @@ class NetworkObserver: ObservableObject {
                 if page == 1 {
                     self.feedbacks.removeAll()
                 }
-                
+
                 // Append new produts
                 self.feedbacks.append(contentsOf: feedbacks)
-            }, error: { error in
+            }, error: { _ in
                 self.errorSubscriber.send()
             })
     }
-    
+
     ///
     /// Get queries
     ///
@@ -277,15 +277,15 @@ class NetworkObserver: ObservableObject {
                 if page == 1 {
                     self.queries.removeAll()
                 }
-                
+
                 // Sort by date
-                let queries_sorted = queries.sorted { (a, b) -> Bool in
+                let sorted = queries.sorted { (a, b) -> Bool in
                     a.updated_at?.compare(b.updated_at ?? Date()) == .orderedDescending
                 }
-                
+
                 // Append new produts
-                self.queries.append(contentsOf: queries_sorted)
-            }, error: { error in
+                self.queries.append(contentsOf: sorted)
+            }, error: { _ in
                 self.errorSubscriber.send()
             })
     }

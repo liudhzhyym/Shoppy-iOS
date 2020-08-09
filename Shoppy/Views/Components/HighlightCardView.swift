@@ -14,17 +14,17 @@ struct HighlightCardView: View {
     @State public var icon: String
     @State public var foreground: Color
     @State public var background: Color
-    
+
     var body: some View {
         VStack(alignment: .leading) {
             Image(systemName: icon)
                 .font(.system(size: 36))
-            
+
             Spacer()
-            
+
             Text(name.localized.uppercased())
                 .font(.footnote)
-            
+
             Text(value)
                 .font(.title)
                 .bold()

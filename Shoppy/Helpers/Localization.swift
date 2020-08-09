@@ -13,8 +13,6 @@ extension String {
     /// Get localized string
     ///
     var localized: String {
-        get {
-            return NSLocalizedString(self, comment: "")
-        }
+        return NSLocalizedString(self, comment: "")
     }
 }

@@ -13,24 +13,24 @@ struct DashboardFeedbackView: View {
     @Binding public var value: Int
     @State public var icon: String
     @State public var color: Color
-    
+
     var body: some View {
         HStack(spacing: 20) {
             Image(systemName: icon)
                 .imageScale(.large)
                 .foregroundColor(color)
                 .padding(.leading, 5)
-            
+
             VStack(alignment: .leading) {
                 Text(label.localized.uppercased())
                     .font(.footnote)
                     .foregroundColor(.secondary)
-                
+
                 Text("\(value)")
                     .font(.system(size: 24))
                     .bold()
             }
-            
+
             Spacer()
         }
         .padding()

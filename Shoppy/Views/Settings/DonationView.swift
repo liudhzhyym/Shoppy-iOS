@@ -17,7 +17,7 @@ struct DonationView: View {
     // Alerts
     @State private var alert = false
     @State private var status: DonationStatus = .fail
-    
+
     ///
     /// Donation method
     ///
@@ -29,32 +29,32 @@ struct DonationView: View {
                 case .error:
                     self.status = .fail
             }
-            
+
             self.alert.toggle()
         }
     }
-    
+
     ///
     /// Body
     ///
     var body: some View {
         Form {
             Text("This application is developed and distributed for free. Please consider doing a small donation to help the future of the app.")
-            
+
             Section {
                 Button(action: {
                     self.makeDonation(product: "SM_TIP")
                 }) {
                     Label(label: "Donate $1", showChevron: true, icon: "1.circle.fill", color: .green)
                 }
-                
+
                 Button(action: {
                     self.makeDonation(product: "MD_TIP")
                 }) {
                     Label(label: "Donate $3", showChevron: true, icon: "3.circle.fill", color: .green)
                 }
             }.buttonStyle(PlainButtonStyle())
-            
+
             Text("You can also contribute to the app on GitHub by reporting issues and proposing new features.")
         }
         .navigationBarTitle("Make a donation")

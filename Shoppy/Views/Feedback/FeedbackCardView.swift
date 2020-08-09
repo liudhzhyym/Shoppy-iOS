@@ -11,14 +11,14 @@ import struct SwiftyShoppy.Feedback
 
 struct FeedbackCardView: View {
     @State public var feedback: Feedback
-    
+
     private func getDate(date: Date) -> String {
         let df = DateFormatter()
         df.dateFormat = "HH:mm MMM dd"
-        
+
         return df.string(from: date)
     }
-    
+
     var body: some View {
         HStack(spacing: 15) {
             if feedback.stars == 1 || feedback.stars == 2 {
@@ -43,16 +43,16 @@ struct FeedbackCardView: View {
                     .frame(width: 40, height: 40)
                     .background(Circle().foregroundColor(Color("PastelGreen")))
             }
-            
+
             VStack(alignment: .leading, spacing: 6) {
                 Text(feedback.comment ?? "Comment")
-                
+
                 Text(getDate(date: feedback.created_at ?? Date()))
                 .font(.caption)
                 .foregroundColor(.secondary)
                 .bold()
             }
-            
+
             Spacer()
         }
         .padding()
@@ -64,7 +64,7 @@ struct FeedbackCardView_Previews: PreviewProvider {
         List {
             FeedbackCardView(feedback: Feedback())
                 .listRowInsets(EdgeInsets())
-            
+
             FeedbackCardView(feedback: Feedback())
                 .listRowInsets(EdgeInsets())
         }.listStyle(GroupedListStyle())

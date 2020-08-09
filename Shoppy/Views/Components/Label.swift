@@ -14,7 +14,7 @@ struct Label: View {
     @State public var showChevron: Bool = false
     @State public var icon: String
     @State public var color = Color.blue
-    
+
     var body: some View {
         HStack(alignment: .center, spacing: 10) {
             Image(systemName: icon)
@@ -23,14 +23,14 @@ struct Label: View {
                 .foregroundColor(.white)
                 .background(color)
                 .cornerRadius(5)
-            
+
             Text(label.localized)
-            
+
             Spacer()
-            
+
             Text(value ?? "")
                 .foregroundColor(.secondary)
-            
+
             if showChevron {
                 Image(systemName: "chevron.right")
                     .imageScale(.small)

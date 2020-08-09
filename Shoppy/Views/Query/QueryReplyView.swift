@@ -11,10 +11,10 @@ import SwiftUI
 struct QueryBubbleView: View {
     @State public var message: String
     @State public var date: Date
-    @State public var is_supporter: Bool
-    
+    @State public var isSupporter: Bool
+
     var body: some View {
-        VStack(alignment: is_supporter ? .trailing : .leading) {
+        VStack(alignment: isSupporter ? .trailing : .leading) {
             Text(message)
         }
         .padding()
@@ -22,9 +22,9 @@ struct QueryBubbleView: View {
         .contextMenu {
             Text("Sent date: \(date.description)")
         }
-        .background(is_supporter ? Color.blue : Color(UIColor.secondarySystemBackground))
-        .cornerRadius(20, corners: is_supporter ? [.topLeft, .topRight, .bottomLeft] : [.topRight, .bottomLeft, .bottomRight])
-        .cornerRadius(5, corners: is_supporter ? .bottomRight : .topLeft)
+        .background(isSupporter ? Color.blue : Color(UIColor.secondarySystemBackground))
+        .cornerRadius(20, corners: isSupporter ? [.topLeft, .topRight, .bottomLeft] : [.topRight, .bottomLeft, .bottomRight])
+        .cornerRadius(5, corners: isSupporter ? .bottomRight : .topLeft)
         .padding([.leading, .trailing])
         .padding(.vertical, 5)
     }
@@ -33,21 +33,21 @@ struct QueryBubbleView: View {
 struct QueryReplyView: View {
     @State public var message: String
     @State public var date: Date
-    @State public var is_supporter: Bool
-    
+    @State public var isSupporter: Bool
+
     var body: some View {
         HStack {
-            if is_supporter {
+            if isSupporter {
                 Spacer()
-                
-                QueryBubbleView(message: message, date: date, is_supporter: is_supporter)
+
+                QueryBubbleView(message: message, date: date, isSupporter: isSupporter)
             } else {
-                QueryBubbleView(message: message, date: date, is_supporter: is_supporter)
-                
+                QueryBubbleView(message: message, date: date, isSupporter: isSupporter)
+
                 Spacer()
             }
         }
-        
+
     }
 }
 
@@ -57,22 +57,22 @@ struct QueryReplyView_Previews: PreviewProvider {
             // Long message from client
             QueryReplyView(message: "Lorem Ipsur Lorem Ipsur Lorem Ipsur Lorem Ipsur Lorem Ipsur Lorem Ipsur Lorem Ipsur Lorem Ipsur",
                            date: Date(),
-                           is_supporter: false)
-            
+                           isSupporter: false)
+
             // Normal message
             QueryReplyView(message: "Support reply's! Support reply's! ",
                            date: Date(),
-                           is_supporter: true)
-            
+                           isSupporter: true)
+
             // Short message
             QueryReplyView(message: "Ok man",
                            date: Date(),
-                           is_supporter: true)
-            
+                           isSupporter: true)
+
             // Very short message
             QueryReplyView(message: "Ok!",
                            date: Date(),
-                           is_supporter: true)
+                           isSupporter: true)
         }
     }
 }

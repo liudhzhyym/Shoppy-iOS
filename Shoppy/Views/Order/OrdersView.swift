@@ -14,18 +14,18 @@ struct OrdersView: View {
     @State private var page: Int = 1
     @State private var showPaidOnly = false
     @State private var orders: [Order] = []
-    
+
     ///
     /// Load more results
     ///
     private func loadMore() {
         // Increment page
         self.page += 1
-        
+
         // Load more
         self.network.getOrders(page: self.page)
     }
-    
+
     ///
     /// Get orders with filters
     ///
@@ -38,7 +38,7 @@ struct OrdersView: View {
             }
         })
     }
-    
+
     ///
     /// Paid Only buttons
     ///
@@ -46,7 +46,7 @@ struct OrdersView: View {
         Button(action: {
             // Toggle paid only
             self.showPaidOnly.toggle()
-            
+
             // Reload orders
             self.orders = self.getOrders()
         }) {
@@ -54,7 +54,7 @@ struct OrdersView: View {
                 .imageScale(.large)
         }
     }
-    
+
     ///
     /// Refresh button
     ///
@@ -67,7 +67,7 @@ struct OrdersView: View {
                 .imageScale(.large)
         }
     }
-    
+
     var body: some View {
         NavigationView {
             List {
@@ -96,7 +96,7 @@ struct OrdersView: View {
             .listStyle(GroupedListStyle())
             .navigationBarTitle("Orders")
             .navigationBarItems(leading: paidOnlyButton, trailing: refreshButton)
-            
+
             Text("No order selected")
         }
         .onAppear {
@@ -107,7 +107,6 @@ struct OrdersView: View {
         }
     }
 }
-
 
 struct OrdersView_Previews: PreviewProvider {
     static var previews: some View {

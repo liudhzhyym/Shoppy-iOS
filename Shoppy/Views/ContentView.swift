@@ -11,21 +11,21 @@ import SwiftUI
 struct ContentView: View {
     @EnvironmentObject var network: NetworkObserver
     @State private var showAlert = false
-    
+
     ///
     /// Show modal
     ///
     private func showModal(_ destination: AnyView) {
         let window = UIApplication.shared.windows.first
         let vc = UIHostingController(rootView: destination)
-        
+
         // Disable dismiss gesture
         vc.isModalInPresentation = true
-        
+
         // Display
         window?.rootViewController?.present(vc, animated: true)
     }
-    
+
     var body: some View {
         TabView {
             DashboardView()
@@ -33,19 +33,19 @@ struct ContentView: View {
                     Image(systemName: "house")
                     Text("Dashboard")
             }
-            
+
             OrdersView()
                 .tabItem {
                     Image(systemName: "list.bullet")
                     Text("Orders")
             }
-            
+
             ProductView()
                 .tabItem {
                     Image(systemName: "cube.box")
                     Text("Products")
             }
-            
+
             QueriesView()
                 .tabItem {
                     Image(systemName: "person.crop.circle.badge.checkmark")
@@ -58,7 +58,7 @@ struct ContentView: View {
                 self.showAlert = true
                 return
             }
-            
+
             self.showModal(AnyView(LoginView(network: self.network)))
         }
         .alert(isPresented: $showAlert) {

@@ -15,23 +15,23 @@ import KeyboardObserving
 struct LoginView: View {
     // Keychain
     private let keychain = KeychainSwift()
-    
+
     // Key
     @State private var key = ""
-    
+
     // Error management
     @State private var isError = false
-    
+
     // Is edit
     @State public var isEdit: Bool = false
-    
+
     // EnvironmentObject workaround for sheet modals
     @State public var network: NetworkObserver
-    
+
     // SafariVC
     @State private var showShoppy = false
     @State private var showPolicy = false
-    
+
     ///
     /// Login method
     ///
@@ -40,16 +40,16 @@ struct LoginView: View {
         NetworkManager
             .prepare(token: key)
             .target(.getAnalytics)
-            .asObject(Analytics.self, success: { analytics in
+            .asObject(Analytics.self, success: { _ in
                 print("[LoginView] Key is valid")
-                
+
                 // Store key
                 self.keychain.set(self.key, forKey: "key")
-                
+
                 // Reload with key
                 self.network.updateKey(key: self.key)
                 self.network.loadAll()
-                
+
                 // Close modal
                 UIApplication.shared.windows.first?.rootViewController?.dismiss(animated: true, completion: nil)
             }, error: { error in
@@ -59,22 +59,22 @@ struct LoginView: View {
                 return
             })
     }
-    
+
     var body: some View {
         VStack {
             Spacer()
-            
+
             if !isEdit {
                 Image(systemName: "cart.fill")
                     .font(.system(size: 50))
                     .foregroundColor(.blue)
                     .padding()
-                
+
                 Text("Welcome on Shoppy")
                     .font(.system(.largeTitle, design: .rounded))
                     .bold()
                     .multilineTextAlignment(.center)
-                
+
                 Text("Manage your digital e-commerce like never before. This alternative client brings you the easiest way to manage your orders, products, and customers' queries.")
                     .padding()
                     .font(.system(.body, design: .rounded))
@@ -84,19 +84,19 @@ struct LoginView: View {
                     .font(.system(size: 50))
                     .foregroundColor(.blue)
                     .padding()
-                
+
                 Text("Change your API key")
                     .font(.title)
                     .bold()
                     .multilineTextAlignment(.center)
             }
-            
+
             TextField("API key", text: $key)
                 .padding()
                 .disableAutocorrection(true)
                 .autocapitalization(.none)
                 .padding(.top)
-            
+
             Button(action: login) {
                 HStack {
                     Image(systemName: "paperplane.fill")
@@ -107,7 +107,7 @@ struct LoginView: View {
             .foregroundColor(.white)
             .background(Color.green)
             .cornerRadius(15)
-            
+
             Button(action: {
                 self.showShoppy.toggle()
             }) {
@@ -120,10 +120,9 @@ struct LoginView: View {
             .foregroundColor(.secondary)
             .multilineTextAlignment(.center)
             .padding()
-            
-            
+
             Spacer()
-            
+
             Button(action: {
                 self.showPolicy.toggle()
             }) {
@@ -158,7 +157,7 @@ struct LoginView_Previews: PreviewProvider {
     static var previews: some View {
         Group {
             LoginView(isEdit: false, network: NetworkObserver(key: ""))
-            
+
             LoginView(isEdit: true, network: NetworkObserver(key: ""))
         }
     }

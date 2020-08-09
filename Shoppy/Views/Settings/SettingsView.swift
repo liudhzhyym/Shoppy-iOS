@@ -16,24 +16,24 @@ enum Links: String {
 struct SettingsView: View {
     // Sheet login
     @State private var displayLogin = false
-    
+
     // EnvironmentObject workaround for sheet modals
     @State public var network: NetworkObserver
-    
+
     // Version name
     @State private var version = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String
-    
+
     // Safari WebView
     @State private var url: Links = .github
     @State private var showSafari = false
-    
+
     ///
     /// Change key
     ///
     private func changeKey() {
         self.displayLogin = true
     }
-    
+
     ///
     /// Body
     ///
@@ -44,7 +44,7 @@ struct SettingsView: View {
                     Label(label: "Change API key", icon: "lock.open.fill", color: .red)
                 }
             }
-            
+
             Section(header: Text("Source code")) {
                 Button(action: {
                     self.url = .github
@@ -52,7 +52,7 @@ struct SettingsView: View {
                 }) {
                     Label(label: "See the source code", showChevron: true, icon: "doc.text.fill")
                 }
-                
+
                 Button(action: {
                     self.url = .issues
                     self.showSafari.toggle()
@@ -60,13 +60,13 @@ struct SettingsView: View {
                     Label(label: "Report a bug", showChevron: true, icon: "exclamationmark.bubble.fill")
                 }
             }.buttonStyle(PlainButtonStyle())
-            
+
             Section(header: Text("Donations")) {
                 NavigationLink(destination: DonationView()) {
                     Label(label: "Make a donation", icon: "app.gift.fill", color: .green)
                 }
             }
-            
+
             Section(header: Text("Information")) {
                 Label(label: "Version", value: self.version ?? "", icon: "i.circle.fill", color: .orange)
             }

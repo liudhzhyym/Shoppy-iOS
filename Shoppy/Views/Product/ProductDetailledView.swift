@@ -12,7 +12,7 @@ import MDText
 struct ProductDetailledView: View {
     @State public var name: String
     @State public var value: String
-    
+
     var body: some View {
         ScrollView {
             MDText(markdown: value)

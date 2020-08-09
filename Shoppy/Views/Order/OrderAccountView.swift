@@ -15,7 +15,7 @@ struct OrderAccountView: View {
     @EnvironmentObject var network: NetworkObserver
     @State public var id: String
     @State public var accounts: [Account?] = []
-    
+
     var body: some View {
         List {
             Section(header: Text("\(accounts.count) \("accounts".localized)".uppercased())) {

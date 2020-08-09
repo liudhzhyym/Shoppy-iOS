@@ -16,29 +16,29 @@ struct DashboardStatView: View {
     @State public var icon: String
     @State public var foreground: Color
     @State public var background: Color
-    
+
     var body: some View {
         HStack {
             VStack(alignment: .leading, spacing: 5) {
                 Text(title.localized.uppercased())
                     .font(.footnote)
                     .fontWeight(.light)
-                
+
                 HStack {
                     if !currency.isEmpty {
                         Text(currency)
                     }
-                    
+
                     Text("\(value, specifier: specifier)")
                 }
                 .font(.system(size: 24, weight: .bold, design: .default))
-                
+
                 Spacer()
-                
+
                 Image(systemName: icon)
                     .font(.system(size: 28))
             }
-            
+
             Spacer()
         }
         .padding()
