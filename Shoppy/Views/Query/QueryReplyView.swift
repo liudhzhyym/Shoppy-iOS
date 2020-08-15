@@ -19,14 +19,13 @@ struct QueryBubbleView: View {
         }
         .padding()
         .padding(.horizontal, 4)
-        .contextMenu {
-            Text("Sent date: \(date.description)")
-        }
         .background(isSupporter ? Color.blue : Color(UIColor.secondarySystemBackground))
         .cornerRadius(20, corners: isSupporter ? [.topLeft, .topRight, .bottomLeft] : [.topRight, .bottomLeft, .bottomRight])
         .cornerRadius(5, corners: isSupporter ? .bottomRight : .topLeft)
         .padding([.leading, .trailing])
-        .padding(.vertical, 5)
+        .contextMenu {
+            Text("Sent date: \(date.description)")
+        }
     }
 }
 

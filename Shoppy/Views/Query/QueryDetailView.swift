@@ -72,10 +72,12 @@ struct QueryDetailView: View {
                 QueryReplyView(message: query.message ?? "", date: query.created_at ?? Date(), isSupporter: false)
 
                 ForEach(query.replies?.reversed() ?? [], id: \.id) { (reply: QueryReply) in
-                    QueryReplyView(message: reply.message ?? "", date: reply.created_at ?? Date(), isSupporter: reply.is_supporter ?? false)
+                    QueryReplyView(message: reply.message ?? "",
+                                   date: reply.created_at ?? Date(),
+                                   isSupporter: reply.is_supporter ?? false)
                 }
-
-                Spacer(minLength: 100)
+                
+                Spacer(minLength: 65)
             }
 
             if query.status != QueryStatus.Closed.rawValue {
@@ -93,7 +95,7 @@ struct QueryDetailView: View {
                     }
                 }
                 .onReceive(message.subscriber) {
-                    if self.message.text.count > 1 && self.message.text.count < 255 {
+                    if self.message.text.count > 2 && self.message.text.count < 255 {
                         withAnimation {
                             self.showButton = true
                         }
@@ -101,11 +103,8 @@ struct QueryDetailView: View {
                         self.showButton = false
                     }
                 }
-                .padding(22)
-                .background(Color(UIColor.secondarySystemBackground))
-                .cornerRadius(20)
-                .shadow(radius: 4)
                 .padding()
+                .background(Color(UIColor.systemGray6))
             }
         }
         .navigationBarTitle("\(query.subject ?? "Query")", displayMode: .inline)
