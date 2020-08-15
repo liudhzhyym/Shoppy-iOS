@@ -12,7 +12,7 @@ import SwiftUI
 /// Shake animation
 ///
 struct Shake: GeometryEffect {
-    var amount: CGFloat = 10
+    var amount: CGFloat = 5
     var shakesPerUnit = 4
     var animatableData: CGFloat
 

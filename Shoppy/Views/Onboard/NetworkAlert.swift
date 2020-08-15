@@ -15,8 +15,8 @@ struct NetworkAlert: View {
 
     var body: some View {
         HStack {
-            Image(systemName: "antenna.radiowaves.left.and.right")
-                .imageScale(.large)
+            Image(systemName: "wifi.exclamationmark")
+                .font(.system(size: 26))
                 .padding([.leading, .trailing], 10)
 
             VStack(alignment: .leading) {
@@ -30,13 +30,12 @@ struct NetworkAlert: View {
             Spacer()
         }
         .padding()
-        .foregroundColor(.white)
-        .background(Color("Gray"))
-        .cornerRadius(10)
+        .background(Color(UIColor.systemGray6))
+        .cornerRadius(15)
         .padding()
         .modifier(Shake(animatableData: CGFloat(attemps)))
-        .offset(y: isPresented ? 0 : 250)
-        .animation(.easeInOut(duration: 1))
+        .opacity(isPresented ? 1 : 0)
+        .animation(.easeOut)
         .transition(.slide)
         .onTapGesture {
             // Check for network

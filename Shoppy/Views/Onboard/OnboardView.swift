@@ -10,33 +10,35 @@ import SwiftUI
 
 struct OnboardView: View {
     @Binding public var isPresented: Bool
-
+    
     var body: some View {
         ZStack {
             Color(UIColor.systemBackground)
                 .edgesIgnoringSafeArea(.all)
-
-            HStack {
-                VStack {
-                    VStack(alignment: .leading) {
-                        Image("Icon")
-                            .resizable()
-                            .frame(width: 92, height: 92)
-                            .cornerRadius(25)
-
-                        Text("Welcome on Shoppy")
-                            .font(.title)
-
-                        Text("Manage your products, invoices and reply to your customers needs.")
+            
+            VStack {
+                HStack {
+                    VStack {
+                        VStack(alignment: .leading) {
+                            Image("Icon")
+                                .resizable()
+                                .frame(width: 92, height: 92)
+                                .cornerRadius(25)
+                            
+                            Text("Welcome on Shoppy")
+                                .font(.title)
+                            
+                            Text("Manage your products, invoices and reply to your customers needs.")
+                        }
                     }
-
-                    ActivityIndicator(isAnimating: .constant(true), style: .large)
-                        .padding(.top)
+                    
+                    Spacer()
                 }
-
-                Spacer()
+                .padding()
+                
+                ActivityIndicator()
+                    .padding(.top, 50)
             }
-            .padding()
         }
         .opacity(isPresented ? 1 : 0)
         .animation(.easeInOut)
@@ -46,11 +48,11 @@ struct OnboardView: View {
 
 struct OnboardMod: ViewModifier {
     @Binding public var isPresented: Bool
-
+    
     func body(content: Content) -> some View {
         ZStack {
             content
-
+            
             OnboardView(isPresented: $isPresented)
         }
     }
@@ -62,17 +64,20 @@ extension View {
     }
 }
 
-struct ActivityIndicator: UIViewRepresentable {
-
-    @Binding var isAnimating: Bool
-    let style: UIActivityIndicatorView.Style
-
-    func makeUIView(context: UIViewRepresentableContext<ActivityIndicator>) -> UIActivityIndicatorView {
-        return UIActivityIndicatorView(style: style)
-    }
-
-    func updateUIView(_ uiView: UIActivityIndicatorView, context: UIViewRepresentableContext<ActivityIndicator>) {
-        isAnimating ? uiView.startAnimating() : uiView.stopAnimating()
+struct ActivityIndicator: View {
+    @State private var animating = false
+    
+    var body: some View {
+        Circle()
+            .trim(from: 0, to: 0.75)
+            .stroke(style: StrokeStyle(lineWidth: 4, lineCap: .round, lineJoin: .round))
+            .foregroundColor(.primary)
+            .frame(width: 50, height: 50)
+            .rotationEffect(Angle(degrees: animating ? 360 : 0))
+            .animation(Animation.linear(duration: 1).repeatForever(autoreverses: false))
+            .onAppear {
+                self.animating = true
+            }
     }
 }
 
