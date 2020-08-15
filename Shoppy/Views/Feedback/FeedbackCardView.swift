@@ -21,14 +21,14 @@ struct FeedbackCardView: View {
 
     var body: some View {
         HStack(spacing: 15) {
-            if feedback.stars == 1 || feedback.stars == 2 {
+            if feedback.rating == -1 {
                 Image(systemName: "hand.thumbsdown.fill")
                     .foregroundColor(Color("PastelRedSecondary"))
                     .font(.headline)
                     .padding(14)
                     .frame(width: 40, height: 40)
                     .background(Circle().foregroundColor(Color("PastelRed")))
-            } else if feedback.stars == 3 {
+            } else if feedback.rating == 0 {
                  Image(systemName: "hand.raised.fill")
                     .foregroundColor(Color("PastelOrangeSecondary"))
                     .font(.headline)
@@ -47,7 +47,7 @@ struct FeedbackCardView: View {
             VStack(alignment: .leading, spacing: 10) {
                 Text(feedback.comment ?? "Unknown comment")
 
-                Text(getDate(date: feedback.created_at ?? Date()))
+                Text("\(feedback.stars ?? 0) stars - \(getDate(date: feedback.created_at ?? Date()))")
                     .font(.caption)
                     .foregroundColor(.secondary)
                     .bold()
