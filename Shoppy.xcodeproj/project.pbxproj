@@ -174,8 +174,6 @@
 				1BC63B1224CEC0D600BD5B9B /* SafariView.swift */,
 				1B0DAA7624D33AF800D5074B /* Label.swift */,
 				1BCBE09D24DFEAEE00E16EF3 /* AccountListView.swift */,
-				1BCBE0C224E001BD00E16EF3 /* NetworkAlert.swift */,
-				1BCBE0C424E03D8B00E16EF3 /* ShakeAnimation.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -331,6 +329,8 @@
 			isa = PBXGroup;
 			children = (
 				1BCBE0C724E03F7300E16EF3 /* OnboardView.swift */,
+				1BCBE0C224E001BD00E16EF3 /* NetworkAlert.swift */,
+				1BCBE0C424E03D8B00E16EF3 /* ShakeAnimation.swift */,
 			);
 			path = Onboard;
 			sourceTree = "<group>";
